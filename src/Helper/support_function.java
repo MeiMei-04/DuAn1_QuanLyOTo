@@ -32,5 +32,9 @@ public class support_function {
             System.out.println("Tệp không tồn tại.");
         }
     }
-    
+    public static void ham_setLogo(JLabel lable) {
+        lable.setSize(1280,720);
+        ImageIcon icon = new ImageIcon("src\\IMAGE\\car_logo.png");
+        lable.setIcon(icon);
+    }
 }
