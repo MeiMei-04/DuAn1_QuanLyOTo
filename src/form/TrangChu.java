@@ -4,7 +4,10 @@
  */
 package form;
 
+import card.testcard;
+import card.testcard2;
 import java.awt.Color;
+import java.awt.Component;
 import javax.swing.JPanel;
 
 /**
@@ -19,19 +22,25 @@ public class TrangChu extends javax.swing.JFrame {
     public TrangChu() {
         initComponents();
         setTitle("Quản Lý Thuê Oto");
-        init();
-    }
-    public void init(){
-        Helper.support_function.ham_setLogo(lbl_logo);
     }
     private void onHover(JPanel panel){
         panel.setBackground(new Color(255,204,204));
     }
     private void onClick(JPanel panel){
-        panel.setBackground(new Color(205, 136, 205));
+        panel.setBackground(new Color(255, 153, 153));
     }
     private void onLeaveClick(JPanel panel){
         panel.setBackground(Color.white);
+//        panel1.setBackground(Color.white);
+    }
+    private void onLeaveHover(JPanel panel){
+        panel.setBackground(Color.white);
+    }
+    public void showFrom(Component com){
+        pnl_Body.removeAll();
+        pnl_Body.add(com);
+        pnl_Body.revalidate();
+        pnl_Body.repaint();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,9 +51,9 @@ public class TrangChu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        lbl_logo = new javax.swing.JLabel();
+        background = new javax.swing.JPanel();
+        pnl_Menu = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         pnl_TrangChu = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
@@ -76,14 +85,16 @@ public class TrangChu extends javax.swing.JFrame {
         pnl_gioithieu = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        pnl_Body = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 204));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        background.setBackground(new java.awt.Color(204, 102, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_Menu.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car_logo.png"))); // NOI18N
 
         pnl_TrangChu.setBackground(new java.awt.Color(255, 255, 255));
         pnl_TrangChu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,7 +109,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel4.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -113,6 +124,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/home.png"))); // NOI18N
         jLabel1.setText("Trang Chủ");
 
         javax.swing.GroupLayout pnl_TrangChuLayout = new javax.swing.GroupLayout(pnl_TrangChu);
@@ -121,8 +133,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_TrangChuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_TrangChuLayout.createSequentialGroup()
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_TrangChuLayout.setVerticalGroup(
@@ -147,7 +159,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -162,6 +174,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/user.png"))); // NOI18N
         jLabel2.setText("Tài Khoản");
 
         javax.swing.GroupLayout pnl_taikhoanLayout = new javax.swing.GroupLayout(pnl_taikhoan);
@@ -170,7 +183,7 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_taikhoanLayout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -196,7 +209,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel6.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -211,6 +224,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car-rental.png"))); // NOI18N
         jLabel3.setText("Thuê Xe");
 
         javax.swing.GroupLayout pnl_thuexeLayout = new javax.swing.GroupLayout(pnl_thuexe);
@@ -219,8 +233,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_thuexeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_thuexeLayout.createSequentialGroup()
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_thuexeLayout.setVerticalGroup(
@@ -245,7 +259,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel10.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -260,6 +274,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/rental.png"))); // NOI18N
         jLabel4.setText("Hợp Đồng");
 
         javax.swing.GroupLayout pnl_hopdongLayout = new javax.swing.GroupLayout(pnl_hopdong);
@@ -268,8 +283,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_hopdongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_hopdongLayout.createSequentialGroup()
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_hopdongLayout.setVerticalGroup(
@@ -294,7 +309,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel11.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel11.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
@@ -309,6 +324,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car.png"))); // NOI18N
         jLabel5.setText("Dịch Vụ");
 
         javax.swing.GroupLayout pnl_dichvuLayout = new javax.swing.GroupLayout(pnl_dichvu);
@@ -317,8 +333,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_dichvuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_dichvuLayout.createSequentialGroup()
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel5)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_dichvuLayout.setVerticalGroup(
@@ -343,7 +359,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel12.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -358,6 +374,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car_bill.png"))); // NOI18N
         jLabel6.setText("Hóa Đơn");
 
         javax.swing.GroupLayout pnl_hoadonLayout = new javax.swing.GroupLayout(pnl_hoadon);
@@ -366,8 +383,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_hoadonLayout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_hoadonLayout.setVerticalGroup(
@@ -392,7 +409,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel13.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel13.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -407,6 +424,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/statistics.png"))); // NOI18N
         jLabel7.setText("Thống kê");
 
         javax.swing.GroupLayout pnl_thongkeLayout = new javax.swing.GroupLayout(pnl_thongke);
@@ -415,8 +433,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_thongkeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_thongkeLayout.createSequentialGroup()
                 .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel7)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_thongkeLayout.setVerticalGroup(
@@ -441,7 +459,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel14.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel14.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
         jPanel14.setLayout(jPanel14Layout);
@@ -456,6 +474,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/maintenance.png"))); // NOI18N
         jLabel8.setText("Bảo Dưỡng");
 
         javax.swing.GroupLayout pnl_baoduongLayout = new javax.swing.GroupLayout(pnl_baoduong);
@@ -464,9 +483,9 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_baoduongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_baoduongLayout.createSequentialGroup()
                 .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
         pnl_baoduongLayout.setVerticalGroup(
             pnl_baoduongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -490,7 +509,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel15.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel15.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
@@ -505,6 +524,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/log-out.png"))); // NOI18N
         jLabel9.setText("Đăng Xuất");
 
         javax.swing.GroupLayout pnl_dangxuatLayout = new javax.swing.GroupLayout(pnl_dangxuat);
@@ -513,8 +533,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_dangxuatLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_dangxuatLayout.createSequentialGroup()
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel9)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_dangxuatLayout.setVerticalGroup(
@@ -539,7 +559,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
         });
 
-        jPanel16.setBackground(new java.awt.Color(153, 153, 255));
+        jPanel16.setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -554,6 +574,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 102, 204));
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/earth-globe.png"))); // NOI18N
         jLabel10.setText("Giới Thiệu");
 
         javax.swing.GroupLayout pnl_gioithieuLayout = new javax.swing.GroupLayout(pnl_gioithieu);
@@ -562,8 +583,8 @@ public class TrangChu extends javax.swing.JFrame {
             pnl_gioithieuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_gioithieuLayout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(jLabel10)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnl_gioithieuLayout.setVerticalGroup(
@@ -575,14 +596,11 @@ public class TrangChu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout pnl_MenuLayout = new javax.swing.GroupLayout(pnl_Menu);
+        pnl_Menu.setLayout(pnl_MenuLayout);
+        pnl_MenuLayout.setHorizontalGroup(
+            pnl_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jSeparator1)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
             .addComponent(pnl_TrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_taikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_thuexe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -593,12 +611,13 @@ public class TrangChu extends javax.swing.JFrame {
             .addComponent(pnl_baoduong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_dangxuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(pnl_gioithieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lbl_logo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+        pnl_MenuLayout.setVerticalGroup(
+            pnl_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_MenuLayout.createSequentialGroup()
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnl_TrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -620,35 +639,37 @@ public class TrangChu extends javax.swing.JFrame {
                 .addComponent(pnl_gioithieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1095, Short.MAX_VALUE))
+        pnl_Body.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_Body.setOpaque(false);
+        pnl_Body.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
+                .addComponent(pnl_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, 1160, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        backgroundLayout.setVerticalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pnl_Menu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -667,6 +688,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        showFrom(new testcard());
     }//GEN-LAST:event_pnl_TrangChuMouseClicked
 
     private void pnl_taikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseClicked
@@ -681,6 +703,17 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        jPanel4.setOpaque(false);
+        jPanel5.setOpaque(true);
+        jPanel6.setOpaque(false);
+        jPanel10.setOpaque(false);
+        jPanel11.setOpaque(false);
+        jPanel12.setOpaque(false);
+        jPanel13.setOpaque(false);
+        jPanel14.setOpaque(false);
+        jPanel15.setOpaque(false);
+        jPanel16.setOpaque(false);
+        showFrom(new testcard2());
     }//GEN-LAST:event_pnl_taikhoanMouseClicked
 
     private void pnl_thuexeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseClicked
@@ -695,6 +728,16 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        jPanel4.setOpaque(false);
+        jPanel5.setOpaque(false);
+        jPanel6.setOpaque(true);
+        jPanel10.setOpaque(false);
+        jPanel11.setOpaque(false);
+        jPanel12.setOpaque(false);
+        jPanel13.setOpaque(false);
+        jPanel14.setOpaque(false);
+        jPanel15.setOpaque(false);
+        jPanel16.setOpaque(false);
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
@@ -798,51 +841,141 @@ public class TrangChu extends javax.swing.JFrame {
     private void pnl_TrangChuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseEntered
         // TODO add your handling code here:
         onHover(pnl_TrangChu);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_TrangChuMouseEntered
 
     private void pnl_taikhoanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseEntered
         // TODO add your handling code here:
         onHover(pnl_taikhoan);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_taikhoanMouseEntered
 
     private void pnl_thuexeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseEntered
         // TODO add your handling code here:
         onHover(pnl_thuexe);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_thuexeMouseEntered
 
     private void pnl_hopdongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseEntered
         // TODO add your handling code here:
         onHover(pnl_hopdong);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_hopdongMouseEntered
 
     private void pnl_dichvuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseEntered
         // TODO add your handling code here:
         onHover(pnl_dichvu);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_dichvuMouseEntered
 
     private void pnl_hoadonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hoadonMouseEntered
         // TODO add your handling code here:
         onHover(pnl_hoadon);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_hoadonMouseEntered
 
     private void pnl_thongkeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseEntered
         // TODO add your handling code here:
         onHover(pnl_thongke);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_thongkeMouseEntered
 
     private void pnl_baoduongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseEntered
         // TODO add your handling code here:
         onHover(pnl_baoduong);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_baoduongMouseEntered
 
     private void pnl_gioithieuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseEntered
         // TODO add your handling code here:
         onHover(pnl_gioithieu);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_gioithieuMouseEntered
 
     private void pnl_dangxuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseEntered
         // TODO add your handling code here:
         onHover(pnl_dangxuat);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_hoadon);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_TrangChu);
     }//GEN-LAST:event_pnl_dangxuatMouseEntered
 
     private void pnl_TrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseExited
@@ -922,8 +1055,10 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel background;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -932,7 +1067,6 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -940,12 +1074,12 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel16;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JLabel lbl_logo;
+    private javax.swing.JPanel pnl_Body;
+    private javax.swing.JPanel pnl_Menu;
     private javax.swing.JPanel pnl_TrangChu;
     private javax.swing.JPanel pnl_baoduong;
     private javax.swing.JPanel pnl_dangxuat;
