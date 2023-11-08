@@ -18,6 +18,7 @@ public class TrangChu extends javax.swing.JFrame {
      */
     public TrangChu() {
         initComponents();
+        setTitle("Quản Lý Thuê Oto");
         init();
     }
     public void init(){
@@ -657,51 +658,141 @@ public class TrangChu extends javax.swing.JFrame {
     private void pnl_TrangChuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseClicked
         // TODO add your handling code here:
         onClick(pnl_TrangChu);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_TrangChuMouseClicked
 
     private void pnl_taikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseClicked
         // TODO add your handling code here:
         onClick(pnl_taikhoan);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_taikhoanMouseClicked
 
     private void pnl_thuexeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseClicked
         // TODO add your handling code here:
         onClick(pnl_thuexe);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
         // TODO add your handling code here:
         onClick(pnl_hopdong);
+         onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_hopdongMouseClicked
 
     private void pnl_dichvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseClicked
         // TODO add your handling code here:
         onClick(pnl_dichvu);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_dichvuMouseClicked
 
     private void pnl_hoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hoadonMouseClicked
         // TODO add your handling code here:
         onClick(pnl_hoadon);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_hoadonMouseClicked
 
     private void pnl_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseClicked
         // TODO add your handling code here:
         onClick(pnl_thongke);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_thongkeMouseClicked
 
     private void pnl_baoduongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseClicked
         // TODO add your handling code here:
         onClick(pnl_baoduong);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_baoduongMouseClicked
 
     private void pnl_gioithieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseClicked
         // TODO add your handling code here:
         onClick(pnl_gioithieu);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_gioithieuMouseClicked
 
     private void pnl_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseClicked
         // TODO add your handling code here:
         onClick(pnl_dangxuat);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_hoadon);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_TrangChu);
     }//GEN-LAST:event_pnl_dangxuatMouseClicked
 
     private void pnl_TrangChuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseEntered
