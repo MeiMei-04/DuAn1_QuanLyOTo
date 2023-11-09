@@ -94,8 +94,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         pnl_Menu.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car_logo.png"))); // NOI18N
-
         pnl_TrangChu.setBackground(new java.awt.Color(255, 255, 255));
         pnl_TrangChu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -124,7 +122,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/home.png"))); // NOI18N
         jLabel1.setText("Trang Chủ");
 
         javax.swing.GroupLayout pnl_TrangChuLayout = new javax.swing.GroupLayout(pnl_TrangChu);
@@ -174,7 +171,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/user.png"))); // NOI18N
         jLabel2.setText("Tài Khoản");
 
         javax.swing.GroupLayout pnl_taikhoanLayout = new javax.swing.GroupLayout(pnl_taikhoan);
@@ -224,7 +220,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car-rental.png"))); // NOI18N
         jLabel3.setText("Thuê Xe");
 
         javax.swing.GroupLayout pnl_thuexeLayout = new javax.swing.GroupLayout(pnl_thuexe);
@@ -274,7 +269,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/rental.png"))); // NOI18N
         jLabel4.setText("Hợp Đồng");
 
         javax.swing.GroupLayout pnl_hopdongLayout = new javax.swing.GroupLayout(pnl_hopdong);
@@ -324,7 +318,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car.png"))); // NOI18N
         jLabel5.setText("Dịch Vụ");
 
         javax.swing.GroupLayout pnl_dichvuLayout = new javax.swing.GroupLayout(pnl_dichvu);
@@ -374,7 +367,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/car_bill.png"))); // NOI18N
         jLabel6.setText("Hóa Đơn");
 
         javax.swing.GroupLayout pnl_hoadonLayout = new javax.swing.GroupLayout(pnl_hoadon);
@@ -424,7 +416,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/statistics.png"))); // NOI18N
         jLabel7.setText("Thống kê");
 
         javax.swing.GroupLayout pnl_thongkeLayout = new javax.swing.GroupLayout(pnl_thongke);
@@ -474,7 +465,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/maintenance.png"))); // NOI18N
         jLabel8.setText("Bảo Dưỡng");
 
         javax.swing.GroupLayout pnl_baoduongLayout = new javax.swing.GroupLayout(pnl_baoduong);
@@ -524,7 +514,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/log-out.png"))); // NOI18N
         jLabel9.setText("Đăng Xuất");
 
         javax.swing.GroupLayout pnl_dangxuatLayout = new javax.swing.GroupLayout(pnl_dangxuat);
@@ -574,7 +563,6 @@ public class TrangChu extends javax.swing.JFrame {
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 102, 204));
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGE/earth-globe.png"))); // NOI18N
         jLabel10.setText("Giới Thiệu");
 
         javax.swing.GroupLayout pnl_gioithieuLayout = new javax.swing.GroupLayout(pnl_gioithieu);
@@ -703,16 +691,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
-        jPanel4.setOpaque(false);
-        jPanel5.setOpaque(true);
-        jPanel6.setOpaque(false);
-        jPanel10.setOpaque(false);
-        jPanel11.setOpaque(false);
-        jPanel12.setOpaque(false);
-        jPanel13.setOpaque(false);
-        jPanel14.setOpaque(false);
-        jPanel15.setOpaque(false);
-        jPanel16.setOpaque(false);
         showFrom(new testcard2());
     }//GEN-LAST:event_pnl_taikhoanMouseClicked
 
@@ -728,16 +706,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
-        jPanel4.setOpaque(false);
-        jPanel5.setOpaque(false);
-        jPanel6.setOpaque(true);
-        jPanel10.setOpaque(false);
-        jPanel11.setOpaque(false);
-        jPanel12.setOpaque(false);
-        jPanel13.setOpaque(false);
-        jPanel14.setOpaque(false);
-        jPanel15.setOpaque(false);
-        jPanel16.setOpaque(false);
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
