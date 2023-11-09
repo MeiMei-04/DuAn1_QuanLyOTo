@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 
 /**
@@ -29,5 +30,10 @@ public class set_iconlbl {
         } else {
             System.out.println("Tệp không tồn tại.");
         }
+    }
+       public static void setIconButton(JButton button, String path){
+        ImageIcon icon = new ImageIcon(path);
+        // Tạo một nhãn mới và đặt biểu tượng cho nó
+        button.setIcon(icon);
     }
 }
