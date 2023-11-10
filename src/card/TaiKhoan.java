@@ -352,12 +352,12 @@ public class TaiKhoan extends javax.swing.JPanel {
 
     private void btn_chonanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chonanhActionPerformed
         // TODO add your handling code here:
-        Hepler.pickimg.chonAnh();
+        Hepler.ImagesHelper.chonAnh();
     }//GEN-LAST:event_btn_chonanhActionPerformed
 
     private void pnl_chonanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pnl_chonanhActionPerformed
         // TODO add your handling code here:
-        Hepler.pickimg.chonAnh();
+        Hepler.ImagesHelper.chonAnh();
     }//GEN-LAST:event_pnl_chonanhActionPerformed
 
 

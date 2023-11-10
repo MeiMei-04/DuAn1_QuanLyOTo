@@ -140,10 +140,10 @@ public class LoginJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
      public void seticon(){
-        Hepler.set_iconlbl.setIconlabel(lbl_anh, "src\\IMAGE\\car-rental-Login.png");
-        Hepler.set_iconlbl.setIconButton(btn_dangky, "src\\IMAGE\\registered.png");
-        Hepler.set_iconlbl.setIconButton(btn_dangnhap, "src\\IMAGE\\login.png");
-        Hepler.set_iconlbl.setIconButton(btn_quenmk, "src\\IMAGE\\cloud-security.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_anh, "src\\IMAGE\\car-rental-Login.png");
+        Hepler.ImagesHelper.setIconButton(btn_dangky, "src\\IMAGE\\registered.png");
+        Hepler.ImagesHelper.setIconButton(btn_dangnhap, "src\\IMAGE\\login.png");
+        Hepler.ImagesHelper.setIconButton(btn_quenmk, "src\\IMAGE\\cloud-security.png");
     }
     /**
      * @param args the command line arguments

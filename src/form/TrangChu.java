@@ -34,17 +34,17 @@ public class TrangChu extends javax.swing.JFrame {
     }
 
     public void seticon() {
-        Hepler.set_iconlbl.setIconlabel(lbl_logo, "src\\IMAGE\\car_logo.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_TrangChu, "src\\IMAGE\\home.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_taikhoan, "src\\IMAGE\\user.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_thuexe, "src\\IMAGE\\car-rental.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_hopdong, "src\\IMAGE\\rental.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_DichVU, "src\\IMAGE\\car.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_hoadon, "src\\IMAGE\\car_bill.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_ThongKe, "src\\IMAGE\\contract.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_BaoDuong, "src\\IMAGE\\maintenance.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_gioithieu, "src\\IMAGE\\earth-globe.png");
-        Hepler.set_iconlbl.setIconlabel(lbl_DangXuat, "src\\IMAGE\\log-out.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_logo, "src\\IMAGE\\car_logo.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_TrangChu, "src\\IMAGE\\home.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_taikhoan, "src\\IMAGE\\user.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_thuexe, "src\\IMAGE\\car-rental.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_hopdong, "src\\IMAGE\\rental.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_DichVU, "src\\IMAGE\\car.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_hoadon, "src\\IMAGE\\car_bill.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_ThongKe, "src\\IMAGE\\contract.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_BaoDuong, "src\\IMAGE\\maintenance.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_gioithieu, "src\\IMAGE\\earth-globe.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_DangXuat, "src\\IMAGE\\log-out.png");
     }
 
     private void onHover(JPanel panel) {

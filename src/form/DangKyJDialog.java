@@ -19,7 +19,7 @@ public class DangKyJDialog extends javax.swing.JDialog {
         seticon();
     }
       public void seticon(){
-        Hepler.set_iconlbl.setIconlabel(lbl_anh, "src\\IMAGE\\account.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_anh, "src\\IMAGE\\account.png");
 //        Hepler.set_iconlbl.setIconButton(btn_dangky, "src\\IMAGE\\registered.png");
 //        Hepler.set_iconlbl.setIconButton(btn_dangnhap, "src\\IMAGE\\login.png");
 //        Hepler.set_iconlbl.setIconButton(btn_quenmk, "src\\IMAGE\\cloud-security.png");
