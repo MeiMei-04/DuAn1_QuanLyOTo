@@ -12,17 +12,20 @@ public class TaiKhoan {
     private int userid;
     private String taikhoan;
     private String matkhau;
+    private String email;
     private boolean vaitro;
+    private boolean trangthai;
 
     public TaiKhoan() {
     }
 
-    
-    public TaiKhoan(int userid, String taikhoan, String matkhau, boolean vaitro) {
+    public TaiKhoan(int userid, String taikhoan, String matkhau, String email, boolean vaitro, boolean trangthai) {
         this.userid = userid;
         this.taikhoan = taikhoan;
         this.matkhau = matkhau;
+        this.email = email;
         this.vaitro = vaitro;
+        this.trangthai = trangthai;
     }
 
     public int getUserid() {
@@ -49,6 +52,14 @@ public class TaiKhoan {
         this.matkhau = matkhau;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public boolean isVaitro() {
         return vaitro;
     }
@@ -56,5 +67,17 @@ public class TaiKhoan {
     public void setVaitro(boolean vaitro) {
         this.vaitro = vaitro;
     }
+
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    
+
+    
     
 }
