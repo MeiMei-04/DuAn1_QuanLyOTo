@@ -16,11 +16,11 @@ import java.util.ArrayList;
  */
 public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
-    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,email,VaiTro) values(?,?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE UserID =?";
-    String DELETE_SQL = "DELETE FROM TaiKhoan WHERE UserID =?";
+    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,VaiTro) values(?,?,?,?)";
+    String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
+    String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
-    String SELECT_BY_ID_SQL = "SELECT*FROM TaiKhoan WHERE UserID =?";
+    String SELECT_BY_ID_SQL = "SELECT*FROM TaiKhoan WHERE TaiKhoan = ?";
 
     @Override
     public void insert(TaiKhoan entity) {
@@ -43,10 +43,9 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
     }
 
     @Override
-    public TaiKhoan selectByID(String key) {
+    public TaiKhoan selectByID(String id) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL, key);
-
+        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL, id);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -66,9 +65,9 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setUserid(rs.getInt("userid"));
                 tk.setTaikhoan(rs.getString("TaiKhoan"));
-                tk.setMatkhau(rs.getString("matkhau"));
-                tk.setEmail(rs.getString("email"));
-                tk.setVaitro(rs.getBoolean("bit"));
+                tk.setMatkhau(rs.getString("MatKhau"));
+                tk.setEmail(rs.getString("Email"));
+                tk.setVaitro(rs.getBoolean("VaiTro"));
                 tk.setTrangthai(rs.getBoolean("Trangthai"));
                 list.add(tk);
             }

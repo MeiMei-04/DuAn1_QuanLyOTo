@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import Hepler.AuthHelper;
 
 /**
  *
@@ -23,12 +24,28 @@ public class TrangChu extends javax.swing.JFrame {
         initComponents();
         setTitle("Quản Lý Thuê Oto");
         seticon();
+        setIconImage(Hepler.ImagesHelper.getAppIcon());
+        openDangNhap();
+        System.out.println(AuthHelper.authenticated());
+    }
 
+    public void openDangNhap() {
+        try {
+            if (!AuthHelper.authenticated()) {
+                new DangNhapDialog(this, false).setVisible(true);
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void openTaiKhoan() {
         try {
-            showFrom(new TaiKhoan());
+            if (AuthHelper.authenticated()) {
+                showFrom(new TaiKhoan());
+            }else{
+                openDangNhap();
+            }
+
         } catch (Exception e) {
         }
     }

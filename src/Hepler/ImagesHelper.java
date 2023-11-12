@@ -4,7 +4,9 @@
  */
 package Hepler;
 
+import java.awt.Image;
 import java.io.File;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,6 +14,7 @@ import java.nio.file.StandardCopyOption;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 /**
@@ -81,5 +84,13 @@ public class ImagesHelper {
         ImageIcon icon = new ImageIcon(path);
         // Tạo một nhãn mới và đặt biểu tượng cho nó
         button.setIcon(icon);
+    }
+    public static Image getAppIcon() {
+        ImageIcon imgIcon = new ImageIcon("src/IMAGE/logo.png");
+        Image img = imgIcon.getImage();
+        return img;
+    }
+    public static void main(String[] args) {
+        
     }
 }
