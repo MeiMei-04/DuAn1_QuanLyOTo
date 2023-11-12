@@ -25,7 +25,8 @@ public class TrangChu extends javax.swing.JFrame {
         setTitle("Quản Lý Thuê Oto");
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
-        openDangNhap();
+//        openDangNhap();
+        showFrom(new TaiKhoan());
         System.out.println(AuthHelper.authenticated());
     }
 
@@ -42,7 +43,7 @@ public class TrangChu extends javax.swing.JFrame {
         try {
             if (AuthHelper.authenticated()) {
                 showFrom(new TaiKhoan());
-            }else{
+            } else {
                 openDangNhap();
             }
 
@@ -57,7 +58,6 @@ public class TrangChu extends javax.swing.JFrame {
         Hepler.ImagesHelper.setIconlabel(lbl_thuexe, "src\\IMAGE\\car-rental.png");
         Hepler.ImagesHelper.setIconlabel(lbl_hopdong, "src\\IMAGE\\rental.png");
         Hepler.ImagesHelper.setIconlabel(lbl_DichVU, "src\\IMAGE\\car.png");
-        Hepler.ImagesHelper.setIconlabel(lbl_hoadon, "src\\IMAGE\\car_bill.png");
         Hepler.ImagesHelper.setIconlabel(lbl_ThongKe, "src\\IMAGE\\contract.png");
         Hepler.ImagesHelper.setIconlabel(lbl_BaoDuong, "src\\IMAGE\\maintenance.png");
         Hepler.ImagesHelper.setIconlabel(lbl_gioithieu, "src\\IMAGE\\earth-globe.png");
@@ -115,9 +115,6 @@ public class TrangChu extends javax.swing.JFrame {
         pnl_dichvu = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
         lbl_DichVU = new javax.swing.JLabel();
-        pnl_hoadon = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        lbl_hoadon = new javax.swing.JLabel();
         pnl_thongke = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         lbl_ThongKe = new javax.swing.JLabel();
@@ -134,13 +131,14 @@ public class TrangChu extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 204));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
+        setPreferredSize(new java.awt.Dimension(1200, 680));
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        background.setPreferredSize(new java.awt.Dimension(1280, 720));
+        background.setBackground(new java.awt.Color(255, 255, 255));
+        background.setPreferredSize(new java.awt.Dimension(1200, 680));
 
         pnl_Menu.setBackground(new java.awt.Color(255, 255, 255));
+        pnl_Menu.setPreferredSize(new java.awt.Dimension(200, 680));
 
         pnl_TrangChu.setBackground(new java.awt.Color(255, 255, 255));
         pnl_TrangChu.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -387,55 +385,6 @@ public class TrangChu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        pnl_hoadon.setBackground(new java.awt.Color(255, 255, 255));
-        pnl_hoadon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pnl_hoadonMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                pnl_hoadonMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_hoadonMouseExited(evt);
-            }
-        });
-
-        jPanel12.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
-        jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 10, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        lbl_hoadon.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_hoadon.setForeground(new java.awt.Color(255, 102, 204));
-        lbl_hoadon.setText("Hóa Đơn");
-
-        javax.swing.GroupLayout pnl_hoadonLayout = new javax.swing.GroupLayout(pnl_hoadon);
-        pnl_hoadon.setLayout(pnl_hoadonLayout);
-        pnl_hoadonLayout.setHorizontalGroup(
-            pnl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_hoadonLayout.createSequentialGroup()
-                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_hoadon, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        pnl_hoadonLayout.setVerticalGroup(
-            pnl_hoadonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(pnl_hoadonLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbl_hoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
         pnl_thongke.setBackground(new java.awt.Color(255, 255, 255));
         pnl_thongke.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -636,19 +585,21 @@ public class TrangChu extends javax.swing.JFrame {
         pnl_Menu.setLayout(pnl_MenuLayout);
         pnl_MenuLayout.setHorizontalGroup(
             pnl_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_TrangChu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_taikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_thuexe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_hopdong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_dichvu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_hoadon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_thongke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_baoduong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_dangxuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(pnl_gioithieu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(pnl_MenuLayout.createSequentialGroup()
                 .addComponent(lbl_logo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(43, 43, 43))
+            .addGroup(pnl_MenuLayout.createSequentialGroup()
+                .addGroup(pnl_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnl_dangxuat, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_gioithieu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_baoduong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_thongke, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_TrangChu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_taikhoan, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_thuexe, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_hopdong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_dichvu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(9, Short.MAX_VALUE))
         );
         pnl_MenuLayout.setVerticalGroup(
             pnl_MenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -665,8 +616,6 @@ public class TrangChu extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(pnl_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(pnl_hoadon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addComponent(pnl_thongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_baoduong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -674,31 +623,42 @@ public class TrangChu extends javax.swing.JFrame {
                 .addComponent(pnl_gioithieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnl_Body.setBackground(new java.awt.Color(242, 171, 227));
         pnl_Body.setOpaque(false);
-        pnl_Body.setLayout(new java.awt.BorderLayout());
+        pnl_Body.setPreferredSize(new java.awt.Dimension(937, 680));
+        pnl_Body.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addComponent(pnl_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(pnl_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_Body, javax.swing.GroupLayout.PREFERRED_SIZE, 1074, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addComponent(pnl_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(pnl_Body, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_Menu, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        getContentPane().add(background, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, 720));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
         setLocationRelativeTo(null);
@@ -711,7 +671,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -725,7 +684,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -740,7 +698,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -754,7 +711,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -768,26 +724,11 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_TrangChu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
     }//GEN-LAST:event_pnl_dichvuMouseClicked
-
-    private void pnl_hoadonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hoadonMouseClicked
-        // TODO add your handling code here:
-        onClick(pnl_hoadon);
-        onLeaveClick(pnl_taikhoan);
-        onLeaveClick(pnl_thuexe);
-        onLeaveClick(pnl_hopdong);
-        onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_TrangChu);
-        onLeaveClick(pnl_thongke);
-        onLeaveClick(pnl_baoduong);
-        onLeaveClick(pnl_gioithieu);
-        onLeaveClick(pnl_dangxuat);
-    }//GEN-LAST:event_pnl_hoadonMouseClicked
 
     private void pnl_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseClicked
         // TODO add your handling code here:
@@ -796,7 +737,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -810,7 +750,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_gioithieu);
@@ -824,7 +763,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_TrangChu);
@@ -838,7 +776,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_thuexe);
         onLeaveClick(pnl_hopdong);
         onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_hoadon);
         onLeaveClick(pnl_thongke);
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
@@ -852,7 +789,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -866,7 +802,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -880,7 +815,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -894,7 +828,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -908,26 +841,11 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_TrangChu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
     }//GEN-LAST:event_pnl_dichvuMouseEntered
-
-    private void pnl_hoadonMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hoadonMouseEntered
-        // TODO add your handling code here:
-        onHover(pnl_hoadon);
-        onLeaveHover(pnl_taikhoan);
-        onLeaveHover(pnl_thuexe);
-        onLeaveHover(pnl_hopdong);
-        onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_TrangChu);
-        onLeaveHover(pnl_thongke);
-        onLeaveHover(pnl_baoduong);
-        onLeaveHover(pnl_gioithieu);
-        onLeaveHover(pnl_dangxuat);
-    }//GEN-LAST:event_pnl_hoadonMouseEntered
 
     private void pnl_thongkeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseEntered
         // TODO add your handling code here:
@@ -936,7 +854,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -950,7 +867,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_gioithieu);
@@ -964,7 +880,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_TrangChu);
@@ -978,7 +893,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_thuexe);
         onLeaveHover(pnl_hopdong);
         onLeaveHover(pnl_dichvu);
-        onLeaveHover(pnl_hoadon);
         onLeaveHover(pnl_thongke);
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
@@ -1004,10 +918,6 @@ public class TrangChu extends javax.swing.JFrame {
     private void pnl_dichvuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseExited
         // TODO add your handling code here:
     }//GEN-LAST:event_pnl_dichvuMouseExited
-
-    private void pnl_hoadonMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hoadonMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_hoadonMouseExited
 
     private void pnl_thongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseExited
         // TODO add your handling code here:
@@ -1065,7 +975,6 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
@@ -1079,7 +988,6 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_ThongKe;
     private javax.swing.JLabel lbl_TrangChu;
     private javax.swing.JLabel lbl_gioithieu;
-    private javax.swing.JLabel lbl_hoadon;
     private javax.swing.JLabel lbl_hopdong;
     private javax.swing.JLabel lbl_logo;
     private javax.swing.JLabel lbl_taikhoan;
@@ -1091,7 +999,6 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_dangxuat;
     private javax.swing.JPanel pnl_dichvu;
     private javax.swing.JPanel pnl_gioithieu;
-    private javax.swing.JPanel pnl_hoadon;
     private javax.swing.JPanel pnl_hopdong;
     private javax.swing.JPanel pnl_taikhoan;
     private javax.swing.JPanel pnl_thongke;

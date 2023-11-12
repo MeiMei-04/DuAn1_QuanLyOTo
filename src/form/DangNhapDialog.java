@@ -126,7 +126,6 @@ public class DangNhapDialog extends java.awt.Dialog {
         txt_tendangnhap.setBackground(new java.awt.Color(255, 204, 204));
         txt_tendangnhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_tendangnhap.setForeground(new java.awt.Color(255, 51, 204));
-        txt_tendangnhap.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txt_tendangnhap.setText("Tên Đăng Nhập");
         txt_tendangnhap.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_tendangnhap.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -205,14 +204,15 @@ public class DangNhapDialog extends java.awt.Dialog {
                             .addComponent(lbl_iconpassword, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_tendangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(cb_hienthimatkhau)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lbl_quenmatkhau))
-                                .addComponent(txt_password)
-                                .addComponent(btn_DangKy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(cb_hienthimatkhau)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lbl_quenmatkhau))
+                            .addComponent(txt_password)
+                            .addComponent(btn_DangKy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(txt_tendangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(77, 77, 77))))
         );
         jPanel2Layout.setVerticalGroup(
