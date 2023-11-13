@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.2" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.DialogFormInfo">
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
   <Properties>
-    <Property name="resizable" type="boolean" value="false"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
   </SyntheticProperties>
-  <Events>
-    <EventHandler event="windowClosing" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosing"/>
-  </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -49,7 +46,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="pnl_anh" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
@@ -69,7 +66,7 @@
                                           <Component id="lbl_maxacnhan" min="-2" pref="40" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txt_maxacnhan" min="-2" pref="250" max="-2" attributes="0"/>
+                                              <Component id="txt_maxacnhan" alignment="0" min="-2" pref="250" max="-2" attributes="0"/>
                                               <Group type="102" alignment="1" attributes="0">
                                                   <Component id="btn_dangky" min="-2" pref="105" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
@@ -79,7 +76,7 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
                                   <Component id="lbl_taikhoan" min="-2" pref="40" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="txt_taikhoan" min="-2" pref="250" max="-2" attributes="0"/>
@@ -96,7 +93,7 @@
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="189" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -118,25 +115,25 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lbl_confirm" max="32767" attributes="0"/>
-                      <Component id="txt_passwordconfirm" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lbl_confirm" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txt_passwordconfirm" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lbl_email" max="32767" attributes="0"/>
-                      <Component id="txt_email" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lbl_email" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txt_email" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="lbl_maxacnhan" max="32767" attributes="0"/>
-                      <Component id="txt_maxacnhan" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="lbl_maxacnhan" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txt_maxacnhan" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_dangky" pref="29" max="32767" attributes="0"/>
-                      <Component id="btn_nhanma" max="32767" attributes="0"/>
+                      <Component id="btn_dangky" alignment="0" pref="29" max="32767" attributes="0"/>
+                      <Component id="btn_nhanma" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="98" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
