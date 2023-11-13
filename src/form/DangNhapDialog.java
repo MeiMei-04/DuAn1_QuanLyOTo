@@ -283,6 +283,11 @@ public class DangNhapDialog extends java.awt.Dialog {
 
     private void cb_hienthimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_hienthimatkhauActionPerformed
         // TODO add your handling code here:
+        if (cb_hienthimatkhau.isSelected()) {
+            txt_password.setEchoChar((char) 0); // password visible
+        } else {
+            txt_password.setEchoChar('*'); // password hidden
+        }
     }//GEN-LAST:event_cb_hienthimatkhauActionPerformed
 
     private void txt_passwordMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_passwordMouseClicked
