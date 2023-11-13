@@ -27,7 +27,7 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
 //        openDangNhap();
-        
+        showFrom(new ThueXe());
         System.out.println(AuthHelper.authenticated());
     }
 
@@ -39,11 +39,32 @@ public class TrangChu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+    public void openThueXe() {
+        try {
+            if (AuthHelper.authenticated()) {
+                showFrom(new ThueXe());
+            } else {
+                openDangNhap();
+            }
 
+        } catch (Exception e) {
+        }
+    }
     public void openTaiKhoan() {
         try {
             if (AuthHelper.authenticated()) {
                 showFrom(new TaiKhoan());
+            } else {
+                openDangNhap();
+            }
+
+        } catch (Exception e) {
+        }
+    }
+    public void openDichVu()    {
+        try {
+            if (AuthHelper.authenticated()) {
+                showFrom(new DichVu());
             } else {
                 openDangNhap();
             }
@@ -147,9 +168,6 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_TrangChuMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_TrangChuMouseExited(evt);
-            }
         });
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 0));
@@ -195,9 +213,6 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_taikhoanMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_taikhoanMouseExited(evt);
             }
         });
 
@@ -245,9 +260,6 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_thuexeMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_thuexeMouseExited(evt);
-            }
         });
 
         jPanel6.setBackground(new java.awt.Color(255, 102, 0));
@@ -293,9 +305,6 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_hopdongMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_hopdongMouseExited(evt);
             }
         });
 
@@ -343,9 +352,6 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_dichvuMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_dichvuMouseExited(evt);
-            }
         });
 
         jPanel11.setBackground(new java.awt.Color(255, 102, 0));
@@ -364,11 +370,6 @@ public class TrangChu extends javax.swing.JFrame {
         lbl_DichVU.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_DichVU.setForeground(new java.awt.Color(255, 255, 255));
         lbl_DichVU.setText("DỊCH VỤ");
-        lbl_DichVU.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lbl_DichVUMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnl_dichvuLayout = new javax.swing.GroupLayout(pnl_dichvu);
         pnl_dichvu.setLayout(pnl_dichvuLayout);
@@ -396,9 +397,6 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_thongkeMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_thongkeMouseExited(evt);
             }
         });
 
@@ -446,9 +444,6 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_baoduongMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_baoduongMouseExited(evt);
-            }
         });
 
         jPanel14.setBackground(new java.awt.Color(255, 102, 0));
@@ -495,9 +490,6 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_dangxuatMouseEntered(evt);
             }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_dangxuatMouseExited(evt);
-            }
         });
 
         jPanel15.setBackground(new java.awt.Color(255, 102, 0));
@@ -543,9 +535,6 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_gioithieuMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                pnl_gioithieuMouseExited(evt);
             }
         });
 
@@ -736,6 +725,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        openDichVu();
     }//GEN-LAST:event_pnl_dichvuMouseClicked
 
     private void pnl_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseClicked
@@ -906,56 +896,6 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_TrangChu);
     }//GEN-LAST:event_pnl_dangxuatMouseEntered
-
-    private void pnl_TrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_TrangChuMouseExited
-
-    private void pnl_taikhoanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_taikhoanMouseExited
-
-    private void pnl_thuexeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_thuexeMouseExited
-
-    private void pnl_hopdongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_hopdongMouseExited
-
-    private void pnl_dichvuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_dichvuMouseExited
-
-    private void pnl_thongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_thongkeMouseExited
-
-    private void pnl_baoduongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_baoduongMouseExited
-
-    private void pnl_gioithieuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_gioithieuMouseExited
-
-    private void pnl_dangxuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pnl_dangxuatMouseExited
-
-    private void lbl_DichVUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_DichVUMouseClicked
-        // TODO add your handling code here:
-        onClick(pnl_taikhoan);
-        onLeaveClick(pnl_TrangChu);
-        onLeaveClick(pnl_thuexe);
-        onLeaveClick(pnl_hopdong);
-        onLeaveClick(pnl_dichvu);
-        onLeaveClick(pnl_thongke);
-        onLeaveClick(pnl_baoduong);
-        onLeaveClick(pnl_gioithieu);
-        onLeaveClick(pnl_dangxuat);
-        showFrom(new DichVu());
-    }//GEN-LAST:event_lbl_DichVUMouseClicked
 
     /**
      * @param args the command line arguments
