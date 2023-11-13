@@ -65,7 +65,7 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        background.setBackground(new java.awt.Color(255, 153, 153));
+        background.setBackground(new java.awt.Color(255, 102, 51));
 
         pnl_anh.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -100,9 +100,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        txt_taikhoan.setBackground(new java.awt.Color(255, 204, 204));
         txt_taikhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_taikhoan.setForeground(new java.awt.Color(255, 51, 204));
+        txt_taikhoan.setForeground(new java.awt.Color(255, 102, 51));
         txt_taikhoan.setText("Tài Khoản");
         txt_taikhoan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_taikhoan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -110,10 +109,14 @@ public class DangKyDialog extends java.awt.Dialog {
                 txt_taikhoanMouseClicked(evt);
             }
         });
+        txt_taikhoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_taikhoanActionPerformed(evt);
+            }
+        });
 
-        txt_email.setBackground(new java.awt.Color(255, 204, 204));
         txt_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_email.setForeground(new java.awt.Color(255, 51, 204));
+        txt_email.setForeground(new java.awt.Color(255, 102, 51));
         txt_email.setText("Email");
         txt_email.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -134,9 +137,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        txt_maxacnhan.setBackground(new java.awt.Color(255, 204, 204));
         txt_maxacnhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_maxacnhan.setForeground(new java.awt.Color(255, 51, 204));
+        txt_maxacnhan.setForeground(new java.awt.Color(255, 102, 51));
         txt_maxacnhan.setText("Mã Xác Nhận");
         txt_maxacnhan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_maxacnhan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -145,9 +147,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        txt_password.setBackground(new java.awt.Color(255, 204, 204));
         txt_password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_password.setForeground(new java.awt.Color(255, 51, 204));
+        txt_password.setForeground(new java.awt.Color(255, 102, 51));
         txt_password.setText("pass");
         txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_password.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,9 +157,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        txt_passwordconfirm.setBackground(new java.awt.Color(255, 204, 204));
         txt_passwordconfirm.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_passwordconfirm.setForeground(new java.awt.Color(255, 51, 204));
+        txt_passwordconfirm.setForeground(new java.awt.Color(255, 102, 51));
         txt_passwordconfirm.setText("pass");
         txt_passwordconfirm.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_passwordconfirm.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -168,15 +168,22 @@ public class DangKyDialog extends java.awt.Dialog {
         });
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Đăng Ký");
 
+        btn_dangky.setBackground(new java.awt.Color(255, 102, 51));
+        btn_dangky.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_dangky.setForeground(new java.awt.Color(255, 255, 255));
         btn_dangky.setText("Đăng Ký");
-        btn_dangky.setContentAreaFilled(false);
+        btn_dangky.setBorder(null);
         btn_dangky.setFocusPainted(false);
 
+        btn_nhanma.setBackground(new java.awt.Color(255, 102, 51));
+        btn_nhanma.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_nhanma.setForeground(new java.awt.Color(255, 255, 255));
         btn_nhanma.setText("Nhận Mã");
-        btn_nhanma.setContentAreaFilled(false);
+        btn_nhanma.setBorder(null);
         btn_nhanma.setFocusPainted(false);
         btn_nhanma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,10 +217,10 @@ public class DangKyDialog extends java.awt.Dialog {
                                         .addGap(18, 18, 18)
                                         .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txt_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(backgroundLayout.createSequentialGroup()
-                                                .addComponent(btn_dangky)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                                .addComponent(btn_dangky, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                                .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addComponent(lbl_taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -254,10 +261,10 @@ public class DangKyDialog extends java.awt.Dialog {
                     .addComponent(lbl_maxacnhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btn_dangky)
-                    .addComponent(btn_nhanma))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btn_dangky, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
+                    .addComponent(btn_nhanma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -332,6 +339,10 @@ public class DangKyDialog extends java.awt.Dialog {
         setVisible(false);
         dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void txt_taikhoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_taikhoanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_taikhoanActionPerformed
 
 
 

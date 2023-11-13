@@ -96,7 +96,7 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        pnlbackground.setBackground(new java.awt.Color(255, 153, 153));
+        pnlbackground.setBackground(new java.awt.Color(255, 102, 51));
 
         pnl_anh.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -117,15 +117,16 @@ public class DangNhapDialog extends java.awt.Dialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 153));
+        jPanel2.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("WELCOME!");
 
-        txt_tendangnhap.setBackground(new java.awt.Color(255, 204, 204));
         txt_tendangnhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        txt_tendangnhap.setForeground(new java.awt.Color(255, 51, 204));
+        txt_tendangnhap.setForeground(new java.awt.Color(255, 102, 51));
         txt_tendangnhap.setText("Tên Đăng Nhập");
         txt_tendangnhap.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_tendangnhap.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -146,8 +147,7 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        txt_password.setBackground(new java.awt.Color(255, 204, 204));
-        txt_password.setForeground(new java.awt.Color(255, 51, 204));
+        txt_password.setForeground(new java.awt.Color(255, 102, 51));
         txt_password.setText("123");
         txt_password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         txt_password.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,7 +156,8 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        cb_hienthimatkhau.setText("Hiển Thị Mật Khẩu");
+        cb_hienthimatkhau.setForeground(new java.awt.Color(255, 255, 255));
+        cb_hienthimatkhau.setText("HIỂN THỊ MẬT KHẨU");
         cb_hienthimatkhau.setContentAreaFilled(false);
         cb_hienthimatkhau.setFocusPainted(false);
         cb_hienthimatkhau.addActionListener(new java.awt.event.ActionListener() {
@@ -165,11 +166,15 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        lbl_quenmatkhau.setText("Quên Mật Khẩu");
-        lbl_quenmatkhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        lbl_quenmatkhau.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_quenmatkhau.setText("QUÊN MẬT KHẨU");
+        lbl_quenmatkhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
-        btn_DangKy.setText("Đăng Nhập");
-        btn_DangKy.setContentAreaFilled(false);
+        btn_DangKy.setBackground(new java.awt.Color(255, 102, 51));
+        btn_DangKy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_DangKy.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DangKy.setText("ĐĂNG NHẬP");
+        btn_DangKy.setBorder(null);
         btn_DangKy.setFocusPainted(false);
         btn_DangKy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,7 +182,8 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        lbl_dangky.setText("Đăng Ký Tài Khoản");
+        lbl_dangky.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_dangky.setText("ĐĂNG KÝ TÀI KHOẢN");
         lbl_dangky.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_dangkyMouseClicked(evt);
@@ -237,9 +243,9 @@ public class DangNhapDialog extends java.awt.Dialog {
                             .addComponent(lbl_quenmatkhau))
                         .addGap(18, 18, 18)
                         .addComponent(btn_DangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_dangky)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout pnlbackgroundLayout = new javax.swing.GroupLayout(pnlbackground);
