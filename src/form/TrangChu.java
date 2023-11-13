@@ -168,6 +168,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_TrangChuMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_TrangChuMouseExited(evt);
+            }
         });
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 0));
@@ -213,6 +216,9 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_taikhoanMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_taikhoanMouseExited(evt);
             }
         });
 
@@ -260,6 +266,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_thuexeMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_thuexeMouseExited(evt);
+            }
         });
 
         jPanel6.setBackground(new java.awt.Color(255, 102, 0));
@@ -305,6 +314,9 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_hopdongMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_hopdongMouseExited(evt);
             }
         });
 
@@ -352,6 +364,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_dichvuMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_dichvuMouseExited(evt);
+            }
         });
 
         jPanel11.setBackground(new java.awt.Color(255, 102, 0));
@@ -397,6 +412,9 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_thongkeMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_thongkeMouseExited(evt);
             }
         });
 
@@ -444,6 +462,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_baoduongMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_baoduongMouseExited(evt);
+            }
         });
 
         jPanel14.setBackground(new java.awt.Color(255, 102, 0));
@@ -490,6 +511,9 @@ public class TrangChu extends javax.swing.JFrame {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_dangxuatMouseEntered(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_dangxuatMouseExited(evt);
+            }
         });
 
         jPanel15.setBackground(new java.awt.Color(255, 102, 0));
@@ -535,6 +559,9 @@ public class TrangChu extends javax.swing.JFrame {
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 pnl_gioithieuMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_gioithieuMouseExited(evt);
             }
         });
 
@@ -896,6 +923,51 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_TrangChu);
     }//GEN-LAST:event_pnl_dangxuatMouseEntered
+
+    private void pnl_TrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseExited
+        // TODO add your handling code here:
+        pnl_TrangChu.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_TrangChuMouseExited
+
+    private void pnl_taikhoanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseExited
+        // TODO add your handling code here:
+        pnl_taikhoan.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_taikhoanMouseExited
+
+    private void pnl_thuexeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseExited
+        // TODO add your handling code here:
+        pnl_thuexe.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_thuexeMouseExited
+
+    private void pnl_hopdongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseExited
+        // TODO add your handling code here:
+        pnl_hopdong.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_hopdongMouseExited
+
+    private void pnl_dichvuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseExited
+        // TODO add your handling code here:
+        pnl_dichvu.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_dichvuMouseExited
+
+    private void pnl_thongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseExited
+        // TODO add your handling code here:
+        pnl_thongke.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_thongkeMouseExited
+
+    private void pnl_baoduongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseExited
+        // TODO add your handling code here:
+        pnl_baoduong.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_baoduongMouseExited
+
+    private void pnl_gioithieuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseExited
+        // TODO add your handling code here:
+        pnl_gioithieu.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_gioithieuMouseExited
+
+    private void pnl_dangxuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseExited
+        // TODO add your handling code here:
+        pnl_dangxuat.setBackground(new Color(255,102,0));
+    }//GEN-LAST:event_pnl_dangxuatMouseExited
 
     /**
      * @param args the command line arguments

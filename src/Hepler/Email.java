@@ -2,7 +2,6 @@ package Hepler;
 
 import java.util.Date;
 import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
@@ -12,72 +11,70 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class Email {
-	// Email: tungletest1.email@gmail.com
-	// Password: nebeekfipcstxcox
-	static final String from = "Email của bạn";
-	static final String password = "nebeekfipcstxcox";
+    // Email: tungletest1.email@gmail.com
+    // Password: nebeekfipcstxcox
 
-	public static boolean sendEmail(String to, String tieuDe, String noiDung) {
-		// Properties : khai báo các thuộc tính
-		Properties props = new Properties();
-		props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
-		props.put("mail.smtp.port", "587"); // TLS 587 SSL 465
-		props.put("mail.smtp.auth", "true");
-		props.put("mail.smtp.starttls.enable", "true");
+    static final String from = "quanlyotofpoly@gmail.com";
+    static final String password = "ufcpnxgvlefjfbhj";
 
-		// create Authenticator
-		Authenticator auth = new Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
-				return new PasswordAuthentication(from, password);
-			}
-		};
+    public static boolean sendEmail(String to, String tieuDe, String noiDung) {
+        // Properties : khai báo các thuộc tính
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
+        props.put("mail.smtp.port", "587"); // TLS 587 SSL 465
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
 
-		// Phiên làm việc
-		Session session = Session.getInstance(props, auth);
+        // create Authenticator
+        Authenticator auth = new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                // TODO Auto-generated method stub
+                return new PasswordAuthentication(from, password);
+            }
+        };
 
-		// Tạo một tin nhắn
-		MimeMessage msg = new MimeMessage(session);
+        // Phiên làm việc
+        Session session = Session.getInstance(props, auth);
 
-		try {
-			// Kiểu nội dung
-			msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+        // Tạo một tin nhắn
+        MimeMessage msg = new MimeMessage(session);
 
-			// Người gửi
-			msg.setFrom(from);
+        try {
+            // Kiểu nội dung
+            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
 
-			// Người nhận
-			msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
+            // Người gửi
+            msg.setFrom(from);
 
-			// Tiêu đề email
-			msg.setSubject(tieuDe);
+            // Người nhận
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to, false));
 
-			// Quy đinh ngày gửi
-			msg.setSentDate(new Date());
+            // Tiêu đề email
+            msg.setSubject(tieuDe);
 
-			// Quy định email nhận phản hồi
-			// msg.setReplyTo(InternetAddress.parse(from, false))
+            // Quy đinh ngày gửi
+            msg.setSentDate(new Date());
 
-			// Nội dung
-			msg.setContent(noiDung, "text/HTML; charset=UTF-8");
+            // Quy định email nhận phản hồi
+            // msg.setReplyTo(InternetAddress.parse(from, false))
+            // Nội dung
+            msg.setContent(noiDung, "text/HTML; charset=UTF-8");
 
-			// Gửi email
-			Transport.send(msg);
-			System.out.println("Gửi email thành công");
-			return true;
-		} catch (Exception e) {
-			System.out.println("Gặp lỗi trong quá trình gửi email");
-			e.printStackTrace();
-			return false;
-		}
-	}
+            // Gửi email
+            Transport.send(msg);
+            System.out.println("Gửi email thành công");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Gặp lỗi trong quá trình gửi email");
+            e.printStackTrace();
+            return false;
+        }
+    }
 
-	public static void main(String[] args) {
-		for (int i = 0; i < 10; i++) {
-			Email.sendEmail("tn.le@uw.edu.pl", System.currentTimeMillis() + "", "Đây là phần nội dung!");
-		}
+    public static void main(String[] args) {
+        Email.sendEmail("truongndph30873@fpt.edu.vn", "Xác Minh Tài Khoản", "123123");
 
-	}
+    }
 
 }
