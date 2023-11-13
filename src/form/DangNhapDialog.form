@@ -138,7 +138,7 @@
                                       <Component id="lbl_quenmatkhau" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="txt_password" max="32767" attributes="0"/>
-                                  <Component id="btn_DangKy" max="32767" attributes="0"/>
+                                  <Component id="btn_DangNhap" max="32767" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="txt_tendangnhap" min="-2" pref="265" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -174,7 +174,7 @@
                                   <Component id="lbl_quenmatkhau" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btn_DangKy" min="-2" pref="49" max="-2" attributes="0"/>
+                              <Component id="btn_DangNhap" min="-2" pref="49" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -270,7 +270,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btn_DangKy">
+            <Component class="javax.swing.JButton" name="btn_DangNhap">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="66" red="ff" type="rgb"/>
@@ -288,7 +288,7 @@
                 <Property name="focusPainted" type="boolean" value="false"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DangKyActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_DangNhapActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_dangky">

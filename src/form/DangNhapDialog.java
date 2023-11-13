@@ -35,7 +35,7 @@ public class DangNhapDialog extends java.awt.Dialog {
         Hepler.ImagesHelper.setIconlabel(lbl_iconpassword, "src\\IMAGE\\password.png");
         Hepler.ImagesHelper.setIconlabel(lbl_quenmatkhau, "src\\IMAGE\\forgot.png");
         Hepler.ImagesHelper.setIconlabel(lbl_dangky, "src\\IMAGE\\register.png");
-        Hepler.ImagesHelper.setIconButton(btn_DangKy, "src\\IMAGE\\enter.png");
+        Hepler.ImagesHelper.setIconButton(btn_DangNhap, "src\\IMAGE\\enter.png");
     }
 
     public void dangNhap() {
@@ -86,7 +86,7 @@ public class DangNhapDialog extends java.awt.Dialog {
         txt_password = new javax.swing.JPasswordField();
         cb_hienthimatkhau = new javax.swing.JCheckBox();
         lbl_quenmatkhau = new javax.swing.JLabel();
-        btn_DangKy = new javax.swing.JButton();
+        btn_DangNhap = new javax.swing.JButton();
         lbl_dangky = new javax.swing.JLabel();
 
         setResizable(false);
@@ -170,15 +170,15 @@ public class DangNhapDialog extends java.awt.Dialog {
         lbl_quenmatkhau.setText("QUÊN MẬT KHẨU");
         lbl_quenmatkhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
 
-        btn_DangKy.setBackground(new java.awt.Color(255, 102, 51));
-        btn_DangKy.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_DangKy.setForeground(new java.awt.Color(255, 255, 255));
-        btn_DangKy.setText("ĐĂNG NHẬP");
-        btn_DangKy.setBorder(null);
-        btn_DangKy.setFocusPainted(false);
-        btn_DangKy.addActionListener(new java.awt.event.ActionListener() {
+        btn_DangNhap.setBackground(new java.awt.Color(255, 102, 51));
+        btn_DangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btn_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DangNhap.setText("ĐĂNG NHẬP");
+        btn_DangNhap.setBorder(null);
+        btn_DangNhap.setFocusPainted(false);
+        btn_DangNhap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_DangKyActionPerformed(evt);
+                btn_DangNhapActionPerformed(evt);
             }
         });
 
@@ -215,7 +215,7 @@ public class DangNhapDialog extends java.awt.Dialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lbl_quenmatkhau))
                             .addComponent(txt_password)
-                            .addComponent(btn_DangKy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_DangNhap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(txt_tendangnhap, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -242,7 +242,7 @@ public class DangNhapDialog extends java.awt.Dialog {
                             .addComponent(cb_hienthimatkhau)
                             .addComponent(lbl_quenmatkhau))
                         .addGap(18, 18, 18)
-                        .addComponent(btn_DangKy, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_DangNhap, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_dangky)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -316,18 +316,17 @@ public class DangNhapDialog extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_formWindowClosing
 
-    private void btn_DangKyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangKyActionPerformed
+    private void btn_DangNhapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_DangNhapActionPerformed
         // TODO add your handling code here:
-        System.out.println("1");
         dangNhap();
-    }//GEN-LAST:event_btn_DangKyActionPerformed
+    }//GEN-LAST:event_btn_DangNhapActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_DangKy;
+    private javax.swing.JButton btn_DangNhap;
     private javax.swing.JCheckBox cb_hienthimatkhau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;

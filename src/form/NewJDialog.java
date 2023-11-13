@@ -27,28 +27,27 @@ public class NewJDialog extends javax.swing.JDialog {
         initComponents();
     }
 
-    public boolean verify() {
-        System.out.println(txt_maxacnhan.getText());
-        if (!txt_maxacnhan.getText().equals(formattedCode)) {
-            DialogHelper.alert(this, "Mã Xác Thực Không Đúng");
-            return false;
-        }
-        if (!String.valueOf(txt_passwordconfirm.getPassword()).equals(String.valueOf(txt_password.getPassword()))) {
-            DialogHelper.alert(this, "Mật Khẩu Phải Nhập Trùng");
-            txt_passwordconfirm.requestFocus();
-            return false;
-        }
-        return true;
+//    public boolean verify() {
+//        if (!txt_maxacnhan.getText().equals(formattedCode)) {
+//            DialogHelper.alert(this, "Mã Xác Thực Không Đúng");
+//            return false;
+//        }
+//        if (!String.valueOf(txt_passwordconfirm.getPassword()).equals(String.valueOf(txt_password.getPassword()))) {
+//            DialogHelper.alert(this, "Mật Khẩu Phải Nhập Trùng");
+//            txt_passwordconfirm.requestFocus();
+//            return false;
+//        }
+//        return true;
+//
+//    }
 
-    }
-
-    public void clearForm() {
-        txt_taikhoan.setText("");
-        txt_password.setText("");
-        txt_passwordconfirm.setText("");
-        txt_email.setText("");
-        txt_maxacnhan.setText("");
-    }
+//    public void clearForm() {
+//        txt_taikhoan.setText("");
+//        txt_password.setText("");
+//        txt_passwordconfirm.setText("");
+//        txt_email.setText("");
+//        txt_maxacnhan.setText("");
+//    }
 
     //getForm lấy dữ liệu từ form
     TaiKhoan getForm() {
@@ -56,6 +55,8 @@ public class NewJDialog extends javax.swing.JDialog {
             TaiKhoan tk = new TaiKhoan();
             tk.setTaikhoan(txt_taikhoan.getText());
             tk.setMatkhau(String.valueOf(txt_password.getPassword()));
+            tk.setEmail(txt_email.getText());
+            tk.setTrangthai(false);
             tk.setVaitro(false);
             return tk;
         } catch (Exception e) {
@@ -69,11 +70,10 @@ public class NewJDialog extends javax.swing.JDialog {
         TaiKhoan tk = getForm();
         try {
             dao.insert(tk);
-            clearForm();
             DialogHelper.alert(this, "Đăng Ký Thành Công");
         } catch (Exception e) {
-            DialogHelper.alert(this, "Đăng Ký Không Thành Công");
-            e.getMessage();
+            System.out.println(e.getMessage());
+            
         }
     }
 
@@ -382,28 +382,28 @@ public class NewJDialog extends javax.swing.JDialog {
 
     private void btn_dangkyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dangkyActionPerformed
         // TODO add your handling code here:
-        if (verify()) {
-            insert();
-        }
+//        if (verify()) {
+//            insert();
+//        }
+insert();
     }//GEN-LAST:event_btn_dangkyActionPerformed
     private static long lastEventTime = 0;
     private void btn_nhanmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nhanmaActionPerformed
-        // TODO add your handling code here:
 
-//        long currentTime = new Date().getTime();
-//        if (currentTime - lastEventTime > 60000) { // 60000 milliseconds = 1 minute
+        long currentTime = new Date().getTime();
+        if (currentTime - lastEventTime > 60000) { // 60000 milliseconds = 1 minute
             if (evl.validate(txt_email.getText())) {
                 Random rand = new Random();
                 int code = rand.nextInt(999999);
                 formattedCode = String.format("%06d", code);
-//                Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode));
+                Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode));
             } else {
                 DialogHelper.alert(this, "Email Không Đúng Định Dạng");
             }
-//            lastEventTime = currentTime;
-//        } else {
-//            DialogHelper.alert(this, "Vui Lòng Chờ Trong Ít Phút");
-//        }
+            lastEventTime = currentTime;
+        } else {
+            DialogHelper.alert(this, "Vui Lòng Chờ Trong Ít Phút");
+        }
 
     }//GEN-LAST:event_btn_nhanmaActionPerformed
 

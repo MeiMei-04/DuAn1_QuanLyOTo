@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
-    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,VaiTro) values(?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
@@ -24,7 +24,7 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
     @Override
     public void insert(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.isVaitro());
+        JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(),entity.isTrangthai(),entity.isVaitro());
     }
 
     @Override

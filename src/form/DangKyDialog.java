@@ -74,6 +74,8 @@ public class DangKyDialog extends java.awt.Dialog {
             TaiKhoan tk = new TaiKhoan();
             tk.setTaikhoan(txt_taikhoan.getText());
             tk.setMatkhau(String.valueOf(txt_password.getPassword()));
+            tk.setEmail(txt_email.getText());
+            tk.setTrangthai(false);
             tk.setVaitro(false);
             return tk;
         } catch (Exception e) {
@@ -90,8 +92,9 @@ public class DangKyDialog extends java.awt.Dialog {
             clearForm();
             DialogHelper.alert(this, "Đăng Ký Thành Công");
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             DialogHelper.alert(this, "Đăng Ký Không Thành Công");
-            e.getMessage();
+
         }
     }
 
@@ -405,9 +408,8 @@ public class DangKyDialog extends java.awt.Dialog {
             if (evl.validate(txt_email.getText())) {
                 Random rand = new Random();
                 int code = rand.nextInt(999999);
-                String formattedCode = String.format("%06d", code);
-                System.out.println(formattedCode);
-//                Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode));
+                formattedCode = String.format("%06d", code);
+                Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode));
             } else {
                 DialogHelper.alert(this, "Email Không Đúng Định Dạng");
             }

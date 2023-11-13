@@ -26,9 +26,8 @@ public class TrangChu extends javax.swing.JFrame {
         setTitle("Quản Lý Thuê Oto");
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
-//        openDangNhap();
-        showFrom(new ThueXe());
-        System.out.println(AuthHelper.authenticated());
+        openDangNhap();
+//        showFrom(new ThueXe());
     }
 
     public void openDangNhap() {
