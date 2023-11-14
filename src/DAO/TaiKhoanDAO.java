@@ -24,7 +24,7 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
     @Override
     public void insert(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(),entity.isTrangthai(),entity.isVaitro());
+        JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(), entity.isTrangthai(), entity.isVaitro());
     }
 
     @Override

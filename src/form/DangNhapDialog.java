@@ -5,6 +5,7 @@
 package form;
 
 import DAO.TaiKhoanDAO;
+import Hepler.DialogHelper;
 import entyti.TaiKhoan;
 import java.awt.Image;
 import javax.swing.ImageIcon;
@@ -38,34 +39,58 @@ public class DangNhapDialog extends java.awt.Dialog {
         Hepler.ImagesHelper.setIconButton(btn_DangNhap, "src\\IMAGE\\enter.png");
     }
 
-    public void dangNhap() {
-        String taikhoan = txt_tendangnhap.getText();
-        String pass = new String(txt_password.getPassword());
-        TaiKhoan tk = tkd.selectByID(taikhoan);
+    public boolean verify() {
+        if (!Hepler.alphaHelper.isAlphaNumeric(txt_tendangnhap.getText())) {
+            DialogHelper.alert(this, "Tài Khoản Chỉ Bao Gồm Số Và Chữ");
+            txt_tendangnhap.requestFocus();
+            return false;
+        }
+        if (txt_tendangnhap.getText().length() > 19) {
+            DialogHelper.alert(this, "Giới Hạn Nhập 20 Kí Tự");
+            txt_tendangnhap.requestFocus();
+            return false;
+        }
         if (txt_tendangnhap.getText().equals("")) {
+            txt_tendangnhap.requestFocus();
             Hepler.DialogHelper.alert(this, "Vui lòng nhập tên đăng nhập");
-            txt_tendangnhap.requestFocus();
-        } else if (txt_password.equals("")) {
-            Hepler.DialogHelper.alert(this, "Vui lòng nhập mật khẩu");
+            return false;
+        }
+        if (String.valueOf(txt_password.getPassword()).equals("")) {
             txt_password.requestFocus();
-        } else if (tk == null) {
-            Hepler.DialogHelper.alert(this, "Tài Khoản Không Tồn Tại");
-            txt_tendangnhap.requestFocus();
-        } else if (!pass.equals(tk.getMatkhau())) {
-            txt_password.requestFocus();
-            Hepler.DialogHelper.alert(this, "Sai mật khẩu");
-        } else {
-            Hepler.AuthHelper.user = tk;// khai bao nhan vien dang nhap
-            Hepler.DialogHelper.alert(this, "Đăng nhập thành công");
+            Hepler.DialogHelper.alert(this, "Vui lòng nhập mật khâu");
+            return false;
+        }
+        return true;
 
-            this.dispose();
+    }
 
+    public void dangNhap() {
+        if (verify()) {
+            TaiKhoan tk = tkd.selectByID(txt_tendangnhap.getText());
+            if (tk == null) {
+                txt_tendangnhap.requestFocus();
+                Hepler.DialogHelper.alert(this, "Tài Khoản Không Tồn Tại");
+
+            } else if (!String.valueOf(txt_password.getPassword()).equals(tk.getMatkhau())) {
+                txt_password.requestFocus();
+                Hepler.DialogHelper.alert(this, "Sai mật khẩu");
+            } else {
+                Hepler.AuthHelper.user = tk;// khai bao nhan vien dang nhap
+                Hepler.DialogHelper.alert(this, "Đăng nhập thành công");
+                this.dispose();
+            }
         }
     }
 
     public void openDangKy() {
         try {
             new DangKyDialog(null, true).setVisible(true);
+        } catch (Exception e) {
+        }
+    }
+    public void quenMatKhau() {
+        try {
+            new QuenMatKhauDialog(null, true).setVisible(true);
         } catch (Exception e) {
         }
     }
@@ -172,6 +197,11 @@ public class DangNhapDialog extends java.awt.Dialog {
         lbl_quenmatkhau.setForeground(new java.awt.Color(255, 255, 255));
         lbl_quenmatkhau.setText("QUÊN MẬT KHẨU");
         lbl_quenmatkhau.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(255, 255, 255)));
+        lbl_quenmatkhau.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lbl_quenmatkhauMouseClicked(evt);
+            }
+        });
 
         btn_DangNhap.setBackground(new java.awt.Color(255, 102, 51));
         btn_DangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -328,6 +358,11 @@ public class DangNhapDialog extends java.awt.Dialog {
         // TODO add your handling code here:
         dangNhap();
     }//GEN-LAST:event_btn_DangNhapActionPerformed
+
+    private void lbl_quenmatkhauMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_quenmatkhauMouseClicked
+        // TODO add your handling code here:
+        quenMatKhau();
+    }//GEN-LAST:event_lbl_quenmatkhauMouseClicked
 
     /**
      * @param args the command line arguments

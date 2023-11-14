@@ -47,13 +47,43 @@ public class DangKyDialog extends java.awt.Dialog {
     }
 
     public boolean verify() {
-        if (!txt_maxacnhan.getText().equalsIgnoreCase(String.valueOf(formattedCode))) {
-            DialogHelper.alert(this, "Mã Xác Thực Không Đúng");
+        if (!Hepler.alphaHelper.isAlphaNumeric(txt_taikhoan.getText())) {
+            DialogHelper.alert(this, "Tài Khoản Chỉ Bao Gồm Số Và Chữ");
+            txt_taikhoan.requestFocus();
             return false;
         }
         if (!String.valueOf(txt_passwordconfirm.getPassword()).equals(String.valueOf(txt_password.getPassword()))) {
-            DialogHelper.alert(this, "Mật Khẩu Phải Nhập Trùng");
+            DialogHelper.alert(this, "Mật Khẩu Xác Nhận Phải Nhập Trùng");
             txt_passwordconfirm.requestFocus();
+            return false;
+        }
+        if (txt_taikhoan.getText().equals("")) {
+            DialogHelper.alert(this, "Tài Khoản Không Được Để Trống");
+            txt_taikhoan.requestFocus();
+            return false;
+        }
+        if (String.valueOf(txt_password.getPassword()).equals("")) {
+            DialogHelper.alert(this, "Mật Khẩu Không Được Để Trống");
+            txt_taikhoan.requestFocus();
+            return false;
+        }
+        if (String.valueOf(txt_passwordconfirm.getPassword()).equals("")) {
+            DialogHelper.alert(this, "Mật Khẩu Xác Nhận Không Được Để Trống");
+            txt_passwordconfirm.requestFocus();
+            return false;
+        }
+        if (txt_email.getText().equals("")) {
+            DialogHelper.alert(this, "Email Không Được Để Trống");
+            txt_email.requestFocus();
+            return false;
+        }
+        if (String.valueOf(txt_password.getPassword()).length() < 6) {
+            DialogHelper.alert(this, "Mật Khẩu Kí tự Lớn hơn 6");
+            txt_password.requestFocus();
+            return false;
+        }
+        if (!txt_maxacnhan.getText().equalsIgnoreCase(String.valueOf(formattedCode))) {
+            DialogHelper.alert(this, "Mã Xác Thực Không Đúng");
             return false;
         }
         return true;
