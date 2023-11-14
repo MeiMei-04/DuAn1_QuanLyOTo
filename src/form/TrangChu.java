@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
-import card.DichVu;
+import card.cardDichVu;
 import card.ThueXe;
 
 /**
@@ -64,7 +64,7 @@ public class TrangChu extends javax.swing.JFrame {
     public void openDichVu()    {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new DichVu());
+                showFrom(new cardDichVu());
             } else {
                 openDangNhap();
             }
