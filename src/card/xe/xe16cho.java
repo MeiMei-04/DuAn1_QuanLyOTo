@@ -84,6 +84,8 @@ public class xe16cho extends javax.swing.JPanel {
         jPanel28 = new javax.swing.JPanel();
         jLabel59 = new javax.swing.JLabel();
 
+        setOpaque(false);
+
         jPanel14.setOpaque(false);
         jPanel14.setPreferredSize(new java.awt.Dimension(654, 1200));
 
