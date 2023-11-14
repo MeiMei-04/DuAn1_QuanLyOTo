@@ -11,14 +11,16 @@ package entyti;
 public class DichVu {
     private String madichvu;
     private String tendichvu;
+    private String ghichu;
     private double dongia;
 
     public DichVu() {
     }
 
-    public DichVu(String madichvu, String tendichvu, double dongia) {
+    public DichVu(String madichvu, String tendichvu, String ghichu, double dongia) {
         this.madichvu = madichvu;
         this.tendichvu = tendichvu;
+        this.ghichu = ghichu;
         this.dongia = dongia;
     }
 
@@ -38,6 +40,14 @@ public class DichVu {
         this.tendichvu = tendichvu;
     }
 
+    public String getGhichu() {
+        return ghichu;
+    }
+
+    public void setGhichu(String ghichu) {
+        this.ghichu = ghichu;
+    }
+
     public double getDongia() {
         return dongia;
     }
@@ -45,5 +55,7 @@ public class DichVu {
     public void setDongia(double dongia) {
         this.dongia = dongia;
     }
+
+ 
     
 }
