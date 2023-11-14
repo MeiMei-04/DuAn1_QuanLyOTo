@@ -45,8 +45,11 @@ public class DangNhapDialog extends java.awt.Dialog {
         if (txt_tendangnhap.getText().equals("")) {
             Hepler.DialogHelper.alert(this, "Vui lòng nhập tên đăng nhập");
             txt_tendangnhap.requestFocus();
+        } else if (txt_password.equals("")) {
+            Hepler.DialogHelper.alert(this, "Vui lòng nhập mật khẩu");
+            txt_password.requestFocus();
         } else if (tk == null) {
-            Hepler.DialogHelper.alert(this, "Sai tên đăng nhập");
+            Hepler.DialogHelper.alert(this, "Tài Khoản Không Tồn Tại");
             txt_tendangnhap.requestFocus();
         } else if (!pass.equals(tk.getMatkhau())) {
             txt_password.requestFocus();

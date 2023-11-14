@@ -91,6 +91,7 @@ public class DangKyDialog extends java.awt.Dialog {
             dao.insert(tk);
             clearForm();
             DialogHelper.alert(this, "Đăng Ký Thành Công");
+            formattedCode = null;
         } catch (Exception e) {
             System.out.println(e.getMessage());
             DialogHelper.alert(this, "Đăng Ký Không Thành Công");
