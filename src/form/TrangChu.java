@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
+import card.CarThongKe;
 import card.cardDichVu;
 import card.ThueXe;
 
@@ -38,6 +39,7 @@ public class TrangChu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+
     public void openThueXe() {
         try {
             if (AuthHelper.authenticated()) {
@@ -49,6 +51,7 @@ public class TrangChu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+
     public void openTaiKhoan() {
         try {
             if (AuthHelper.authenticated()) {
@@ -60,10 +63,23 @@ public class TrangChu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
-    public void openDichVu()    {
+
+    public void openDichVu() {
         try {
             if (AuthHelper.authenticated()) {
                 showFrom(new cardDichVu());
+            } else {
+                openDangNhap();
+            }
+
+        } catch (Exception e) {
+        }
+    }
+
+    public void openThongKe() {
+        try {
+            if (AuthHelper.authenticated()) {
+
             } else {
                 openDangNhap();
             }
@@ -765,6 +781,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        openThongKe();
     }//GEN-LAST:event_pnl_thongkeMouseClicked
 
     private void pnl_baoduongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseClicked
@@ -925,47 +942,47 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void pnl_TrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseExited
         // TODO add your handling code here:
-        pnl_TrangChu.setBackground(new Color(255,102,0));
+        pnl_TrangChu.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_TrangChuMouseExited
 
     private void pnl_taikhoanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseExited
         // TODO add your handling code here:
-        pnl_taikhoan.setBackground(new Color(255,102,0));
+        pnl_taikhoan.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_taikhoanMouseExited
 
     private void pnl_thuexeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseExited
         // TODO add your handling code here:
-        pnl_thuexe.setBackground(new Color(255,102,0));
+        pnl_thuexe.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_thuexeMouseExited
 
     private void pnl_hopdongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseExited
         // TODO add your handling code here:
-        pnl_hopdong.setBackground(new Color(255,102,0));
+        pnl_hopdong.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_hopdongMouseExited
 
     private void pnl_dichvuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseExited
         // TODO add your handling code here:
-        pnl_dichvu.setBackground(new Color(255,102,0));
+        pnl_dichvu.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_dichvuMouseExited
 
     private void pnl_thongkeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseExited
         // TODO add your handling code here:
-        pnl_thongke.setBackground(new Color(255,102,0));
+        pnl_thongke.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_thongkeMouseExited
 
     private void pnl_baoduongMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseExited
         // TODO add your handling code here:
-        pnl_baoduong.setBackground(new Color(255,102,0));
+        pnl_baoduong.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_baoduongMouseExited
 
     private void pnl_gioithieuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseExited
         // TODO add your handling code here:
-        pnl_gioithieu.setBackground(new Color(255,102,0));
+        pnl_gioithieu.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_gioithieuMouseExited
 
     private void pnl_dangxuatMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseExited
         // TODO add your handling code here:
-        pnl_dangxuat.setBackground(new Color(255,102,0));
+        pnl_dangxuat.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_dangxuatMouseExited
 
     /**
