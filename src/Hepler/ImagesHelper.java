@@ -46,7 +46,7 @@ public class ImagesHelper {
 
     //chọn file
     public static String chonAnh() {
-        JFileChooser f = new JFileChooser();
+        JFileChooser f = new JFileChooser("C:\\Desktop");
         f.setDialogTitle("Chọn ảnh");
         f.showOpenDialog(null);
         File file = f.getSelectedFile();

@@ -21,7 +21,11 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
     String SELECT_BY_ID_SQL = "SELECT*FROM TaiKhoan WHERE TaiKhoan = ?";
-
+    String SELECT_INNER_JOIN = "SELECT ChiTietTaiKhoan.HoTen, ChiTietTaiKhoan.Email,ChiTietTaiKhoan.SDT,ChiTietTaiKhoan.CCCD,TaiKhoan.UserID,TaiKhoan.Trangthai FROM ChiTietTaiKhoan INNER JOIN TaiKhoan ON TaiKhoan.UserID = ChiTietTaiKhoan.UserID";
+    
+    public void selecttk(){
+        
+    }
     @Override
     public void insert(TaiKhoan entity) {
         JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(), entity.isTrangthai(), entity.isVaitro());

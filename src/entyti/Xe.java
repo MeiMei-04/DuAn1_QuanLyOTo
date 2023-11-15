@@ -15,20 +15,20 @@ public class Xe {
     private boolean trangthaixethue;
     private double giathue;
     private String anhxe;
-    private boolean loaixe;
+    private String maloaixe;
     private String ghichu;
 
     public Xe() {
     }
 
-    public Xe(String maxe, String tenxe, int soghe, boolean trangthaixethue, double giathue, String anhxe, boolean loaixe, String ghichu) {
+    public Xe(String maxe, String tenxe, int soghe, boolean trangthaixethue, double giathue, String anhxe, String maloaixe, String ghichu) {
         this.maxe = maxe;
         this.tenxe = tenxe;
         this.soghe = soghe;
         this.trangthaixethue = trangthaixethue;
         this.giathue = giathue;
         this.anhxe = anhxe;
-        this.loaixe = loaixe;
+        this.maloaixe = maloaixe;
         this.ghichu = ghichu;
     }
 
@@ -80,12 +80,12 @@ public class Xe {
         this.anhxe = anhxe;
     }
 
-    public boolean isLoaixe() {
-        return loaixe;
+    public String getMaloaixe() {
+        return maloaixe;
     }
 
-    public void setLoaixe(boolean loaixe) {
-        this.loaixe = loaixe;
+    public void setMaloaixe(String maloaixe) {
+        this.maloaixe = maloaixe;
     }
 
     public String getGhichu() {
@@ -95,5 +95,6 @@ public class Xe {
     public void setGhichu(String ghichu) {
         this.ghichu = ghichu;
     }
+
     
 }
