@@ -90,7 +90,7 @@ public class ThueXe extends javax.swing.JPanel {
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbb_loaixe = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -264,7 +264,12 @@ public class ThueXe extends javax.swing.JPanel {
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Xe 4 chỗ", "Xe 7 Chỗ", "Xe 16 Chỗ", "Xe 29 Chỗ" }));
+        cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "12", "123123", "123213" }));
+        cbb_loaixe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbb_loaixeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout backgourndLayout = new javax.swing.GroupLayout(backgournd);
         backgournd.setLayout(backgourndLayout);
@@ -275,7 +280,7 @@ public class ThueXe extends javax.swing.JPanel {
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgourndLayout.createSequentialGroup()
                         .addGap(89, 89, 89)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgourndLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(ttxe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -302,7 +307,7 @@ public class ThueXe extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgourndLayout.createSequentialGroup()
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38)
                         .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
@@ -347,15 +352,21 @@ public class ThueXe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_nextActionPerformed
 
+    private void cbb_loaixeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_loaixeActionPerformed
+        // TODO add your handling code here:
+        String item = String.valueOf(cbb_loaixe.getSelectedItem());
+        System.out.println(item);
+    }//GEN-LAST:event_cbb_loaixeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel backgournd;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_next;
+    private javax.swing.JComboBox<String> cbb_loaixe;
     private javax.swing.JButton jButton1;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
