@@ -33,7 +33,7 @@ public class ThueXe extends javax.swing.JPanel {
     }
 
     public void seticon(String string) {
-        Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\IMAGE\\" + string);
+        Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
     }
     public void fillcbbDichVu(){
@@ -120,7 +120,10 @@ public class ThueXe extends javax.swing.JPanel {
         anh.setLayout(anhLayout);
         anhLayout.setHorizontalGroup(
             anhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_anhxe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(anhLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_anhxe, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         anhLayout.setVerticalGroup(
             anhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

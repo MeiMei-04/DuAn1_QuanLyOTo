@@ -4,6 +4,7 @@
  */
 package Hepler;
 
+import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -103,32 +104,28 @@ public class ImagesHelper {
             // Đọc hình ảnh
             BufferedImage image = ImageIO.read(new File("src/IMAGE/" + patch));
 
+            // Thay đổi kích thước hình ảnh thành 24x24
+            Image tempImage = image.getScaledInstance(24, 35, Image.SCALE_DEFAULT);
+            BufferedImage resizedImage = new BufferedImage(24, 35, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = resizedImage.getGraphics();
+            g.drawImage(tempImage, 0, 0, null);
+            g.dispose();
+
             // Tạo một danh sách các BufferedImage
             List<BufferedImage> images = new ArrayList<>();
-            images.add(image);
+            images.add(resizedImage);
 
             // Lấy tên của tệp từ patch, loại bỏ phần mở rộng
             String baseName = patch.substring(0, patch.lastIndexOf('.'));
 
-            File file = new File("src/IMAGE/ICON/");
-
-            if (!file.exists()) {
-                try {
-                    if (file.createNewFile()) {
-                        System.out.println("File created: " + file.getName());
-                    } else {
-                        System.out.println("File already exists.");
-                    }
-                } catch (IOException e) {
-                    System.out.println("An error occurred.");
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.println("File already exists.");
+            File dir = new File("src/ICON/");
+            if (!dir.exists()) {
+                dir.mkdirs();
             }
+
             // Ghi các hình ảnh vào một tệp ICO với tên mới
-            ICOEncoder.write(images, new File("src/IMAGE/ICON/" + baseName + ".ico"));
-        } catch (Exception e) {
+            ICOEncoder.write(images, new File(dir, baseName + ".ico"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
