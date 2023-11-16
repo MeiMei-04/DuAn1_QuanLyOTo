@@ -4,8 +4,11 @@
  */
 package Hepler;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -104,27 +107,21 @@ public class ImagesHelper {
             // Đọc hình ảnh
             BufferedImage image = ImageIO.read(new File("src/IMAGE/" + patch));
 
-            // Thay đổi kích thước hình ảnh thành 24x24
-            Image tempImage = image.getScaledInstance(24, 35, Image.SCALE_DEFAULT);
-            BufferedImage resizedImage = new BufferedImage(24, 35, BufferedImage.TYPE_INT_ARGB);
-            Graphics g = resizedImage.getGraphics();
+            // Thay đổi kích thước hình ảnh thành 24x35
+            Image tempImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = resizedImage.createGraphics();
+            // Vẽ hình tròn
+            g.setClip(new Ellipse2D.Float(0, 0, 30, 30));
             g.drawImage(tempImage, 0, 0, null);
             g.dispose();
-
-            // Tạo một danh sách các BufferedImage
-            List<BufferedImage> images = new ArrayList<>();
-            images.add(resizedImage);
-
-            // Lấy tên của tệp từ patch, loại bỏ phần mở rộng
-            String baseName = patch.substring(0, patch.lastIndexOf('.'));
-
             File dir = new File("src/ICON/");
             if (!dir.exists()) {
                 dir.mkdirs();
             }
 
-            // Ghi các hình ảnh vào một tệp ICO với tên mới
-            ICOEncoder.write(images, new File(dir, baseName + ".ico"));
+            // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
+            ImageIO.write(resizedImage, "png", new File("src/ICON/" + patch));
         } catch (IOException e) {
             e.printStackTrace();
         }

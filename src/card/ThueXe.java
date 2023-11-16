@@ -19,6 +19,7 @@ import javax.swing.DefaultComboBoxModel;
  * @author 04dkh
  */
 public class ThueXe extends javax.swing.JPanel {
+
     DichVuDAO dvd = new DichVuDAO();
     ThueXeDAO txd = new ThueXeDAO();
     int index = -1;
@@ -30,13 +31,15 @@ public class ThueXe extends javax.swing.JPanel {
     public ThueXe() {
         initComponents();
         fillcbbDichVu();
+        fillcbbLoaiXe();
     }
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
     }
-    public void fillcbbDichVu(){
+
+    public void fillcbbDichVu() {
         try {
             DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_DichVu.getModel();
             model.removeAllElements();
@@ -48,12 +51,28 @@ public class ThueXe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
+
+    public void fillcbbLoaiXe() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_DichVu.getModel();
+            model.removeAllElements();
+            List<Xe> list = txd.selectAll();
+            int index = 2; // Bắt đầu từ vị trí thứ 2
+            for (Xe xe : list) {
+                model.insertElementAt(xe.getSoghe(), index++);
+            }
+            cbb_DichVu.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }
+
     public void setForm(int index) {
         try {
             String trangthai = null;
             List<Xe> list = txd.selectAll();
             Xe xe = list.get(index);
-            size = list.size()-1;
+            size = list.size() - 1;
+            Hepler.ImagesHelper.checkfile("src\\imgxe\\" + xe.getAnhxe());
             seticon(xe.getAnhxe()); //set ảnh xe
             lbl_maxe.setText("Mã Xe: " + xe.getMaxe());
             lbl_tenxe.setText("Tên Xe: " + xe.getTenxe());
