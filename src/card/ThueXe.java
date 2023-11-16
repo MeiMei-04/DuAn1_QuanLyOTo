@@ -4,19 +4,22 @@
  */
 package card;
 
+import DAO.DichVuDAO;
 import DAO.ThueXeDAO;
+import entyti.DichVu;
 import entyti.Xe;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author 04dkh
  */
 public class ThueXe extends javax.swing.JPanel {
-
+    DichVuDAO dvd = new DichVuDAO();
     ThueXeDAO txd = new ThueXeDAO();
     int index = -1;
     int size = 0;
@@ -26,14 +29,25 @@ public class ThueXe extends javax.swing.JPanel {
      */
     public ThueXe() {
         initComponents();
-
+        fillcbbDichVu();
     }
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\IMAGE\\" + string);
 
     }
-
+    public void fillcbbDichVu(){
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_DichVu.getModel();
+            model.removeAllElements();
+            List<DichVu> list = dvd.selectAll();
+            for (DichVu dv : list) {
+                model.addElement(dv.getTendichvu());
+            }
+            cbb_DichVu.setSelectedIndex(0);
+        } catch (Exception e) {
+        }
+    }
     public void setForm(int index) {
         try {
             String trangthai = null;
@@ -85,7 +99,7 @@ public class ThueXe extends javax.swing.JPanel {
         txt_noidung = new javax.swing.JTextArea();
         lbl_noidung = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbb_DichVu = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -106,13 +120,11 @@ public class ThueXe extends javax.swing.JPanel {
         anh.setLayout(anhLayout);
         anhLayout.setHorizontalGroup(
             anhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbl_anhxe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(lbl_anhxe, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         anhLayout.setVerticalGroup(
             anhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(anhLayout.createSequentialGroup()
-                .addComponent(lbl_anhxe, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 2, Short.MAX_VALUE))
+            .addComponent(lbl_anhxe, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
         );
 
         btn_back.setBackground(new java.awt.Color(255, 102, 51));
@@ -221,7 +233,7 @@ public class ThueXe extends javax.swing.JPanel {
         jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 178));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
+        cbb_DichVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
 
         jLabel9.setText("Vocher");
 
@@ -236,7 +248,7 @@ public class ThueXe extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox1, 0, 285, Short.MAX_VALUE)
+                    .addComponent(cbb_DichVu, 0, 285, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel9)
@@ -254,7 +266,7 @@ public class ThueXe extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addComponent(jLabel10)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbb_DichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -364,9 +376,9 @@ public class ThueXe extends javax.swing.JPanel {
     private javax.swing.JPanel backgournd;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_next;
+    private javax.swing.JComboBox<String> cbb_DichVu;
     private javax.swing.JComboBox<String> cbb_loaixe;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

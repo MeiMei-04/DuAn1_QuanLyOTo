@@ -55,6 +55,7 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String>{
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 Xe xe = new Xe();
+                xe.setMaxe(rs.getString("MaXe"));
                 xe.setTenxe(rs.getString("TenXe"));
                 xe.setSoghe(rs.getInt("SoGhe"));
                 xe.setTrangthaixethue(rs.getBoolean("TrangThai"));
