@@ -5,17 +5,23 @@
 package Hepler;
 
 import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import net.ifok.image.image4j.codec.ico.ICOEncoder;
 
 /**
  *
@@ -85,12 +91,49 @@ public class ImagesHelper {
         // Tạo một nhãn mới và đặt biểu tượng cho nó
         button.setIcon(icon);
     }
+
     public static Image getAppIcon() {
         ImageIcon imgIcon = new ImageIcon("src/IMAGE/logo.png");
         Image img = imgIcon.getImage();
         return img;
     }
+
+    public static void convertToIcon(String patch) {
+        try {
+            // Đọc hình ảnh
+            BufferedImage image = ImageIO.read(new File("src/IMAGE/" + patch));
+
+            // Tạo một danh sách các BufferedImage
+            List<BufferedImage> images = new ArrayList<>();
+            images.add(image);
+
+            // Lấy tên của tệp từ patch, loại bỏ phần mở rộng
+            String baseName = patch.substring(0, patch.lastIndexOf('.'));
+
+            File file = new File("src/IMAGE/ICON/");
+
+            if (!file.exists()) {
+                try {
+                    if (file.createNewFile()) {
+                        System.out.println("File created: " + file.getName());
+                    } else {
+                        System.out.println("File already exists.");
+                    }
+                } catch (IOException e) {
+                    System.out.println("An error occurred.");
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.println("File already exists.");
+            }
+            // Ghi các hình ảnh vào một tệp ICO với tên mới
+            ICOEncoder.write(images, new File("src/IMAGE/ICON/" + baseName + ".ico"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
-        
+
     }
 }

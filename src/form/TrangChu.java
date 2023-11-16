@@ -4,7 +4,7 @@
  */
 package form;
 
-import card.TaiKhoan;
+import card.cardTaiKhoan;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
@@ -55,7 +55,7 @@ public class TrangChu extends javax.swing.JFrame {
     public void openTaiKhoan() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new TaiKhoan());
+                showFrom(new cardTaiKhoan());
             } else {
                 openDangNhap();
             }

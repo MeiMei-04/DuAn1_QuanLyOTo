@@ -112,6 +112,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Vui L&#xf2;ng Nh&#x1ead;p Email"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="txt_emailMouseClicked"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_timkiem">
           <Properties>

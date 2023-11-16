@@ -59,8 +59,8 @@
                   </Group>
                   <EmptySpace pref="132" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jPanel1" pref="307" max="32767" attributes="0"/>
                       <Component id="jPanel3" pref="307" max="32767" attributes="0"/>
+                      <Component id="jPanel1" pref="307" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btn_next" min="-2" pref="30" max="-2" attributes="0"/>

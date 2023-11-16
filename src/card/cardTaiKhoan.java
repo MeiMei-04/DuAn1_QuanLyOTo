@@ -13,12 +13,12 @@ import java.util.List;
  *
  * @author hieud
  */
-public class TaiKhoan extends javax.swing.JPanel {
+public class cardTaiKhoan extends javax.swing.JPanel {
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     /**
      * Creates new form TaiKhoan
      */
-    public TaiKhoan() {
+    public cardTaiKhoan() {
         initComponents();
     }
     public void seticon(String anhdaidien,String banglai) {
@@ -372,6 +372,7 @@ public class TaiKhoan extends javax.swing.JPanel {
         String banglai;
         banglai = Hepler.ImagesHelper.chonAnh();
         seticon(null, banglai);
+        
     }//GEN-LAST:event_btn_ChonbangolaiActionPerformed
 
     private void btn_ChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonAnhActionPerformed
@@ -380,6 +381,7 @@ public class TaiKhoan extends javax.swing.JPanel {
         String anhdaidien;
         anhdaidien = Hepler.ImagesHelper.chonAnh();
         seticon(anhdaidien, null);
+        Hepler.ImagesHelper.convertToIcon(anhdaidien);
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
 
 

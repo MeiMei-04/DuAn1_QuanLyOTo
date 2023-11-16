@@ -118,6 +118,11 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
         );
 
         txt_email.setText("Vui Lòng Nhập Email");
+        txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txt_emailMouseClicked(evt);
+            }
+        });
 
         btn_timkiem.setContentAreaFilled(false);
         btn_timkiem.setFocusPainted(false);
@@ -241,6 +246,11 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
         col = tabletaikhoan.columnAtPoint(evt.getPoint());
 
     }//GEN-LAST:event_tabletaikhoanMouseClicked
+
+    private void txt_emailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txt_emailMouseClicked
+        // TODO add your handling code here:
+        txt_email.setText("");
+    }//GEN-LAST:event_txt_emailMouseClicked
 
     /**
      * @param args the command line arguments
