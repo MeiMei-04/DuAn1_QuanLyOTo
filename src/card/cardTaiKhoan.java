@@ -22,9 +22,9 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         initComponents();
     }
     public void seticon(String anhdaidien,String banglai) {
-        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\IMAGE\\"+anhdaidien);
+        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\"+anhdaidien);
         
-        Hepler.ImagesHelper.setIconlabel(lbl_anhbanglai, "src\\IMAGE\\"+banglai);
+        Hepler.ImagesHelper.setIconlabel(lbl_anhbanglai, "src\\imgbanglai\\"+banglai);
     }
     public void setForm(){
             try {

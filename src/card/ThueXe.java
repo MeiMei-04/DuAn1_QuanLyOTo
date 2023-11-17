@@ -24,7 +24,7 @@ public class ThueXe extends javax.swing.JPanel {
     ThueXeDAO txd = new ThueXeDAO();
     int index = -1;
     int size = 0;
-    List<Xe> newList = new ArrayList<>(); // Tạo một danh sách mới
+    String item = null;
 
     /**
      * Creates new form ThueXe
@@ -32,7 +32,7 @@ public class ThueXe extends javax.swing.JPanel {
     public ThueXe() {
         initComponents();
         fillcbbDichVu();
-        setForm(0);
+        setForm(locxe(item), 0);
     }
 
     public void seticon(String string) {
@@ -55,25 +55,29 @@ public class ThueXe extends javax.swing.JPanel {
         }
     }
 
-    public void locxe(int soghe) {
+    public List<Xe> locxe(String soghe) {
+        List<Xe> list = new ArrayList<>();
         try {
-            String trangthai = null;
-            List<Xe> list = txd.selectAll();
-            
-            for (Xe xe : list) {
-                if (xe.getSoghe() == soghe) {
-                    newList.add(xe);
-                }
+            List<Xe> allXe = txd.selectAll();
+            if (soghe != null) {
+                for (Xe xe : allXe) {
+                    if (xe.getSoghe() == Integer.valueOf(soghe)) {
+                        list.add(xe);
+                    }
+                }   
+            } else {
+                list = allXe;
             }
         } catch (Exception e) {
+            // handle exception
+            System.out.println(e.getMessage());
         }
-
+        return list;
     }
 
-    public void setForm(int index) {
+    public void setForm(List<Xe> list, int index) {
         try {
             String trangthai = null;
-            List<Xe> list = txd.selectAll();
             Xe xe = list.get(index);
             size = list.size() - 1;
             Hepler.ImagesHelper.checkfile("src\\imgxe\\" + xe.getAnhxe());
@@ -380,7 +384,7 @@ public class ThueXe extends javax.swing.JPanel {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
             btn_back.setEnabled(false);
         } else {
-            setForm(index);
+            setForm(locxe(item), index);
         }
 
     }//GEN-LAST:event_btn_backActionPerformed
@@ -393,16 +397,20 @@ public class ThueXe extends javax.swing.JPanel {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
             btn_next.setEnabled(false);
         } else {
-            setForm(index);
+            setForm(locxe(item), index);
         }
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void cbb_loaixeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_loaixeActionPerformed
         // TODO add your handling code here:
-        
-        String item = String.valueOf(cbb_loaixe.getSelectedItem());
-        int items = Integer.parseInt(item);
-        System.out.println(items);
+        item = String.valueOf(cbb_loaixe.getSelectedItem());
+        index = 0;
+        if (item.equalsIgnoreCase("Tất Cả")) {
+            item = null;
+        }
+        btn_back.setEnabled(false);
+        btn_next.setEnabled(true);
+        setForm(locxe(item), index);
     }//GEN-LAST:event_cbb_loaixeActionPerformed
 
 

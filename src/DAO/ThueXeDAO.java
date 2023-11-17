@@ -15,27 +15,27 @@ import java.util.ArrayList;
  *
  * @author hieud
  */
-public class ThueXeDAO extends QuanLyOToDAO<Xe, String>{
+public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
 
-    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
-    String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
+    String INSERT_SQL = "INSERT INTO Xe (MaXe, TenXe, SoGhe, TrangThai, GiaThue, Anh_Xe, MaLoaiXe, GhiChu) VALUES (?,?,?,?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE Xe SET TenXe=?,SoGhe = ?,TrangThai=?, GiaThue = ?,Anh_Xe = ?,MaLoaiXe,?,GhiChu? WHERE MaXe =?";
+    String DELETE_SQL = "DELETE FROM Xe WHERE MaXe =?";
     String SELECT_ALL_SQL = "SELECT * FROM xe";
-    String SELECT_BY_ID_SQL = "SELECT*FROM TaiKhoan WHERE TaiKhoan = ?";
+    String SELECT_BY_ID_SQL = "SELECT*FROM xe WHERE soghe = ?";
 
     @Override
     public void insert(Xe entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(INSERT_SQL, entity.getMaxe(), entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu());
     }
 
     @Override
     public void update(Xe entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu(), entity.getMaxe());
     }
 
     @Override
     public void delete(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(DELETE_SQL, key);
     }
 
     @Override
@@ -44,8 +44,17 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String>{
     }
 
     @Override
-    public Xe selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Xe selectByID(String id) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<Xe> list = selectBySQL(SELECT_BY_ID_SQL, id);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
     }
 
     @Override
@@ -71,5 +80,5 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String>{
             throw new RuntimeException(e);
         }
     }
-    
+
 }

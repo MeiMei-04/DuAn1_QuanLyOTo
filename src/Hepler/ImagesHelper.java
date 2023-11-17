@@ -56,7 +56,7 @@ public class ImagesHelper {
 
     //chọn file
     public static String chonAnh() {
-        JFileChooser f = new JFileChooser("C:\\Desktop");
+        JFileChooser f = new JFileChooser("/src");
         f.setDialogTitle("Chọn ảnh");
         f.showOpenDialog(null);
         File file = f.getSelectedFile();
@@ -105,7 +105,7 @@ public class ImagesHelper {
     public static void convertToIcon(String patch) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File("src/IMAGE/" + patch));
+            BufferedImage image = ImageIO.read(new File("src/imganhdaidien/" + patch));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
