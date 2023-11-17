@@ -24,6 +24,7 @@ public class ThueXe extends javax.swing.JPanel {
     ThueXeDAO txd = new ThueXeDAO();
     int index = -1;
     int size = 0;
+    List<Xe> newList = new ArrayList<>(); // Tạo một danh sách mới
 
     /**
      * Creates new form ThueXe
@@ -31,7 +32,7 @@ public class ThueXe extends javax.swing.JPanel {
     public ThueXe() {
         initComponents();
         fillcbbDichVu();
-        fillcbbLoaiXe();
+        setForm(0);
     }
 
     public void seticon(String string) {
@@ -46,24 +47,27 @@ public class ThueXe extends javax.swing.JPanel {
             List<DichVu> list = dvd.selectAll();
             for (DichVu dv : list) {
                 model.addElement(dv.getTendichvu());
+                System.out.println(dv.getTendichvu());
             }
             cbb_DichVu.setSelectedIndex(0);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void fillcbbLoaiXe() {
+    public void locxe(int soghe) {
         try {
-            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_DichVu.getModel();
-            model.removeAllElements();
+            String trangthai = null;
             List<Xe> list = txd.selectAll();
-            int index = 2; // Bắt đầu từ vị trí thứ 2
+            
             for (Xe xe : list) {
-                model.insertElementAt(xe.getSoghe(), index++);
+                if (xe.getSoghe() == soghe) {
+                    newList.add(xe);
+                }
             }
-            cbb_DichVu.setSelectedIndex(0);
         } catch (Exception e) {
         }
+
     }
 
     public void setForm(int index) {
@@ -124,6 +128,7 @@ public class ThueXe extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         cbb_loaixe = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -298,12 +303,14 @@ public class ThueXe extends javax.swing.JPanel {
                 .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "12", "123123", "123213" }));
+        cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "4", "7", "16", "29" }));
         cbb_loaixe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbb_loaixeActionPerformed(evt);
             }
         });
+
+        jLabel1.setText("Tìm Theo Số Ghế:");
 
         javax.swing.GroupLayout backgourndLayout = new javax.swing.GroupLayout(backgournd);
         backgournd.setLayout(backgourndLayout);
@@ -313,14 +320,16 @@ public class ThueXe extends javax.swing.JPanel {
                 .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgourndLayout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgourndLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(ttxe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgourndLayout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgourndLayout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
@@ -341,7 +350,9 @@ public class ThueXe extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgourndLayout.createSequentialGroup()
-                        .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1))
                         .addGap(38, 38, 38)
                         .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
@@ -388,8 +399,10 @@ public class ThueXe extends javax.swing.JPanel {
 
     private void cbb_loaixeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbb_loaixeActionPerformed
         // TODO add your handling code here:
+        
         String item = String.valueOf(cbb_loaixe.getSelectedItem());
-        System.out.println(item);
+        int items = Integer.parseInt(item);
+        System.out.println(items);
     }//GEN-LAST:event_cbb_loaixeActionPerformed
 
 
@@ -401,6 +414,7 @@ public class ThueXe extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbb_DichVu;
     private javax.swing.JComboBox<String> cbb_loaixe;
     private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;

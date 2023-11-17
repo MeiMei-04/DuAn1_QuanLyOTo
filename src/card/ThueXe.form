@@ -45,16 +45,19 @@
                   <Component id="btn_back" min="-2" pref="30" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="89" max="-2" attributes="0"/>
-                          <Component id="cbb_loaixe" min="-2" pref="252" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="ttxe" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
-                          <Component id="anh" min="-2" pref="301" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="cbb_loaixe" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="anh" min="-2" pref="301" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace pref="132" max="32767" attributes="0"/>
@@ -81,7 +84,10 @@
                           <Component id="jPanel3" min="-2" pref="244" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="cbb_loaixe" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="cbb_loaixe" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                           <Component id="anh" min="-2" pref="200" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
@@ -399,11 +405,12 @@
         <Component class="javax.swing.JComboBox" name="cbb_loaixe">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
+              <StringArray count="5">
                 <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
-                <StringItem index="1" value="12"/>
-                <StringItem index="2" value="123123"/>
-                <StringItem index="3" value="123213"/>
+                <StringItem index="1" value="4"/>
+                <StringItem index="2" value="7"/>
+                <StringItem index="3" value="16"/>
+                <StringItem index="4" value="29"/>
               </StringArray>
             </Property>
           </Properties>
@@ -413,6 +420,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="jLabel1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="T&#xec;m Theo S&#x1ed1; Gh&#x1ebf;:"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
