@@ -4,8 +4,10 @@
  */
 package card;
 
+import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThueXeDAO;
+import entyti.DanhGia;
 import entyti.DichVu;
 import entyti.Xe;
 import java.awt.Color;
@@ -20,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public class cardThueXe extends javax.swing.JPanel {
 
+    DanhGiaDAO dgd = new DanhGiaDAO();
     DichVuDAO dvd = new DichVuDAO();
     ThueXeDAO txd = new ThueXeDAO();
     int index = 0;
@@ -35,9 +38,37 @@ public class cardThueXe extends javax.swing.JPanel {
         setForm(locxe(item), 0);
     }
 
+    public void seticonDanhGia(String anh) {
+        Hepler.ImagesHelper.setIconlabel(lbl_anh, "src\\ICON\\" + anh);
+    }
+
+    public void setFormDanhGia(String id) {
+        try {
+            System.out.println(id);
+            List<DanhGia> list = new ArrayList<>();
+            DanhGia dg = dgd.selectByID(id);
+            list.add(dg);
+            seticonDanhGia(dg.getAnhdaidien());
+            lbl_tennguoidung.setText(dg.getHoten());
+            System.out.println(dg.getHoten());
+            lbl_sosao.setText(dg.getSosaodanhgia() + " sao");
+            lbl_noidung.setText(dg.getNoidung());
+        } catch (Exception e) {
+            Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
+    }
+
+    public void showFrom(Component com) {
+        pnl_danhgia.removeAll();
+        pnl_danhgia.add(com);
+        pnl_danhgia.revalidate();
+        pnl_danhgia.repaint();
     }
 
     public void fillcbbDichVu() {
@@ -63,7 +94,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     if (xe.getSoghe() == Integer.valueOf(soghe)) {
                         list.add(xe);
                     }
-                }   
+                }
             } else {
                 list = allXe;
             }
@@ -93,7 +124,7 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_trangthai.setText("Trạng Thái: " + trangthai);
             lbl_giathue.setText("Giá Thuê: " + xe.getGiathue());
             lbl_maloaixe.setText("Loại Xe: " + xe.getMaloaixe());
-
+            showDanhGia(xe.getMaxe());
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());
@@ -114,7 +145,13 @@ public class cardThueXe extends javax.swing.JPanel {
         lbl_anhxe = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
         btn_next = new javax.swing.JButton();
+        pnl_danhgia = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        lbl_anh = new javax.swing.JLabel();
+        lbl_tennguoidung = new javax.swing.JLabel();
+        lbl_noidung1 = new javax.swing.JLabel();
+        lbl_sosao = new javax.swing.JLabel();
         ttxe = new javax.swing.JPanel();
         lbl_maxe = new javax.swing.JLabel();
         lbl_tenxe = new javax.swing.JLabel();
@@ -186,20 +223,79 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đánh Giá", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
+        pnl_danhgia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        pnl_danhgia.setForeground(new java.awt.Color(255, 255, 255));
+        pnl_danhgia.setOpaque(false);
+        pnl_danhgia.setPreferredSize(new java.awt.Dimension(350, 345));
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 51));
         jPanel1.setOpaque(false);
-        jPanel1.setPreferredSize(new java.awt.Dimension(350, 345));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        lbl_tennguoidung.setText("Tên Người Dùng");
+
+        lbl_noidung1.setText("Nội Dung Đánh Giá");
+
+        lbl_sosao.setText("Số Sao");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_tennguoidung)
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_sosao)
+                        .addGap(0, 115, Short.MAX_VALUE))
+                    .addComponent(lbl_noidung1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lbl_tennguoidung)
+                            .addComponent(lbl_sosao))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lbl_noidung1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lbl_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 318, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(262, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnl_danhgiaLayout = new javax.swing.GroupLayout(pnl_danhgia);
+        pnl_danhgia.setLayout(pnl_danhgiaLayout);
+        pnl_danhgiaLayout.setHorizontalGroup(
+            pnl_danhgiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnl_danhgiaLayout.setVerticalGroup(
+            pnl_danhgiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         ttxe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông Tin Xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -364,7 +460,7 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
+                    .addComponent(pnl_danhgia, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -377,8 +473,8 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addGap(23, 23, 23)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgourndLayout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(pnl_danhgia, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(backgourndLayout.createSequentialGroup()
                         .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -453,17 +549,23 @@ public class cardThueXe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lbl_anh;
     private javax.swing.JLabel lbl_anhxe;
     private javax.swing.JLabel lbl_giathue;
     private javax.swing.JLabel lbl_maloaixe;
     private javax.swing.JLabel lbl_maxe;
     private javax.swing.JLabel lbl_noidung;
+    private javax.swing.JLabel lbl_noidung1;
     private javax.swing.JLabel lbl_soghe;
+    private javax.swing.JLabel lbl_sosao;
+    private javax.swing.JLabel lbl_tennguoidung;
     private javax.swing.JLabel lbl_tenxe;
     private javax.swing.JLabel lbl_trangthai;
+    private javax.swing.JPanel pnl_danhgia;
     private javax.swing.JPanel ttxe;
     private javax.swing.JTextArea txt_noidung;
     // End of variables declaration//GEN-END:variables

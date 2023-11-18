@@ -20,7 +20,13 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
     String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
-    String SELECT_BY_ID_SQL = "SELECT*FROM TaiKhoan WHERE TaiKhoan = ?";
+    String SELECT_BY_ID_SQL = "SELECT ChiTietTaiKhoan.HoTen,ChiTietTaiKhoan.AnhDaiDien,danhgia.NoiDung,danhgia.NgayDanhGia,danhgia.SoSaoDanhGia\n"
+            + "  FROM TaiKhoan\n"
+            + "  INNER JOIN ChiTietTaiKhoan\n"
+            + "  ON TaiKhoan.UserID = ChiTietTaiKhoan.UserID\n"
+            + "  INNER JOIN danhgia\n"
+            + "  ON ChiTietTaiKhoan.UserID = danhgia.UserID\n"
+            + "  where maxe = ?";
 
     @Override
     public void insert(TaiKhoan entity) {

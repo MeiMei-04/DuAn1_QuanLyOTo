@@ -10,6 +10,7 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
 import card.CardThongKe;
+import card.cardDanhGIa;
 
 import card.cardDichVu;
 import card.cardThueXe;
@@ -29,7 +30,6 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
-        showFrom(new cardThueXe());
 
     }
 
