@@ -52,7 +52,8 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_tennguoidung.setText(dg.getHoten());
             System.out.println(dg.getHoten());
             lbl_sosao.setText(dg.getSosaodanhgia() + " sao");
-            lbl_noidung.setText(dg.getNoidung());
+            lbl_noidungdanhgia.setText(dg.getNoidung());
+            System.out.println(dg.getNoidung());
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());
@@ -114,6 +115,7 @@ public class cardThueXe extends javax.swing.JPanel {
             System.out.println(xe.getAnhxe());
             seticon(xe.getAnhxe()); //set ảnh xe
             lbl_maxe.setText("Mã Xe: " + xe.getMaxe());
+            setFormDanhGia(xe.getMaxe());
             lbl_tenxe.setText("Tên Xe: " + xe.getTenxe());
             lbl_soghe.setText("Số Ghế: " + xe.getSoghe());
             if (xe.isTrangthaixethue()) {
@@ -124,7 +126,6 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_trangthai.setText("Trạng Thái: " + trangthai);
             lbl_giathue.setText("Giá Thuê: " + xe.getGiathue());
             lbl_maloaixe.setText("Loại Xe: " + xe.getMaloaixe());
-            showDanhGia(xe.getMaxe());
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());
@@ -150,7 +151,7 @@ public class cardThueXe extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         lbl_anh = new javax.swing.JLabel();
         lbl_tennguoidung = new javax.swing.JLabel();
-        lbl_noidung1 = new javax.swing.JLabel();
+        lbl_noidungdanhgia = new javax.swing.JLabel();
         lbl_sosao = new javax.swing.JLabel();
         ttxe = new javax.swing.JPanel();
         lbl_maxe = new javax.swing.JLabel();
@@ -235,7 +236,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         lbl_tennguoidung.setText("Tên Người Dùng");
 
-        lbl_noidung1.setText("Nội Dung Đánh Giá");
+        lbl_noidungdanhgia.setText("Nội Dung Đánh Giá");
 
         lbl_sosao.setText("Số Sao");
 
@@ -253,7 +254,7 @@ public class cardThueXe extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lbl_sosao)
                         .addGap(0, 115, Short.MAX_VALUE))
-                    .addComponent(lbl_noidung1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lbl_noidungdanhgia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -266,7 +267,7 @@ public class cardThueXe extends javax.swing.JPanel {
                             .addComponent(lbl_tennguoidung)
                             .addComponent(lbl_sosao))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_noidung1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
+                        .addComponent(lbl_noidungdanhgia, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lbl_anh, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -559,7 +560,7 @@ public class cardThueXe extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_maloaixe;
     private javax.swing.JLabel lbl_maxe;
     private javax.swing.JLabel lbl_noidung;
-    private javax.swing.JLabel lbl_noidung1;
+    private javax.swing.JLabel lbl_noidungdanhgia;
     private javax.swing.JLabel lbl_soghe;
     private javax.swing.JLabel lbl_sosao;
     private javax.swing.JLabel lbl_tennguoidung;

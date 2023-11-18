@@ -266,7 +266,7 @@
                                       <Component id="lbl_sosao" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="115" max="32767" attributes="0"/>
                                   </Group>
-                                  <Component id="lbl_noidung1" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lbl_noidungdanhgia" alignment="0" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -283,7 +283,7 @@
                                           <Component id="lbl_sosao" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="lbl_noidung1" pref="42" max="32767" attributes="0"/>
+                                      <Component id="lbl_noidungdanhgia" pref="42" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="lbl_anh" min="-2" pref="32" max="-2" attributes="0"/>
@@ -303,7 +303,7 @@
                         <Property name="text" type="java.lang.String" value="T&#xea;n Ng&#x1b0;&#x1edd;i D&#xf9;ng"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="lbl_noidung1">
+                    <Component class="javax.swing.JLabel" name="lbl_noidungdanhgia">
                       <Properties>
                         <Property name="text" type="java.lang.String" value="N&#x1ed9;i Dung &#x110;&#xe1;nh Gi&#xe1;"/>
                       </Properties>
