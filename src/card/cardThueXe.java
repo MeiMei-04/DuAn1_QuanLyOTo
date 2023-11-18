@@ -47,7 +47,6 @@ public class cardThueXe extends javax.swing.JPanel {
             List<DichVu> list = dvd.selectAll();
             for (DichVu dv : list) {
                 model.addElement(dv.getTendichvu());
-                System.out.println(dv.getTendichvu());
             }
             cbb_DichVu.setSelectedIndex(0);
         } catch (Exception e) {

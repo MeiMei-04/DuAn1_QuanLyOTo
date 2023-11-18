@@ -13,12 +13,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author truon
  */
-public class CarThongKe extends javax.swing.JPanel {
+public class CardThongKe extends javax.swing.JPanel {
 
     /**
      * Creates new form CarThongKe
      */
-    public CarThongKe() {
+    public CardThongKe() {
         initComponents();
         filltableHopDong();
         fillComboboxNam();
