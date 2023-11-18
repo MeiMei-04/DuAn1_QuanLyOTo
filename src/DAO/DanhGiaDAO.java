@@ -19,7 +19,7 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
     String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
-    String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
+    String SELECT_ALL_SQL = "SELECT * FROM danhgia";
     String SELECT_BY_ID_SQL = "SELECT TaiKhoan.UserID,danhgia.MaXe,ChiTietTaiKhoan.HoTen,ChiTietTaiKhoan.AnhDaiDien,danhgia.NoiDung,danhgia.NgayDanhGia,danhgia.SoSaoDanhGia FROM TaiKhoan  INNER JOIN ChiTietTaiKhoan  ON TaiKhoan.UserID = ChiTietTaiKhoan.UserID  INNER JOIN danhgia  ON ChiTietTaiKhoan.UserID = danhgia.UserID  where maxe = ?";
     @Override
     public void insert(DanhGia entity) {
@@ -38,7 +38,7 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
 
     @Override
     public List<DanhGia> selectAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return selectBySQL(SELECT_ALL_SQL);
     }
 
     @Override
@@ -65,8 +65,8 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
                 dg.setId(rs.getInt("userid"));
                 dg.setMaxe(rs.getString("Maxe"));
                 dg.setNoidung(rs.getString("noidung"));
-                dg.setAnhdaidien(rs.getString("anhdaidien"));
-                dg.setHoten(rs.getString("hoten"));
+//                dg.setAnhdaidien(rs.getString("anhdaidien"));
+//                dg.setHoten(rs.getString("hoten"));
                 dg.setNgaydanhgia(rs.getDate("ngaydanhgia"));
                 dg.setSosaodanhgia(rs.getInt("sosaodanhgia"));
                 list.add(dg);
