@@ -10,9 +10,9 @@ import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
 import card.CarThongKe;
-import card.CardThueXe;
+
 import card.cardDichVu;
-import card.ThueXe;
+import card.cardThueXe;
 
 /**
  *
@@ -29,7 +29,7 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
-        showFrom(new ThueXe());
+        showFrom(new cardThueXe());
 
     }
 
@@ -45,7 +45,7 @@ public class TrangChu extends javax.swing.JFrame {
     public void openThueXe() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new ThueXe());
+                showFrom(new cardThueXe());
             } else {
                 openDangNhap();
             }
@@ -733,7 +733,7 @@ public class TrangChu extends javax.swing.JFrame {
 
     private void pnl_thuexeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseClicked
         // TODO add your handling code here:
-        showFrom(new ThueXe());
+        showFrom(new cardThueXe());
         onClick(pnl_thuexe);
         onLeaveClick(pnl_taikhoan);
         onLeaveClick(pnl_TrangChu);
