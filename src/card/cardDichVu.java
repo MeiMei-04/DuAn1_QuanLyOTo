@@ -171,6 +171,8 @@ public class cardDichVu extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
         jPanel2.setPreferredSize(new java.awt.Dimension(0, 70));
 
+        btnThem.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnThem.setForeground(new java.awt.Color(255, 102, 51));
         btnThem.setText("THÊM");
         btnThem.setRequestFocusEnabled(false);
         btnThem.setVerifyInputWhenFocusTarget(false);
@@ -180,6 +182,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btnSua.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnSua.setForeground(new java.awt.Color(255, 102, 51));
         btnSua.setText("SỬA");
         btnSua.setRequestFocusEnabled(false);
         btnSua.setVerifyInputWhenFocusTarget(false);
@@ -189,6 +193,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btnMoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnMoi.setForeground(new java.awt.Color(255, 102, 51));
         btnMoi.setText("MỚI");
         btnMoi.setRequestFocusEnabled(false);
         btnMoi.setVerifyInputWhenFocusTarget(false);
@@ -198,6 +204,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btnXoa.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnXoa.setForeground(new java.awt.Color(255, 102, 51));
         btnXoa.setText("XÓA");
         btnXoa.setRequestFocusEnabled(false);
         btnXoa.setVerifyInputWhenFocusTarget(false);
@@ -207,6 +215,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btncuoi.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btncuoi.setForeground(new java.awt.Color(255, 102, 51));
         btncuoi.setText(">|");
         btncuoi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +224,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btnlui.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnlui.setForeground(new java.awt.Color(255, 102, 51));
         btnlui.setText("<<");
         btnlui.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +233,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        Btndau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Btndau.setForeground(new java.awt.Color(255, 102, 51));
         Btndau.setText("|<");
         Btndau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,6 +242,8 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btnsau.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnsau.setForeground(new java.awt.Color(255, 102, 51));
         btnsau.setText(">>");
         btnsau.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

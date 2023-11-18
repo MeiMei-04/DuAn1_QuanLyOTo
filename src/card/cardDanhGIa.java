@@ -31,7 +31,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(300, 335));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 51));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
