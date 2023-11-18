@@ -266,11 +266,10 @@ public class DangKyDialog extends java.awt.Dialog {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("Đăng Ký");
+        jLabel6.setText("ĐĂNG KÝ");
 
-        btn_dangky.setBackground(new java.awt.Color(255, 102, 51));
-        btn_dangky.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_dangky.setForeground(new java.awt.Color(255, 255, 255));
+        btn_dangky.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_dangky.setForeground(new java.awt.Color(255, 102, 51));
         btn_dangky.setText("Đăng Ký");
         btn_dangky.setBorder(null);
         btn_dangky.setFocusPainted(false);
@@ -280,9 +279,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
-        btn_nhanma.setBackground(new java.awt.Color(255, 102, 51));
-        btn_nhanma.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_nhanma.setForeground(new java.awt.Color(255, 255, 255));
+        btn_nhanma.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_nhanma.setForeground(new java.awt.Color(255, 102, 51));
         btn_nhanma.setText("Nhận Mã");
         btn_nhanma.setBorder(null);
         btn_nhanma.setFocusPainted(false);
