@@ -81,11 +81,18 @@ public class CarThongKe extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHopDong = new javax.swing.JTable();
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 3, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
+        setBackground(new java.awt.Color(255, 102, 51));
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Báo Cáo Thống Kê");
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tháng"));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 102, 51));
+        jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
+        jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jPanel3.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
         cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
@@ -96,6 +103,9 @@ public class CarThongKe extends javax.swing.JPanel {
         });
         jPanel3.add(cboThang);
 
+        jScrollPane3.setBackground(new java.awt.Color(255, 102, 51));
+
+        tblDoanhThu.setBackground(new java.awt.Color(255, 102, 51));
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
@@ -125,11 +135,16 @@ public class CarThongKe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Doanh Thu Theo Tháng", jPanel1);
 
+        jPanel2.setBackground(new java.awt.Color(255, 102, 51));
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 102, 51));
+
+        tblHopDong.setBackground(new java.awt.Color(255, 102, 51));
         tblHopDong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
