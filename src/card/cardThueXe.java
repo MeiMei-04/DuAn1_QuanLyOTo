@@ -134,9 +134,9 @@ public class cardThueXe extends javax.swing.JPanel {
         cbb_loaixe = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        setBackground(new java.awt.Color(255, 102, 51));
 
-        backgournd.setBackground(new java.awt.Color(255, 255, 255));
+        backgournd.setBackground(new java.awt.Color(255, 102, 51));
 
         anh.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         anh.setOpaque(false);
@@ -159,7 +159,8 @@ public class cardThueXe extends javax.swing.JPanel {
         );
 
         btn_back.setBackground(new java.awt.Color(255, 102, 51));
-        btn_back.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_back.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
         btn_back.setText("<");
         btn_back.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_back.setBorderPainted(false);
@@ -172,7 +173,8 @@ public class cardThueXe extends javax.swing.JPanel {
         });
 
         btn_next.setBackground(new java.awt.Color(255, 102, 51));
-        btn_next.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        btn_next.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        btn_next.setForeground(new java.awt.Color(255, 255, 255));
         btn_next.setText(">");
         btn_next.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_next.setBorderPainted(false);
@@ -184,7 +186,8 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Đánh Giá"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Đánh Giá", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(350, 345));
 
@@ -196,28 +199,42 @@ public class cardThueXe extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
+            .addGap(0, 318, Short.MAX_VALUE)
         );
 
-        ttxe.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông Tin Xe"));
+        ttxe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông Tin Xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         ttxe.setOpaque(false);
 
+        lbl_maxe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_maxe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_maxe.setText("Mã Xe");
 
+        lbl_tenxe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_tenxe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_tenxe.setText("Tên Xe");
 
+        lbl_soghe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_soghe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_soghe.setText("Số Ghế");
 
+        lbl_trangthai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_trangthai.setForeground(new java.awt.Color(255, 255, 255));
         lbl_trangthai.setText("Trạng Thái");
 
+        lbl_giathue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_giathue.setForeground(new java.awt.Color(255, 255, 255));
         lbl_giathue.setText("Giá Thuê");
 
+        lbl_maloaixe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_maloaixe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_maloaixe.setText("Mã Loại Xe");
 
         txt_noidung.setColumns(20);
         txt_noidung.setRows(5);
         jScrollPane1.setViewportView(txt_noidung);
 
+        lbl_noidung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_noidung.setForeground(new java.awt.Color(255, 255, 255));
         lbl_noidung.setText("Ghi Chú");
 
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
@@ -235,9 +252,9 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(lbl_maxe)
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(lbl_noidung)
-                        .addGap(18, 18, 18)
+                        .addGap(38, 38, 38)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         ttxeLayout.setVerticalGroup(
             ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -260,16 +277,22 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Thuê Xe"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thuê Xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 178));
 
+        cbb_DichVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_DichVu.setForeground(new java.awt.Color(255, 102, 51));
         cbb_DichVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Vocher");
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Dich Vụ");
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 102, 51));
         jButton1.setText("Thuê Xe");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -304,9 +327,11 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton1)
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
 
+        cbb_loaixe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_loaixe.setForeground(new java.awt.Color(255, 102, 51));
         cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "4", "7", "16", "29" }));
         cbb_loaixe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,6 +339,8 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Tìm Theo Số Ghế:");
 
         javax.swing.GroupLayout backgourndLayout = new javax.swing.GroupLayout(backgournd);
@@ -334,7 +361,7 @@ public class cardThueXe extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 123, Short.MAX_VALUE)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE))
@@ -361,7 +388,7 @@ public class cardThueXe extends javax.swing.JPanel {
                         .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -203,9 +203,8 @@ public class DangNhapDialog extends java.awt.Dialog {
             }
         });
 
-        btn_DangNhap.setBackground(new java.awt.Color(255, 102, 51));
         btn_DangNhap.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btn_DangNhap.setForeground(new java.awt.Color(255, 255, 255));
+        btn_DangNhap.setForeground(new java.awt.Color(255, 102, 51));
         btn_DangNhap.setText("ĐĂNG NHẬP");
         btn_DangNhap.setBorder(null);
         btn_DangNhap.setFocusPainted(false);
