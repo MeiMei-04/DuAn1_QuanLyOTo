@@ -78,5 +78,10 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<DanhGia> selectByKey(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

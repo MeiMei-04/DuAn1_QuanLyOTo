@@ -22,5 +22,7 @@ public abstract class QuanLyOToDAO<E, K> {
 
     abstract public E selectByID(K key);
 
+    abstract public List<E> selectByKey(K key);
+    
     abstract protected List<E> selectBySQL(String sql, Object... args);
 }

@@ -79,4 +79,9 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
         }
     }
 
+    @Override
+    public List<TaiKhoan> selectByKey(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

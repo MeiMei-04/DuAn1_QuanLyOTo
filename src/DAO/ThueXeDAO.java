@@ -81,4 +81,9 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
         }
     }
 
+    @Override
+    public List<Xe> selectByKey(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

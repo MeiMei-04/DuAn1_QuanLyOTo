@@ -73,5 +73,10 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String>{
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public List<DichVu> selectByKey(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
