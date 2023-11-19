@@ -9,10 +9,10 @@ package card;
  *
  * @author truon
  */
-public class HopDong extends javax.swing.JPanel {
+public class cardHopDong extends javax.swing.JPanel {
 
     /** Creates new form HopDong */
-    public HopDong() {
+    public cardHopDong() {
         initComponents();
     }
 

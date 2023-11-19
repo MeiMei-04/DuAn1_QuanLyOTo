@@ -7,16 +7,20 @@ package card;
 import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThueXeDAO;
+import Hepler.AuthHelper;
 import Hepler.DialogHelper;
 import entyti.DanhGia;
 import entyti.DichVu;
 import entyti.Xe;
+import form.DangKyDialog;
+import form.DangNhapDialog;
 import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
+import form.TaoHopDongDialog;
 
 /**
  *
@@ -29,6 +33,7 @@ public class cardThueXe extends javax.swing.JPanel {
     ThueXeDAO txd = new ThueXeDAO();
     int index = 0;
     int size = 0;
+    int row = -1;
     String item = null;
 
     /**
@@ -39,28 +44,12 @@ public class cardThueXe extends javax.swing.JPanel {
         fillcbbDichVu();
         setForm(locxe(item), 0);
     }
-
-//    public void seticonDanhGia(String anh) {
-//        Hepler.ImagesHelper.setIconlabel(lbl_anh, "src\\ICON\\" + anh);
-//    }
-//
-//    public void setFormDanhGia(String id) {
-//        try {
-//            System.out.println(id);
-//            List<DanhGia> list = new ArrayList<>();
-//            DanhGia dg = dgd.selectByID(id);
-//            list.add(dg);
-//            seticonDanhGia(dg.getAnhdaidien());
-//            lbl_tennguoidung.setText(dg.getHoten());
-//            System.out.println(dg.getHoten());
-//            lbl_sosao.setText(dg.getSosaodanhgia() + " sao");
-//            txt_danhgia.setText(dg.getNoidung());
-//            System.out.println(dg.getNoidung());
-//        } catch (Exception e) {
-//            Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
-//            System.out.println(e.getMessage());
-//        }
-//    }
+    public void openThuexe() {
+        try {
+            new TaoHopDongDialog(null, true).setVisible(true);
+        } catch (Exception e) {
+        }
+    }
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
@@ -72,42 +61,35 @@ public class cardThueXe extends javax.swing.JPanel {
         pnl_danhgia.revalidate();
         pnl_danhgia.repaint();
     }
+
     public List<DanhGia> getlistdanhgia(String maxe) {
         List<DanhGia> list = new ArrayList<>();
         try {
-            List<DanhGia> alldanhgia = dgd.selectAll();
-            if (maxe != null) {
-                for (DanhGia dg : alldanhgia) {
-                    if (dg.getMaxe().equalsIgnoreCase(maxe)) {
-                        list.add(dg);
-                    }
-                }
-            } else {
-                list = alldanhgia;
-            }
+            list = dgd.selectByKey(maxe);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return list;
     }
-    int row = -1;
 
     private void filltableDanhGia(List<DanhGia> list) {
-
         DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
         model.setRowCount(0);
         try {
-            
-            for (DanhGia dg :list) {
-                Object[] row = {dg.getHoten(),
-                    dg.getNoidung(),
-                    dg.getSosaodanhgia(),
-                    dg.getNgaydanhgia()
-                };
-                model.addRow(row);
+            if (!list.isEmpty()) {
+                for (DanhGia dg : list) {
+                    Object[] row = {dg.getHoten(),
+                        dg.getNoidung(),
+                        dg.getSosaodanhgia(),
+                        dg.getNgaydanhgia()
+                    };
+                    model.addRow(row);
+                }
+            }else{
+                return;
             }
+
         } catch (Exception e) {
-            DialogHelper.alert(this, "Loi Truy van");
             System.out.println(e.getMessage());
         }
     }
@@ -156,7 +138,6 @@ public class cardThueXe extends javax.swing.JPanel {
             seticon(xe.getAnhxe()); //set ảnh xe
             lbl_maxe.setText("Mã Xe: " + xe.getMaxe());
             filltableDanhGia(getlistdanhgia(xe.getMaxe()));
-//            setFormDanhGia(xe.getMaxe());
             lbl_tenxe.setText("Tên Xe: " + xe.getTenxe());
             lbl_soghe.setText("Số Ghế: " + xe.getSoghe());
             if (xe.isTrangthaixethue()) {
@@ -202,12 +183,12 @@ public class cardThueXe extends javax.swing.JPanel {
         lbl_noidung = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         cbb_DichVu = new javax.swing.JComboBox<>();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        lbl_voucher = new javax.swing.JLabel();
+        lbl_dichvu = new javax.swing.JLabel();
+        txt_voucher = new javax.swing.JTextField();
+        btn_Thuexe = new javax.swing.JButton();
         cbb_loaixe = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lbl_timtheosoghe = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 102, 51));
 
@@ -283,7 +264,9 @@ public class cardThueXe extends javax.swing.JPanel {
         pnl_danhgia.setLayout(pnl_danhgiaLayout);
         pnl_danhgiaLayout.setHorizontalGroup(
             pnl_danhgiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_danhgiaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         pnl_danhgiaLayout.setVerticalGroup(
             pnl_danhgiaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,15 +356,20 @@ public class cardThueXe extends javax.swing.JPanel {
         cbb_DichVu.setForeground(new java.awt.Color(255, 102, 51));
         cbb_DichVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
 
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Vocher");
+        lbl_voucher.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_voucher.setText("Vocher");
 
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Dich Vụ");
+        lbl_dichvu.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_dichvu.setText("Dich Vụ");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 102, 51));
-        jButton1.setText("Thuê Xe");
+        btn_Thuexe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_Thuexe.setForeground(new java.awt.Color(255, 102, 51));
+        btn_Thuexe.setText("Thuê Xe");
+        btn_Thuexe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ThuexeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -393,28 +381,28 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(cbb_DichVu, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                            .addComponent(lbl_voucher)
+                            .addComponent(lbl_dichvu))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextField1)
+                    .addComponent(txt_voucher)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 250, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btn_Thuexe)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jLabel10)
+                .addComponent(lbl_dichvu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbb_DichVu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel9)
+                .addComponent(lbl_voucher)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btn_Thuexe)
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -427,9 +415,9 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Tìm Theo Số Ghế:");
+        lbl_timtheosoghe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_timtheosoghe.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_timtheosoghe.setText("Tìm Theo Số Ghế:");
 
         javax.swing.GroupLayout backgourndLayout = new javax.swing.GroupLayout(backgournd);
         backgournd.setLayout(backgourndLayout);
@@ -445,14 +433,14 @@ public class cardThueXe extends javax.swing.JPanel {
                         .addGap(69, 69, 69)
                         .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(backgourndLayout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(lbl_timtheosoghe)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(pnl_danhgia, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 355, Short.MAX_VALUE))
+                    .addComponent(pnl_danhgia, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
@@ -470,7 +458,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addGroup(backgourndLayout.createSequentialGroup()
                         .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
+                            .addComponent(lbl_timtheosoghe))
                         .addGap(38, 38, 38)
                         .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -532,33 +520,38 @@ public class cardThueXe extends javax.swing.JPanel {
         setForm(locxe(item), index);
     }//GEN-LAST:event_cbb_loaixeActionPerformed
 
+    private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
+        // TODO add your handling code here:
+        openThuexe();
+    }//GEN-LAST:event_btn_ThuexeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel backgournd;
+    private javax.swing.JButton btn_Thuexe;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_next;
     private javax.swing.JComboBox<String> cbb_DichVu;
     private javax.swing.JComboBox<String> cbb_loaixe;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel lbl_anhxe;
+    private javax.swing.JLabel lbl_dichvu;
     private javax.swing.JLabel lbl_giathue;
     private javax.swing.JLabel lbl_maloaixe;
     private javax.swing.JLabel lbl_maxe;
     private javax.swing.JLabel lbl_noidung;
     private javax.swing.JLabel lbl_soghe;
     private javax.swing.JLabel lbl_tenxe;
+    private javax.swing.JLabel lbl_timtheosoghe;
     private javax.swing.JLabel lbl_trangthai;
+    private javax.swing.JLabel lbl_voucher;
     private javax.swing.JPanel pnl_danhgia;
     private javax.swing.JTable tbl_danhgia;
     private javax.swing.JPanel ttxe;
     private javax.swing.JTextArea txt_noidung;
+    private javax.swing.JTextField txt_voucher;
     // End of variables declaration//GEN-END:variables
 }

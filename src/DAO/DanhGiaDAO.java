@@ -65,8 +65,8 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
                 dg.setId(rs.getInt("userid"));
                 dg.setMaxe(rs.getString("Maxe"));
                 dg.setNoidung(rs.getString("noidung"));
-//                dg.setAnhdaidien(rs.getString("anhdaidien"));
-//                dg.setHoten(rs.getString("hoten"));
+                dg.setAnhdaidien(rs.getString("anhdaidien"));
+                dg.setHoten(rs.getString("hoten"));
                 dg.setNgaydanhgia(rs.getDate("ngaydanhgia"));
                 dg.setSosaodanhgia(rs.getInt("sosaodanhgia"));
                 list.add(dg);
@@ -81,7 +81,16 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
 
     @Override
     public List<DanhGia> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<DanhGia> list = selectBySQL(SELECT_BY_ID_SQL, key);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
     }
     
 }

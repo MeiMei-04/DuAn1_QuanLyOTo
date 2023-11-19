@@ -24,7 +24,6 @@ public class CardThongKe extends javax.swing.JPanel {
         fillComboboxNam();
     }
     ThongKeDAO tkdao = new ThongKeDAO();
-//    HopDongDAO
 
     void filltableHopDong() {
         DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
