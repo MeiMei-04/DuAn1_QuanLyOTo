@@ -454,21 +454,23 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="cbb_DichVu" max="32767" attributes="0"/>
+                          <Component id="txt_voucher" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_songaythue" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbl_voucher" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_dichvu" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lbl_songaythue" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="txt_voucher" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -486,9 +488,13 @@
                       <Component id="lbl_voucher" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_voucher" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="lbl_songaythue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="txt_songaythue" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="60" max="32767" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -543,6 +549,16 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThuexeActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txt_songaythue">
+            </Component>
+            <Component class="javax.swing.JLabel" name="lbl_songaythue">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="S&#x1ed1; Ng&#xe0;y Thu&#xea;"/>
+              </Properties>
             </Component>
           </SubComponents>
         </Container>

@@ -740,6 +740,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        openThueXe();
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
