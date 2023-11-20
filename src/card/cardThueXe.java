@@ -501,6 +501,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_next.setEnabled(true);
         if (index < 0) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
+            index =0;
             btn_back.setEnabled(false);
         } else {
             setForm(locxe(item), index);
@@ -514,6 +515,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_back.setEnabled(true);
         if (index > size) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
+            index =size;
             btn_next.setEnabled(false);
         } else {
             setForm(locxe(item), index);
