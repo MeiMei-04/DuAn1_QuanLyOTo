@@ -86,6 +86,7 @@ public class cardXeThue extends javax.swing.JPanel {
             this.filltable();
             this.clearForm();
             DialogHelper.alert(this, "Thêm mới thành công !");
+            Hepler.ImagesHelper.convertImgTo280x180(anhxe);
         }catch (Exception e) {
             DialogHelper.alert(this, "Thêm mới thất bại !");
             e.printStackTrace();
@@ -128,6 +129,7 @@ public class cardXeThue extends javax.swing.JPanel {
                  dao.update(xe);
                  this.filltable();
                  DialogHelper.alert(this, "Cập nhật thành công");
+                 Hepler.ImagesHelper.convertImgTo280x180(anhxe);
              } catch (Exception e) {
                  DialogHelper.alert(this,"Cập nhật thất bại");
                  e.printStackTrace();

@@ -126,6 +126,29 @@ public class ImagesHelper {
             e.printStackTrace();
         }
     }
+    public static void convertImgTo280x180(String patch) {
+        try {
+            // Đọc hình ảnh
+            BufferedImage image = ImageIO.read(new File("src/imganhdaidien/" + patch));
+
+            // Thay đổi kích thước hình ảnh thành 24x35
+            Image tempImage = image.getScaledInstance(280, 180, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(280, 180, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = resizedImage.createGraphics();
+            
+            g.drawImage(tempImage, 0, 0, null);
+            g.dispose();
+            File dir = new File("src/imgxe/");
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+
+            // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
+            ImageIO.write(resizedImage, "png", new File("src/imgxe/" + patch));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) {
 
