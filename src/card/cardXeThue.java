@@ -37,7 +37,24 @@ public class cardXeThue extends javax.swing.JPanel {
         Hepler.ImagesHelper.setIconButton(btn_chonanh, "src\\IMAGE\\pickimg.png");
     }
     
-    
+    public boolean verify(){
+        if(txt_maxe.getText().equals("")){
+            DialogHelper.alert(this, "Mã Xe Không Được Để Trống");
+            txt_maxe.requestFocus();
+           return false;
+        }
+        if(txt_tenxe.getText().equals("")){
+            DialogHelper.alert(this, "Tên Xe Không Được Để Trống");
+            txt_tenxe.requestFocus();
+           return false;
+        }
+        if(txt_maloaixe.getText().equals("")){
+            DialogHelper.alert(this, "MÃ Loại Xe Không Được Để Trống");
+            txt_maloaixe.requestFocus();
+           return false;
+        }
+        return true;
+   }
     private void filltable(){
             DefaultTableModel model = (DefaultTableModel) tblXeThue.getModel();
             model.setRowCount(0);

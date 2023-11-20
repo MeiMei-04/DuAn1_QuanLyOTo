@@ -78,14 +78,16 @@ public class ImagesHelper {
     }
 
     //kiểm tra file
-    public static void checkfile(String patha) {
+    public static boolean checkfile(String patha) {
         Path path = Paths.get(patha);
 
         // Kiểm tra xem tệp có tồn tại hay không
         if (Files.exists(path)) {
             System.out.println("Tệp tồn tại.");
+            return true;
         } else {
             System.out.println("Tệp không tồn tại.");
+            return false;
         }
     }
 
@@ -142,9 +144,14 @@ public class ImagesHelper {
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-
+            //kiểm tra xem tệp tồn tại chưa, rồi thì không thêm nưa
+            if(checkfile("src/imgxe/"+patch)){
+                return;
+           }else{
+                ImageIO.write(resizedImage, "png", new File("src/imgxe/" + patch));
+            }
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
-            ImageIO.write(resizedImage, "png", new File("src/imgxe/" + patch));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }

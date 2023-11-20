@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
 
     String INSERT_SQL = "INSERT INTO Xe (MaXe, TenXe, SoGhe, TrangThai, GiaThue, Anh_Xe, MaLoaiXe, GhiChu) VALUES (?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE Xe SET TenXe=?,SoGhe = ?,TrangThai=?, GiaThue = ?,Anh_Xe = ?,MaLoaiXe,?,GhiChu? WHERE MaXe =?";
+    String UPDATE_SQL = "UPDATE Xe SET TenXe=?,SoGhe = ?,TrangThai=?, GiaThue = ?,Anh_Xe = ?,MaLoaiXe=?,GhiChu=? WHERE MaXe =?";
     String DELETE_SQL = "DELETE FROM Xe WHERE MaXe =?";
     String SELECT_ALL_SQL = "SELECT * FROM xe";
     String SELECT_BY_ID_SQL = "SELECT*FROM xe WHERE MaXe = ?";
