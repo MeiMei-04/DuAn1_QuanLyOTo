@@ -129,7 +129,7 @@ public class ImagesHelper {
     public static void convertImgTo280x180(String patch) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File("src/imganhdaidien/" + patch));
+            BufferedImage image = ImageIO.read(new File("src/imgxenew/" + patch));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(280, 180, Image.SCALE_SMOOTH);
@@ -149,8 +149,16 @@ public class ImagesHelper {
             e.printStackTrace();
         }
     }
+    public static void deleteImg(String patch){
+        File file = new File("src/imgxe/"+patch);
 
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
+    }
     public static void main(String[] args) {
-
+        deleteImg("bentley_4cho_xang.jpg");
     }
 }

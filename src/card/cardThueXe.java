@@ -144,6 +144,7 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_trangthai.setText("Trạng Thái: " + trangthai);
             lbl_giathue.setText("Giá Thuê: " + xe.getGiathue());
             lbl_maloaixe.setText("Loại Xe: " + xe.getMaloaixe());
+            txt_noidung.setText(xe.getGhichu());
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());

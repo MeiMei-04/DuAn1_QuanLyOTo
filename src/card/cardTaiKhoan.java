@@ -21,9 +21,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     public cardTaiKhoan() {
         initComponents();
     }
-    public void seticon(String anhdaidien,String banglai) {
-        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\"+anhdaidien);
-        
+    public void setImg(String anhdaidien,String banglai) {
+        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\"+anhdaidien); 
         Hepler.ImagesHelper.setIconlabel(lbl_anhbanglai, "src\\imgbanglai\\"+banglai);
     }
     public void setForm(){
@@ -371,7 +370,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         // TODO add your handling code here:
         String banglai;
         banglai = Hepler.ImagesHelper.chonAnh();
-        seticon(null, banglai);
+        setImg(null, banglai);
         
     }//GEN-LAST:event_btn_ChonbangolaiActionPerformed
 
@@ -380,7 +379,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         
         String anhdaidien;
         anhdaidien = Hepler.ImagesHelper.chonAnh();
-        seticon(anhdaidien, null);
+        setImg(anhdaidien, null);
         Hepler.ImagesHelper.convertToIcon(anhdaidien);
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
 

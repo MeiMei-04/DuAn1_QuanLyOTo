@@ -25,7 +25,7 @@ public class cardDichVu extends javax.swing.JPanel {
     }
     DichVuDAO dao = new DichVuDAO();
     int row = -1;
-     private void filltable(){
+    private void filltable(){
          DefaultTableModel model = (DefaultTableModel) tbldichvu.getModel();
          model.setRowCount(0);
          try {
@@ -53,7 +53,6 @@ public class cardDichVu extends javax.swing.JPanel {
          txtTenDichVu.setText(vd.getTendichvu());
          txtGhiChu.setText(vd.getGhichu());
          txtDonGia.setText(String.valueOf(vd.getDongia()));
-     
      }
      void clearFrom(){
          DichVu dv = new DichVu();

@@ -26,6 +26,9 @@ public class cardXeThue extends javax.swing.JPanel {
         filltable();
         seticon();
     }
+    public void setimg(String path){
+        Hepler.ImagesHelper.setIconlabel(lbl_anh, "src\\imgxe\\"+path);
+    }
     public void seticon(){
         Hepler.ImagesHelper.setIconButton(btnMoi, "src\\IMAGE\\new.png");
         Hepler.ImagesHelper.setIconButton(btnSua, "src\\IMAGE\\update.png");
@@ -40,9 +43,7 @@ public class cardXeThue extends javax.swing.JPanel {
             model.setRowCount(0);
             try {
                 List<Xe> list= dao.selectAll();
-                System.out.println(list);
                 for(Xe xe : list){
-                    System.out.println(xe.getMaxe());
                     Object[] row = {xe.getMaxe(),
                                     xe.getTenxe(),
                                     xe.getSoghe(),
@@ -64,6 +65,7 @@ public class cardXeThue extends javax.swing.JPanel {
         txt_giathue.setText(String.valueOf(ex.getGiathue()));
         txt_maloaixe.setText(ex.getMaloaixe());
         txt_noidung.setText(ex.getGhichu());
+        setimg(ex.getAnhxe());
     }
     
     Xe getForm(){
@@ -86,7 +88,6 @@ public class cardXeThue extends javax.swing.JPanel {
             this.filltable();
             this.clearForm();
             DialogHelper.alert(this, "Thêm mới thành công !");
-            Hepler.ImagesHelper.convertImgTo280x180(anhxe);
         }catch (Exception e) {
             DialogHelper.alert(this, "Thêm mới thất bại !");
             e.printStackTrace();
@@ -98,6 +99,7 @@ public class cardXeThue extends javax.swing.JPanel {
     
     void edit(){
         String Maxe = (String) tblXeThue.getValueAt(this.row,0);
+        System.out.println(Maxe);
         Xe xe = dao.selectByID(Maxe);
         this.setForm(xe);
     }
@@ -109,6 +111,8 @@ public class cardXeThue extends javax.swing.JPanel {
                  dao.delete(Maxe);
                  this.filltable();
                  this.clearForm();
+                 System.out.println(anhxe);
+                 Hepler.ImagesHelper.deleteImg(anhxe);
                  DialogHelper.alert(this, "bạn xóa thành công");
              } catch (Exception e) {
                  DialogHelper.alert(this, "Xóa thất bại");
@@ -129,7 +133,6 @@ public class cardXeThue extends javax.swing.JPanel {
                  dao.update(xe);
                  this.filltable();
                  DialogHelper.alert(this, "Cập nhật thành công");
-                 Hepler.ImagesHelper.convertImgTo280x180(anhxe);
              } catch (Exception e) {
                  DialogHelper.alert(this,"Cập nhật thất bại");
                  e.printStackTrace();
@@ -202,6 +205,11 @@ public class cardXeThue extends javax.swing.JPanel {
                 "MÃ XE", "TÊN XE", "SỐ GHẾ", "GIÁ THUÊ", "MÃ LOẠI XE"
             }
         ));
+        tblXeThue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblXeThueMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblXeThue);
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
@@ -528,8 +536,17 @@ public class cardXeThue extends javax.swing.JPanel {
     private void btn_chonanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chonanhActionPerformed
         // TODO add your handling code here:
         anhxe = Hepler.ImagesHelper.chonAnh();
-        
+        Hepler.ImagesHelper.convertImgTo280x180(anhxe);
+        setimg(anhxe);
     }//GEN-LAST:event_btn_chonanhActionPerformed
+
+    private void tblXeThueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblXeThueMouseClicked
+        // TODO add your handling code here:
+        if(evt.getClickCount()==1){
+            this.row = tblXeThue.getSelectedRow();
+            this.edit();
+        }
+    }//GEN-LAST:event_tblXeThueMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
