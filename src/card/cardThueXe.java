@@ -8,15 +8,10 @@ import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThueXeDAO;
 import Hepler.AuthHelper;
-import Hepler.DialogHelper;
 import entyti.DanhGia;
 import entyti.DichVu;
-import entyti.TaiKhoan;
 import entyti.Xe;
-import form.DangKyDialog;
-import form.DangNhapDialog;
 import form.TaoHopDongDialog;
-import java.awt.Color;
 import java.awt.Component;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +47,20 @@ public class cardThueXe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
+    
+    public void openHopDong() {
+        try {
+            if (AuthHelper.authenticated()) {
+                new TaoHopDongDialog(null, true).setVisible(true);
+            } else {
+                openHopDong();
+            }
+
+        } catch (Exception e) {
+        }
+    }
+    
+    
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
@@ -149,6 +158,13 @@ public class cardThueXe extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
+    // đăng khoa
+    public void showFrom(Component com) {
+        background.removeAll();
+        background.add(com);
+        background.revalidate();
+        background.repaint();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,7 +175,7 @@ public class cardThueXe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        backgournd = new javax.swing.JPanel();
+        background = new javax.swing.JPanel();
         anh = new javax.swing.JPanel();
         lbl_anhxe = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
@@ -190,7 +206,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 102, 51));
 
-        backgournd.setBackground(new java.awt.Color(255, 102, 51));
+        background.setBackground(new java.awt.Color(255, 102, 51));
 
         anh.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         anh.setOpaque(false);
@@ -389,7 +405,7 @@ public class cardThueXe extends javax.swing.JPanel {
                             .addComponent(lbl_songaythue))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 349, Short.MAX_VALUE)
+                        .addGap(0, 346, Short.MAX_VALUE)
                         .addComponent(btn_Thuexe)))
                 .addContainerGap())
         );
@@ -426,58 +442,58 @@ public class cardThueXe extends javax.swing.JPanel {
         lbl_timtheosoghe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_timtheosoghe.setText("Tìm Theo Số Ghế:");
 
-        javax.swing.GroupLayout backgourndLayout = new javax.swing.GroupLayout(backgournd);
-        backgournd.setLayout(backgourndLayout);
-        backgourndLayout.setHorizontalGroup(
-            backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(backgourndLayout.createSequentialGroup()
+        javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
+        background.setLayout(backgroundLayout);
+        backgroundLayout.setHorizontalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(backgroundLayout.createSequentialGroup()
                 .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(ttxe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(69, 69, 69)
-                        .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(backgourndLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(backgroundLayout.createSequentialGroup()
                                 .addComponent(lbl_timtheosoghe)
                                 .addGap(18, 18, 18)
                                 .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                         .addComponent(pnl_danhgia, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(btn_next, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15))
         );
-        backgourndLayout.setVerticalGroup(
-            backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        backgroundLayout.setVerticalGroup(
+            backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btn_back, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btn_next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(backgourndLayout.createSequentialGroup()
+            .addGroup(backgroundLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgourndLayout.createSequentialGroup()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                         .addGap(33, 33, 33)
                         .addComponent(pnl_danhgia, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(backgourndLayout.createSequentialGroup()
-                        .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(backgroundLayout.createSequentialGroup()
+                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cbb_loaixe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lbl_timtheosoghe))
                         .addGap(38, 38, 38)
                         .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(backgourndLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap(41, Short.MAX_VALUE))
-                    .addGroup(backgourndLayout.createSequentialGroup()
+                    .addGroup(backgroundLayout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 279, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -487,11 +503,11 @@ public class cardThueXe extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgournd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(backgournd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(background, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -534,13 +550,12 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
-        openThuexe();
+        openHopDong();
     }//GEN-LAST:event_btn_ThuexeActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
-    private javax.swing.JPanel backgournd;
+    private javax.swing.JPanel background;
     private javax.swing.JButton btn_Thuexe;
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_next;

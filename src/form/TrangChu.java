@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import Hepler.AuthHelper;
 import card.CardThongKe;
 import card.cardDichVu;
+import card.cardHopDong;
 import card.cardThueXe;
 
 /**
@@ -80,6 +81,18 @@ public class TrangChu extends javax.swing.JFrame {
         try {
             if (AuthHelper.authenticated()) {
                 showFrom(new CardThongKe());
+            } else {
+                openDangNhap();
+            }
+
+        } catch (Exception e) {
+        }
+    }
+    // đăng khoa
+    public void openHopDong() {
+        try {
+            if (AuthHelper.authenticated()) {
+                showFrom(new cardHopDong());
             } else {
                 openDangNhap();
             }
@@ -873,6 +886,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        
     }//GEN-LAST:event_pnl_hopdongMouseEntered
 
     private void pnl_dichvuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseEntered
