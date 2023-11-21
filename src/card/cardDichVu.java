@@ -437,18 +437,23 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addGap(39, 39, 39))
         );
 
-        jTabbedPane1.addTab("Dịch Vụ", jPanel1);
+        jTabbedPane1.addTab("DỊCH VỤ", jPanel1);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 3, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("Voucher");
+        jPanel3.setBackground(new java.awt.Color(255, 102, 51));
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("VOUCHER");
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 102, 51));
         jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jScrollPane2MousePressed(evt);
             }
         });
 
+        tblVoucher.setBackground(new java.awt.Color(255, 102, 51));
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -467,37 +472,57 @@ public class cardDichVu extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblVoucher);
 
+        jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Mã Voucher:");
 
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Nội dung:");
 
         txtNoiDung.setColumns(20);
         txtNoiDung.setRows(5);
         jScrollPane3.setViewportView(txtNoiDung);
 
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Trang thái:");
 
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel4.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         Trangthai.add(rdoDaDung);
+        rdoDaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rdoDaDung.setForeground(new java.awt.Color(255, 255, 255));
         rdoDaDung.setText("Đã dùng");
         jPanel4.add(rdoDaDung);
 
         Trangthai.add(rdoChuaDung);
+        rdoChuaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rdoChuaDung.setForeground(new java.awt.Color(255, 255, 255));
         rdoChuaDung.setText("Chưa dùng");
         jPanel4.add(rdoChuaDung);
 
-        jPanel5.setLayout(new java.awt.GridLayout());
+        jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 102, 51));
         jButton1.setText("Thêm");
         jPanel5.add(jButton1);
 
+        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 102, 51));
         jButton2.setText("Sửa");
         jPanel5.add(jButton2);
 
+        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton3.setForeground(new java.awt.Color(255, 102, 51));
         jButton3.setText("Xóa");
         jPanel5.add(jButton3);
 
+        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(255, 102, 51));
         jButton4.setText("Mới");
         jPanel5.add(jButton4);
 
@@ -551,7 +576,7 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Voucher", jPanel3);
+        jTabbedPane1.addTab("VOUCHER", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
