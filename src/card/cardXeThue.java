@@ -18,6 +18,8 @@ public class cardXeThue extends javax.swing.JPanel {
     ThueXeDAO dao = new ThueXeDAO();
     int row = -1;
     String anhxe = null;
+    private static String readurl = "src/imgxenew/" ;
+    private static String writeurl = "src/imgxe/" ;
     /**
      * Creates new form cardXeThue
      */
@@ -129,7 +131,7 @@ public class cardXeThue extends javax.swing.JPanel {
                  this.filltable();
                  this.clearForm();
                  System.out.println(anhxe);
-                 Hepler.ImagesHelper.deleteImg(anhxe);
+                 Hepler.ImagesHelper.deleteImg(writeurl,anhxe);
                  DialogHelper.alert(this, "bạn xóa thành công");
              } catch (Exception e) {
                  DialogHelper.alert(this, "Xóa thất bại");
@@ -553,7 +555,7 @@ public class cardXeThue extends javax.swing.JPanel {
     private void btn_chonanhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chonanhActionPerformed
         // TODO add your handling code here:
         anhxe = Hepler.ImagesHelper.chonAnh();
-        Hepler.ImagesHelper.convertImgTo280x180(anhxe);
+        Hepler.ImagesHelper.convertImgTo280x180(readurl,anhxe,writeurl);
         setimg(anhxe);
     }//GEN-LAST:event_btn_chonanhActionPerformed
 
