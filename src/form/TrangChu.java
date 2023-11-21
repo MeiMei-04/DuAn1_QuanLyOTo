@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
-import card.CardThongKe;
+import card.cardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
 import card.cardThueXe;
@@ -81,7 +81,7 @@ public class TrangChu extends javax.swing.JFrame {
     public void openThongKe() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new CardThongKe());
+                showFrom(new cardThongKe());
             } else {
                 openDangNhap();
             }

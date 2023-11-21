@@ -8,12 +8,12 @@ package card;
  *
  * @author hieud
  */
-public class SuaChuaBaoDuong extends javax.swing.JPanel {
+public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
 
     /**
      * Creates new form SuaChuaBaoDuong
      */
-    public SuaChuaBaoDuong() {
+    public cardSuaChuaBaoDuong() {
         initComponents();
     }
 

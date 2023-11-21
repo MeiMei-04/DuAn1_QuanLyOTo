@@ -14,11 +14,11 @@ public class ChiTietTaiKhoan {
     private int id_detail;
     private int userid;
     private String hoten;
+    private String email;
     private String anhdaidien;
     private String cccd;
     private String banglaixe;
     private String sdt;
-    private boolean trangthaitaikhoan;
     private Date ngaysinh;
     private boolean gioitinh;
     private String diachi;
@@ -26,15 +26,15 @@ public class ChiTietTaiKhoan {
     public ChiTietTaiKhoan() {
     }
 
-    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String anhdaidien, String cccd, String banglaixe, String sdt, boolean trangthaitaikhoan, Date ngaysinh, boolean gioitinh, String diachi) {
+    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String email, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, boolean gioitinh, String diachi) {
         this.id_detail = id_detail;
         this.userid = userid;
         this.hoten = hoten;
+        this.email = email;
         this.anhdaidien = anhdaidien;
         this.cccd = cccd;
         this.banglaixe = banglaixe;
         this.sdt = sdt;
-        this.trangthaitaikhoan = trangthaitaikhoan;
         this.ngaysinh = ngaysinh;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
@@ -62,6 +62,14 @@ public class ChiTietTaiKhoan {
 
     public void setHoten(String hoten) {
         this.hoten = hoten;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAnhdaidien() {
@@ -96,14 +104,6 @@ public class ChiTietTaiKhoan {
         this.sdt = sdt;
     }
 
-    public boolean isTrangthaitaikhoan() {
-        return trangthaitaikhoan;
-    }
-
-    public void setTrangthaitaikhoan(boolean trangthaitaikhoan) {
-        this.trangthaitaikhoan = trangthaitaikhoan;
-    }
-
     public Date getNgaysinh() {
         return ngaysinh;
     }
@@ -127,5 +127,7 @@ public class ChiTietTaiKhoan {
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
+
+    
     
 }
