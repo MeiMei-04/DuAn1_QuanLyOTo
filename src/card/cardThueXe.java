@@ -153,6 +153,7 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_trangthai.setText("Trạng Thái: " + trangthai);
             lbl_giathue.setText("Giá Thuê: " + xe.getGiathue());
             lbl_maloaixe.setText("Loại Xe: " + xe.getMaloaixe());
+            txt_noidung.setText(xe.getGhichu());
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());
@@ -517,6 +518,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_next.setEnabled(true);
         if (index < 0) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
+            index =0;
             btn_back.setEnabled(false);
         } else {
             setForm(locxe(item), index);
@@ -530,6 +532,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_back.setEnabled(true);
         if (index > size) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
+            index =size;
             btn_next.setEnabled(false);
         } else {
             setForm(locxe(item), index);

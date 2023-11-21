@@ -78,14 +78,16 @@ public class ImagesHelper {
     }
 
     //kiểm tra file
-    public static void checkfile(String patha) {
+    public static boolean checkfile(String patha) {
         Path path = Paths.get(patha);
 
         // Kiểm tra xem tệp có tồn tại hay không
         if (Files.exists(path)) {
             System.out.println("Tệp tồn tại.");
+            return true;
         } else {
             System.out.println("Tệp không tồn tại.");
+            return false;
         }
     }
 
@@ -101,33 +103,71 @@ public class ImagesHelper {
         Image img = imgIcon.getImage();
         return img;
     }
-
-    public static void convertToIcon(String patch) {
+    public static void convertImgTo280x180(String readurl,String patch,String writeurl) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File("src/imganhdaidien/" + patch));
+            BufferedImage image = ImageIO.read(new File(readurl+ patch));
 
             // Thay đổi kích thước hình ảnh thành 24x35
-            Image tempImage = image.getScaledInstance(30, 30, Image.SCALE_SMOOTH);
-            BufferedImage resizedImage = new BufferedImage(30, 30, BufferedImage.TYPE_INT_ARGB);
+            Image tempImage = image.getScaledInstance(280, 180, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(280, 180, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = resizedImage.createGraphics();
-            // Vẽ hình tròn
-            g.setClip(new Ellipse2D.Float(0, 0, 30, 30));
+            
             g.drawImage(tempImage, 0, 0, null);
             g.dispose();
-            File dir = new File("src/ICON/");
+            File dir = new File(writeurl);
             if (!dir.exists()) {
                 dir.mkdirs();
             }
-
+            //kiểm tra xem tệp tồn tại chưa, rồi thì không thêm nưa
+            if(checkfile(writeurl+patch)){
+                return;
+           }else{
+                ImageIO.write(resizedImage, "png", new File(writeurl+ patch));
+            }
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
-            ImageIO.write(resizedImage, "png", new File("src/ICON/" + patch));
+            
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public static void convertImgTo110x164(String readurl,String patch,String writeurl) {
+        try {
+            // Đọc hình ảnh
+            BufferedImage image = ImageIO.read(new File(readurl+ patch));
 
+            // Thay đổi kích thước hình ảnh thành 24x35
+            Image tempImage = image.getScaledInstance(110, 164, Image.SCALE_SMOOTH);
+            BufferedImage resizedImage = new BufferedImage(110, 164, BufferedImage.TYPE_INT_ARGB);
+            Graphics2D g = resizedImage.createGraphics();
+            
+            g.drawImage(tempImage, 0, 0, null);
+            g.dispose();
+            File dir = new File(writeurl);
+            if (!dir.exists()) {
+                dir.mkdirs();
+            }
+            //kiểm tra xem tệp tồn tại chưa, rồi thì không thêm nưa
+            if(checkfile(writeurl+patch)){
+                return;
+           }else{
+                ImageIO.write(resizedImage, "png", new File(writeurl+ patch));
+            }
+            // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
+            
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void deleteImg(String writeurl,String patch){
+        File file = new File(writeurl+patch);
+
+        if (file.delete()) {
+            System.out.println("File deleted successfully");
+        } else {
+            System.out.println("Failed to delete the file");
+        }
+    }
     public static void main(String[] args) {
-
     }
 }

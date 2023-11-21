@@ -13,6 +13,7 @@ import card.CardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
 import card.cardThueXe;
+import card.cardXeThue;
 
 /**
  *
@@ -29,7 +30,7 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
-        showFrom(new cardThueXe());
+        showFrom(new cardXeThue());
     }
 
     public void openDangNhap() {

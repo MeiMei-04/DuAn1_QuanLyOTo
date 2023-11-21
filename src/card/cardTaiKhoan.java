@@ -15,15 +15,20 @@ import java.util.List;
  */
 public class cardTaiKhoan extends javax.swing.JPanel {
     TaiKhoanDAO tkd = new TaiKhoanDAO();
+    String banglai = null;
+    String anhdaidien = null;
+    private static String readurl_banglai = "src/imgbanglainew/" ;
+    private static String writeurl_banglai = "src/imgbanglai/" ;
+    private static String readurl_anhdaidien = "src/imganhdaidiennew/" ;
+    private static String writeurl_anhdaidien = "src/imganhdaidien/" ;
     /**
      * Creates new form TaiKhoan
      */
     public cardTaiKhoan() {
         initComponents();
     }
-    public void seticon(String anhdaidien,String banglai) {
-        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\"+anhdaidien);
-        
+    public void setImg(String anhdaidien,String banglai) {
+        Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\"+anhdaidien); 
         Hepler.ImagesHelper.setIconlabel(lbl_anhbanglai, "src\\imgbanglai\\"+banglai);
     }
     public void setForm(){
@@ -91,23 +96,22 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         pnl_anhbanglai.setOpaque(false);
         pnl_anhbanglai.setPreferredSize(new java.awt.Dimension(400, 200));
 
-        lbl_anhbanglai.setPreferredSize(new java.awt.Dimension(299, 193));
+        lbl_anhbanglai.setPreferredSize(new java.awt.Dimension(300, 200));
 
         javax.swing.GroupLayout pnl_anhbanglaiLayout = new javax.swing.GroupLayout(pnl_anhbanglai);
         pnl_anhbanglai.setLayout(pnl_anhbanglaiLayout);
         pnl_anhbanglaiLayout.setHorizontalGroup(
             pnl_anhbanglaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnl_anhbanglaiLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_anhbanglaiLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
                 .addComponent(lbl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(25, 25, 25))
         );
         pnl_anhbanglaiLayout.setVerticalGroup(
             pnl_anhbanglaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_anhbanglaiLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(lbl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(0, 23, Short.MAX_VALUE))
         );
 
         btn_ChonAnh.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -158,20 +162,19 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(67, 67, 67)
-                .addComponent(btn_ChonAnh)
-                .addContainerGap(77, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_Chonbangolai)
                 .addGap(20, 20, 20))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(btn_ChonAnh)
+                        .addContainerGap())))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,11 +183,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_ChonAnh, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addGap(47, 47, 47)
-                .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
+                .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(btn_Chonbangolai)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         lbl_capnhatthongtin.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -283,7 +286,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 134, Short.MAX_VALUE)
+                                .addGap(0, 121, Short.MAX_VALUE)
                                 .addComponent(lbl_capnhatthongtin)
                                 .addGap(112, 112, 112))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -359,29 +362,32 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 997, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_ChonbangolaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonbangolaiActionPerformed
         // TODO add your handling code here:
-        String banglai;
+        
         banglai = Hepler.ImagesHelper.chonAnh();
-        seticon(null, banglai);
+        Hepler.ImagesHelper.convertImgTo280x180(readurl_banglai,banglai,writeurl_banglai);
+        setImg(anhdaidien, banglai);
+        
         
     }//GEN-LAST:event_btn_ChonbangolaiActionPerformed
 
     private void btn_ChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ChonAnhActionPerformed
         // TODO add your handling code here:
         
-        String anhdaidien;
+        
         anhdaidien = Hepler.ImagesHelper.chonAnh();
-        seticon(anhdaidien, null);
-        Hepler.ImagesHelper.convertToIcon(anhdaidien);
+        Hepler.ImagesHelper.convertImgTo280x180(readurl_anhdaidien,anhdaidien,writeurl_anhdaidien);
+        setImg(anhdaidien, banglai);
+        
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
 
 
