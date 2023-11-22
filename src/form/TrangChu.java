@@ -30,6 +30,7 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
+        showFrom(new cardXeThue());
     }
 
     public void openDangNhap() {
