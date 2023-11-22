@@ -385,7 +385,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         
         
         anhdaidien = Hepler.ImagesHelper.chonAnh();
-        Hepler.ImagesHelper.convertImgTo280x180(readurl_anhdaidien,anhdaidien,writeurl_anhdaidien);
+        Hepler.ImagesHelper.convertImgTo110x164(readurl_anhdaidien,anhdaidien,writeurl_anhdaidien);
         setImg(anhdaidien, banglai);
         
     }//GEN-LAST:event_btn_ChonAnhActionPerformed
