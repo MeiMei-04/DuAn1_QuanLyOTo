@@ -128,7 +128,7 @@ public class ImagesHelper {
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
             
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     public static void convertImgTo110x164(String readurl,String patch,String writeurl) {
@@ -156,7 +156,7 @@ public class ImagesHelper {
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
             
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
     public static void deleteImg(String writeurl,String patch){

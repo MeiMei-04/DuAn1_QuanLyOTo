@@ -156,7 +156,7 @@ public class DangNhapDialog extends java.awt.Dialog {
         txt_tendangnhap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_tendangnhap.setForeground(new java.awt.Color(255, 102, 51));
         txt_tendangnhap.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_tendangnhap.setText("dangkhoa2004");
+        txt_tendangnhap.setText("admin");
         txt_tendangnhap.setBorder(null);
         txt_tendangnhap.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -178,7 +178,7 @@ public class DangNhapDialog extends java.awt.Dialog {
 
         txt_password.setForeground(new java.awt.Color(255, 102, 51));
         txt_password.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txt_password.setText("khoacute");
+        txt_password.setText("admin");
         txt_password.setBorder(null);
         txt_password.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
