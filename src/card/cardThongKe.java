@@ -49,7 +49,7 @@ public class cardThongKe extends javax.swing.JPanel {
         try {
             DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
             model.setRowCount(0);
-            int thang = (Integer) cboThang.getSelectedItem();
+            int thang = Integer.parseInt(String.valueOf(cboThang.getSelectedItem()));
             List<Object[]> list = tkdao.getDoanhThu(thang);
             list.stream().forEach((row) -> {
                 model.addRow(row);
@@ -94,7 +94,6 @@ public class cardThongKe extends javax.swing.JPanel {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setLayout(new java.awt.GridLayout(1, 0));
 
-        cboThang.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
         cboThang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cboThangActionPerformed(evt);
