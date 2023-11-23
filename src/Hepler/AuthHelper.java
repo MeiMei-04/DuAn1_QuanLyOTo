@@ -5,19 +5,6 @@
 package Hepler;
 
 import entyti.TaiKhoan;
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-
 /**
  *
  * @author hieud
