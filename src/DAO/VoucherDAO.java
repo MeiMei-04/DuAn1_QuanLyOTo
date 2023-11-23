@@ -15,20 +15,20 @@ import java.sql.ResultSet;
  * @author truon
  */
 public class VoucherDAO extends QuanLyOToDAO<Voucher, String>{
-    String INSERT_SQL="INSERT INTO Vouncher(MaVouncher,NoiDung,TrangThai) values(?,?,?)";
-    String UPDATE_SQL="UPDATE Vouncher set NoiDung=?,TrangThai=? where MaVouncher=?";
+    String INSERT_SQL="INSERT INTO Vouncher(MaVouncher,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
+    String UPDATE_SQL="UPDATE Vouncher set NoiDung=?,GiaTri=?,TrangThai=? where MaVouncher=?";
     String DELETE_SQL="  DELETE FROM Vouncher WHERE MaVouncher=?";
     String SELECT_ALL_SQL="SELECT * FROM Vouncher";
     String SELECT_BY_ID_SQL=" SELECT * FROM Vouncher WHERE MaVouncher=?";
     
     @Override
     public void insert(Voucher entity) {
-       JDBCHelper.executeUpdate(INSERT_SQL, entity.getMavoucher(),entity.getNoidung(),entity.isTrangthai());
+       JDBCHelper.executeUpdate(INSERT_SQL, entity.getMavoucher(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
     }
 
     @Override
     public void update(Voucher entity) {
-       JDBCHelper.executeUpdate(UPDATE_SQL, entity.getNoidung(),entity.isTrangthai());
+       JDBCHelper.executeUpdate(UPDATE_SQL, entity.getNoidung(),entity.getGiatri(),entity.isTrangthai(),entity.getMavoucher());
     }
 
     @Override
@@ -64,6 +64,7 @@ public class VoucherDAO extends QuanLyOToDAO<Voucher, String>{
                 Voucher ch = new Voucher();
                 ch.setMavoucher(rs.getString("MaVouncher"));
                 ch.setNoidung(rs.getString("NoiDung"));
+                ch.setGiatri(rs.getInt("GiaTri"));
                 ch.setTrangthai(rs.getBoolean("TrangThai"));
                 list.add(ch);
             }
