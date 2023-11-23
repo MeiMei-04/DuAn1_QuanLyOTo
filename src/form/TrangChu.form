@@ -90,18 +90,16 @@
                               <Component id="lbl_logo" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="pnl_dangxuat" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pnl_thongke" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pnl_TrangChu" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pnl_taikhoan" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pnl_thuexe" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="pnl_hopdong" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="pnl_dichvu" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pnl_baoduong" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="pnl_gioithieu" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="2" attributes="0">
+                                  <Component id="pnl_TrangChu" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_taikhoan" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_thuexe" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_hopdong" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_dichvu" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_thongke" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_baoduong" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnl_dangxuat" alignment="2" max="32767" attributes="0"/>
+                                  <Component id="pnl_gioithieu" alignment="2" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="46" max="32767" attributes="0"/>
                           </Group>
@@ -116,7 +114,7 @@
                       <Component id="lbl_logo" min="-2" pref="140" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pnl_TrangChu" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_gioithieu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_taikhoan" min="-2" max="-2" attributes="0"/>
@@ -124,11 +122,11 @@
                       <Component id="pnl_thuexe" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_hopdong" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_baoduong" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_thongke" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_dichvu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_dangxuat" min="-2" max="-2" attributes="0"/>
@@ -431,7 +429,7 @@
                           <Component id="jPanel11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lbl_DichVU" min="-2" pref="98" max="-2" attributes="0"/>
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
