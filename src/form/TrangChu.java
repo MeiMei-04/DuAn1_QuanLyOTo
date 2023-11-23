@@ -9,23 +9,19 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
-import Hepler.DialogHelper;
-import Hepler.UpdateNewTimer;
-import Hepler.UpdateNewTimer.MethodInterface;
 import card.cardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
 import card.cardSuaChuaBaoDuong;
 import card.cardThueXe;
 import card.cardXeThue;
-import java.util.Timer;
 
 /**
  *
  * @author truon
  */
 public class TrangChu extends javax.swing.JFrame {
-    boolean flag = false;
+
     /**
      * Creates new form MainJFrame
      */
@@ -35,26 +31,46 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
-        do {            
-            UpdateNewTimer timer = new UpdateNewTimer(new MethodInterface() {
-            @Override
-            public void execute() {
-                if (AuthHelper.authenticated()) {
-                    updateStatus();
-                }
-
-            }
-        });
-        new Thread(timer).start();
-        } while (flag = false);
+        updateStatus_off();
     }
 
-    public void updateStatus() {
-        if (!AuthHelper.isManager()) {
-            pnl_baoduong.setVisible(false);
-            pnl_thongke.setVisible(false);
-            pnl_dichvu.setVisible(false);
-            flag = true;
+    public void updateStatus_off() {
+        pnl_baoduong.setVisible(false);
+        pnl_thongke.setVisible(false);
+        pnl_dichvu.setVisible(false);
+        pnl_taikhoan.setVisible(false);
+        pnl_thuexe.setVisible(false);
+        pnl_hopdong.setVisible(false);
+    }
+
+    public void updateStatus_on_true() {
+        pnl_baoduong.setVisible(true);
+        pnl_thongke.setVisible(true);
+        pnl_dichvu.setVisible(true);
+        pnl_taikhoan.setVisible(true);
+        pnl_thuexe.setVisible(true);
+        pnl_hopdong.setVisible(true);
+    }
+
+    public void updateStatus_on_false() {
+        pnl_taikhoan.setVisible(true);
+        pnl_thuexe.setVisible(true);
+        pnl_hopdong.setVisible(true);
+    }
+
+    public void openChucnang() {
+        try {
+            if (!AuthHelper.authenticated()) {
+                new DangNhapDialog(this, false).setVisible(true);
+            } else {
+                if (AuthHelper.isManager()) {
+                    updateStatus_on_true();
+                } else {
+                    updateStatus_on_false();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -65,9 +81,6 @@ public class TrangChu extends javax.swing.JFrame {
             } else {
                 if (AuthHelper.isManager()) {
                     showFrom(new cardSuaChuaBaoDuong());
-                } else {
-                    pnl_baoduong.setVisible(false);
-
                 }
             }
         } catch (Exception e) {
@@ -82,9 +95,6 @@ public class TrangChu extends javax.swing.JFrame {
             } else {
                 if (AuthHelper.isManager()) {
                     showFrom(new cardThongKe());
-                } else {
-                    pnl_thongke.setVisible(false);
-
                 }
             }
         } catch (Exception e) {
@@ -98,6 +108,9 @@ public class TrangChu extends javax.swing.JFrame {
                 new DangNhapDialog(this, false).setVisible(true);
             } else {
                 AuthHelper.logoff();
+                System.out.println(AuthHelper.isManager());
+                updateStatus_off();
+                new DangNhapDialog(this, false).setVisible(true);
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -151,9 +164,6 @@ public class TrangChu extends javax.swing.JFrame {
 
                 if (AuthHelper.isManager()) {
                     showFrom(new cardDichVu());
-                } else {
-                    pnl_dichvu.setVisible(false);
-
                 }
             } else {
                 openDangNhap();
@@ -189,6 +199,7 @@ public class TrangChu extends javax.swing.JFrame {
         Hepler.ImagesHelper.setIconlabel(lbl_BaoDuong, "src\\IMAGE\\maintenance.png");
         Hepler.ImagesHelper.setIconlabel(lbl_gioithieu, "src\\IMAGE\\earth-globe.png");
         Hepler.ImagesHelper.setIconlabel(lbl_DangXuat, "src\\IMAGE\\log-out.png");
+        Hepler.ImagesHelper.setIconlabel(lbl_chucnang, "src\\IMAGE\\cross-functional.png");
     }
 
     private void onHover(JPanel panel) {
@@ -253,6 +264,9 @@ public class TrangChu extends javax.swing.JFrame {
         pnl_gioithieu = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         lbl_gioithieu = new javax.swing.JLabel();
+        pnl_chucnang = new javax.swing.JPanel();
+        jPanel7 = new javax.swing.JPanel();
+        lbl_chucnang = new javax.swing.JLabel();
         pnl_Body = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -706,6 +720,56 @@ public class TrangChu extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        pnl_chucnang.setBackground(new java.awt.Color(255, 102, 0));
+        pnl_chucnang.setPreferredSize(new java.awt.Dimension(154, 32));
+        pnl_chucnang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pnl_chucnangMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                pnl_chucnangMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                pnl_chucnangMouseExited(evt);
+            }
+        });
+
+        jPanel7.setBackground(new java.awt.Color(255, 102, 0));
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 10, Short.MAX_VALUE)
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        lbl_chucnang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbl_chucnang.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_chucnang.setText("CHỨC NĂNG");
+
+        javax.swing.GroupLayout pnl_chucnangLayout = new javax.swing.GroupLayout(pnl_chucnang);
+        pnl_chucnang.setLayout(pnl_chucnangLayout);
+        pnl_chucnangLayout.setHorizontalGroup(
+            pnl_chucnangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_chucnangLayout.createSequentialGroup()
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lbl_chucnang)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        pnl_chucnangLayout.setVerticalGroup(
+            pnl_chucnangLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnl_chucnangLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout pnl_MenuLayout = new javax.swing.GroupLayout(pnl_Menu);
         pnl_Menu.setLayout(pnl_MenuLayout);
         pnl_MenuLayout.setHorizontalGroup(
@@ -726,7 +790,10 @@ public class TrangChu extends javax.swing.JFrame {
                             .addComponent(pnl_baoduong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(pnl_dangxuat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(pnl_gioithieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 46, Short.MAX_VALUE)))
+                        .addGap(0, 46, Short.MAX_VALUE))
+                    .addGroup(pnl_MenuLayout.createSequentialGroup()
+                        .addComponent(pnl_chucnang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnl_MenuLayout.setVerticalGroup(
@@ -737,6 +804,8 @@ public class TrangChu extends javax.swing.JFrame {
                 .addComponent(pnl_TrangChu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_gioithieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnl_chucnang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -749,9 +818,9 @@ public class TrangChu extends javax.swing.JFrame {
                 .addComponent(pnl_thongke, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(pnl_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnl_dangxuat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pnl_Body.setBackground(new java.awt.Color(255, 255, 255));
@@ -803,6 +872,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
     }//GEN-LAST:event_pnl_TrangChuMouseClicked
 
     private void pnl_taikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseClicked
@@ -816,6 +886,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
         openTaiKhoan();
     }//GEN-LAST:event_pnl_taikhoanMouseClicked
 
@@ -830,6 +901,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
         openThueXe();
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
@@ -844,6 +916,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
     }//GEN-LAST:event_pnl_hopdongMouseClicked
 
     private void pnl_dichvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseClicked
@@ -857,6 +930,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
         openDichVu();
     }//GEN-LAST:event_pnl_dichvuMouseClicked
 
@@ -871,6 +945,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
         openThongKe();
     }//GEN-LAST:event_pnl_thongkeMouseClicked
 
@@ -885,6 +960,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
         openBaoDuong();
     }//GEN-LAST:event_pnl_baoduongMouseClicked
 
@@ -899,6 +975,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_chucnang);
     }//GEN-LAST:event_pnl_gioithieuMouseClicked
 
     private void pnl_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseClicked
@@ -912,6 +989,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_TrangChu);
+        onLeaveClick(pnl_chucnang);
         openDangXuat();
     }//GEN-LAST:event_pnl_dangxuatMouseClicked
 
@@ -926,6 +1004,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_TrangChuMouseEntered
 
     private void pnl_taikhoanMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseEntered
@@ -939,6 +1018,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_taikhoanMouseEntered
 
     private void pnl_thuexeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thuexeMouseEntered
@@ -952,6 +1032,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_thuexeMouseEntered
 
     private void pnl_hopdongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseEntered
@@ -965,7 +1046,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
-
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_hopdongMouseEntered
 
     private void pnl_dichvuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseEntered
@@ -979,6 +1060,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_dichvuMouseEntered
 
     private void pnl_thongkeMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseEntered
@@ -992,6 +1074,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_thongkeMouseEntered
 
     private void pnl_baoduongMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseEntered
@@ -1005,6 +1088,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_baoduongMouseEntered
 
     private void pnl_gioithieuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseEntered
@@ -1018,6 +1102,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_TrangChu);
         onLeaveHover(pnl_dangxuat);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_gioithieuMouseEntered
 
     private void pnl_dangxuatMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseEntered
@@ -1031,6 +1116,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_chucnang);
     }//GEN-LAST:event_pnl_dangxuatMouseEntered
 
     private void pnl_TrangChuMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseExited
@@ -1078,6 +1164,39 @@ public class TrangChu extends javax.swing.JFrame {
         pnl_dangxuat.setBackground(new Color(255, 102, 0));
     }//GEN-LAST:event_pnl_dangxuatMouseExited
 
+    private void pnl_chucnangMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_chucnangMouseClicked
+        // TODO add your handling code here:
+        onClick(pnl_chucnang);
+        onLeaveClick(pnl_taikhoan);
+        onLeaveClick(pnl_thuexe);
+        onLeaveClick(pnl_hopdong);
+        onLeaveClick(pnl_dichvu);
+        onLeaveClick(pnl_thongke);
+        onLeaveClick(pnl_baoduong);
+        onLeaveClick(pnl_gioithieu);
+        onLeaveClick(pnl_dangxuat);
+        onLeaveClick(pnl_TrangChu);
+        openChucnang();
+    }//GEN-LAST:event_pnl_chucnangMouseClicked
+
+    private void pnl_chucnangMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_chucnangMouseEntered
+        // TODO add your handling code here:
+        onHover(pnl_chucnang);
+        onLeaveHover(pnl_taikhoan);
+        onLeaveHover(pnl_thuexe);
+        onLeaveHover(pnl_hopdong);
+        onLeaveHover(pnl_dichvu);
+        onLeaveHover(pnl_thongke);
+        onLeaveHover(pnl_baoduong);
+        onLeaveHover(pnl_gioithieu);
+        onLeaveHover(pnl_TrangChu);
+        onLeaveHover(pnl_dangxuat);
+    }//GEN-LAST:event_pnl_chucnangMouseEntered
+
+    private void pnl_chucnangMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_chucnangMouseExited
+        pnl_chucnang.setBackground(new Color(255, 102, 0));
+    }//GEN-LAST:event_pnl_chucnangMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -1092,16 +1211,24 @@ public class TrangChu extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TrangChu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(TrangChu.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -1125,11 +1252,13 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel lbl_BaoDuong;
     private javax.swing.JLabel lbl_DangXuat;
     private javax.swing.JLabel lbl_DichVU;
     private javax.swing.JLabel lbl_ThongKe;
     private javax.swing.JLabel lbl_TrangChu;
+    private javax.swing.JLabel lbl_chucnang;
     private javax.swing.JLabel lbl_gioithieu;
     private javax.swing.JLabel lbl_hopdong;
     private javax.swing.JLabel lbl_logo;
@@ -1139,6 +1268,7 @@ public class TrangChu extends javax.swing.JFrame {
     private javax.swing.JPanel pnl_Menu;
     private javax.swing.JPanel pnl_TrangChu;
     private javax.swing.JPanel pnl_baoduong;
+    private javax.swing.JPanel pnl_chucnang;
     private javax.swing.JPanel pnl_dangxuat;
     private javax.swing.JPanel pnl_dichvu;
     private javax.swing.JPanel pnl_gioithieu;
