@@ -56,7 +56,7 @@ public class cardDichVu extends javax.swing.JPanel {
     void setFrom(DichVu vd) {
         txtMaDichVu.setText(vd.getMadichvu());
         txtTenDichVu.setText(vd.getTendichvu());
-        txtGhiChu.setText(vd.getGhichu());
+        txtghichu.setText(vd.getGhichu());
         txtDonGia.setText(String.valueOf(vd.getDongia()));
 
     }
@@ -72,7 +72,7 @@ public class cardDichVu extends javax.swing.JPanel {
         dv.setMadichvu(txtMaDichVu.getText());
         dv.setTendichvu(txtTenDichVu.getText());
         dv.setDongia(Float.valueOf(txtDonGia.getText()));
-        dv.setGhichu(txtGhiChu.getText());
+        dv.setGhichu(txtghichu.getText());
         return dv;
     }
 
@@ -182,7 +182,6 @@ public class cardDichVu extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtDonGia = new javax.swing.JTextField();
-        txtGhiChu = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
@@ -195,6 +194,8 @@ public class cardDichVu extends javax.swing.JPanel {
         btnsau = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbldichvu = new javax.swing.JTable();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtghichu = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -382,6 +383,10 @@ public class cardDichVu extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbldichvu);
 
+        txtghichu.setColumns(20);
+        txtghichu.setRows(5);
+        jScrollPane4.setViewportView(txtghichu);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -392,20 +397,24 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTenDichVu)
                     .addComponent(txtDonGia)
-                    .addComponent(txtGhiChu)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(291, 291, 291))
                     .addComponent(txtMaDichVu, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -430,8 +439,8 @@ public class cardDichVu extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtGhiChu, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39))
@@ -685,16 +694,17 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JRadioButton rdoChuaDung;
     private javax.swing.JRadioButton rdoDaDung;
     private javax.swing.JTable tblVoucher;
     private javax.swing.JTable tbldichvu;
     private javax.swing.JTextField txtDonGia;
-    private javax.swing.JTextField txtGhiChu;
     private javax.swing.JTextField txtMaDichVu;
     private javax.swing.JTextField txtMavoucher;
     private javax.swing.JTextArea txtNoiDung;
     private javax.swing.JTextField txtTenDichVu;
+    private javax.swing.JTextArea txtghichu;
     // End of variables declaration//GEN-END:variables
 }

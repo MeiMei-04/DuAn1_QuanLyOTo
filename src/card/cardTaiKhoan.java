@@ -70,7 +70,24 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         } else {
             trangthai = "Chưa Xác Thực ";
         }
-        lbl_trangthaithaikhoan.setText("Trạng Thái :\n" + trangthai);
+        lbl_trangthaithaikhoan.setText("Trạng Thái :" + trangthai);
+        try {
+            ChiTietTaiKhoan cttk = cttkdao.selectByID(String.valueOf(tk.getUserid()));
+            txt_hoten.setText(cttk.getHoten());
+            txt_ngaysinh.setText(DateHelper.toString(cttk.getNgaysinh(), "dd/mm/yyyy"));
+            txt_sodienthoai.setText(cttk.getSdt());
+            txt_cancuoc.setText(cttk.getCccd());
+            txt_diachi.setText(cttk.getDiachi());
+            if(cttk.isGioitinh()){
+                rdo_nu.setSelected(true);
+            }else{
+                rdo_nam.setSelected(true);
+            }
+            anhdaidien = cttk.getAnhdaidien();
+            banglai = cttk.getBanglaixe();
+            setImg(anhdaidien, banglai);
+        } catch (Exception e) {
+        }
     }
 
     public void update() {
