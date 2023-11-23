@@ -9,9 +9,11 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
+import Hepler.DialogHelper;
 import card.cardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
+import card.cardSuaChuaBaoDuong;
 import card.cardThueXe;
 import card.cardXeThue;
 
@@ -30,15 +32,57 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
-        showFrom(new cardXeThue());
     }
+    public void openBaoDuong() {
+        try {
+            if (!AuthHelper.authenticated()) {
+                new DangNhapDialog(this, false).setVisible(true);
+            }else{
+                if (AuthHelper.isManager()) {
+                    showFrom(new cardSuaChuaBaoDuong());
+                } else {
+                    DialogHelper.alert(this, "Bạn Không Có Quyền Truy Cập");
 
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void openThongKe() {
+        try {
+            if (!AuthHelper.authenticated()) {
+                new DangNhapDialog(this, false).setVisible(true);
+            }else{
+                if (AuthHelper.isManager()) {
+                    showFrom(new cardThongKe());
+                } else {
+                    DialogHelper.alert(this, "Bạn Không Có Quyền Truy Cập");
+
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void openDangXuat() {
+        try {
+            if (!AuthHelper.authenticated()) {
+                new DangNhapDialog(this, false).setVisible(true);
+            }else{
+                AuthHelper.logoff();
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void openDangNhap() {
         try {
             if (!AuthHelper.authenticated()) {
                 new DangNhapDialog(this, false).setVisible(true);
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -56,6 +100,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -68,6 +113,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -80,18 +126,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
-        }
-    }
-
-    public void openThongKe() {
-        try {
-            if (AuthHelper.authenticated()) {
-                showFrom(new cardThongKe());
-            } else {
-                openDangNhap();
-            }
-
-        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -105,6 +140,7 @@ public class TrangChu extends javax.swing.JFrame {
             }
 
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -815,6 +851,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
+        openBaoDuong();
     }//GEN-LAST:event_pnl_baoduongMouseClicked
 
     private void pnl_gioithieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseClicked
@@ -841,6 +878,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_baoduong);
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_TrangChu);
+        openDangXuat();
     }//GEN-LAST:event_pnl_dangxuatMouseClicked
 
     private void pnl_TrangChuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_TrangChuMouseEntered
