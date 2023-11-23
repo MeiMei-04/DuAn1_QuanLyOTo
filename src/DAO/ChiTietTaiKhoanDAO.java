@@ -16,20 +16,20 @@ import java.util.List;
  */
 public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
-    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,Email,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi) values(?,?,?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,email = ?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=? WHERE userid =?";
+    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,Email,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,sodu) values(?,?,?,?,?,?,?,?,?,?,?)";
+    String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,email = ?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=?, sodu=? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL_SQL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_SQL = "select * from ChiTietTaiKhoan where userid =?";
 
     @Override
     public void insert(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getUserid(), entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi());
+        JDBCHelper.executeUpdate(INSERT_SQL, entity.getUserid(), entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi(),entity.getSodu());
     }
 
     @Override
     public void update(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi(),entity.getUserid());
+        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi(),entity.getSodu(),entity.getUserid());
     }
 
     @Override
@@ -87,6 +87,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
                 cttk.setNgaysinh(rs.getDate("ngaysinh"));
                 cttk.setGioitinh(rs.getBoolean("gioitinh"));
                 cttk.setDiachi(rs.getString("diachi"));
+                cttk.setSodu(rs.getFloat("sodu"));
                 list.add(cttk);
             }
             rs.getStatement().getConnection().close();

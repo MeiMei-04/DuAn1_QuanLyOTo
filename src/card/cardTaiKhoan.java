@@ -118,6 +118,62 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         }
     }
 
+    public boolean verify(){
+        if(txt_hoten.getText().equals("")){
+            DialogHelper.alert(this, "Vui lòng nhập họ tên");
+            txt_hoten.requestFocus();
+           return false;
+        }
+        if(txt_ngaysinh.getText().equals("")){
+            DialogHelper.alert(this, "Vui lòng nhập ngày sinh");
+            txt_ngaysinh.requestFocus();
+           return false;
+        }
+        if (!Hepler.Validate.isValidDate(txt_ngaysinh.getText())) {
+            DialogHelper.alert(this, "Vui lòng nhập đúng định dạng dd/mm/yyyy");
+            txt_ngaysinh.requestFocus();
+            return false;
+        }
+        if(txt_cancuoc.getText().equals("")){
+            DialogHelper.alert(this, "Vui lòng nhập số CCCD");
+            txt_cancuoc.requestFocus();
+           return false;
+        }
+        if (txt_sodienthoai.getText().length() > 12) {
+            DialogHelper.alert(this, "Số CCCD không được quá 12 kí tự");
+            txt_sodienthoai.requestFocus();
+            return false;
+        }
+        if(txt_email.getText().equals("")){
+            DialogHelper.alert(this, "Email không được để trống");
+            txt_email.requestFocus();
+           return false;
+        }
+        if(txt_diachi.getText().equals("")){
+            DialogHelper.alert(this, "Địa chỉ không được để trống");
+            txt_diachi.requestFocus();
+           return false;
+        }
+        if(txt_sodienthoai.getText().equals("")){
+            DialogHelper.alert(this, "Số điện thoại không được để trống");
+            txt_sodienthoai.requestFocus();
+           return false;
+        }
+        if (txt_sodienthoai.getText().length() > 10) {
+            DialogHelper.alert(this, "Số điện thoại không được quá 10 kí tự");
+            txt_sodienthoai.requestFocus();
+            return false;
+        }
+        if (anhdaidien == null) {
+            DialogHelper.alert(this, "Vui lòng thêm ảnh đại diện");
+            return false;
+        }
+        if (banglai == null) {
+            DialogHelper.alert(this, "Vui lòng thêm ảnh đại diện");
+            return false;
+        }
+        return true;
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,7 +249,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         pnl_anhbanglaiLayout.setHorizontalGroup(
             pnl_anhbanglaiLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_anhbanglaiLayout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(lbl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -339,64 +395,56 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbl_userid))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lbl_sodu)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_userid))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(430, 430, 430)
+                        .addComponent(lbl_cancuoc)
+                        .addGap(370, 370, 370))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(430, 430, 430)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lbl_cancuoc)
-                                        .addGap(370, 370, 370))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(txt_cancuoc)
-                                        .addGap(115, 115, 115))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(34, 34, 34)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addComponent(btn_napsodu)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btn_capnhatthongtin))
-                                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                    .addComponent(lbl_hovaten)
-                                                    .addComponent(txt_hoten)
-                                                    .addComponent(lbl_ngaysinh)
-                                                    .addComponent(lbl_email)
-                                                    .addComponent(txt_email)
-                                                    .addComponent(pnl_gioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                    .addComponent(lbl_diachi)
-                                                    .addComponent(jScrollPane1)
-                                                    .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                    .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                .addGap(96, 96, 96)
-                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                    .addComponent(txt_sodienthoai)
-                                                    .addComponent(lbl_sodienthoai))))))
-                                .addGap(115, 115, 115))))))
+                                        .addComponent(btn_napsodu)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(btn_capnhatthongtin))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(lbl_hovaten)
+                                            .addComponent(txt_hoten)
+                                            .addComponent(lbl_ngaysinh)
+                                            .addComponent(lbl_email)
+                                            .addComponent(txt_email)
+                                            .addComponent(pnl_gioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_diachi)
+                                            .addComponent(jScrollPane1)
+                                            .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txt_sodienthoai, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                                            .addComponent(lbl_sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(lbl_sodu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_cancuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(115, 115, 115))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_capnhatthongtin)
-                .addGap(4, 4, 4)
-                .addComponent(lbl_sodu)
-                .addGap(18, 18, 18)
+                .addGap(47, 47, 47)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_userid)
-                    .addComponent(lbl_trangthaithaikhoan))
+                    .addComponent(lbl_trangthaithaikhoan)
+                    .addComponent(lbl_sodu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()

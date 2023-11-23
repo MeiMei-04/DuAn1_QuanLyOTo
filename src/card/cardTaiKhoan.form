@@ -57,68 +57,56 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="lbl_sodu" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_userid" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
+                          <Component id="lbl_cancuoc" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="370" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lbl_userid" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" attributes="0">
-                                          <Component id="lbl_cancuoc" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="370" max="-2" attributes="0"/>
+                                          <Component id="btn_napsodu" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Component id="btn_capnhatthongtin" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" attributes="0">
-                                          <Component id="txt_cancuoc" max="32767" attributes="0"/>
-                                          <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="lbl_hovaten" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_hoten" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lbl_ngaysinh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_email" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="pnl_gioitinh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="lbl_diachi" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="lbl_trangthaithaikhoan" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="txt_ngaysinh" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="32767" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="txt_sodienthoai" pref="322" max="32767" attributes="0"/>
+                                              <Component id="lbl_sodienthoai" min="-2" pref="97" max="-2" attributes="0"/>
+                                              <Component id="lbl_sodu" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <EmptySpace max="32767" attributes="0"/>
-                                          <Component id="pnl_anhbanglai" min="-2" pref="345" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <Component id="btn_napsodu" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="btn_capnhatthongtin" min="-2" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" attributes="0">
-                                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                                      <Component id="lbl_hovaten" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="txt_hoten" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="lbl_ngaysinh" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lbl_email" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="pnl_gioitinh" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="lbl_diachi" alignment="0" min="-2" max="-2" attributes="0"/>
-                                                      <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="lbl_trangthaithaikhoan" alignment="0" max="32767" attributes="0"/>
-                                                      <Component id="txt_ngaysinh" alignment="0" min="-2" pref="300" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                                                  <Group type="103" groupAlignment="0" attributes="0">
-                                                      <Component id="txt_sodienthoai" max="32767" attributes="0"/>
-                                                      <Component id="lbl_sodienthoai" min="-2" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
-                                          </Group>
-                                      </Group>
+                                      <Component id="txt_cancuoc" alignment="0" min="-2" pref="322" max="-2" attributes="0"/>
+                                      <Component id="pnl_anhbanglai" min="-2" pref="322" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="115" pref="115" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace min="115" pref="115" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -129,12 +117,11 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lbl_capnhatthongtin" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
-                  <Component id="lbl_sodu" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_userid" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="lbl_trangthaithaikhoan" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_sodu" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -243,7 +230,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace pref="29" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="lbl_anhbanglai" min="-2" pref="300" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
