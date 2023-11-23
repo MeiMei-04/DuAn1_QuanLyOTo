@@ -45,7 +45,12 @@ public class TrangChu extends javax.swing.JFrame {
     public void openThueXe() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new cardThueXe());
+                if (AuthHelper.isManager()) {
+                    showFrom(new cardXeThue());
+                } else {
+                    showFrom(new cardThueXe());
+
+                }
             } else {
                 openDangNhap();
             }
@@ -89,6 +94,7 @@ public class TrangChu extends javax.swing.JFrame {
         } catch (Exception e) {
         }
     }
+
     // đăng khoa
     public void openHopDong() {
         try {
@@ -887,7 +893,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveHover(pnl_baoduong);
         onLeaveHover(pnl_gioithieu);
         onLeaveHover(pnl_dangxuat);
-        
+
     }//GEN-LAST:event_pnl_hopdongMouseEntered
 
     private void pnl_dichvuMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseEntered

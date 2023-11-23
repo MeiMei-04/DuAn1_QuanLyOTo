@@ -8,8 +8,10 @@ import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThueXeDAO;
 import Hepler.AuthHelper;
+import Hepler.DialogHelper;
 import entyti.DanhGia;
 import entyti.DichVu;
+import entyti.TaiKhoan;
 import entyti.Xe;
 import form.TaoHopDongDialog;
 import java.awt.Component;
@@ -47,7 +49,7 @@ public class cardThueXe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
+
     public void openHopDong() {
         try {
             if (AuthHelper.authenticated()) {
@@ -59,8 +61,6 @@ public class cardThueXe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    
-    
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
@@ -159,6 +159,7 @@ public class cardThueXe extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
+
     // đăng khoa
     public void showFrom(Component com) {
         background.removeAll();
@@ -518,7 +519,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_next.setEnabled(true);
         if (index < 0) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
-            index =0;
+            index = 0;
             btn_back.setEnabled(false);
         } else {
             setForm(locxe(item), index);
@@ -532,7 +533,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_back.setEnabled(true);
         if (index > size) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
-            index =size;
+            index = size;
             btn_next.setEnabled(false);
         } else {
             setForm(locxe(item), index);
@@ -553,7 +554,15 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
-        openHopDong();
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        if (tk.isVaitro()) {
+            openHopDong();
+
+        } else {
+            DialogHelper.alert(this, "Vui Lòng Xác Thực Tài Khoản");
+            return;
+        }
+
     }//GEN-LAST:event_btn_ThuexeActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

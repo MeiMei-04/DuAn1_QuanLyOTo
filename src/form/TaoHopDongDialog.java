@@ -16,6 +16,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     public TaoHopDongDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
