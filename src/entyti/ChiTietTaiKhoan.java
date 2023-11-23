@@ -20,13 +20,14 @@ public class ChiTietTaiKhoan {
     private String banglaixe;
     private String sdt;
     private Date ngaysinh;
+    private float sodu;
     private boolean gioitinh;
     private String diachi;
 
     public ChiTietTaiKhoan() {
     }
 
-    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String email, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, boolean gioitinh, String diachi) {
+    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String email, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, float sodu, boolean gioitinh, String diachi) {
         this.id_detail = id_detail;
         this.userid = userid;
         this.hoten = hoten;
@@ -36,6 +37,7 @@ public class ChiTietTaiKhoan {
         this.banglaixe = banglaixe;
         this.sdt = sdt;
         this.ngaysinh = ngaysinh;
+        this.sodu = sodu;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
     }
@@ -112,6 +114,14 @@ public class ChiTietTaiKhoan {
         this.ngaysinh = ngaysinh;
     }
 
+    public float getSodu() {
+        return sodu;
+    }
+
+    public void setSodu(float sodu) {
+        this.sodu = sodu;
+    }
+
     public boolean isGioitinh() {
         return gioitinh;
     }
@@ -127,6 +137,8 @@ public class ChiTietTaiKhoan {
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
+
+    
 
     
     

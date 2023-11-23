@@ -46,7 +46,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         TaiKhoan tk = Hepler.AuthHelper.user;
         cttk.setUserid(tk.getUserid());
         cttk.setHoten(txt_hoten.getText());
-        cttk.setNgaysinh(DateHelper.toDate(txt_ngaysinh.getText(),"dd/mm/yyyy"));
+        cttk.setNgaysinh(DateHelper.toDate(txt_ngaysinh.getText(),"dd/MM/yyyy"));
         cttk.setEmail(txt_email.getText());
         cttk.setSdt(txt_sodienthoai.getText());
         cttk.setCccd(txt_cancuoc.getText());
@@ -74,7 +74,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         try {
             ChiTietTaiKhoan cttk = cttkdao.selectByID(String.valueOf(tk.getUserid()));
             txt_hoten.setText(cttk.getHoten());
-            txt_ngaysinh.setText(DateHelper.toString(cttk.getNgaysinh(), "dd/mm/yyyy"));
+            txt_ngaysinh.setText(DateHelper.toString(cttk.getNgaysinh(), "dd/MM/yyyy"));
+            System.out.println(cttk.getNgaysinh());
             txt_sodienthoai.setText(cttk.getSdt());
             txt_cancuoc.setText(cttk.getCccd());
             txt_diachi.setText(cttk.getDiachi());
@@ -87,6 +88,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             banglai = cttk.getBanglaixe();
             txt_email.setText(cttk.getEmail());
             setImg(anhdaidien, banglai);
+            lbl_sodu.setText("Số Dư: "+String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
         }
     }
@@ -151,6 +153,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         lbl_ngaysinh = new javax.swing.JLabel();
         txt_ngaysinh = new javax.swing.JTextField();
         lbl_hovaten = new javax.swing.JLabel();
+        lbl_sodu = new javax.swing.JLabel();
+        btn_napsodu = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(985, 660));
@@ -316,6 +320,14 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         lbl_hovaten.setForeground(new java.awt.Color(255, 255, 255));
         lbl_hovaten.setText("Họ Và Tên");
 
+        lbl_sodu.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lbl_sodu.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_sodu.setText("Số Dư: ");
+
+        btn_napsodu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_napsodu.setForeground(new java.awt.Color(255, 102, 51));
+        btn_napsodu.setText("Nạp Số Dư");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -327,51 +339,61 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_userid))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(430, 430, 430)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(lbl_cancuoc)
-                                .addGap(370, 370, 370))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txt_cancuoc)
-                                .addGap(115, 115, 115))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_hovaten)
-                            .addComponent(txt_hoten)
-                            .addComponent(lbl_ngaysinh)
-                            .addComponent(lbl_email)
-                            .addComponent(txt_email)
-                            .addComponent(pnl_gioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lbl_diachi)
-                            .addComponent(jScrollPane1)
-                            .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(96, 96, 96)
+                        .addComponent(lbl_sodu)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_sodienthoai)
-                            .addComponent(lbl_sodienthoai))
-                        .addGap(115, 115, 115))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbl_userid))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(23, 23, 23))
-                            .addComponent(btn_capnhatthongtin))
-                        .addGap(108, 108, 108))))
+                                .addGap(430, 430, 430)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(lbl_cancuoc)
+                                        .addGap(370, 370, 370))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txt_cancuoc)
+                                        .addGap(115, 115, 115))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addComponent(btn_napsodu)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btn_capnhatthongtin))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                    .addComponent(lbl_hovaten)
+                                                    .addComponent(txt_hoten)
+                                                    .addComponent(lbl_ngaysinh)
+                                                    .addComponent(lbl_email)
+                                                    .addComponent(txt_email)
+                                                    .addComponent(pnl_gioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(lbl_diachi)
+                                                    .addComponent(jScrollPane1)
+                                                    .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(txt_ngaysinh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(96, 96, 96)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                    .addComponent(txt_sodienthoai)
+                                                    .addComponent(lbl_sodienthoai))))))
+                                .addGap(115, 115, 115))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_capnhatthongtin)
-                .addGap(42, 42, 42)
+                .addGap(4, 4, 4)
+                .addComponent(lbl_sodu)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_userid)
                     .addComponent(lbl_trangthaithaikhoan))
@@ -409,15 +431,18 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                                 .addGap(58, 58, 58)
                                 .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(btn_capnhatthongtin)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btn_capnhatthongtin)
+                    .addComponent(btn_napsodu))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1020, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,6 +469,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhatthongtin;
+    private javax.swing.JButton btn_napsodu;
     private javax.swing.ButtonGroup btngr_gioitinh;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
@@ -457,6 +483,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_hovaten;
     private javax.swing.JLabel lbl_ngaysinh;
     private javax.swing.JLabel lbl_sodienthoai;
+    private javax.swing.JLabel lbl_sodu;
     private javax.swing.JLabel lbl_trangthaithaikhoan;
     private javax.swing.JLabel lbl_userid;
     private javax.swing.JPanel pnl_anhbanglai;
