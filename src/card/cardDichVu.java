@@ -1,4 +1,3 @@
-
 package card;
 
 import DAO.DichVuDAO;
@@ -27,6 +26,26 @@ public class cardDichVu extends javax.swing.JPanel {
     VoucherDAO vdao = new VoucherDAO();
     int row = -1;
 
+    private boolean verify() {
+        if (txtMaDichVu.getText().equals("")) {
+            DialogHelper.alert(this, "Mã dịch vụ không được để trống");
+            txtMaDichVu.requestFocus();
+            return false;
+        }
+        if (txtTenDichVu.getText().equals("")) {
+            DialogHelper.alert(this, "Tên dịch vụ không được để trống");
+            txtTenDichVu.requestFocus();
+            return false;
+        }
+        if (txtDonGia.getText().equals("")) {
+            DialogHelper.alert(this, "Đơn giá không được để trống");
+            txtDonGia.requestFocus();
+            return false;
+
+        }
+
+        return true;
+    }
 
     private void filltable() {
         DefaultTableModel model = (DefaultTableModel) tbldichvu.getModel();
@@ -68,6 +87,7 @@ public class cardDichVu extends javax.swing.JPanel {
     }
 
     DichVu getFrom() {
+        verify();
         DichVu dv = new DichVu();
         dv.setMadichvu(txtMaDichVu.getText());
         dv.setTendichvu(txtTenDichVu.getText());
@@ -92,6 +112,7 @@ public class cardDichVu extends javax.swing.JPanel {
         } else {
             return;
         }
+        filltable();
 
     }
 
@@ -108,6 +129,7 @@ public class cardDichVu extends javax.swing.JPanel {
             }
 
         }
+        filltable();
     }
 
     void delete() {
@@ -124,6 +146,28 @@ public class cardDichVu extends javax.swing.JPanel {
         }
     }
 
+    private boolean verify1() {
+        if (txtMavoucher.getText().equals("")) {
+            DialogHelper.alert(this, "Mã voucher không được để trống");
+            txtMavoucher.requestFocus();
+            return false;
+
+        }
+        if (txtNoiDung.getText().equals("")) {
+            DialogHelper.alert(this, "Nội dung không được để trống");
+            txtNoiDung.requestFocus();
+            return false;
+        }
+        if (txtGiaTri.getText().equals("")) {
+            DialogHelper.alert(this, "Giá trị không được để trống");
+            txtGiaTri.requestFocus();
+            return false;
+
+        }
+      
+        return true;
+    }
+
     private void filltableVoucher() {
         DefaultTableModel model = (DefaultTableModel) tblVoucher.getModel();
         model.setRowCount(0);
@@ -132,6 +176,7 @@ public class cardDichVu extends javax.swing.JPanel {
             for (Voucher vh : list) {
                 Object[] row = {vh.getMavoucher(),
                     vh.getNoidung(),
+                    vh.getGiatri(),
                     vh.isTrangthai()
 
                 };
@@ -145,8 +190,12 @@ public class cardDichVu extends javax.swing.JPanel {
     void setFromvoucher(Voucher vh) {
         txtMavoucher.setText(vh.getMavoucher());
         txtNoiDung.setText(vh.getNoidung());
-        rdoChuaDung.setSelected(vh.isTrangthai());
-        rdoDaDung.setSelected(!vh.isTrangthai());
+        txtGiaTri.setText(String.valueOf(vh.getGiatri()));
+        if(!vh.isTrangthai()){
+            rdoChuaDung.setSelected(true);
+        }else{
+            rdoDaDung.setSelected(true);
+        }
 
     }
 
@@ -157,17 +206,73 @@ public class cardDichVu extends javax.swing.JPanel {
     }
 
     Voucher getFromVoucher() {
+        verify1();
         Voucher vh = new Voucher();
         vh.setMavoucher(txtMavoucher.getText());
         vh.setNoidung(txtNoiDung.getText());
+        vh.setGiatri(Integer.parseInt(txtGiaTri.getText()));
         vh.setTrangthai(rdoChuaDung.isSelected());
         return vh;
     }
-     void editVoucher() {
+
+    void editVoucher() {
         String mavc = (String) tblVoucher.getValueAt(this.row, 0);
         Voucher vh = vdao.selectByID(mavc);
         this.setFromvoucher(vh);
     }
+
+    void insertVoucher() {
+        Voucher vh = getFromVoucher();
+        if (vh != null) {
+            try {
+                vdao.insert(vh);
+                this.filltable();
+                this.clearFrom();
+                DialogHelper.alert(this, "Thêm  mới thành công !");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Thêm mới thất bại !");
+                e.printStackTrace();
+            }
+
+        } else {
+            return;
+        }
+        filltableVoucher();
+
+    }
+
+    void updateVoucher() {
+        Voucher vh = getFromVoucher();
+        if (vh != null) {
+            try {
+                vdao.update(vh);
+                System.out.println(vh.getGiatri());
+                this.filltable();
+                DialogHelper.alert(this, "Cập nhật thành công");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại");
+                e.printStackTrace();
+            }
+
+        }
+        filltableVoucher();
+    }
+
+    void deleteVoucher() {
+        String mavh = txtMavoucher.getText();
+        if (DialogHelper.confirm(this, "Bạn muốn xóa Voucher này!")) {
+            try {
+                vdao.delete(mavh);
+                this.filltable();
+                this.clearFrom();
+                DialogHelper.alert(this, "bạn xóa thành công");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Xóa thất bại");
+            }
+        }
+        filltableVoucher();
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -207,13 +312,15 @@ public class cardDichVu extends javax.swing.JPanel {
         txtNoiDung = new javax.swing.JTextArea();
         jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        rdoDaDung = new javax.swing.JRadioButton();
         rdoChuaDung = new javax.swing.JRadioButton();
+        rdoDaDung = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        them1 = new javax.swing.JButton();
+        sua1 = new javax.swing.JButton();
+        xoa1 = new javax.swing.JButton();
+        moi1 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtGiaTri = new javax.swing.JTextField();
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(946, 692));
 
@@ -465,13 +572,13 @@ public class cardDichVu extends javax.swing.JPanel {
         tblVoucher.setBackground(new java.awt.Color(255, 102, 51));
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Mã Voucher", "Nội dung", "Trạng thái"
+                "Mã Voucher", "Nội dung", "Giá trị", "Trạng thái"
             }
         ));
         tblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -501,39 +608,63 @@ public class cardDichVu extends javax.swing.JPanel {
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
-        Trangthai.add(rdoDaDung);
-        rdoDaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rdoDaDung.setForeground(new java.awt.Color(255, 255, 255));
-        rdoDaDung.setText("Đã dùng");
-        jPanel4.add(rdoDaDung);
-
         Trangthai.add(rdoChuaDung);
         rdoChuaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         rdoChuaDung.setForeground(new java.awt.Color(255, 255, 255));
         rdoChuaDung.setText("Chưa dùng");
         jPanel4.add(rdoChuaDung);
 
+        Trangthai.add(rdoDaDung);
+        rdoDaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        rdoDaDung.setForeground(new java.awt.Color(255, 255, 255));
+        rdoDaDung.setText("Đã dùng");
+        jPanel4.add(rdoDaDung);
+
         jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 102, 51));
-        jButton1.setText("Thêm");
-        jPanel5.add(jButton1);
+        them1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        them1.setForeground(new java.awt.Color(255, 102, 51));
+        them1.setText("Thêm");
+        them1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                them1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(them1);
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 102, 51));
-        jButton2.setText("Sửa");
-        jPanel5.add(jButton2);
+        sua1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        sua1.setForeground(new java.awt.Color(255, 102, 51));
+        sua1.setText("Sửa");
+        sua1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sua1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(sua1);
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 102, 51));
-        jButton3.setText("Xóa");
-        jPanel5.add(jButton3);
+        xoa1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        xoa1.setForeground(new java.awt.Color(255, 102, 51));
+        xoa1.setText("Xóa");
+        xoa1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xoa1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(xoa1);
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 102, 51));
-        jButton4.setText("Mới");
-        jPanel5.add(jButton4);
+        moi1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        moi1.setForeground(new java.awt.Color(255, 102, 51));
+        moi1.setText("Mới");
+        moi1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                moi1ActionPerformed(evt);
+            }
+        });
+        jPanel5.add(moi1);
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Giá trị:");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -544,7 +675,7 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -555,8 +686,14 @@ public class cardDichVu extends javax.swing.JPanel {
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
                             .addComponent(txtMavoucher)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 324, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(43, 43, 43)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel10))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txtGiaTri)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -581,7 +718,11 @@ public class cardDichVu extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
 
@@ -656,11 +797,27 @@ public class cardDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_jScrollPane2MousePressed
 
     private void tblVoucherMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblVoucherMousePressed
-         if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblVoucher.getSelectedRow();
             this.editVoucher();
         }
     }//GEN-LAST:event_tblVoucherMousePressed
+
+    private void moi1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moi1ActionPerformed
+        clearFromvoucher();
+    }//GEN-LAST:event_moi1ActionPerformed
+
+    private void them1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_them1ActionPerformed
+        insertVoucher();
+    }//GEN-LAST:event_them1ActionPerformed
+
+    private void sua1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sua1ActionPerformed
+        updateVoucher();
+    }//GEN-LAST:event_sua1ActionPerformed
+
+    private void xoa1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xoa1ActionPerformed
+        deleteVoucher();
+    }//GEN-LAST:event_xoa1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -673,11 +830,8 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JButton btncuoi;
     private javax.swing.JButton btnlui;
     private javax.swing.JButton btnsau;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -696,15 +850,20 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JButton moi1;
     private javax.swing.JRadioButton rdoChuaDung;
     private javax.swing.JRadioButton rdoDaDung;
+    private javax.swing.JButton sua1;
     private javax.swing.JTable tblVoucher;
     private javax.swing.JTable tbldichvu;
+    private javax.swing.JButton them1;
     private javax.swing.JTextField txtDonGia;
+    private javax.swing.JTextField txtGiaTri;
     private javax.swing.JTextField txtMaDichVu;
     private javax.swing.JTextField txtMavoucher;
     private javax.swing.JTextArea txtNoiDung;
     private javax.swing.JTextField txtTenDichVu;
     private javax.swing.JTextArea txtghichu;
+    private javax.swing.JButton xoa1;
     // End of variables declaration//GEN-END:variables
 }

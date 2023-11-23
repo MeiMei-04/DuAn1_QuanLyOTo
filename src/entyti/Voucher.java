@@ -11,11 +11,16 @@ package entyti;
 public class Voucher {
     private String mavoucher;
     private String noidung;
+    private int giatri;
     private boolean trangthai;
 
-    public Voucher(String mavoucher, String noidung, boolean trangthai) {
+    public Voucher() {
+    }
+
+    public Voucher(String mavoucher, String noidung, int giatri, boolean trangthai) {
         this.mavoucher = mavoucher;
         this.noidung = noidung;
+        this.giatri = giatri;
         this.trangthai = trangthai;
     }
 
@@ -35,6 +40,14 @@ public class Voucher {
         this.noidung = noidung;
     }
 
+    public float getGiatri() {
+        return giatri;
+    }
+
+    public void setGiatri(int giatri) {
+        this.giatri = giatri;
+    }
+
     public boolean isTrangthai() {
         return trangthai;
     }
@@ -43,6 +56,5 @@ public class Voucher {
         this.trangthai = trangthai;
     }
 
-    public Voucher() {
-    }
+   
 }
