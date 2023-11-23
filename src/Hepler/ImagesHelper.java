@@ -4,28 +4,26 @@
  */
 package Hepler;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
-import net.ifok.image.image4j.codec.ico.ICOEncoder;
 
 /**
  *
@@ -103,16 +101,17 @@ public class ImagesHelper {
         Image img = imgIcon.getImage();
         return img;
     }
-    public static void convertImgTo280x180(String readurl,String patch,String writeurl) {
+
+    public static void convertImgTo280x180(String readurl, String patch, String writeurl) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File(readurl+ patch));
+            BufferedImage image = ImageIO.read(new File(readurl + patch));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(280, 180, Image.SCALE_SMOOTH);
             BufferedImage resizedImage = new BufferedImage(280, 180, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = resizedImage.createGraphics();
-            
+
             g.drawImage(tempImage, 0, 0, null);
             g.dispose();
             File dir = new File(writeurl);
@@ -120,27 +119,28 @@ public class ImagesHelper {
                 dir.mkdirs();
             }
             //kiểm tra xem tệp tồn tại chưa, rồi thì không thêm nưa
-            if(checkfile(writeurl+patch)){
+            if (checkfile(writeurl + patch)) {
                 return;
-           }else{
-                ImageIO.write(resizedImage, "png", new File(writeurl+ patch));
+            } else {
+                ImageIO.write(resizedImage, "png", new File(writeurl + patch));
             }
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
-            
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-    public static void convertImgTo110x164(String readurl,String patch,String writeurl) {
+
+    public static void convertImgTo110x164(String readurl, String patch, String writeurl) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File(readurl+ patch));
+            BufferedImage image = ImageIO.read(new File(readurl + patch));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(110, 164, Image.SCALE_SMOOTH);
             BufferedImage resizedImage = new BufferedImage(110, 164, BufferedImage.TYPE_INT_ARGB);
             Graphics2D g = resizedImage.createGraphics();
-            
+
             g.drawImage(tempImage, 0, 0, null);
             g.dispose();
             File dir = new File(writeurl);
@@ -148,19 +148,20 @@ public class ImagesHelper {
                 dir.mkdirs();
             }
             //kiểm tra xem tệp tồn tại chưa, rồi thì không thêm nưa
-            if(checkfile(writeurl+patch)){
+            if (checkfile(writeurl + patch)) {
                 return;
-           }else{
-                ImageIO.write(resizedImage, "png", new File(writeurl+ patch));
+            } else {
+                ImageIO.write(resizedImage, "png", new File(writeurl + patch));
             }
             // Ghi hình ảnh đã thay đổi kích thước vào tệp gốc
-            
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
-    public static void deleteImg(String writeurl,String patch){
-        File file = new File(writeurl+patch);
+
+    public static void deleteImg(String writeurl, String patch) {
+        File file = new File(writeurl + patch);
 
         if (file.delete()) {
             System.out.println("File deleted successfully");
@@ -168,6 +169,31 @@ public class ImagesHelper {
             System.out.println("Failed to delete the file");
         }
     }
-    public static void main(String[] args) {
+
+    public static void createimgqr(String manap) throws WriterException, IOException {
+        String data = manap;
+        QRCodeWriter qrCodeWriter = new QRCodeWriter();
+        BitMatrix matrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 200, 200);
+
+        // Create directory if it doesn't exist
+        File dir = new File("src/imgqrcode/");
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        // Check if file already exists
+        File outputFile = new File(dir, manap + ".png");
+        if (outputFile.exists()) {
+            System.out.println("File already exists: " + outputFile);
+            return;
+        }
+
+        // Write to file image
+        Path path = outputFile.toPath();
+        MatrixToImageWriter.writeToPath(matrix, "PNG", path);
+    }
+
+    public static void main(String[] args) throws WriterException, IOException {
+        createimgqr("123");
     }
 }
