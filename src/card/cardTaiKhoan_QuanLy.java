@@ -165,7 +165,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         nc.setManap(txtMaNap.getText());
         nc.setNoidung(TxtNoiDung.getText());
         nc.setGiatri(Float.parseFloat(txtGiaTri.getText()));
-        nc.setTrangthai(rdochuanap.isSelected());
+        nc.setTrangthai(false);
         return nc;
     }
 
