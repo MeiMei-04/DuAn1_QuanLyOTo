@@ -7,14 +7,15 @@ package card;
 import DAO.ChiTietTaiKhoanDAO;
 import DAO.NapCardDAO;
 import DAO.TaiKhoanDAO;
-import Hepler.DialogHelper;
+import Hepler.*;
+import com.google.zxing.WriterException;
 import entyti.ChiTietTaiKhoan;
-import entyti.DanhGia;
 import entyti.NapCard;
 import entyti.TaiKhoan;
-import entyti.Voucher;
-import entyti.Xe;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,10 +23,12 @@ import javax.swing.table.DefaultTableModel;
  * @author Hieu
  */
 public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
+
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     String userid = null;
-    NapCardDAO  ndao = new NapCardDAO();
+    NapCardDAO ndao = new NapCardDAO();
+
     /**
      * Creates new form cardTaiKhoan_QuanLy
      */
@@ -34,10 +37,24 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         filltableTaiKhoan();
         filltableNapCard();
     }
+
+    public void sendcode_qr(String string) throws WriterException, IOException {
+        NapCard nc = getFromNapcard();
+        try {
+            TaiKhoan tk = tkd.selectByID(string);
+            ImagesHelper.createimgqr(nc.getManap());
+            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: "+String.valueOf(nc.getGiatri())+"\nMã: "+nc.getManap(), nc.getManap()+".png");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi Truy Vấn");
+        }
+
+    }
+
     public void setImg(String anhdaidien, String banglai) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhdaidien, "src\\imganhdaidien\\" + anhdaidien);
         Hepler.ImagesHelper.setIconlabel(lbl_anhbanglai, "src\\imgbanglai\\" + banglai);
     }
+
     private void filltableTaiKhoan() {
         DefaultTableModel model = (DefaultTableModel) tbl_taikhoan.getModel();
         model.setRowCount(0);
@@ -63,7 +80,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
             DialogHelper.alert(this, "Loi Try van");
         }
     }
-    void setForm(ChiTietTaiKhoan cttk){
+
+    void setForm(ChiTietTaiKhoan cttk) {
         String trangthai = null;
         TaiKhoan tk = tkd.selectByID_1(String.valueOf(cttk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
@@ -79,36 +97,32 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         setImg(cttk.getAnhdaidien(), cttk.getBanglaixe());
     }
     int row = -1;
-    void edit(){
-        userid =  String.valueOf(tbl_taikhoan.getValueAt(this.row,0));
+
+    void edit() {
+        userid = String.valueOf(tbl_taikhoan.getValueAt(this.row, 0));
         ChiTietTaiKhoan cttk = cttkd.selectByID(userid);
         this.setForm(cttk);
     }
+
     void update() {
         TaiKhoan tk = new TaiKhoan();
         tk.setTrangthai(true);
         tk.setUserid(Integer.parseInt(userid));
-            try {
-                tkd.update_1(tk);
-                filltableTaiKhoan();
-                DialogHelper.alert(this, "Cập nhật thành công");
-            } catch (Exception e) {
-                DialogHelper.alert(this, "Cập nhật thất bại");
-                e.printStackTrace();
-            }
+        try {
+            tkd.update_1(tk);
+            filltableTaiKhoan();
+            DialogHelper.alert(this, "Cập nhật thành công");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Cập nhật thất bại");
+            e.printStackTrace();
+        }
     }
-    public void sendemailverifly(String email){
+
+    public void sendemailverifly(String email) {
         Hepler.Email.sendEmail(email, "Yêu Cầu Xác Thực Tài Khoản", "Tài Khoản Của Bạn Chưa Đủ Điều Kiện Xác Thực, Vui Lòng Cập Nhật Lại Thông Tin Để Tiến Hành Xác Thực Tài Khoản", null);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-     private void filltableNapCard() {
+
+    private void filltableNapCard() {
         DefaultTableModel model = (DefaultTableModel) tblmanap.getModel();
         model.setRowCount(0);
         try {
@@ -131,9 +145,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         txtMaNap.setText(nc.getManap());
         TxtNoiDung.setText(nc.getNoidung());
         txtGiaTri.setText(String.valueOf(nc.getGiatri()));
-        if(!nc.isTrangthai()){
+        if (!nc.isTrangthai()) {
             rdochuanap.setSelected(true);
-        }else{
+        } else {
             rdodanap.setSelected(true);
         }
 
@@ -146,11 +160,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }
 
     NapCard getFromNapcard() {
-        
+
         NapCard nc = new NapCard();
         nc.setManap(txtMaNap.getText());
         nc.setNoidung(TxtNoiDung.getText());
-        nc.setGiatri(Integer.parseInt(txtGiaTri.getText()));
+        nc.setGiatri(Float.parseFloat(txtGiaTri.getText()));
         nc.setTrangthai(rdochuanap.isSelected());
         return nc;
     }
@@ -177,12 +191,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         } else {
             return;
         }
-      
+
         filltableNapCard();
     }
-
-    
-        
 
     void deleteNapCard() {
         String manc = txtMaNap.getText();
@@ -193,12 +204,14 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 this.clearFromnapcard();
                 DialogHelper.alert(this, "bạn xóa thành công");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 DialogHelper.alert(this, "Xóa thất bại");
             }
         }
         filltableNapCard();
-      
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -208,9 +221,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
         trangthai = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         pnl_taikhoan = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_taikhoan = new javax.swing.JTable();
@@ -229,35 +241,28 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         btn_guiemail = new javax.swing.JButton();
         btn_xacthuc = new javax.swing.JButton();
         lbl_trangthaithaikhoan = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        pnl_TheNap = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblmanap = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbl_thenap = new javax.swing.JLabel();
+        lbl_manaptien = new javax.swing.JLabel();
         txtMaNap = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TxtNoiDung = new javax.swing.JTextArea();
-        jLabel5 = new javax.swing.JLabel();
+        lbl_giatri = new javax.swing.JLabel();
         txtGiaTri = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        pnl_trangthai = new javax.swing.JPanel();
         rdochuanap = new javax.swing.JRadioButton();
         rdodanap = new javax.swing.JRadioButton();
-        jPanel4 = new javax.swing.JPanel();
+        pnl_chucnang = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
         btnMoi = new javax.swing.JButton();
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        btn_sendmail = new javax.swing.JPanel();
+        lbl_taikhoan = new javax.swing.JLabel();
+        txt_taikhoan = new javax.swing.JTextField();
+        btn_gui = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 102, 51));
         setPreferredSize(new java.awt.Dimension(985, 660));
@@ -448,9 +453,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        jTabbedPane1.addTab("Tài Khoản", pnl_taikhoan);
+        tabs.addTab("Tài Khoản", pnl_taikhoan);
 
-        jPanel3.setOpaque(false);
+        pnl_TheNap.setOpaque(false);
 
         tblmanap.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -473,10 +478,10 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblmanap);
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
-        jLabel2.setText("Thẻ nạp");
+        lbl_thenap.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lbl_thenap.setText("Thẻ nạp");
 
-        jLabel3.setText("Mã nạp tiền:");
+        lbl_manaptien.setText("Mã nạp tiền:");
 
         txtMaNap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,14 +495,15 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         TxtNoiDung.setRows(5);
         jScrollPane3.setViewportView(TxtNoiDung);
 
-        jLabel5.setText("Giá trị:");
+        lbl_giatri.setText("Giá trị:");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        pnl_trangthai.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
+        pnl_trangthai.setOpaque(false);
+        pnl_trangthai.setLayout(new java.awt.GridLayout(1, 0));
 
         trangthai.add(rdochuanap);
         rdochuanap.setText("Chưa nạp");
-        jPanel1.add(rdochuanap);
+        pnl_trangthai.add(rdochuanap);
 
         trangthai.add(rdodanap);
         rdodanap.setText("Đã Nạp");
@@ -506,9 +512,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 rdodanapActionPerformed(evt);
             }
         });
-        jPanel1.add(rdodanap);
+        pnl_trangthai.add(rdodanap);
 
-        jPanel4.setLayout(new java.awt.GridLayout());
+        pnl_chucnang.setLayout(new java.awt.GridLayout(1, 0));
 
         btnThem.setText("Thêm");
         btnThem.addActionListener(new java.awt.event.ActionListener() {
@@ -516,7 +522,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 btnThemActionPerformed(evt);
             }
         });
-        jPanel4.add(btnThem);
+        pnl_chucnang.add(btnThem);
 
         btnXoa.setText("Xóa");
         btnXoa.addActionListener(new java.awt.event.ActionListener() {
@@ -524,7 +530,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 btnXoaActionPerformed(evt);
             }
         });
-        jPanel4.add(btnXoa);
+        pnl_chucnang.add(btnXoa);
 
         btnMoi.setText("Mới");
         btnMoi.addActionListener(new java.awt.event.ActionListener() {
@@ -532,43 +538,78 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 btnMoiActionPerformed(evt);
             }
         });
-        jPanel4.add(btnMoi);
+        pnl_chucnang.add(btnMoi);
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(txtMaNap)
-                        .addComponent(jLabel4)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE)
-                        .addComponent(jLabel5)
-                        .addComponent(txtGiaTri))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 537, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(317, 317, 317)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+        lbl_taikhoan.setText("Tài Khoản");
+
+        btn_gui.setText("Gửi");
+        btn_gui.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guiActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout btn_sendmailLayout = new javax.swing.GroupLayout(btn_sendmail);
+        btn_sendmail.setLayout(btn_sendmailLayout);
+        btn_sendmailLayout.setHorizontalGroup(
+            btn_sendmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_sendmailLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(btn_sendmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lbl_taikhoan)
+                    .addGroup(btn_sendmailLayout.createSequentialGroup()
+                        .addComponent(txt_taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_gui)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        btn_sendmailLayout.setVerticalGroup(
+            btn_sendmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btn_sendmailLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_taikhoan)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(btn_sendmailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_gui))
+                .addContainerGap(50, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnl_TheNapLayout = new javax.swing.GroupLayout(pnl_TheNap);
+        pnl_TheNap.setLayout(pnl_TheNapLayout);
+        pnl_TheNapLayout.setHorizontalGroup(
+            pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_TheNapLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lbl_manaptien)
+                    .addComponent(txtMaNap)
+                    .addComponent(jLabel4)
+                    .addComponent(jScrollPane3)
+                    .addComponent(lbl_giatri)
+                    .addComponent(txtGiaTri)
+                    .addComponent(pnl_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_sendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(pnl_TheNapLayout.createSequentialGroup()
+                .addGap(317, 317, 317)
+                .addComponent(lbl_thenap, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnl_TheNapLayout.setVerticalGroup(
+            pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_TheNapLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
-                .addComponent(jLabel2)
+                .addComponent(lbl_thenap)
                 .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(pnl_TheNapLayout.createSequentialGroup()
                         .addGap(39, 39, 39)
-                        .addComponent(jLabel3)
+                        .addComponent(lbl_manaptien)
                         .addGap(18, 18, 18)
                         .addComponent(txtMaNap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -576,34 +617,36 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel5)
+                        .addComponent(lbl_giatri)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnl_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(pnl_chucnang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_sendmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Mã Nạp", jPanel3);
+        tabs.addTab("Mã Nạp", pnl_TheNap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void tbl_taikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_taikhoanMouseClicked
         // TODO add your handling code here:
-        if(evt.getClickCount()==1){
+        if (evt.getClickCount() == 1) {
             this.row = tbl_taikhoan.getSelectedRow();
             this.edit();
         }
@@ -628,11 +671,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_rdodanapActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
-       insertNapCard();
+        insertNapCard();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-       deleteNapCard();
+        deleteNapCard();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void btnMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMoiActionPerformed
@@ -647,8 +690,19 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }//GEN-LAST:event_tblmanapMousePressed
 
     private void tblmanapMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblmanapMouseClicked
-      
+
     }//GEN-LAST:event_tblmanapMouseClicked
+
+    private void btn_guiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guiActionPerformed
+        try {
+            // TODO add your handling code here:
+            sendcode_qr(txt_taikhoan.getText());
+        } catch (WriterException ex) {
+            Logger.getLogger(cardTaiKhoan_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(cardTaiKhoan_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btn_guiActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -656,32 +710,34 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btn_gui;
     private javax.swing.JButton btn_guiemail;
+    private javax.swing.JPanel btn_sendmail;
     private javax.swing.JButton btn_xacthuc;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lbl_anhbanglai;
     private javax.swing.JLabel lbl_anhdaidien;
     private javax.swing.JLabel lbl_cancuoc;
     private javax.swing.JLabel lbl_email;
+    private javax.swing.JLabel lbl_giatri;
     private javax.swing.JLabel lbl_hovaten;
+    private javax.swing.JLabel lbl_manaptien;
     private javax.swing.JLabel lbl_sodienthoai;
+    private javax.swing.JLabel lbl_taikhoan;
+    private javax.swing.JLabel lbl_thenap;
     private javax.swing.JLabel lbl_trangthaithaikhoan;
+    private javax.swing.JPanel pnl_TheNap;
     private javax.swing.JPanel pnl_anhbanglai;
     private javax.swing.JPanel pnl_anhdaidien;
+    private javax.swing.JPanel pnl_chucnang;
     private javax.swing.JPanel pnl_taikhoan;
+    private javax.swing.JPanel pnl_trangthai;
     private javax.swing.JRadioButton rdochuanap;
     private javax.swing.JRadioButton rdodanap;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbl_taikhoan;
     private javax.swing.JTable tblmanap;
     private javax.swing.ButtonGroup trangthai;
@@ -691,5 +747,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_hoten;
     private javax.swing.JTextField txt_sodienthoai;
+    private javax.swing.JTextField txt_taikhoan;
     // End of variables declaration//GEN-END:variables
 }

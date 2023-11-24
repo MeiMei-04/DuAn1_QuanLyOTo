@@ -35,7 +35,7 @@ public class NapCardDAO extends QuanLyOToDAO<NapCard, String>{
 
     @Override
     public void delete(String key) {
-        JDBCHelper.executeQuery(DELETE_SQL, key);
+        JDBCHelper.executeUpdate(DELETE_SQL, key);
     }
 
     @Override

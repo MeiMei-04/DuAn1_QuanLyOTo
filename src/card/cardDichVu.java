@@ -164,7 +164,7 @@ public class cardDichVu extends javax.swing.JPanel {
             return false;
 
         }
-      
+
         return true;
     }
 
@@ -191,9 +191,9 @@ public class cardDichVu extends javax.swing.JPanel {
         txtMavoucher.setText(vh.getMavoucher());
         txtNoiDung.setText(vh.getNoidung());
         txtGiaTri.setText(String.valueOf(vh.getGiatri()));
-        if(!vh.isTrangthai()){
+        if (!vh.isTrangthai()) {
             rdoChuaDung.setSelected(true);
-        }else{
+        } else {
             rdoDaDung.setSelected(true);
         }
 
