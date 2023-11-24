@@ -10,6 +10,7 @@ import Hepler.DateHelper;
 import Hepler.DialogHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.TaiKhoan;
+import form.DoiMatKhauDialog;
 
 /**
  *
@@ -44,7 +45,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         TaiKhoan tk = Hepler.AuthHelper.user;
         cttk.setUserid(tk.getUserid());
         cttk.setHoten(txt_hoten.getText());
-        cttk.setNgaysinh(DateHelper.toDate(txt_ngaysinh.getText(),"dd/MM/yyyy"));
+        cttk.setNgaysinh(DateHelper.toDate(txt_ngaysinh.getText(), "dd/MM/yyyy"));
         cttk.setSdt(txt_sodienthoai.getText());
         cttk.setCccd(txt_cancuoc.getText());
         cttk.setDiachi(txt_diachi.getText());
@@ -77,16 +78,16 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             txt_sodienthoai.setText(cttk.getSdt());
             txt_cancuoc.setText(cttk.getCccd());
             txt_diachi.setText(cttk.getDiachi());
-            if(cttk.isGioitinh()){
+            if (cttk.isGioitinh()) {
                 rdo_nu.setSelected(true);
-            }else{
+            } else {
                 rdo_nam.setSelected(true);
             }
             anhdaidien = cttk.getAnhdaidien();
             banglai = cttk.getBanglaixe();
             txt_email.setText(tk.getEmail());
             setImg(anhdaidien, banglai);
-            lbl_sodu.setText("Số Dư: "+String.valueOf(cttk.getSodu()));
+            lbl_sodu.setText("Số Dư: " + String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
         }
     }
@@ -103,6 +104,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             }
         }
     }
+
     public void update() {
         ChiTietTaiKhoan cttk = getForm();
         if (cttk != null) {
@@ -116,46 +118,46 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         }
     }
 
-    public boolean verify(){
-        if(txt_hoten.getText().equals("")){
+    public boolean verify() {
+        if (txt_hoten.getText().equals("")) {
             DialogHelper.alert(this, "Vui lòng nhập họ tên");
             txt_hoten.requestFocus();
-           return false;
+            return false;
         }
-        if(txt_ngaysinh.getText().equals("")){
+        if (txt_ngaysinh.getText().equals("")) {
             DialogHelper.alert(this, "Vui lòng nhập ngày sinh");
             txt_ngaysinh.requestFocus();
-           return false;
+            return false;
         }
         if (!Hepler.Validate.isValidDate(txt_ngaysinh.getText())) {
             DialogHelper.alert(this, "Vui lòng nhập đúng định dạng dd/mm/yyyy");
             txt_ngaysinh.requestFocus();
             return false;
         }
-        if(txt_cancuoc.getText().equals("")){
+        if (txt_cancuoc.getText().equals("")) {
             DialogHelper.alert(this, "Vui lòng nhập số CCCD");
             txt_cancuoc.requestFocus();
-           return false;
+            return false;
         }
         if (txt_sodienthoai.getText().length() > 12) {
             DialogHelper.alert(this, "Số CCCD không được quá 12 kí tự");
             txt_sodienthoai.requestFocus();
             return false;
         }
-        if(txt_email.getText().equals("")){
+        if (txt_email.getText().equals("")) {
             DialogHelper.alert(this, "Email không được để trống");
             txt_email.requestFocus();
-           return false;
+            return false;
         }
-        if(txt_diachi.getText().equals("")){
+        if (txt_diachi.getText().equals("")) {
             DialogHelper.alert(this, "Địa chỉ không được để trống");
             txt_diachi.requestFocus();
-           return false;
+            return false;
         }
-        if(txt_sodienthoai.getText().equals("")){
+        if (txt_sodienthoai.getText().equals("")) {
             DialogHelper.alert(this, "Số điện thoại không được để trống");
             txt_sodienthoai.requestFocus();
-           return false;
+            return false;
         }
         if (txt_sodienthoai.getText().length() > 10) {
             DialogHelper.alert(this, "Số điện thoại không được quá 10 kí tự");
@@ -171,7 +173,14 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             return false;
         }
         return true;
-   }
+    }
+    public void openDoiMatKhau() {
+        try {
+            new DoiMatKhauDialog(null, true).setVisible(true);
+        } catch (Exception e) {
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,6 +218,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         lbl_hovaten = new javax.swing.JLabel();
         lbl_sodu = new javax.swing.JLabel();
         btn_napsodu = new javax.swing.JButton();
+        btn_doimatkhau = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(985, 660));
@@ -382,6 +392,13 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         btn_napsodu.setForeground(new java.awt.Color(255, 102, 51));
         btn_napsodu.setText("Nạp Số Dư");
 
+        btn_doimatkhau.setText("Đổi Mật Khẩu");
+        btn_doimatkhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_doimatkhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -428,9 +445,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                                             .addComponent(lbl_sodu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_cancuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txt_cancuoc, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btn_doimatkhau))))
                         .addGap(115, 115, 115))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -481,7 +500,9 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_capnhatthongtin)
                     .addComponent(btn_napsodu))
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
+                .addComponent(btn_doimatkhau)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -500,7 +521,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
 
     private void btn_capnhatthongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatthongtinActionPerformed
 
-            insert();
+        insert();
     }//GEN-LAST:event_btn_capnhatthongtinActionPerformed
 
     private void lbl_anhdaidienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhdaidienMouseClicked
@@ -515,9 +536,15 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         setImg(anhdaidien, banglai);
     }//GEN-LAST:event_lbl_anhbanglaiMouseClicked
 
+    private void btn_doimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doimatkhauActionPerformed
+        // TODO add your handling code here:
+        openDoiMatKhau();
+    }//GEN-LAST:event_btn_doimatkhauActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhatthongtin;
+    private javax.swing.JButton btn_doimatkhau;
     private javax.swing.JButton btn_napsodu;
     private javax.swing.ButtonGroup btngr_gioitinh;
     private javax.swing.JPanel jPanel1;
