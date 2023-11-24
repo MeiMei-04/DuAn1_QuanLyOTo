@@ -32,6 +32,7 @@ import java.util.concurrent.ThreadFactory;
  */
 public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, ThreadFactory {
 
+    boolean flag = false;
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     NapCardDAO ncd = new NapCardDAO();
     private WebcamPanel panel = null;
@@ -57,9 +58,8 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            float tongtien =0;
+            float tongtien = 0;
             tongtien = cttk.getSodu() + laygiatri();
-            System.out.println("So du"+cttk.getSodu() +"Giatri:"+laygiatri());
             cttk.setSodu(tongtien);
             cttkd.update_1(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
@@ -72,16 +72,11 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
 
     public float laygiatri() {
         try {
-            List<NapCard> list = ncd.selectAll();
-            for (NapCard nc : list) {
-                if (String.valueOf(result).equals(nc.getManap())) {
-                    ncd.delete(String.valueOf(result));
-                    return nc.getGiatri();
-                }
-                            
-            }
+            NapCard nc = ncd.selectByID(String.valueOf(result));
+            ncd.delete(String.valueOf(result));
+            return nc.getGiatri();
+
         } catch (Exception e) {
-            Hepler.DialogHelper.alert(this, "Mã Nạp Không Tồn Tại");
             System.out.println(e.getMessage());
         }
         return 0;
@@ -146,7 +141,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         } while (true);
         webcam.close();
         this.dispose();
-        
+
     }
 
     /**
