@@ -57,8 +57,12 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            float tongtien =0;
+            float tongtien =-1;
             tongtien = cttk.getSodu() + laygiatri();
+            if(tongtien<0){
+                Hepler.DialogHelper.alert(this, "Lỗi Giá Trị Thẻ");
+                return;
+            }
             cttk.setSodu(tongtien);
             cttkd.update_1(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
@@ -70,20 +74,16 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
     }
 
     public float laygiatri() {
+        float giatrithe = 0;
         try {
-            List<NapCard> list = ncd.selectAll();
-            for (NapCard nc : list) {
-                if (String.valueOf(result).equals(nc.getManap())) {
-                    ncd.delete(String.valueOf(result));
-                    return nc.getGiatri();
-                }
-                            
-            }
+            NapCard nc = ncd.selectByID(String.valueOf(result));
+            giatrithe = nc.getGiatri();
+            ncd.delete(String.valueOf(result));
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Mã Nạp Không Tồn Tại");
             System.out.println(e.getMessage());
         }
-        return 0;
+        return giatrithe;
     }
 
     private void initWebcam() {
