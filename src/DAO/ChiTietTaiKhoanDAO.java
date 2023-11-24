@@ -18,6 +18,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
     String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,yeucauxacthuc) values(?,?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=? WHERE userid =?";
+    String UPDATE_SQL_1 = "UPDATE ChiTietTaiKhoan SET sodu = ? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL_SQL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_SQL = "select * from ChiTietTaiKhoan where userid =?";
@@ -101,7 +102,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
     @Override
     public void update_1(ChiTietTaiKhoan entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(UPDATE_SQL_1, entity.getSodu(), entity.getUserid());
     }
 
     @Override

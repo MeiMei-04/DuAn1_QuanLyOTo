@@ -1,5 +1,7 @@
 package form;
 
+import DAO.ChiTietTaiKhoanDAO;
+import DAO.NapCardDAO;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -10,14 +12,20 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import entyti.ChiTietTaiKhoan;
+import entyti.NapCard;
+import entyti.TaiKhoan;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
+import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-public class NapCard extends javax.swing.JFrame implements Runnable, ThreadFactory {
+public class NapMaThe extends javax.swing.JFrame implements Runnable, ThreadFactory {
 
+    ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
+    NapCardDAO ncd = new NapCardDAO();
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private boolean stop = false;
@@ -26,11 +34,34 @@ public class NapCard extends javax.swing.JFrame implements Runnable, ThreadFacto
     private static final long serialVersionUID = 6441489157408381878L;
     private Executor executor = Executors.newSingleThreadExecutor(this);
 
-    public NapCard() {
+    public NapMaThe() {
         initComponents();
         initWebcam();
         setTitle("Nạp Card");
         setLocationRelativeTo(null);
+    }
+    public void congtien(){
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        try {
+            ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
+            cttk.setSodu(cttk.getSodu()+laygiatri());
+            cttkd.update_1(cttk);
+        } catch (Exception e) {
+        }
+        
+    }
+    public float laygiatri() {
+        try {
+            List<NapCard> list = ncd.selectAll();
+            for (NapCard nc : list) {
+                if (result.equals(nc.getManap())) {
+                    return nc.getGiatri();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 
     private void initWebcam() {
@@ -82,9 +113,8 @@ public class NapCard extends javax.swing.JFrame implements Runnable, ThreadFacto
                 break;
             }
         } while (true);
-        System.out.println(result);
-
-        System.exit(0);
+        congtien();
+        this.dispose();
     }
 
     public void stop() {
@@ -137,32 +167,6 @@ public class NapCard extends javax.swing.JFrame implements Runnable, ThreadFacto
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Windows".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NapCard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new NapCard().setVisible(true);
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;

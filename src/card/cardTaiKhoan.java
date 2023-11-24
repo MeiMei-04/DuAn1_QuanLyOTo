@@ -11,6 +11,8 @@ import Hepler.DialogHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.TaiKhoan;
 import form.DoiMatKhauDialog;
+import form.NapMaThe;
+import form.NapTheCaoDialog;
 
 /**
  *
@@ -179,6 +181,13 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         try {
             new DoiMatKhauDialog(null, true).setVisible(true);
         } catch (Exception e) {
+        }
+    }
+    public void openNapCard() {
+        try {
+            new NapTheCaoDialog(null, true).setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
@@ -392,6 +401,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         btn_napsodu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_napsodu.setForeground(new java.awt.Color(255, 102, 51));
         btn_napsodu.setText("Nạp Số Dư");
+        btn_napsodu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_napsoduActionPerformed(evt);
+            }
+        });
 
         btn_doimatkhau.setText("Đổi Mật Khẩu");
         btn_doimatkhau.addActionListener(new java.awt.event.ActionListener() {
@@ -541,6 +555,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         // TODO add your handling code here:
         openDoiMatKhau();
     }//GEN-LAST:event_btn_doimatkhauActionPerformed
+
+    private void btn_napsoduActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_napsoduActionPerformed
+        // TODO add your handling code here:
+        openNapCard();
+    }//GEN-LAST:event_btn_napsoduActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
