@@ -59,6 +59,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
             float tongtien =0;
             tongtien = cttk.getSodu() + laygiatri();
+            System.out.println("So du"+cttk.getSodu() +"Giatri:"+laygiatri());
             cttk.setSodu(tongtien);
             cttkd.update_1(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
@@ -109,8 +110,8 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             }
 
             // Check if 30 seconds have passed
-            if (System.currentTimeMillis() - startTime > 10000) {
-                System.out.println("30 seconds have passed");
+            if (System.currentTimeMillis() - startTime > 20000) {
+                System.out.println("20 seconds have passed");
                 break;
             }
 

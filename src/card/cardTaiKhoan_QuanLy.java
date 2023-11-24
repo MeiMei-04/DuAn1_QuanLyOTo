@@ -13,7 +13,9 @@ import entyti.ChiTietTaiKhoan;
 import entyti.NapCard;
 import entyti.TaiKhoan;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
+    private static long lastEventTime = 0;
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     String userid = null;
@@ -43,7 +46,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         try {
             TaiKhoan tk = tkd.selectByID(string);
             ImagesHelper.createimgqr(nc.getManap());
-            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: "+String.valueOf(nc.getGiatri())+"\nMã: "+nc.getManap(), nc.getManap()+".png");
+            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(), nc.getManap() + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
         }
@@ -696,7 +699,15 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private void btn_guiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guiActionPerformed
         try {
             // TODO add your handling code here:
-            sendcode_qr(txt_taikhoan.getText());
+
+            long currentTime = new Date().getTime();
+            if (currentTime - lastEventTime > 60000) { // 60000 milliseconds = 1 minute
+                sendcode_qr(txt_taikhoan.getText());
+                DialogHelper.alert(this, "Vui Lòng Check Email");
+                lastEventTime = currentTime;
+            } else {
+                DialogHelper.alert(this, "Vui Lòng Chờ Trong Ít Phút");
+            }
         } catch (WriterException ex) {
             Logger.getLogger(cardTaiKhoan_QuanLy.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
