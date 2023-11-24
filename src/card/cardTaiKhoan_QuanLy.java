@@ -5,9 +5,11 @@
 package card;
 
 import DAO.ChiTietTaiKhoanDAO;
+import DAO.TaiKhoanDAO;
 import Hepler.DialogHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.DanhGia;
+import entyti.TaiKhoan;
 import entyti.Voucher;
 import entyti.Xe;
 import java.util.List;
@@ -19,6 +21,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
+    TaiKhoanDAO tkd = new TaiKhoanDAO();
+    String userid = null;
     /**
      * Creates new form cardTaiKhoan_QuanLy
      */
@@ -34,12 +38,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tbl_taikhoan.getModel();
         model.setRowCount(0);
         try {
-            List<ChiTietTaiKhoan> list = cttkd.selectAll();
+            List<ChiTietTaiKhoan> list = cttkd.selectByKey("True");
             for (ChiTietTaiKhoan cttk : list) {
                 Object[] row = {
                     cttk.getUserid(),
                     cttk.getHoten(),
-                    cttk.getEmail(),
                     cttk.getAnhdaidien(),
                     cttk.getCccd(),
                     cttk.getBanglaixe(),
@@ -57,17 +60,38 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         }
     }
     void setForm(ChiTietTaiKhoan cttk){
+        String trangthai = null;
+        TaiKhoan tk = tkd.selectByID_1(String.valueOf(cttk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
         txt_cancuoc.setText(cttk.getCccd());
-        txt_email.setText(cttk.getEmail());
         txt_sodienthoai.setText(cttk.getSdt());
+        txt_email.setText(tk.getEmail());
+        if (tk.isTrangthai()) {
+            trangthai = "Đã Xác Thực ";
+        } else {
+            trangthai = "Chưa Xác Thực ";
+        }
+        lbl_trangthaithaikhoan.setText("Trạng Thái :" + trangthai);
         setImg(cttk.getAnhdaidien(), cttk.getBanglaixe());
     }
     int row = -1;
     void edit(){
-        String userid =  String.valueOf(tbl_taikhoan.getValueAt(this.row,0));
+        userid =  String.valueOf(tbl_taikhoan.getValueAt(this.row,0));
         ChiTietTaiKhoan cttk = cttkd.selectByID(userid);
         this.setForm(cttk);
+    }
+    void update() {
+        TaiKhoan tk = new TaiKhoan();
+        tk.setTrangthai(true);
+        tk.setUserid(Integer.parseInt(userid));
+            try {
+                tkd.update_1(tk);
+                filltableTaiKhoan();
+                DialogHelper.alert(this, "Cập nhật thành công");
+            } catch (Exception e) {
+                DialogHelper.alert(this, "Cập nhật thất bại");
+                e.printStackTrace();
+            }
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -97,6 +121,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         txt_sodienthoai = new javax.swing.JTextField();
         btn_guiemail = new javax.swing.JButton();
         btn_xacthuc = new javax.swing.JButton();
+        lbl_trangthaithaikhoan = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -122,7 +147,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
             },
             new String [] {
-                "UserID", "Họ Tên", "Email", "AnhDaiDien", "CCCD", "BangLaiXe", "SDT", "NgaySinh", "GioiTinh", "DiaChi", "SoDu"
+                "UserID", "Họ Tên", "AnhDaiDien", "CCCD", "BangLaiXe", "SDT", "NgaySinh", "GioiTinh", "DiaChi", "SoDu"
             }
         ));
         tbl_taikhoan.setOpaque(false);
@@ -211,6 +236,18 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         btn_guiemail.setText("Gửi Email Yêu Cầu Xác Thực");
 
         btn_xacthuc.setText("Xác Thực Tài Khoản");
+        btn_xacthuc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_xacthucActionPerformed(evt);
+            }
+        });
+
+        lbl_trangthaithaikhoan.setBackground(new java.awt.Color(255, 102, 51));
+        lbl_trangthaithaikhoan.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lbl_trangthaithaikhoan.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_trangthaithaikhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        lbl_trangthaithaikhoan.setText("Trạng Thái :");
+        lbl_trangthaithaikhoan.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout pnl_taikhoanLayout = new javax.swing.GroupLayout(pnl_taikhoan);
         pnl_taikhoan.setLayout(pnl_taikhoanLayout);
@@ -234,8 +271,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                             .addComponent(txt_email)
                             .addComponent(lbl_sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_sodienthoai)))
-                    .addComponent(btn_guiemail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+                    .addGroup(pnl_taikhoanLayout.createSequentialGroup()
+                        .addComponent(btn_guiemail)
+                        .addGap(161, 161, 161)
+                        .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_xacthuc))
@@ -266,11 +306,17 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txt_sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
-                .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_guiemail)
-                    .addComponent(btn_xacthuc))
-                .addGap(31, 31, 31))
+                .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_taikhoanLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_guiemail)
+                            .addComponent(btn_xacthuc))
+                        .addGap(31, 31, 31))
+                    .addGroup(pnl_taikhoanLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lbl_trangthaithaikhoan)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         jTabbedPane1.addTab("Tài Khoản", pnl_taikhoan);
@@ -310,6 +356,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tbl_taikhoanMouseClicked
 
+    private void btn_xacthucActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacthucActionPerformed
+        // TODO add your handling code here:
+        update();
+    }//GEN-LAST:event_btn_xacthucActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_guiemail;
@@ -324,6 +375,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_email;
     private javax.swing.JLabel lbl_hovaten;
     private javax.swing.JLabel lbl_sodienthoai;
+    private javax.swing.JLabel lbl_trangthaithaikhoan;
     private javax.swing.JPanel pnl_anhbanglai;
     private javax.swing.JPanel pnl_anhdaidien;
     private javax.swing.JPanel pnl_taikhoan;

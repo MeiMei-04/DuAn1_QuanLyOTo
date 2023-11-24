@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
     String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
+    String UPDATE_SQL = "UPDATE TaiKhoan SET TrangThai=? WHERE taikhoan =?";
+    String UPDATE_SQL_1 = "UPDATE TaiKhoan SET TrangThai=? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
     String SELECT_BY_ID_SQL = "select * from taikhoan where taikhoan =?";
+    String SELECT_BY_ID_SQL_1 = "select * from taikhoan where userid =?";
 
     @Override
     public void insert(TaiKhoan entity) {
@@ -29,7 +31,7 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
     @Override
     public void update(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.isVaitro());
+        JDBCHelper.executeUpdate(UPDATE_SQL,entity.isTrangthai(),entity.getTaikhoan());
     }
 
     @Override
@@ -82,6 +84,25 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
     @Override
     public List<TaiKhoan> selectByKey(String key) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void update_1(TaiKhoan entity) {
+        JDBCHelper.executeUpdate(UPDATE_SQL_1,entity.isTrangthai(),entity.getUserid());
+    }
+
+    @Override
+    public TaiKhoan selectByID_1(String key) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL_1, key);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
     }
 
 }

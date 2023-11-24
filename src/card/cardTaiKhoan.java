@@ -10,8 +10,6 @@ import Hepler.DateHelper;
 import Hepler.DialogHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.TaiKhoan;
-import java.awt.Color;
-import java.util.List;
 
 /**
  *
@@ -23,10 +21,10 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     ChiTietTaiKhoanDAO cttkdao = new ChiTietTaiKhoanDAO();
     String banglai = null;
     String anhdaidien = null;
-    private static String readurl_banglai = "src/imgbanglainew/";
-    private static String writeurl_banglai = "src/imgbanglai/";
-    private static String readurl_anhdaidien = "src/imganhdaidiennew/";
-    private static String writeurl_anhdaidien = "src/imganhdaidien/";
+    private static final String readurl_banglai = "src/imgbanglainew/";
+    private static final String writeurl_banglai = "src/imgbanglai/";
+    private static final String readurl_anhdaidien = "src/imganhdaidiennew/";
+    private static final String writeurl_anhdaidien = "src/imganhdaidien/";
 
     /**
      * Creates new form TaiKhoan
@@ -47,7 +45,6 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         cttk.setUserid(tk.getUserid());
         cttk.setHoten(txt_hoten.getText());
         cttk.setNgaysinh(DateHelper.toDate(txt_ngaysinh.getText(),"dd/MM/yyyy"));
-        cttk.setEmail(txt_email.getText());
         cttk.setSdt(txt_sodienthoai.getText());
         cttk.setCccd(txt_cancuoc.getText());
         cttk.setDiachi(txt_diachi.getText());
@@ -58,6 +55,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         } else {
             cttk.setGioitinh(false);
         }
+        cttk.setYeucauxacthuc(true);
         return cttk;
     }
 
@@ -86,7 +84,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             }
             anhdaidien = cttk.getAnhdaidien();
             banglai = cttk.getBanglaixe();
-            txt_email.setText(cttk.getEmail());
+            txt_email.setText(tk.getEmail());
             setImg(anhdaidien, banglai);
             lbl_sodu.setText("Số Dư: "+String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
@@ -98,7 +96,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         if (cttk != null) {
             try {
                 cttkdao.insert(cttk);
-                DialogHelper.alert(this, "Cập nhật thông tin thành công !!!");
+                DialogHelper.alert(this, "Thêm thông tin thành công !!!");
             } catch (Exception e) {
                 System.out.println("them thong tin that bai");
                 update();
@@ -501,7 +499,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_capnhatthongtinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_capnhatthongtinActionPerformed
-        insert();
+
+            insert();
     }//GEN-LAST:event_btn_capnhatthongtinActionPerformed
 
     private void lbl_anhdaidienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhdaidienMouseClicked

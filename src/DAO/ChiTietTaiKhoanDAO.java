@@ -16,20 +16,21 @@ import java.util.List;
  */
 public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
-    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,Email,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,sodu) values(?,?,?,?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,email = ?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=?, sodu=? WHERE userid =?";
+    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,yeucauxacthuc) values(?,?,?,?,?,?,?,?,?,?,0)";
+    String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL_SQL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_SQL = "select * from ChiTietTaiKhoan where userid =?";
+    String SELECT_BY_ID_SQL_LIST = "select * from ChiTietTaiKhoan INNER JOIN TaiKhoan ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID where yeucauxacthuc = ? and Trangthai = 0";
 
     @Override
     public void insert(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getUserid(), entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi(),entity.getSodu());
+        JDBCHelper.executeUpdate(INSERT_SQL, entity.getUserid(), entity.getHoten(), entity.getAnhdaidien(), entity.getCccd(), entity.getBanglaixe(), entity.getSdt(), entity.getNgaysinh(), entity.isGioitinh(), entity.getDiachi(), entity.isYeucauxacthuc());
     }
 
     @Override
     public void update(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getHoten(), entity.getEmail(), entity.getAnhdaidien(), entity.getCccd(),entity.getBanglaixe(),entity.getSdt(),entity.getNgaysinh(),entity.isGioitinh(),entity.getDiachi(),entity.getSodu(),entity.getUserid());
+        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getHoten(), entity.getAnhdaidien(), entity.getCccd(), entity.getBanglaixe(), entity.getSdt(), entity.getNgaysinh(), entity.isGioitinh(), entity.getDiachi(), entity.getUserid());
     }
 
     @Override
@@ -59,7 +60,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
     @Override
     public List<ChiTietTaiKhoan> selectByKey(String key) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL, key);
+        List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL_LIST, key);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -72,14 +73,13 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
     @Override
     protected List<ChiTietTaiKhoan> selectBySQL(String sql, Object... args) {
-       List<ChiTietTaiKhoan> list = new ArrayList<>();
+        List<ChiTietTaiKhoan> list = new ArrayList<>();
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 ChiTietTaiKhoan cttk = new ChiTietTaiKhoan();
                 cttk.setUserid(rs.getInt("userid"));
                 cttk.setHoten(rs.getString("hoten"));
-                cttk.setEmail(rs.getString("email"));
                 cttk.setAnhdaidien(rs.getString("anhdaidien"));
                 cttk.setCccd(rs.getString("cccd"));
                 cttk.setBanglaixe(rs.getString("banglaixe"));
@@ -88,6 +88,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
                 cttk.setGioitinh(rs.getBoolean("gioitinh"));
                 cttk.setDiachi(rs.getString("diachi"));
                 cttk.setSodu(rs.getFloat("sodu"));
+                cttk.setYeucauxacthuc(rs.getBoolean("yeucauxacthuc"));
                 list.add(cttk);
             }
             rs.getStatement().getConnection().close();
@@ -97,5 +98,17 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public void update_1(ChiTietTaiKhoan entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public ChiTietTaiKhoan selectByID_1(String key) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
 
 }

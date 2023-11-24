@@ -14,7 +14,6 @@ public class ChiTietTaiKhoan {
     private int id_detail;
     private int userid;
     private String hoten;
-    private String email;
     private String anhdaidien;
     private String cccd;
     private String banglaixe;
@@ -23,15 +22,15 @@ public class ChiTietTaiKhoan {
     private float sodu;
     private boolean gioitinh;
     private String diachi;
+    private boolean yeucauxacthuc;
 
     public ChiTietTaiKhoan() {
     }
 
-    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String email, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, float sodu, boolean gioitinh, String diachi) {
+    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, float sodu, boolean gioitinh, String diachi, boolean yeucauxacthuc) {
         this.id_detail = id_detail;
         this.userid = userid;
         this.hoten = hoten;
-        this.email = email;
         this.anhdaidien = anhdaidien;
         this.cccd = cccd;
         this.banglaixe = banglaixe;
@@ -40,6 +39,7 @@ public class ChiTietTaiKhoan {
         this.sodu = sodu;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
+        this.yeucauxacthuc = yeucauxacthuc;
     }
 
     public int getId_detail() {
@@ -64,14 +64,6 @@ public class ChiTietTaiKhoan {
 
     public void setHoten(String hoten) {
         this.hoten = hoten;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAnhdaidien() {
@@ -138,8 +130,12 @@ public class ChiTietTaiKhoan {
         this.diachi = diachi;
     }
 
-    
+    public boolean isYeucauxacthuc() {
+        return yeucauxacthuc;
+    }
 
-    
+    public void setYeucauxacthuc(boolean yeucauxacthuc) {
+        this.yeucauxacthuc = yeucauxacthuc;
+    }
     
 }
