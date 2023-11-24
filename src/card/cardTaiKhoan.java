@@ -189,7 +189,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         lbl_userid = new javax.swing.JLabel();
         pnl_anhbanglai = new javax.swing.JPanel();
         lbl_anhbanglai = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        pnl_anhdaidien = new javax.swing.JPanel();
         lbl_anhdaidien = new javax.swing.JLabel();
         lbl_capnhatthongtin = new javax.swing.JLabel();
         txt_hoten = new javax.swing.JTextField();
@@ -261,9 +261,9 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh Đại Diện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 12), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel3.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel3.setOpaque(false);
+        pnl_anhdaidien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh Đại Diện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnl_anhdaidien.setForeground(new java.awt.Color(255, 255, 255));
+        pnl_anhdaidien.setOpaque(false);
 
         lbl_anhdaidien.setForeground(new java.awt.Color(255, 255, 255));
         lbl_anhdaidien.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -274,18 +274,18 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnl_anhdaidienLayout = new javax.swing.GroupLayout(pnl_anhdaidien);
+        pnl_anhdaidien.setLayout(pnl_anhdaidienLayout);
+        pnl_anhdaidienLayout.setHorizontalGroup(
+            pnl_anhdaidienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnl_anhdaidienLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_anhdaidien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        pnl_anhdaidienLayout.setVerticalGroup(
+            pnl_anhdaidienLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnl_anhdaidienLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_anhdaidien, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -395,7 +395,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lbl_userid))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -478,7 +478,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
                                 .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btn_capnhatthongtin)
@@ -490,7 +490,9 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1018, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,7 +522,6 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JButton btn_napsodu;
     private javax.swing.ButtonGroup btngr_gioitinh;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_anhbanglai;
     private javax.swing.JLabel lbl_anhdaidien;
@@ -535,6 +536,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_trangthaithaikhoan;
     private javax.swing.JLabel lbl_userid;
     private javax.swing.JPanel pnl_anhbanglai;
+    private javax.swing.JPanel pnl_anhdaidien;
     private javax.swing.JPanel pnl_gioitinh;
     private javax.swing.JRadioButton rdo_nam;
     private javax.swing.JRadioButton rdo_nu;

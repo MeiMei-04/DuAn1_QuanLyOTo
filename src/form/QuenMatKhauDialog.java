@@ -233,7 +233,7 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
                     List<TaiKhoan> list = tkd.selectAll();
                     for (TaiKhoan tk : list) {
                         if (tk.getTaikhoan().equalsIgnoreCase(tentaikhoan)) {
-                            Hepler.Email.sendEmail(tk.getEmail(), "Thư Quên Mật Khẩu Tài Khoản: " + tk.getTaikhoan(), "Mật Khẩu Của Bạn Là: " + tk.getMatkhau());
+                            Hepler.Email.sendEmail(tk.getEmail(), "Thư Quên Mật Khẩu Tài Khoản: " + tk.getTaikhoan(), "Mật Khẩu Của Bạn Là: " + tk.getMatkhau(),null);
                             DialogHelper.alert(this, "Vui Lòng Check Email");
                         }
                     }

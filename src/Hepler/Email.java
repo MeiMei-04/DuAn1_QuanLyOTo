@@ -2,13 +2,18 @@ package Hepler;
 
 import java.util.Date;
 import java.util.Properties;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 public class Email {
     // Email: tungletest1.email@gmail.com
@@ -17,7 +22,7 @@ public class Email {
     static final String from = "quanlyotofpoly@gmail.com";
     static final String password = "ufcpnxgvlefjfbhj";
 
-    public static boolean sendEmail(String to, String tieuDe, String noiDung) {
+    public static boolean sendEmail(String to, String tieuDe, String noiDung, String nameimg) {
         // Properties : khai báo các thuộc tính
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
@@ -56,10 +61,26 @@ public class Email {
             // Quy đinh ngày gửi
             msg.setSentDate(new Date());
 
-            // Quy định email nhận phản hồi
-            // msg.setReplyTo(InternetAddress.parse(from, false))
-            // Nội dung
-            msg.setContent(noiDung, "text/HTML; charset=UTF-8");
+            // Tạo nội dung email
+            MimeMultipart multipart = new MimeMultipart("related");
+
+            // Phần thân email
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+            messageBodyPart.setContent(noiDung, "text/html");
+            multipart.addBodyPart(messageBodyPart);
+
+            // Kiểm tra xem có file ảnh nào được cung cấp hay không
+            if (nameimg != null && !nameimg.isEmpty()) {
+                // Phần ảnh
+                messageBodyPart = new MimeBodyPart();
+                DataSource fds = new FileDataSource("src/imgqrcode/"+nameimg);
+                messageBodyPart.setDataHandler(new DataHandler(fds));
+                messageBodyPart.setHeader("Content-ID", "<image>");
+                multipart.addBodyPart(messageBodyPart);
+            }
+
+            // Đặt nội dung cho email
+            msg.setContent(multipart);
 
             // Gửi email
             Transport.send(msg);
@@ -73,7 +94,7 @@ public class Email {
     }
 
     public static void main(String[] args) {
-        Email.sendEmail("truongndph30873@fpt.edu.vn", "Xác Minh Tài Khoản", "123123");
+        Email.sendEmail("hieudzpro4444@gmail.com", "Xác Minh Tài Khoản", "123123", "123.png");
 
     }
 

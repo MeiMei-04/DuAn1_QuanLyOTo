@@ -13,6 +13,7 @@ import card.cardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
 import card.cardSuaChuaBaoDuong;
+import card.cardTaiKhoan_QuanLy;
 import card.cardThueXe;
 import card.cardTrangChu;
 import card.cardXeThue;
@@ -150,7 +151,13 @@ public class TrangChu extends javax.swing.JFrame {
     public void openTaiKhoan() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new cardTaiKhoan());
+                
+                if (AuthHelper.isManager()) {
+                    showFrom(new cardTaiKhoan_QuanLy());
+                } else {
+                    showFrom(new cardTaiKhoan());
+
+                }
             } else {
                 openDangNhap();
             }
