@@ -9,19 +9,18 @@ package entyti;
  * @author Hieu
  */
 public class NapCard {
+    private int ID;
     private String manap;
     private String noidung;
     private float giatri;
     private boolean trangthai;
 
-    public NapCard() {
+    public int getID() {
+        return ID;
     }
 
-    public NapCard(String manap, String noidung, float giatri, boolean trangthai) {
-        this.manap = manap;
-        this.noidung = noidung;
-        this.giatri = giatri;
-        this.trangthai = trangthai;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getManap() {
@@ -55,6 +54,18 @@ public class NapCard {
     public void setTrangthai(boolean trangthai) {
         this.trangthai = trangthai;
     }
-    
+
+    public NapCard(int ID, String manap, String noidung, float giatri, boolean trangthai) {
+        this.ID = ID;
+        this.manap = manap;
+        this.noidung = noidung;
+        this.giatri = giatri;
+        this.trangthai = trangthai;
+    }
+
+    public NapCard() {
+    }
+
+  
     
 }
