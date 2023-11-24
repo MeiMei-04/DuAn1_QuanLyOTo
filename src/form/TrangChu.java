@@ -14,6 +14,7 @@ import card.cardDichVu;
 import card.cardHopDong;
 import card.cardSuaChuaBaoDuong;
 import card.cardThueXe;
+import card.cardTrangChu;
 import card.cardXeThue;
 
 /**
@@ -31,6 +32,7 @@ public class TrangChu extends javax.swing.JFrame {
         seticon();
         setIconImage(Hepler.ImagesHelper.getAppIcon());
         openDangNhap();
+        showFrom(new cardTrangChu());
         updateStatus_off();
     }
 
@@ -108,8 +110,8 @@ public class TrangChu extends javax.swing.JFrame {
                 new DangNhapDialog(this, false).setVisible(true);
             } else {
                 AuthHelper.logoff();
-                System.out.println(AuthHelper.isManager());
                 updateStatus_off();
+                showFrom(new cardTrangChu());
                 new DangNhapDialog(this, false).setVisible(true);
             }
         } catch (Exception e) {
