@@ -64,6 +64,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         String trangthai = null;
         TaiKhoan tk = Hepler.AuthHelper.user;
         lbl_userid.setText("USERID: " + String.valueOf(tk.getUserid()));
+        txt_email.setText(tk.getEmail());
         if (tk.isTrangthai()) {
             trangthai = "Đã Xác Thực ";
         } else {
@@ -84,8 +85,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 rdo_nam.setSelected(true);
             }
             anhdaidien = cttk.getAnhdaidien();
-            banglai = cttk.getBanglaixe();
-            txt_email.setText(tk.getEmail());
+            banglai = cttk.getBanglaixe();   
             setImg(anhdaidien, banglai);
             lbl_sodu.setText("Số Dư: " + String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
@@ -99,6 +99,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 cttkdao.insert(cttk);
                 DialogHelper.alert(this, "Thêm thông tin thành công !!!");
             } catch (Exception e) {
+                System.out.println(e.getMessage());
                 System.out.println("them thong tin that bai");
                 update();
             }

@@ -93,6 +93,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 e.printStackTrace();
             }
     }
+    public void sendemailverifly(String email){
+        Hepler.Email.sendEmail(email, "Yêu Cầu Xác Thực Tài Khoản", "Tài Khoản Của Bạn Chưa Đủ Điều Kiện Xác Thực, Vui Lòng Cập Nhật Lại Thông Tin Để Tiến Hành Xác Thực Tài Khoản", null);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -234,6 +237,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         txt_sodienthoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btn_guiemail.setText("Gửi Email Yêu Cầu Xác Thực");
+        btn_guiemail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guiemailActionPerformed(evt);
+            }
+        });
 
         btn_xacthuc.setText("Xác Thực Tài Khoản");
         btn_xacthuc.addActionListener(new java.awt.event.ActionListener() {
@@ -360,6 +368,11 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         // TODO add your handling code here:
         update();
     }//GEN-LAST:event_btn_xacthucActionPerformed
+
+    private void btn_guiemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guiemailActionPerformed
+        // TODO add your handling code here:
+        sendemailverifly(txt_email.getText());
+    }//GEN-LAST:event_btn_guiemailActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

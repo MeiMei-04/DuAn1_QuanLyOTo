@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
 
-    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,yeucauxacthuc) values(?,?,?,?,?,?,?,?,?,?,0)";
+    String INSERT_SQL = "INSERT INTO ChiTietTaiKhoan (userid,hoten,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,yeucauxacthuc) values(?,?,?,?,?,?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE ChiTietTaiKhoan SET hoten=?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL_SQL = "SELECT * FROM ChiTietTaiKhoan";
