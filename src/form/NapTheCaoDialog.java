@@ -19,6 +19,7 @@ import com.google.zxing.common.HybridBinarizer;
 import entyti.ChiTietTaiKhoan;
 import entyti.NapCard;
 import entyti.TaiKhoan;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.util.List;
@@ -80,6 +81,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             NapCard nc = ncd.selectByID(String.valueOf(result));
             return nc.getGiatri();
         } catch (Exception e) {
+            Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
             System.out.println(e.getMessage());
             return 0;
         }
