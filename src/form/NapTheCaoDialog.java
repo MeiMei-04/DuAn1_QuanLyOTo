@@ -58,8 +58,12 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            float tongtien = 0;
+            float tongtien =-1;
             tongtien = cttk.getSodu() + laygiatri();
+            if(tongtien<0){
+                Hepler.DialogHelper.alert(this, "Lỗi Giá Trị Thẻ");
+                return;
+            }
             cttk.setSodu(tongtien);
             cttkd.update_1(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
@@ -79,7 +83,6 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             System.out.println(e.getMessage());
             return 0;
         }
-        
     }
 
     private void initWebcam() {
