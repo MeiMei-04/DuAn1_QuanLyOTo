@@ -59,10 +59,10 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            float tongtien =-1;
+            float tongtien = -1;
             tongtien = cttk.getSodu() + laygiatri();
-            if(tongtien<0){
-                Hepler.DialogHelper.alert(this, "Lỗi Giá Trị Thẻ");
+            if (laygiatri() < 0) {
+                Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
                 return;
             }
             cttk.setSodu(tongtien);
@@ -81,9 +81,8 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             NapCard nc = ncd.selectByID(String.valueOf(result));
             return nc.getGiatri();
         } catch (Exception e) {
-            Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
             System.out.println(e.getMessage());
-            return 0;
+            return -2;
         }
     }
 

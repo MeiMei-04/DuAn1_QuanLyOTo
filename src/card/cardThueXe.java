@@ -555,9 +555,8 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
         TaiKhoan tk = Hepler.AuthHelper.user;
-        if (tk.isVaitro()) {
+        if (tk.isTrangthai()) {
             openHopDong();
-
         } else {
             DialogHelper.alert(this, "Vui Lòng Xác Thực Tài Khoản");
             return;
