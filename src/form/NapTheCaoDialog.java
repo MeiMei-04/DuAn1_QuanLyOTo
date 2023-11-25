@@ -63,6 +63,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             cttk.setSodu(tongtien);
             cttkd.update_1(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
+            ncd.delete(String.valueOf(result));
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Nạp Thất Bại");
             System.out.println(e.getMessage());
@@ -73,13 +74,12 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
     public float laygiatri() {
         try {
             NapCard nc = ncd.selectByID(String.valueOf(result));
-            ncd.delete(String.valueOf(result));
             return nc.getGiatri();
-
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return 0;
         }
-        return 0;
+        
     }
 
     private void initWebcam() {

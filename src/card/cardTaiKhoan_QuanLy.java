@@ -49,6 +49,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
             Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(), nc.getManap() + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
+            return;
         }
 
     }
