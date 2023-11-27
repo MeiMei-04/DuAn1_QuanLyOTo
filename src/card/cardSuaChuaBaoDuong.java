@@ -6,7 +6,6 @@ package card;
 
 import DAO.SuaChuaBaoDuongDAO;
 import Hepler.DialogHelper;
-import entyti.DichVu;
 import entyti.SuaChuaBaoDuong;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -209,6 +208,11 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
                 "Mã Xe", "Lần Gần Nhất", "Ngày Sửa chữa"
             }
         ));
+        tblSuaChuaBaoDuong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tblSuaChuaBaoDuongMousePressed(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblSuaChuaBaoDuong);
 
         btnGui.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -303,7 +307,6 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
                             .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(124, 124, 124)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -367,6 +370,13 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
             edit();
         }    // TODO add your handling code here:
     }//GEN-LAST:event_btnSauActionPerformed
+
+    private void tblSuaChuaBaoDuongMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSuaChuaBaoDuongMousePressed
+         if (evt.getClickCount() == 2) {
+            this.row = tblSuaChuaBaoDuong.getSelectedRow();
+            this.edit();
+        }
+    }//GEN-LAST:event_tblSuaChuaBaoDuongMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
