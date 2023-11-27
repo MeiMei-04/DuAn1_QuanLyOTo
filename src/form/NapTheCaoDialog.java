@@ -165,6 +165,11 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -216,8 +221,13 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         result = new Result(text, null, null, BarcodeFormat.CODABAR);
         laygiatri();
         congtien();
-        this.dispose();
     }//GEN-LAST:event_btn_napActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        webcam.close();
+        dispose();
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

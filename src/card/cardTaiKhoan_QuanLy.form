@@ -461,7 +461,6 @@
                           <Component id="jScrollPane3" alignment="0" max="32767" attributes="0"/>
                           <Component id="lbl_giatri" min="-2" max="-2" attributes="0"/>
                           <Component id="txtGiaTri" alignment="0" max="32767" attributes="0"/>
-                          <Component id="pnl_trangthai" min="-2" max="-2" attributes="0"/>
                           <Component id="btn_sendmail" alignment="0" max="32767" attributes="0"/>
                           <Component id="pnl_chucnang" alignment="0" max="32767" attributes="0"/>
                       </Group>
@@ -497,9 +496,7 @@
                               <Component id="lbl_giatri" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="txtGiaTri" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="pnl_trangthai" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                               <Component id="pnl_chucnang" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btn_sendmail" min="-2" max="-2" attributes="0"/>
@@ -606,42 +603,6 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtGiaTri">
             </Component>
-            <Container class="javax.swing.JPanel" name="pnl_trangthai">
-              <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="Tr&#x1ea1;ng th&#xe1;i"/>
-                  </Border>
-                </Property>
-                <Property name="opaque" type="boolean" value="false"/>
-              </Properties>
-
-              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                <Property name="columns" type="int" value="0"/>
-                <Property name="rows" type="int" value="1"/>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JRadioButton" name="rdochuanap">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="trangthai"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Ch&#x1b0;a n&#x1ea1;p"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JRadioButton" name="rdodanap">
-                  <Properties>
-                    <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="trangthai"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="&#x110;&#xe3; N&#x1ea1;p"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rdodanapActionPerformed"/>
-                  </Events>
-                </Component>
-              </SubComponents>
-            </Container>
             <Container class="javax.swing.JPanel" name="pnl_chucnang">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">

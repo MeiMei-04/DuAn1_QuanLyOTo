@@ -149,11 +149,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         txtMaNap.setText(nc.getManap());
         TxtNoiDung.setText(nc.getNoidung());
         txtGiaTri.setText(String.valueOf(nc.getGiatri()));
-        if (!nc.isTrangthai()) {
-            rdochuanap.setSelected(true);
-        } else {
-            rdodanap.setSelected(true);
-        }
 
     }
 
@@ -256,9 +251,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         TxtNoiDung = new javax.swing.JTextArea();
         lbl_giatri = new javax.swing.JLabel();
         txtGiaTri = new javax.swing.JTextField();
-        pnl_trangthai = new javax.swing.JPanel();
-        rdochuanap = new javax.swing.JRadioButton();
-        rdodanap = new javax.swing.JRadioButton();
         pnl_chucnang = new javax.swing.JPanel();
         btnThem = new javax.swing.JButton();
         btnXoa = new javax.swing.JButton();
@@ -501,23 +493,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
         lbl_giatri.setText("Giá trị:");
 
-        pnl_trangthai.setBorder(javax.swing.BorderFactory.createTitledBorder("Trạng thái"));
-        pnl_trangthai.setOpaque(false);
-        pnl_trangthai.setLayout(new java.awt.GridLayout(1, 0));
-
-        trangthai.add(rdochuanap);
-        rdochuanap.setText("Chưa nạp");
-        pnl_trangthai.add(rdochuanap);
-
-        trangthai.add(rdodanap);
-        rdodanap.setText("Đã Nạp");
-        rdodanap.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdodanapActionPerformed(evt);
-            }
-        });
-        pnl_trangthai.add(rdodanap);
-
         pnl_chucnang.setLayout(new java.awt.GridLayout(1, 0));
 
         btnThem.setText("Thêm");
@@ -592,7 +567,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                     .addComponent(jScrollPane3)
                     .addComponent(lbl_giatri)
                     .addComponent(txtGiaTri)
-                    .addComponent(pnl_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_sendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
@@ -624,9 +598,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addComponent(lbl_giatri)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(pnl_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(74, 74, 74)
                         .addComponent(pnl_chucnang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_sendmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -669,10 +641,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private void txtMaNapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaNapActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMaNapActionPerformed
-
-    private void rdodanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdodanapActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rdodanapActionPerformed
 
     private void btnThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemActionPerformed
         insertNapCard();
@@ -746,9 +714,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JPanel pnl_anhdaidien;
     private javax.swing.JPanel pnl_chucnang;
     private javax.swing.JPanel pnl_taikhoan;
-    private javax.swing.JPanel pnl_trangthai;
-    private javax.swing.JRadioButton rdochuanap;
-    private javax.swing.JRadioButton rdodanap;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbl_taikhoan;
     private javax.swing.JTable tblmanap;
