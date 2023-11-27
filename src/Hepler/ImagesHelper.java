@@ -10,6 +10,7 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
 import java.awt.AWTException;
+import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
@@ -198,13 +199,14 @@ public class ImagesHelper {
     }
 
     public static void capturePanel(JPanel panel, String name) {
-        BufferedImage image = null;
+        Dimension size = panel.getSize();
+        BufferedImage image = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+        Graphics2D g2 = image.createGraphics();
+        panel.paint(g2);
+        g2.dispose();
         try {
-            Robot robot = new Robot();
-            Rectangle rect = panel.getBounds();
-            image = robot.createScreenCapture(rect);
-            ImageIO.write(image, "png", new File("src/imghopdong/"+name+".png"));
-        } catch (AWTException | IOException e) {
+            ImageIO.write(image, "png", new File("src/imghopdong/" + name + ".png"));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

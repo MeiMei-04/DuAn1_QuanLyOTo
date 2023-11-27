@@ -1195,7 +1195,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         Hepler.ImagesHelper.capturePanel(MAIN_PAGE, "HopDong");
-        System.out.println("1");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
