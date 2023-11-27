@@ -184,7 +184,12 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     }
     public void openNapCard() {
         try {
-            new NapTheCaoDialog(null, true).setVisible(true);
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            if(tk.isTrangthai()){
+                new NapTheCaoDialog(null, true).setVisible(true);
+            }else{
+                DialogHelper.alert(this, "Vui Lòng Xác Thực Tài Khoản");
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

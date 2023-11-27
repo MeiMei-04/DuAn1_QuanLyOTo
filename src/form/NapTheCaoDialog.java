@@ -9,6 +9,7 @@ import DAO.NapCardDAO;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
+import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.LuminanceSource;
 import com.google.zxing.MultiFormatReader;
@@ -59,7 +60,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            float tongtien = -1;
+            int tongtien = -1;
             tongtien = cttk.getSodu() + laygiatri();
             if (laygiatri() < 0) {
                 Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
@@ -76,7 +77,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
 
     }
 
-    public float laygiatri() {
+    public int laygiatri() {
         try {
             NapCard nc = ncd.selectByID(String.valueOf(result));
             return nc.getGiatri();
@@ -159,6 +160,9 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
 
         background = new javax.swing.JPanel();
         pnl_qrcam = new javax.swing.JPanel();
+        txt_manap = new javax.swing.JTextField();
+        btn_nap = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -169,6 +173,18 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         pnl_qrcam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 230, 230)));
         pnl_qrcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         background.add(pnl_qrcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 300));
+        background.add(txt_manap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 280, -1));
+
+        btn_nap.setText("Nạp");
+        btn_nap.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_napActionPerformed(evt);
+            }
+        });
+        background.add(btn_nap, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
+
+        jLabel1.setText("Mã Nạp");
+        background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,12 +210,24 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_napActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_napActionPerformed
+        // TODO add your handling code here:
+        String text = txt_manap.getText();
+        result = new Result(text, null, null, BarcodeFormat.CODABAR);
+        laygiatri();
+        congtien();
+        this.dispose();
+    }//GEN-LAST:event_btn_napActionPerformed
+
     /**
      * @param args the command line arguments
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
+    private javax.swing.JButton btn_nap;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel pnl_qrcam;
+    private javax.swing.JTextField txt_manap;
     // End of variables declaration//GEN-END:variables
 
     @Override

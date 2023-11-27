@@ -91,7 +91,7 @@ public class cardDichVu extends javax.swing.JPanel {
         DichVu dv = new DichVu();
         dv.setMadichvu(txtMaDichVu.getText());
         dv.setTendichvu(txtTenDichVu.getText());
-        dv.setDongia(Float.valueOf(txtDonGia.getText()));
+        dv.setDongia(Integer.parseInt(txtDonGia.getText()));
         dv.setGhichu(txtghichu.getText());
         return dv;
     }

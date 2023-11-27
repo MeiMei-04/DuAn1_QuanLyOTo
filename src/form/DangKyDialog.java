@@ -153,6 +153,7 @@ public class DangKyDialog extends java.awt.Dialog {
         jLabel6 = new javax.swing.JLabel();
         btn_dangky = new javax.swing.JButton();
         btn_nhanma = new javax.swing.JButton();
+        cb_hienthimatkhau = new javax.swing.JCheckBox();
 
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -290,6 +291,15 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
+        cb_hienthimatkhau.setText("HIỂN THỊ MẬT KHẨU");
+        cb_hienthimatkhau.setContentAreaFilled(false);
+        cb_hienthimatkhau.setFocusPainted(false);
+        cb_hienthimatkhau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_hienthimatkhauActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
         backgroundLayout.setHorizontalGroup(
@@ -314,12 +324,14 @@ public class DangKyDialog extends java.awt.Dialog {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
                                         .addComponent(lbl_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txt_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
-                                                .addComponent(btn_dangky, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(cb_hienthimatkhau)
+                                            .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addComponent(txt_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, backgroundLayout.createSequentialGroup()
+                                                    .addComponent(btn_dangky, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                             .addGroup(backgroundLayout.createSequentialGroup()
                                 .addComponent(lbl_taikhoan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
@@ -359,11 +371,13 @@ public class DangKyDialog extends java.awt.Dialog {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(lbl_maxacnhan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt_maxacnhan, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(13, 13, 13)
+                .addComponent(cb_hienthimatkhau)
                 .addGap(18, 18, 18)
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btn_dangky, javax.swing.GroupLayout.DEFAULT_SIZE, 29, Short.MAX_VALUE)
-                    .addComponent(btn_nhanma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(98, Short.MAX_VALUE))
+                    .addComponent(btn_dangky, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(65, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -467,11 +481,23 @@ public class DangKyDialog extends java.awt.Dialog {
         }
     }//GEN-LAST:event_btn_dangkyActionPerformed
 
+    private void cb_hienthimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_hienthimatkhauActionPerformed
+        // TODO add your handling code here:
+        if (cb_hienthimatkhau.isSelected()) {
+            txt_password.setEchoChar((char) 0); // password visible
+            txt_passwordconfirm.setEchoChar((char) 0); // password visible
+        } else {
+            txt_password.setEchoChar('*'); // password hidden
+            txt_passwordconfirm.setEchoChar('*'); // password hidden
+        }
+    }//GEN-LAST:event_cb_hienthimatkhauActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JButton btn_dangky;
     private javax.swing.JButton btn_nhanma;
+    private javax.swing.JCheckBox cb_hienthimatkhau;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel lbl_anh;
     private javax.swing.JLabel lbl_confirm;

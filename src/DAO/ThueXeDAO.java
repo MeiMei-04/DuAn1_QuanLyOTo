@@ -68,7 +68,7 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
                 xe.setTenxe(rs.getString("TenXe"));
                 xe.setSoghe(rs.getInt("SoGhe"));
                 xe.setTrangthaixethue(rs.getBoolean("TrangThai"));
-                xe.setGiathue(rs.getFloat("GiaThue"));
+                xe.setGiathue(rs.getInt("GiaThue"));
                 xe.setAnhxe(rs.getString("Anh_Xe"));
                 xe.setMaloaixe(rs.getString("MaLoaiXe"));
                 xe.setGhichu(rs.getString("ghichu"));

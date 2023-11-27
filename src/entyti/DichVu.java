@@ -12,12 +12,12 @@ public class DichVu {
     private String madichvu;
     private String tendichvu;
     private String ghichu;
-    private double dongia;
+    private int dongia;
 
     public DichVu() {
     }
 
-    public DichVu(String madichvu, String tendichvu, String ghichu, double dongia) {
+    public DichVu(String madichvu, String tendichvu, String ghichu, int dongia) {
         this.madichvu = madichvu;
         this.tendichvu = tendichvu;
         this.ghichu = ghichu;
@@ -48,14 +48,12 @@ public class DichVu {
         this.ghichu = ghichu;
     }
 
-    public double getDongia() {
+    public int getDongia() {
         return dongia;
     }
 
-    public void setDongia(double dongia) {
+    public void setDongia(int dongia) {
         this.dongia = dongia;
     }
-
- 
     
 }

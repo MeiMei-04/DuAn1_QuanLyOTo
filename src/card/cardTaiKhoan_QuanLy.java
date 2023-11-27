@@ -168,7 +168,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         NapCard nc = new NapCard();
         nc.setManap(txtMaNap.getText());
         nc.setNoidung(TxtNoiDung.getText());
-        nc.setGiatri(Float.parseFloat(txtGiaTri.getText()));
+        nc.setGiatri(Integer.parseInt(txtGiaTri.getText()));
         nc.setTrangthai(false);
         return nc;
     }

@@ -68,12 +68,15 @@
                                       <Group type="102" alignment="1" attributes="0">
                                           <Component id="lbl_maxacnhan" min="-2" pref="40" max="-2" attributes="0"/>
                                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Component id="txt_maxacnhan" min="-2" pref="250" max="-2" attributes="0"/>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="btn_dangky" min="-2" pref="105" max="-2" attributes="0"/>
-                                                  <EmptySpace max="32767" attributes="0"/>
-                                                  <Component id="btn_nhanma" min="-2" pref="107" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="cb_hienthimatkhau" min="-2" max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                                  <Component id="txt_maxacnhan" min="-2" pref="250" max="-2" attributes="0"/>
+                                                  <Group type="102" alignment="1" attributes="0">
+                                                      <Component id="btn_dangky" min="-2" pref="105" max="-2" attributes="0"/>
+                                                      <EmptySpace max="32767" attributes="0"/>
+                                                      <Component id="btn_nhanma" min="-2" pref="107" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
                                           </Group>
                                       </Group>
@@ -114,7 +117,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_pass" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="txt_password" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="txt_password" alignment="1" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -131,12 +134,14 @@
                       <Component id="lbl_maxacnhan" max="32767" attributes="0"/>
                       <Component id="txt_maxacnhan" min="-2" pref="40" max="-2" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                  <Component id="cb_hienthimatkhau" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="btn_dangky" pref="29" max="32767" attributes="0"/>
-                      <Component id="btn_nhanma" max="32767" attributes="0"/>
+                      <Component id="btn_dangky" max="32767" attributes="0"/>
+                      <Component id="btn_nhanma" min="-2" pref="29" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="98" max="32767" attributes="0"/>
+                  <EmptySpace pref="65" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -336,6 +341,16 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_nhanmaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="cb_hienthimatkhau">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="HI&#x1ec2;N TH&#x1eca; M&#x1eac;T KH&#x1ea8;U"/>
+            <Property name="contentAreaFilled" type="boolean" value="false"/>
+            <Property name="focusPainted" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_hienthimatkhauActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

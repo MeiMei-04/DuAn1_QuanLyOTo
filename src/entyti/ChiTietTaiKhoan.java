@@ -19,7 +19,7 @@ public class ChiTietTaiKhoan {
     private String banglaixe;
     private String sdt;
     private Date ngaysinh;
-    private float sodu;
+    private int sodu;
     private boolean gioitinh;
     private String diachi;
     private boolean yeucauxacthuc;
@@ -27,7 +27,7 @@ public class ChiTietTaiKhoan {
     public ChiTietTaiKhoan() {
     }
 
-    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, float sodu, boolean gioitinh, String diachi, boolean yeucauxacthuc) {
+    public ChiTietTaiKhoan(int id_detail, int userid, String hoten, String anhdaidien, String cccd, String banglaixe, String sdt, Date ngaysinh, int sodu, boolean gioitinh, String diachi, boolean yeucauxacthuc) {
         this.id_detail = id_detail;
         this.userid = userid;
         this.hoten = hoten;
@@ -106,11 +106,11 @@ public class ChiTietTaiKhoan {
         this.ngaysinh = ngaysinh;
     }
 
-    public float getSodu() {
+    public int getSodu() {
         return sodu;
     }
 
-    public void setSodu(float sodu) {
+    public void setSodu(int sodu) {
         this.sodu = sodu;
     }
 
@@ -137,5 +137,6 @@ public class ChiTietTaiKhoan {
     public void setYeucauxacthuc(boolean yeucauxacthuc) {
         this.yeucauxacthuc = yeucauxacthuc;
     }
+
     
 }

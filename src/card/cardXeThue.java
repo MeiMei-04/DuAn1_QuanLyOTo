@@ -91,8 +91,8 @@ public class cardXeThue extends javax.swing.JPanel {
         xe.setAnhxe(anhxe);
         xe.setMaxe(txt_maxe.getText());
         xe.setTenxe(txt_tenxe.getText());
-        xe.setSoghe(Integer.valueOf(txt_soghe.getText()));
-        xe.setGiathue(Float.valueOf(txt_giathue.getText()));
+        xe.setSoghe(Integer.parseInt(txt_soghe.getText()));
+        xe.setGiathue(Integer.parseInt(txt_giathue.getText()));
         xe.setMaloaixe(txt_maloaixe.getText());
         xe.setGhichu(txt_noidung.getText());
         return xe;

@@ -12,8 +12,19 @@ public class NapCard {
     private int ID;
     private String manap;
     private String noidung;
-    private float giatri;
+    private int giatri;
     private boolean trangthai;
+
+    public NapCard() {
+    }
+
+    public NapCard(int ID, String manap, String noidung, int giatri, boolean trangthai) {
+        this.ID = ID;
+        this.manap = manap;
+        this.noidung = noidung;
+        this.giatri = giatri;
+        this.trangthai = trangthai;
+    }
 
     public int getID() {
         return ID;
@@ -39,11 +50,11 @@ public class NapCard {
         this.noidung = noidung;
     }
 
-    public float getGiatri() {
+    public int getGiatri() {
         return giatri;
     }
 
-    public void setGiatri(float giatri) {
+    public void setGiatri(int giatri) {
         this.giatri = giatri;
     }
 
@@ -54,18 +65,7 @@ public class NapCard {
     public void setTrangthai(boolean trangthai) {
         this.trangthai = trangthai;
     }
-
-    public NapCard(int ID, String manap, String noidung, float giatri, boolean trangthai) {
-        this.ID = ID;
-        this.manap = manap;
-        this.noidung = noidung;
-        this.giatri = giatri;
-        this.trangthai = trangthai;
-    }
-
-    public NapCard() {
-    }
-
+    
   
     
 }

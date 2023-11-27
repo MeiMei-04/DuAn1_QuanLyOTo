@@ -88,7 +88,7 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
                 cttk.setNgaysinh(rs.getDate("ngaysinh"));
                 cttk.setGioitinh(rs.getBoolean("gioitinh"));
                 cttk.setDiachi(rs.getString("diachi"));
-                cttk.setSodu(rs.getFloat("sodu"));
+                cttk.setSodu(rs.getInt("sodu"));
                 cttk.setYeucauxacthuc(rs.getBoolean("yeucauxacthuc"));
                 list.add(cttk);
             }

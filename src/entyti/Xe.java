@@ -13,7 +13,7 @@ public class Xe {
     private String tenxe;
     private int soghe;
     private boolean trangthaixethue;
-    private double giathue;
+    private int giathue;
     private String anhxe;
     private String maloaixe;
     private String ghichu;
@@ -21,7 +21,7 @@ public class Xe {
     public Xe() {
     }
 
-    public Xe(String maxe, String tenxe, int soghe, boolean trangthaixethue, double giathue, String anhxe, String maloaixe, String ghichu) {
+    public Xe(String maxe, String tenxe, int soghe, boolean trangthaixethue, int giathue, String anhxe, String maloaixe, String ghichu) {
         this.maxe = maxe;
         this.tenxe = tenxe;
         this.soghe = soghe;
@@ -64,11 +64,11 @@ public class Xe {
         this.trangthaixethue = trangthaixethue;
     }
 
-    public double getGiathue() {
+    public int getGiathue() {
         return giathue;
     }
 
-    public void setGiathue(double giathue) {
+    public void setGiathue(int giathue) {
         this.giathue = giathue;
     }
 
@@ -95,6 +95,5 @@ public class Xe {
     public void setGhichu(String ghichu) {
         this.ghichu = ghichu;
     }
-
     
 }
