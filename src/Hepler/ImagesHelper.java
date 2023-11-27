@@ -9,8 +9,11 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
+import java.awt.AWTException;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -24,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -191,6 +195,18 @@ public class ImagesHelper {
         // Write to file image
         Path path = outputFile.toPath();
         MatrixToImageWriter.writeToPath(matrix, "PNG", path);
+    }
+
+    public static void capturePanel(JPanel panel, String name) {
+        BufferedImage image = null;
+        try {
+            Robot robot = new Robot();
+            Rectangle rect = panel.getBounds();
+            image = robot.createScreenCapture(rect);
+            ImageIO.write(image, "png", new File("src/imghopdong/"+name+".png"));
+        } catch (AWTException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) throws WriterException, IOException {
