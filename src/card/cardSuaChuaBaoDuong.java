@@ -104,7 +104,6 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         txtLanGanNhat = new javax.swing.JTextField();
         txtNgaySuaChua = new javax.swing.JTextField();
-        txtNoiDung = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         btnBatDau = new javax.swing.JButton();
@@ -116,6 +115,8 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
         btnGui = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtMaXe = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtNoiDung = new javax.swing.JTextArea();
 
         jTable1.setBackground(new java.awt.Color(204, 204, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -165,12 +166,6 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
         txtNgaySuaChua.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNgaySuaChuaActionPerformed(evt);
-            }
-        });
-
-        txtNoiDung.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNoiDungActionPerformed(evt);
             }
         });
 
@@ -228,6 +223,10 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Lần Gần Nhất :");
 
+        txtNoiDung.setColumns(20);
+        txtNoiDung.setRows(5);
+        jScrollPane1.setViewportView(txtNoiDung);
+
         javax.swing.GroupLayout SuaChuaBaoDuongLayout = new javax.swing.GroupLayout(SuaChuaBaoDuong);
         SuaChuaBaoDuong.setLayout(SuaChuaBaoDuongLayout);
         SuaChuaBaoDuongLayout.setHorizontalGroup(
@@ -239,12 +238,11 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
                 .addGroup(SuaChuaBaoDuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
-                        .addGroup(SuaChuaBaoDuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMaXe, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtLanGanNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(SuaChuaBaoDuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtMaXe, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
+                            .addComponent(txtLanGanNhat, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                             .addComponent(jLabel7)
-                            .addComponent(txtNgaySuaChua, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNgaySuaChua, javax.swing.GroupLayout.DEFAULT_SIZE, 432, Short.MAX_VALUE)
                             .addComponent(jLabel8)
                             .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
                                 .addComponent(btnBatDau, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -257,7 +255,8 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
                             .addComponent(jLabel5)
                             .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
                                 .addGap(160, 160, 160)
-                                .addComponent(btnGui)))
+                                .addComponent(btnGui))
+                            .addComponent(jScrollPane1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
@@ -304,8 +303,9 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
                             .addGroup(SuaChuaBaoDuongLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(124, 124, 124)))
-                        .addComponent(txtNoiDung, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGui, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(SuaChuaBaoDuongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -334,10 +334,6 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
     private void txtNgaySuaChuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNgaySuaChuaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNgaySuaChuaActionPerformed
-
-    private void txtNoiDungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNoiDungActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNoiDungActionPerformed
 
     private void btnBatDauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatDauActionPerformed
         row = 0;
@@ -390,6 +386,7 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
@@ -397,7 +394,7 @@ public class cardSuaChuaBaoDuong extends javax.swing.JPanel {
     private javax.swing.JTextField txtLanGanNhat;
     private javax.swing.JTextField txtMaXe;
     private javax.swing.JTextField txtNgaySuaChua;
-    private javax.swing.JTextField txtNoiDung;
+    private javax.swing.JTextArea txtNoiDung;
     // End of variables declaration//GEN-END:variables
 
 }
