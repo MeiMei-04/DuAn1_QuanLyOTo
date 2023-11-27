@@ -151,7 +151,7 @@ public class TrangChu extends javax.swing.JFrame {
     public void openTaiKhoan() {
         try {
             if (AuthHelper.authenticated()) {
-                
+
                 if (AuthHelper.isManager()) {
                     showFrom(new cardTaiKhoan_QuanLy());
                 } else {
@@ -834,7 +834,7 @@ public class TrangChu extends javax.swing.JFrame {
 
         pnl_Body.setBackground(new java.awt.Color(255, 255, 255));
         pnl_Body.setOpaque(false);
-        pnl_Body.setPreferredSize(new java.awt.Dimension(937, 680));
+        pnl_Body.setPreferredSize(new java.awt.Dimension(985, 680));
         pnl_Body.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -844,7 +844,7 @@ public class TrangChu extends javax.swing.JFrame {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addComponent(pnl_Menu, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE))
+                .addComponent(pnl_Body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -882,6 +882,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
+        showFrom(new cardTrangChu());
     }//GEN-LAST:event_pnl_TrangChuMouseClicked
 
     private void pnl_taikhoanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_taikhoanMouseClicked

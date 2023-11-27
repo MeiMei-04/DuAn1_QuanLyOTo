@@ -5,6 +5,9 @@
 package card;
 
 import Hepler.AnimatedCarPanel;
+import java.net.URL;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -17,6 +20,14 @@ public class cardTrangChu extends javax.swing.JPanel {
      */
     public cardTrangChu() {
         initComponents();
+        showLoader();
+    }
+
+    public void showLoader() {
+        //URL url = getClass().getResource("/gif/dragon.gif");
+        Hepler.ImagesHelper.checkfile("src\\gif\\dragon.gif");
+        Icon icon = new ImageIcon("src\\gif\\dragon.gif");
+        lbl_gif.setIcon(icon);
     }
 
     /**
@@ -28,21 +39,29 @@ public class cardTrangChu extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 255, 255));
+        lbl_gif = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(0, 0, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 878, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(lbl_gif, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 554, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(lbl_gif, javax.swing.GroupLayout.PREFERRED_SIZE, 659, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel lbl_gif;
     // End of variables declaration//GEN-END:variables
 }
