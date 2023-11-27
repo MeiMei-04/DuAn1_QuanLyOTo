@@ -33,6 +33,10 @@ public class cardThueXe extends javax.swing.JPanel {
     int size = 0;
     int row = -1;
     String item = null;
+    String maxe = null;
+    String songaythue = null;
+    int tiendichvu = 0;
+    int tienvoucher = 0;
 
     /**
      * Creates new form ThueXe
@@ -43,20 +47,9 @@ public class cardThueXe extends javax.swing.JPanel {
         setForm(locxe(item), 0);
     }
 
-    public void openThuexe() {
-        try {
-            new TaoHopDongDialog(null, true).setVisible(true);
-        } catch (Exception e) {
-        }
-    }
-
     public void openHopDong() {
         try {
-            if (AuthHelper.authenticated()) {
-                new TaoHopDongDialog(null, true).setVisible(true);
-            } else {
-                openHopDong();
-            }
+            new TaoHopDongDialog(null, true, maxe,songaythue).setVisible(true);
 
         } catch (Exception e) {
         }
@@ -154,6 +147,7 @@ public class cardThueXe extends javax.swing.JPanel {
             lbl_giathue.setText("Giá Thuê: " + xe.getGiathue());
             lbl_maloaixe.setText("Loại Xe: " + xe.getMaloaixe());
             txt_noidung.setText(xe.getGhichu());
+            maxe = xe.getMaxe();
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Lỗi Truy Vấn");
             System.out.println(e.getMessage());
@@ -373,7 +367,7 @@ public class cardThueXe extends javax.swing.JPanel {
         cbb_DichVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
 
         lbl_voucher.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_voucher.setText("Vocher");
+        lbl_voucher.setText("Voucher");
 
         lbl_dichvu.setForeground(new java.awt.Color(255, 255, 255));
         lbl_dichvu.setText("Dich Vụ");
@@ -407,7 +401,7 @@ public class cardThueXe extends javax.swing.JPanel {
                             .addComponent(lbl_songaythue))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 346, Short.MAX_VALUE)
+                        .addGap(0, 349, Short.MAX_VALUE)
                         .addComponent(btn_Thuexe)))
                 .addContainerGap())
         );
@@ -554,6 +548,8 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
+        songaythue = txt_songaythue.getText();
+        System.out.println(songaythue);
         TaiKhoan tk = Hepler.AuthHelper.user;
         if (tk.isTrangthai()) {
             openHopDong();

@@ -3,22 +3,66 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package form;
-
+import DAO.ChiTietTaiKhoanDAO;
+import DAO.ThueXeDAO;
+import entyti.*;
 /**
  *
  * @author Hieu
  */
 public class TaoHopDongDialog extends javax.swing.JDialog {
-
-    /**
-     * Creates new form TaoHopDongDialog
-     */
-    public TaoHopDongDialog(java.awt.Frame parent, boolean modal) {
+    ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
+    ThueXeDAO txd = new ThueXeDAO();
+    String maxe = null;
+    String songaythue = null;
+    int tongtien = 0;
+    int tiendichvu = 0;
+    int tienvoucher = 0;
+    
+    public TaoHopDongDialog(java.awt.Frame parent, boolean modal,String Maxe,String Songaythue) {
         super(parent, modal);
+        maxe = Maxe;
+        songaythue = Songaythue;
         initComponents();
         setLocationRelativeTo(null);
+        setForm();
     }
-
+    public void setForm(){
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        String gioitinh = null;
+        try {
+            Xe xe = txd.selectByID(this.maxe);
+            ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
+            txt_hotenbenthue.setText(cttk.getHoten());
+            if(cttk.isGioitinh()){
+                gioitinh = "Nữ";
+            }else{
+                gioitinh = "Nam";
+            }
+            txt_gioitinh.setText(gioitinh);
+            txt_cccd.setText(cttk.getCccd());
+            txt_Email.setText(tk.getEmail());
+            txt_sdt.setText(cttk.getSdt());
+            txt_diachi.setText(cttk.getDiachi());
+            txt_maxe.setText(maxe);
+            txt_tenxe.setText(xe.getTenxe());
+            txt_soghe.setText(String.valueOf(xe.getSoghe()));
+            txt_maloaixe.setText(xe.getMaloaixe());
+            txt_ghichu.setText(xe.getGhichu());
+            txt_giathue.setText(String.valueOf(xe.getGiathue()));
+            txt_ngaythue.setText(String.valueOf(Hepler.DateHelper.now()));
+            txt_songaythue.setText(songaythue);
+            int tienthuexe = xe.getGiathue()*Integer.parseInt(songaythue);
+            tongtien = tienthuexe - tienvoucher+tiendichvu;
+            System.out.println(tongtien);
+            txt_tongtien.setText(String.valueOf(tongtien));
+        } catch (Exception e) {
+        }
+        
+    }
+    public void insert(){
+        
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,21 +95,19 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
+        txt_hotenbenthue = new javax.swing.JTextField();
+        txt_gioitinh = new javax.swing.JTextField();
+        txt_cccd = new javax.swing.JTextField();
+        txt_sdt = new javax.swing.JTextField();
+        txt_Email = new javax.swing.JTextField();
+        txt_diachi = new javax.swing.JTextField();
+        txt_hotenchothue = new javax.swing.JTextField();
+        txt_chucvu = new javax.swing.JTextField();
+        txt_congty = new javax.swing.JTextField();
+        txt_sogcndkkd = new javax.swing.JTextField();
+        txt_ngaycap = new javax.swing.JTextField();
+        txt_noicap = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         PAGE1 = new javax.swing.JPanel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
@@ -77,7 +119,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel29 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jTextField13 = new javax.swing.JTextField();
+        txt_ngaythue = new javax.swing.JTextField();
         jLabel33 = new javax.swing.JLabel();
         jLabel40 = new javax.swing.JLabel();
         txt_maxe = new javax.swing.JTextField();
@@ -90,7 +132,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel44 = new javax.swing.JLabel();
         txt_maloaixe = new javax.swing.JTextField();
         jLabel45 = new javax.swing.JLabel();
-        txt_noidung = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt_ghichu = new javax.swing.JTextArea();
         PAGE2 = new javax.swing.JPanel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
@@ -98,13 +141,13 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel37 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
-        jTextField14 = new javax.swing.JTextField();
+        txt_songaythue = new javax.swing.JTextField();
         jLabel46 = new javax.swing.JLabel();
         jLabel47 = new javax.swing.JLabel();
         jLabel48 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
         jLabel50 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
+        txt_tongtien = new javax.swing.JTextField();
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
         jLabel54 = new javax.swing.JLabel();
@@ -149,7 +192,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel106 = new javax.swing.JLabel();
         jLabel97 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_thanhtoan = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -273,45 +316,51 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel20.setForeground(new java.awt.Color(255, 255, 255));
         jLabel20.setText("Địa chỉ :");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        txt_hotenbenthue.setEnabled(false);
+
+        txt_gioitinh.setEnabled(false);
+        txt_gioitinh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                txt_gioitinhActionPerformed(evt);
             }
         });
 
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField7.setText("NGUYỄN ĐÌNH HIẾU");
+        txt_cccd.setEnabled(false);
 
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField8.setText("GIÁM ĐỐC ĐẠI DIỆN");
+        txt_sdt.setEnabled(false);
 
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField9.setText("CÔNG TY CỔ PHẦN POLY CAR");
+        txt_Email.setEnabled(false);
 
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField10.setText("0123456789");
+        txt_diachi.setEnabled(false);
 
-        jTextField11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField11.setText("21-01-2023");
+        txt_hotenchothue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_hotenchothue.setText("NGUYỄN ĐÌNH HIẾU");
+        txt_hotenchothue.setEnabled(false);
 
-        jTextField12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jTextField12.setText("Sở Kế hoạch và Đầu tư TPHAIPHONG");
+        txt_chucvu.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_chucvu.setText("GIÁM ĐỐC ĐẠI DIỆN");
+        txt_chucvu.setEnabled(false);
+
+        txt_congty.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_congty.setText("CÔNG TY CỔ PHẦN POLY CAR");
+        txt_congty.setEnabled(false);
+
+        txt_sogcndkkd.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_sogcndkkd.setText("0123456789");
+        txt_sogcndkkd.setEnabled(false);
+
+        txt_ngaycap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_ngaycap.setText("21-01-2023");
+        txt_ngaycap.setEnabled(false);
+
+        txt_noicap.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_noicap.setText("Sở Kế hoạch và Đầu tư TPHAIPHONG");
+        txt_noicap.setEnabled(false);
 
         jLabel21.setBackground(new java.awt.Color(255, 255, 255));
         jLabel21.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
         jLabel21.setForeground(new java.awt.Color(255, 255, 255));
         jLabel21.setText("THỎA THẬN KÝ HỢP ĐỒNG THUÊ XE VÀ CAM KẾT LÀM ĐÚNG THEO NHỮNG ĐIỀU KHOẢN ĐẶT RA !");
-
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 102, 51));
-        jButton1.setText("THANH TOÁN");
-
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout MAIN_PAGELayout = new javax.swing.GroupLayout(MAIN_PAGE);
         MAIN_PAGE.setLayout(MAIN_PAGELayout);
@@ -323,7 +372,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                         .addGap(30, 30, 30)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel21)
-                            .addComponent(jButton1)
                             .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(MAIN_PAGELayout.createSequentialGroup()
                                     .addGap(14, 14, 14)
@@ -336,18 +384,18 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                                         .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jTextField6)
-                                        .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField10)
-                                        .addComponent(jTextField11, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jTextField7)
-                                        .addComponent(jTextField8)
-                                        .addComponent(jTextField9)))
+                                        .addComponent(txt_diachi)
+                                        .addComponent(txt_Email, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_sdt, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_gioitinh, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_sogcndkkd)
+                                        .addComponent(txt_ngaycap, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_noicap, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 485, Short.MAX_VALUE)
+                                        .addComponent(txt_hotenbenthue, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_cccd, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(txt_hotenchothue)
+                                        .addComponent(txt_chucvu)
+                                        .addComponent(txt_congty)))
                                 .addComponent(jLabel6)
                                 .addComponent(jLabel14)
                                 .addGroup(MAIN_PAGELayout.createSequentialGroup()
@@ -369,9 +417,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(91, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MAIN_PAGELayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 77, Short.MAX_VALUE)
+                .addContainerGap(158, Short.MAX_VALUE)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(196, 196, 196))
         );
@@ -379,9 +425,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(MAIN_PAGELayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jButton3))
+                .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
@@ -398,63 +442,62 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
                     .addGroup(MAIN_PAGELayout.createSequentialGroup()
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_hotenchothue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_chucvu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_congty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_sogcndkkd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_ngaycap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_noicap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_hotenbenthue, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_gioitinh, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_cccd, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_sdt, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel19)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(MAIN_PAGELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel20)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel21)
-                .addGap(12, 12, 12)
-                .addComponent(jButton1)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("HỢP ĐỒNG", MAIN_PAGE);
 
         PAGE1.setBackground(new java.awt.Color(255, 102, 51));
+        PAGE1.setEnabled(false);
         PAGE1.setPreferredSize(new java.awt.Dimension(730, 730));
 
         jLabel22.setBackground(new java.awt.Color(255, 255, 255));
@@ -504,6 +547,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel32.setForeground(new java.awt.Color(255, 255, 255));
         jLabel32.setText("2.1. Thời điểm bên A bàn giao tài sản thuê vào ngày :");
 
+        txt_ngaythue.setEnabled(false);
+
         jLabel33.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel33.setForeground(new java.awt.Color(255, 255, 255));
         jLabel33.setText("2.2. Tài sản bàn giao bao gồm (Xe Thuê ) :");
@@ -513,6 +558,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel40.setForeground(new java.awt.Color(255, 255, 255));
         jLabel40.setText("MÃ XE");
 
+        txt_maxe.setEnabled(false);
         txt_maxe.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jLabel41.setBackground(new java.awt.Color(255, 255, 255));
@@ -520,6 +566,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel41.setForeground(new java.awt.Color(255, 255, 255));
         jLabel41.setText("TÊN XE");
 
+        txt_tenxe.setEnabled(false);
         txt_tenxe.setPreferredSize(new java.awt.Dimension(64, 30));
         txt_tenxe.setRequestFocusEnabled(false);
 
@@ -528,6 +575,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("SỐ GHẾ");
 
+        txt_soghe.setEnabled(false);
         txt_soghe.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jLabel43.setBackground(new java.awt.Color(255, 255, 255));
@@ -535,6 +583,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel43.setForeground(new java.awt.Color(255, 255, 255));
         jLabel43.setText("GIÁ THUÊ");
 
+        txt_giathue.setEnabled(false);
         txt_giathue.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jLabel44.setBackground(new java.awt.Color(255, 255, 255));
@@ -542,12 +591,18 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel44.setForeground(new java.awt.Color(255, 255, 255));
         jLabel44.setText("MÃ LOẠI XE");
 
+        txt_maloaixe.setEnabled(false);
         txt_maloaixe.setPreferredSize(new java.awt.Dimension(64, 30));
 
         jLabel45.setBackground(new java.awt.Color(255, 255, 255));
         jLabel45.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel45.setForeground(new java.awt.Color(255, 255, 255));
         jLabel45.setText("GHI CHÚ");
+
+        txt_ghichu.setColumns(20);
+        txt_ghichu.setRows(5);
+        txt_ghichu.setEnabled(false);
+        jScrollPane1.setViewportView(txt_ghichu);
 
         javax.swing.GroupLayout PAGE1Layout = new javax.swing.GroupLayout(PAGE1);
         PAGE1.setLayout(PAGE1Layout);
@@ -565,7 +620,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addGroup(PAGE1Layout.createSequentialGroup()
                                 .addComponent(jLabel32)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel33)))
                     .addGroup(PAGE1Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
@@ -587,12 +642,12 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addComponent(jLabel45))
                         .addGap(18, 18, 18)
                         .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_maxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt_maxe, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
                             .addComponent(txt_tenxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_soghe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_giathue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_maloaixe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_noidung, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1)))
                     .addGroup(PAGE1Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -609,7 +664,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel24)
                 .addGap(28, 28, 28)
@@ -627,7 +682,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel32)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel33)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -653,8 +708,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel45)
-                    .addComponent(txt_noidung, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(61, 61, 61))
         );
 
         jTabbedPane1.addTab("TRANG 1", PAGE1);
@@ -693,6 +748,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel39.setForeground(new java.awt.Color(255, 255, 255));
         jLabel39.setText("- Thuê tài sản xe thuê với thời hạn :");
 
+        txt_songaythue.setEnabled(false);
+
         jLabel46.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel46.setForeground(new java.awt.Color(255, 255, 255));
         jLabel46.setText("kể từ ngày bàn giao xe.");
@@ -712,6 +769,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel50.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jLabel50.setForeground(new java.awt.Color(255, 255, 255));
         jLabel50.setText("4.1. Bên B sẽ giao cho bên A khoản tiền là :");
+
+        txt_tongtien.setEnabled(false);
 
         jLabel51.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel51.setForeground(new java.awt.Color(255, 255, 255));
@@ -755,7 +814,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                         .addGap(35, 35, 35)
                         .addComponent(jLabel39)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_songaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel46))
                     .addGroup(PAGE2Layout.createSequentialGroup()
@@ -772,7 +831,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addGroup(PAGE2Layout.createSequentialGroup()
                                 .addComponent(jLabel50)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txt_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel51, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel54)
@@ -817,7 +876,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PAGE2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel39)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_songaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel46))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel47)
@@ -828,7 +887,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PAGE2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel50)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel51))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel52)
@@ -1080,13 +1139,18 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel97.setText("- Tuân thủ một cách chặt chẽ quy định tại hợp đồng này và các quy định của pháp luật Việt Nam.");
 
         jLabel30.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel30.setFont(new java.awt.Font("Segoe UI", 2, 10)); // NOI18N
+        jLabel30.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(255, 255, 255));
         jLabel30.setText("THỎA THẬN KÝ HỢP ĐỒNG THUÊ XE VÀ CAM KẾT LÀM ĐÚNG THEO NHỮNG ĐIỀU KHOẢN ĐẶT RA !");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 102, 51));
-        jButton2.setText("THANH TOÁN");
+        btn_thanhtoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_thanhtoan.setForeground(new java.awt.Color(255, 102, 51));
+        btn_thanhtoan.setText("THANH TOÁN");
+        btn_thanhtoan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_thanhtoanActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout PAGE4Layout = new javax.swing.GroupLayout(PAGE4);
         PAGE4.setLayout(PAGE4Layout);
@@ -1094,8 +1158,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAGE4Layout.createSequentialGroup()
                 .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton2)
-                    .addComponent(jLabel30)
                     .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(PAGE4Layout.createSequentialGroup()
                             .addGap(35, 35, 35)
@@ -1118,14 +1180,22 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel84, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                                 .addComponent(jLabel85, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                    .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel94)
-                        .addComponent(jLabel93, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel95)
-                        .addComponent(jLabel106)
-                        .addComponent(jLabel97, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel96, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
-                        .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(PAGE4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel94)
+                                .addComponent(jLabel93, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel95)
+                                .addComponent(jLabel106)
+                                .addComponent(jLabel97, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel96, javax.swing.GroupLayout.DEFAULT_SIZE, 690, Short.MAX_VALUE)
+                                .addComponent(jLabel105, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(PAGE4Layout.createSequentialGroup()
+                                .addGroup(PAGE4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btn_thanhtoan)
+                                    .addComponent(jLabel30))
+                                .addGap(9, 9, 9)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PAGE4Layout.setVerticalGroup(
@@ -1165,11 +1235,11 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addComponent(jLabel106)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel97)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addComponent(jLabel30)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
-                .addGap(48, 48, 48))
+                .addGap(18, 18, 18)
+                .addComponent(btn_thanhtoan)
+                .addGap(140, 140, 140))
         );
 
         jTabbedPane1.addTab("TRANG 4", PAGE4);
@@ -1188,56 +1258,63 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void txt_gioitinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_gioitinhActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_txt_gioitinhActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         // TODO add your handling code here:
-        Hepler.ImagesHelper.capturePanel(MAIN_PAGE, "HopDong");
-    }//GEN-LAST:event_jButton3ActionPerformed
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
+            if(cttk.getSodu()-tongtien > -1){
+                
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                TaoHopDongDialog dialog = new TaoHopDongDialog(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(TaoHopDongDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the dialog */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                TaoHopDongDialog dialog = new TaoHopDongDialog(new javax.swing.JFrame(), true);
+//                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+//                    @Override
+//                    public void windowClosing(java.awt.event.WindowEvent e) {
+//                        System.exit(0);
+//                    }
+//                });
+//                dialog.setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel MAIN_PAGE;
@@ -1245,9 +1322,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     private javax.swing.JPanel PAGE2;
     private javax.swing.JPanel PAGE3;
     private javax.swing.JPanel PAGE4;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_thanhtoan;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel100;
@@ -1340,27 +1415,28 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel97;
     private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txt_Email;
+    private javax.swing.JTextField txt_cccd;
+    private javax.swing.JTextField txt_chucvu;
+    private javax.swing.JTextField txt_congty;
+    private javax.swing.JTextField txt_diachi;
+    private javax.swing.JTextArea txt_ghichu;
     private javax.swing.JTextField txt_giathue;
+    private javax.swing.JTextField txt_gioitinh;
+    private javax.swing.JTextField txt_hotenbenthue;
+    private javax.swing.JTextField txt_hotenchothue;
     private javax.swing.JTextField txt_maloaixe;
     private javax.swing.JTextField txt_maxe;
-    private javax.swing.JTextField txt_noidung;
+    private javax.swing.JTextField txt_ngaycap;
+    private javax.swing.JTextField txt_ngaythue;
+    private javax.swing.JTextField txt_noicap;
+    private javax.swing.JTextField txt_sdt;
+    private javax.swing.JTextField txt_sogcndkkd;
     private javax.swing.JTextField txt_soghe;
+    private javax.swing.JTextField txt_songaythue;
     private javax.swing.JTextField txt_tenxe;
+    private javax.swing.JTextField txt_tongtien;
     // End of variables declaration//GEN-END:variables
 }
