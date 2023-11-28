@@ -37,9 +37,9 @@ public class cardThueXe extends javax.swing.JPanel {
     int row = -1;
     String item = null;
     String maxe = null;
-    String songaythue = null;
+    int songaythue = 1;
     int tiendichvu = 0;
-    int tienvoucher = 0;
+    String mavoucher =null;
 
     /**
      * Creates new form ThueXe
@@ -52,7 +52,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
     public void openHopDong() {
         try {
-            new TaoHopDongDialog(null, true, maxe,songaythue).setVisible(true);
+            new TaoHopDongDialog(null, true, maxe,songaythue,mavoucher).setVisible(true);
 
         } catch (Exception e) {
         }
@@ -135,7 +135,6 @@ public class cardThueXe extends javax.swing.JPanel {
             Xe xe = list.get(index);
             size = list.size() - 1;
             Hepler.ImagesHelper.checkfile("src\\imgxe\\" + xe.getAnhxe());
-            System.out.println(xe.getAnhxe());
             seticon(xe.getAnhxe()); //set ảnh xe
             lbl_maxe.setText("Mã Xe: " + xe.getMaxe());
             filltableDanhGia(getlistdanhgia(xe.getMaxe()));
@@ -564,8 +563,8 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
-        songaythue = txt_songaythue.getText();
-        System.out.println(songaythue);
+        mavoucher = txt_voucher.getText();
+        songaythue = Integer.parseInt(txt_songaythue.getText());
         TaiKhoan tk = Hepler.AuthHelper.user;
         if (tk.isTrangthai()) {
             openHopDong();
@@ -588,6 +587,7 @@ public class cardThueXe extends javax.swing.JPanel {
             tdvd.insert(tdv);
             DialogHelper.alert(this, "Chọn Thành Công");
         } catch (Exception e) {
+            DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_chondichvuActionPerformed

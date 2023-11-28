@@ -40,7 +40,7 @@ public class Voucher {
         this.noidung = noidung;
     }
 
-    public float getGiatri() {
+    public int getGiatri() {
         return giatri;
     }
 
