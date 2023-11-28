@@ -5,7 +5,10 @@
 package DAO;
 
 import Hepler.JDBCHelper;
+import entyti.ChiTietTaiKhoan;
 import entyti.HopDong;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,13 +17,13 @@ import java.util.List;
  */
 public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
-    String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaDichVu,MaVouncher,ThanhTien) values(?,?,?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien) values(?,?,?,?,?,?,?,?)";
     String SELECT_ALL_SQL = "SELECT * FROM HopDong";
     String SELECT_BY_ID_SQL = "SELECT*FROM HopDong WHERE MaHopDong = ?";
 
     @Override
     public void insert(HopDong entity) {
-         JDBCHelper.executeUpdate(INSERT_SQL, entity.getMahopdong(),entity.getMaxe(),entity.getUserid(),entity.getGhichu(),entity.getNgaythue(),entity.getNgaytra(),entity.getMadichvu(),entity.getMavoucher(),entity.getThanhtien());
+         JDBCHelper.executeUpdate(INSERT_SQL, entity.getMahopdong(),entity.getMaxe(),entity.getUserid(),entity.getGhichu(),entity.getNgaythue(),entity.getNgaytra(),entity.getMavoucher(),entity.getThanhtien());
 
     }
 
@@ -70,7 +73,27 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
     @Override
     protected List<HopDong> selectBySQL(String sql, Object... args) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        List<HopDong> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql, args);
+            while (rs.next()) {
+                HopDong hp = new HopDong();
+                hp.setMahopdong(rs.getString("MaHopDong"));
+                hp.setMaxe(rs.getString("MaXe"));
+                hp.setUserid(rs.getInt("Userid"));
+                hp.setGhichu(rs.getString("GhiChu"));
+                hp.setNgaythue(rs.getDate("NgayThue"));
+                hp.setNgaytra(rs.getDate("NgayTra"));
+                hp.setMavoucher(rs.getString("MaVouncher"));
+                hp.setThanhtien(rs.getInt("ThanhTien"));
+                list.add(hp);
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (Exception e) {
+            e.getMessage();
+            throw new RuntimeException(e);
+        }
     }
 
 }

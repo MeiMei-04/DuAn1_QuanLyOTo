@@ -6,6 +6,7 @@ package form;
 
 import DAO.ChiTietTaiKhoanDAO;
 import DAO.DichVuDAO;
+import DAO.ThemHopDongDAO;
 import DAO.ThueDichVuDAO;
 import DAO.ThueXeDAO;
 import DAO.VoucherDAO;
@@ -26,6 +27,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     DichVuDAO dvd = new DichVuDAO();
     ThueDichVuDAO tdvd = new ThueDichVuDAO();
     VoucherDAO vcd = new VoucherDAO();
+    ThemHopDongDAO thdd = new ThemHopDongDAO();
     String maxe = null;
     String mavoucher = null;
     List<DichVu> list_dv = new ArrayList<>();
@@ -35,7 +37,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     int giatrivoucher = 0;
     int tienvoucher = 0;
 
-    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue,String Mavoucher) {
+    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher) {
         super(parent, modal);
         maxe = Maxe;
         songaythue = Songaythue;
@@ -61,25 +63,26 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             System.out.println(e.getMessage());
         }
     }
-    public int giatrigiamgia(){
+
+    public int giatrigiamgia() {
         try {
             Voucher vh = vcd.selectByID(mavoucher);
             giatrivoucher = vh.getGiatri();
-//            vcd.delete(mavoucher);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        if(giatrivoucher == 1){
-            tienvoucher = (tongtien*5)/100;
-        }else if(giatrivoucher == 2){
-            tienvoucher = (tongtien*10)/100;
-        }else if(giatrivoucher == 3){
-            tienvoucher = (tongtien*15)/100;
-        }else{
+        if (giatrivoucher == 1) {
+            tienvoucher = (tongtien * 5) / 100;
+        } else if (giatrivoucher == 2) {
+            tienvoucher = (tongtien * 10) / 100;
+        } else if (giatrivoucher == 3) {
+            tienvoucher = (tongtien * 15) / 100;
+        } else {
             tienvoucher = 0;
         }
-        return tienvoucher; 
+        return tienvoucher;
     }
+
     public int tiendichvu() {
         try {
             List<ThueDichVu> list = tdvd.selectByKey(maxe);
@@ -89,7 +92,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 list_dv.add(dv);
             }
             filltable_dichvu();
-            tdvd.delete(maxe);
         } catch (Exception e) {
         }
         return tiendichvu;
@@ -127,30 +129,51 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             txt_mavoucher.setText(mavoucher);
             tongtien = tienthuexe + tiendichvu();
             txt_tienvoucher.setText(String.valueOf(giatrigiamgia()));
-            tongtien = tongtien -giatrigiamgia();
+            tongtien = tongtien - giatrigiamgia();
             txt_tongtien.setText(String.valueOf(tongtien));
         } catch (Exception e) {
         }
 
     }
-    public void thanhtoan(){
+
+    public void thanhtoan() {
         int mymoney = 0;
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
             mymoney = cttk.getSodu();
-            if(mymoney - tongtien >= 0){
-                
-            }else{
+            if (mymoney - tongtien >= 0) {
+                insert();
+                cttk.setSodu(mymoney - tongtien);
+                vcd.delete(mavoucher);
+                tdvd.delete(maxe);
+                DialogHelper.alert(this, "Thanh Toán Thành Công");
+            } else {
                 DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
                 return;
             }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void insert() {
-        
+        try {
+            Xe xe = txd.selectByID(this.maxe);
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            HopDong hp = new HopDong();
+            hp.setMahopdong(Hepler.RandomString.generateRandomString(6));
+            hp.setMaxe(maxe);
+            hp.setUserid(tk.getUserid());
+            hp.setGhichu(xe.getGhichu());
+            hp.setNgaythue(Hepler.DateHelper.now());
+            hp.setNgaytra(Hepler.DateHelper.add(songaythue));
+            hp.setMavoucher(mavoucher);
+            hp.setThanhtien(tongtien);
+            thdd.insert(hp);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     /**
@@ -1452,14 +1475,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         // TODO add your handling code here:
-        try {
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
-            if (cttk.getSodu() - tongtien > -1) {
-
-            }
-        } catch (Exception e) {
-        }
+        thanhtoan();
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     /**

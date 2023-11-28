@@ -17,8 +17,11 @@ public class HopDong {
     private String ghichu;
     private Date ngaythue;
     private Date ngaytra;
-    private String madichvu;
     private String mavoucher;
+    private int thanhtien;
+
+    public HopDong() {
+    }
 
     public String getMahopdong() {
         return mahopdong;
@@ -68,14 +71,6 @@ public class HopDong {
         this.ngaytra = ngaytra;
     }
 
-    public String getMadichvu() {
-        return madichvu;
-    }
-
-    public void setMadichvu(String madichvu) {
-        this.madichvu = madichvu;
-    }
-
     public String getMavoucher() {
         return mavoucher;
     }
@@ -92,24 +87,15 @@ public class HopDong {
         this.thanhtien = thanhtien;
     }
 
-    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String madichvu, String mavoucher, int thanhtien) {
+    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String mavoucher, int thanhtien) {
         this.mahopdong = mahopdong;
         this.maxe = maxe;
         this.userid = userid;
         this.ghichu = ghichu;
         this.ngaythue = ngaythue;
         this.ngaytra = ngaytra;
-        this.madichvu = madichvu;
         this.mavoucher = mavoucher;
         this.thanhtien = thanhtien;
     }
 
-    public HopDong() {
-    }
-    private int thanhtien;
-
-
-   
-    
-    
 }
