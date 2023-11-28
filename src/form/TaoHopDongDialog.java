@@ -14,6 +14,7 @@ import Hepler.DialogHelper;
 import entyti.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -86,6 +87,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     public int tiendichvu() {
         try {
             List<ThueDichVu> list = tdvd.selectByKey(maxe);
+            list_dv.clear();
             for (ThueDichVu tdv : list) {
                 DichVu dv = dvd.selectByID(tdv.getDichvu());
                 tiendichvu = dv.getDongia() + tiendichvu;
@@ -127,7 +129,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             tiendichvu = tiendichvu() * songaythue;
             txt_tiendichvu.setText(String.valueOf(tiendichvu));
             txt_mavoucher.setText(mavoucher);
-            tongtien = tienthuexe + tiendichvu();
+            tongtien = tienthuexe + tiendichvu;
             txt_tienvoucher.setText(String.valueOf(giatrigiamgia()));
             tongtien = tongtien - giatrigiamgia();
             txt_tongtien.setText(String.valueOf(tongtien));
@@ -139,12 +141,18 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     public void thanhtoan() {
         int mymoney = 0;
         try {
+            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
             TaiKhoan tk = Hepler.AuthHelper.user;
             ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
             mymoney = cttk.getSodu();
             if (mymoney - tongtien >= 0) {
+                int tienconlai = 0;
+                tienconlai = mymoney - tongtien;
+                System.out.println(tienconlai);
                 insert();
-                cttk.setSodu(mymoney - tongtien);
+                cttknew.setUserid(tk.getUserid());
+                cttknew.setSodu(tienconlai);
+                cttkd.update_1(cttknew);
                 vcd.delete(mavoucher);
                 tdvd.delete(maxe);
                 DialogHelper.alert(this, "Thanh Toán Thành Công");
@@ -161,8 +169,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         try {
             Xe xe = txd.selectByID(this.maxe);
             TaiKhoan tk = Hepler.AuthHelper.user;
+            String hopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
             HopDong hp = new HopDong();
-            hp.setMahopdong(Hepler.RandomString.generateRandomString(6));
+            hp.setMahopdong(hopdong);
             hp.setMaxe(maxe);
             hp.setUserid(tk.getUserid());
             hp.setGhichu(xe.getGhichu());
@@ -173,6 +182,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             thdd.insert(hp);
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            return;
+
         }
     }
 
