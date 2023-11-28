@@ -464,20 +464,24 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="cbb_DichVu" max="32767" attributes="0"/>
                           <Component id="txt_voucher" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_songaythue" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="0" pref="346" max="32767" attributes="0"/>
+                              <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lbl_voucher" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_dichvu" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lbl_songaythue" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="cbb_DichVu" min="-2" pref="300" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="btn_chondichvu" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="349" max="32767" attributes="0"/>
-                              <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -490,7 +494,10 @@
                       <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       <Component id="lbl_dichvu" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="cbb_DichVu" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbb_DichVu" min="-2" max="-2" attributes="0"/>
+                          <Component id="btn_chondichvu" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="lbl_voucher" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -566,6 +573,14 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="S&#x1ed1; Ng&#xe0;y Thu&#xea;"/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_chondichvu">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n D&#x1ecb;ch V&#x1ee5;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_chondichvuActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

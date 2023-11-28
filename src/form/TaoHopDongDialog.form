@@ -1796,7 +1796,7 @@
                                       <Component id="jLabel95" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel106" alignment="0" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel97" alignment="0" min="-2" pref="648" max="-2" attributes="0"/>
-                                      <Component id="jLabel96" alignment="0" pref="690" max="32767" attributes="0"/>
+                                      <Component id="jLabel96" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel105" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">

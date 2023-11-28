@@ -4,8 +4,11 @@
  */
 package form;
 import DAO.ChiTietTaiKhoanDAO;
+import DAO.DichVuDAO;
+import DAO.ThueDichVuDAO;
 import DAO.ThueXeDAO;
 import entyti.*;
+import java.util.List;
 /**
  *
  * @author Hieu
@@ -13,6 +16,8 @@ import entyti.*;
 public class TaoHopDongDialog extends javax.swing.JDialog {
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ThueXeDAO txd = new ThueXeDAO();
+    DichVuDAO dvd = new DichVuDAO();
+    ThueDichVuDAO tdvd = new ThueDichVuDAO();
     String maxe = null;
     String songaythue = null;
     int tongtien = 0;
@@ -26,6 +31,18 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         setForm();
+    }
+    public int tiendichvu(){
+        try {
+            List<ThueDichVu> list = tdvd.selectByKey(maxe);
+            for(ThueDichVu tdv : list){
+                DichVu dv = dvd.selectByID(tdv.getDichvu());
+                tiendichvu = dv.getDongia()+tiendichvu;
+                System.out.println(tiendichvu);
+            }
+        } catch (Exception e) {
+        }
+        return tiendichvu;
     }
     public void setForm(){
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -53,7 +70,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             txt_ngaythue.setText(String.valueOf(Hepler.DateHelper.now()));
             txt_songaythue.setText(songaythue);
             int tienthuexe = xe.getGiathue()*Integer.parseInt(songaythue);
-            tongtien = tienthuexe - tienvoucher+tiendichvu;
+            tongtien = tienthuexe - tienvoucher+tiendichvu();
+            System.out.println(tiendichvu());
             System.out.println(tongtien);
             txt_tongtien.setText(String.valueOf(tongtien));
         } catch (Exception e) {

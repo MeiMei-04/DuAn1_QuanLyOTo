@@ -21,6 +21,7 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
     String DELETE_SQL = "DELETE FROM DichVu WHERE MaDichVu =?";
     String SELECT_ALL_SQL = "SELECT * FROM DichVu";
     String SELECT_BY_ID_SQL = "SELECT*FROM DichVu WHERE MaDichVu = ?";
+    String SELECT_BY_ID_SQL_1 = "SELECT*FROM DichVu WHERE tendichvu = ?";
 
     @Override
     public void insert(DichVu entity) {
@@ -89,7 +90,16 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
 
     @Override
     public DichVu selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_SQL_1, key);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
     }
 
 }
