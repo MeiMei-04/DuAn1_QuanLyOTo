@@ -5,6 +5,22 @@
 
 package card;
 
+import DAO.HopDongDAO;
+import Hepler.DialogHelper;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.List;
+import javax.swing.JFileChooser;
+import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 /**
  *
  * @author truon
@@ -14,6 +30,71 @@ public class cardHopDong extends javax.swing.JPanel {
     /** Creates new form HopDong */
     public cardHopDong() {
         initComponents();
+        filltableHopDong();
+    }
+    
+     HopDongDAO dao = new HopDongDAO();
+
+    void filltableHopDong() {
+        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
+        model.setRowCount(0);
+        List<Object[]> list = dao.getSoHopDong();
+        for (Object[] row : list) {
+            model.addRow(row);
+        }
+    }
+    
+    void xuatEXCL() {
+       try{
+           JFileChooser jFileChooser = new JFileChooser();
+           jFileChooser.showSaveDialog(this);
+           File saveFile = jFileChooser.getSelectedFile();
+           
+           if(saveFile != null){
+               saveFile = new File(saveFile.toString()+".xlsx");
+               Workbook wb = new XSSFWorkbook();
+               Sheet sheet = wb.createSheet("Doanh thu");
+               
+               Row rowCol = sheet.createRow(4);
+               for(int i=0;i<tblHopDong.getColumnCount();i++){
+                   
+                   Cell cell = rowCol.createCell(4+i);// lui sang phải
+                   cell.setCellValue(tblHopDong.getColumnName(i));
+               }
+               
+               for(int j=0;j<tblHopDong.getRowCount();j++){
+                   Row row = sheet.createRow(j+5);// sang phải
+                   for(int k=0;k<tblHopDong.getColumnCount();k++){
+                       Cell cell = row.createCell(k+4);// lùi xuống
+                       if(tblHopDong.getValueAt(j, k)!=null){
+                           cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
+                       }
+                   }
+               }
+               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+               wb.write(out);
+               wb.close();
+               out.close();
+               onpenFile(saveFile.toString());
+           }else{
+               DialogHelper.alert(this, "loiiiii");
+           }
+       }catch(FileNotFoundException e){
+           System.out.println(e);
+       }catch(IOException io){
+           System.out.println(io);
+       }
+
+    }
+
+    void onpenFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println("e");
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -28,16 +109,11 @@ public class cardHopDong extends javax.swing.JPanel {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tblHopDong = new javax.swing.JTable();
         jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
         jTextField2 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 102, 51));
@@ -48,41 +124,31 @@ public class cardHopDong extends javax.swing.JPanel {
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Hợp Đồng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Trạng Thái:");
-
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "Đã Thanh Toán", "Chờ Thanh Toán" }));
-
         jScrollPane3.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane3.setForeground(new java.awt.Color(255, 102, 51));
         jScrollPane3.setInheritsPopupMenu(true);
 
-        jTable3.setBackground(new java.awt.Color(255, 102, 51));
-        jTable3.setForeground(new java.awt.Color(255, 102, 51));
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tblHopDong.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Mã Hợp Đồng", "Ngày Tạo", "Ngày Thanh Toán", "Tổng Tiền", "Trạng Thái"
+                "Mã Hợp Đồng", "Mã Xe", "Userid", "Ghi Chú", "Ngày Thuê", "Ngày Trả", "Mã Dịch Vụ", "Mã Voucher", "Thành Tiền"
             }
         ));
-        jTable3.setSelectionForeground(new java.awt.Color(255, 102, 51));
-        jScrollPane3.setViewportView(jTable3);
+        tblHopDong.setSelectionForeground(new java.awt.Color(255, 102, 51));
+        jScrollPane3.setViewportView(tblHopDong);
 
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 102, 51));
-        jButton7.setText("In Hóa Đơn");
-
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 102, 51));
-        jButton8.setText("Xuất Danh Sách");
+        jButton7.setText("Xuất danh sách");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 102, 51));
@@ -92,64 +158,31 @@ public class cardHopDong extends javax.swing.JPanel {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(263, 263, 263)
+                        .addGap(509, 509, 509)
                         .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(472, 472, 472)
-                .addComponent(jButton7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton8)
-                .addContainerGap(136, Short.MAX_VALUE))
+                        .addComponent(jButton2))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(472, 472, 472)
+                        .addComponent(jButton7)))
+                .addContainerGap(91, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 29, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jButton8)))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addComponent(jButton7))
         );
-
-        jScrollPane2.setBackground(new java.awt.Color(255, 102, 51));
-        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Chi Tiết Hợp Đồng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-
-        jTable2.setBackground(new java.awt.Color(255, 102, 51));
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "Mã Hợp Đồng", "Mã Xe", "User id", "Ngày Thuê", "Ngảy Trả", "Mã Dịch Vụ", "Thành tiền", "Trạng Thái"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -157,22 +190,17 @@ public class cardHopDong extends javax.swing.JPanel {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("tab1", jPanel3);
+        jTabbedPane1.addTab("Hợp Đồng", jPanel3);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -185,7 +213,7 @@ public class cardHopDong extends javax.swing.JPanel {
             .addGap(0, 493, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel4);
+        jTabbedPane1.addTab("Hợp Đồng Khách Hàng", jPanel4);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -199,31 +227,21 @@ public class cardHopDong extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        xuatEXCL();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblHopDong;
     // End of variables declaration//GEN-END:variables
 
 }
