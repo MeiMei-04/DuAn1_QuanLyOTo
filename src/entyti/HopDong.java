@@ -18,23 +18,7 @@ public class HopDong {
     private Date ngaythue;
     private Date ngaytra;
     private String madichvu;
-    private int thanhtien;
-    private boolean trangthaihopdong;
-
-    public HopDong() {
-    }
-
-    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String madichvu, int thanhtien, boolean trangthaihopdong) {
-        this.mahopdong = mahopdong;
-        this.maxe = maxe;
-        this.userid = userid;
-        this.ghichu = ghichu;
-        this.ngaythue = ngaythue;
-        this.ngaytra = ngaytra;
-        this.madichvu = madichvu;
-        this.thanhtien = thanhtien;
-        this.trangthaihopdong = trangthaihopdong;
-    }
+    private String mavoucher;
 
     public String getMahopdong() {
         return mahopdong;
@@ -92,6 +76,14 @@ public class HopDong {
         this.madichvu = madichvu;
     }
 
+    public String getMavoucher() {
+        return mavoucher;
+    }
+
+    public void setMavoucher(String mavoucher) {
+        this.mavoucher = mavoucher;
+    }
+
     public int getThanhtien() {
         return thanhtien;
     }
@@ -100,14 +92,24 @@ public class HopDong {
         this.thanhtien = thanhtien;
     }
 
-    public boolean isTrangthaihopdong() {
-        return trangthaihopdong;
+    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String madichvu, String mavoucher, int thanhtien) {
+        this.mahopdong = mahopdong;
+        this.maxe = maxe;
+        this.userid = userid;
+        this.ghichu = ghichu;
+        this.ngaythue = ngaythue;
+        this.ngaytra = ngaytra;
+        this.madichvu = madichvu;
+        this.mavoucher = mavoucher;
+        this.thanhtien = thanhtien;
     }
 
-    public void setTrangthaihopdong(boolean trangthaihopdong) {
-        this.trangthaihopdong = trangthaihopdong;
+    public HopDong() {
     }
-    
+    private int thanhtien;
+
+
+   
     
     
 }
