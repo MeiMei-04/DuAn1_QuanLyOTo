@@ -4,8 +4,6 @@
  */
 package card;
 
-import Hepler.AnimatedCarPanel;
-import java.net.URL;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
