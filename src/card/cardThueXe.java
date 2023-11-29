@@ -115,12 +115,17 @@ public class cardThueXe extends javax.swing.JPanel {
             List<Xe> allXe = txd.selectAll();
             if (soghe != null) {
                 for (Xe xe : allXe) {
-                    if (xe.getSoghe() == Integer.valueOf(soghe)) {
+                    if (xe.getSoghe() == Integer.valueOf(soghe)&&xe.isTrangthaixethue()==false) {
                         list.add(xe);
                     }
                 }
             } else {
-                list = allXe;
+                for (Xe xe : allXe) {
+                    if (xe.isTrangthaixethue()==false) {
+                        list.add(xe);
+                    }
+                }
+//                list = allXe;
             }
         } catch (Exception e) {
             // handle exception

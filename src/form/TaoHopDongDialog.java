@@ -172,6 +172,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 xe.setTrangthaixethue(true);
                 txd.update_1(xe);
                 DialogHelper.alert(this, "Thanh Toán Thành Công");
+                this.dispose();
             } else {
                 DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
                 return;

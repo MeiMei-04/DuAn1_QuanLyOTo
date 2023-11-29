@@ -320,6 +320,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         txt_hoten.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_email.setEnabled(false);
 
         lbl_email.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
         lbl_email.setForeground(new java.awt.Color(255, 255, 255));
