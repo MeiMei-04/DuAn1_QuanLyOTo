@@ -48,11 +48,12 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setForm();
     }
-    public void sendcode_qr(String string) throws WriterException, IOException {
+    public void sendcode_qr(String name){
         try {
+            Xe xe = txd.selectByID(this.maxe);
             TaiKhoan tk = Hepler.AuthHelper.user;
-            ImagesHelper.capturePanel(MAIN_PAGE, );
-            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(),path, nc.getManap() + ".png");
+            ImagesHelper.capturePanel(MAIN_PAGE,name);
+            Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng", "Hợp Đồng Thuê Xe" +"\nXe: "+xe.getTenxe()+"\nMã Hợp Đồng"+name,path, name + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
             return;
@@ -196,6 +197,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hp.setMavoucher(mavoucher);
             hp.setThanhtien(tongtien);
             thdd.insert(hp);
+            sendcode_qr(hopdong);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return;
