@@ -22,6 +22,7 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
     String DELETE_SQL = "DELETE FROM Xe WHERE MaXe =?";
     String SELECT_ALL_SQL = "SELECT * FROM xe";
     String SELECT_BY_ID_SQL = "SELECT*FROM xe WHERE MaXe = ?";
+    String UPDATE_SQL_1 = "UPDATE Xe SET TrangThai=? WHERE MaXe =?";
 
     @Override
     public void insert(Xe entity) {
@@ -89,7 +90,7 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
 
     @Override
     public void update_1(Xe entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(UPDATE_SQL_1, entity.isTrangthaixethue(), entity.getMaxe());
     }
 
     @Override
