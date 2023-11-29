@@ -33,7 +33,7 @@ public class HopDongDAO {
     public static ResultSet rs = null;
     public List<Object[]> getSoHopDong() {
         String sql = "{CALL sp_ThongKeHopDong}";
-        String[] cols = {"MaHopDong", "MaXe", "Userid", "GhiChu","NgayThue","NgayTra","MaDichVu","MaVouncher","ThanhTien"};
+        String[] cols = {"MaHopDong", "MaXe", "Userid", "GhiChu","NgayThue","NgayTra","MaVouncher","ThanhTien","ThoiHanHopDong"};
         return this.getListOfArray(sql, cols);
     }
     

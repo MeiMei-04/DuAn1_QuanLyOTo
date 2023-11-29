@@ -135,7 +135,7 @@ public class cardHopDong extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã Hợp Đồng", "Mã Xe", "Userid", "Ghi Chú", "Ngày Thuê", "Ngày Trả", "Mã Dịch Vụ", "Mã Voucher", "Thành Tiền"
+                "Mã Hợp Đồng", "Mã Xe", "Userid", "Ghi Chú", "Ngày Thuê", "Ngày Trả", "Mã Voucher", "Thành Tiền", "ThoiHanHopDong"
             }
         ));
         tblHopDong.setSelectionForeground(new java.awt.Color(255, 102, 51));
