@@ -102,5 +102,10 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
     public DanhGia selectByID_1(String key) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public void update_2(DanhGia entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }

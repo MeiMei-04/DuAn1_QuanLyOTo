@@ -18,7 +18,8 @@ import java.util.List;
 public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
     String INSERT_SQL = "INSERT INTO themdichvu (maxe,madichvu) values(?,?)";
     String UPDATE_SQL = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
-    String UPDATE_SQL_1 = "UPDATE TaiKhoan SET TrangThai=? WHERE userid =?";
+    String UPDATE_SQL_1 = "UPDATE Maxe =?  WHERE madichvu =?";
+    String UPDATE_SQL_2 = "UPDATE themdichvu SET TrangThai=? WHERE userid =?";
     String DELETE_SQL = "DELETE FROM themdichvu WHERE maxe =?";
     String SELECT_ALL_SQL = "SELECT * FROM themdichvu";
     String SELECT_BY_ID_SQL = "select * from themdichvu where maxe =?";
@@ -36,7 +37,7 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
 
     @Override
     public void update_1(ThueDichVu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getMaxe(), entity.getDichvu());
     }
 
     @Override
@@ -89,6 +90,11 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
             e.getMessage();
             throw new RuntimeException(e);
         }
+    }
+
+    @Override
+    public void update_2(ThueDichVu entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

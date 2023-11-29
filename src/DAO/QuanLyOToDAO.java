@@ -17,6 +17,8 @@ public abstract class QuanLyOToDAO<E, K> {
     abstract public void update(E entity);
     
     abstract public void update_1(E entity);
+    
+    abstract public void update_2(E entity);
 
     abstract public void delete(K key);
 

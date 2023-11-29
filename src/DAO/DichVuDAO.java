@@ -102,4 +102,9 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
         return list.get(0);
     }
 
+    @Override
+    public void update_2(DichVu entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

@@ -110,6 +110,11 @@ public class ChiTietTaiKhoanDAO extends QuanLyOToDAO<ChiTietTaiKhoan, String> {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    @Override
+    public void update_2(ChiTietTaiKhoan entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 
 }

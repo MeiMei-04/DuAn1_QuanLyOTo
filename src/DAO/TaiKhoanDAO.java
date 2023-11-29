@@ -105,4 +105,9 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
         return list.get(0);
     }
 
+    @Override
+    public void update_2(TaiKhoan entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 }

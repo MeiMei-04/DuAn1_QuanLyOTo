@@ -583,15 +583,16 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_chondichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chondichvuActionPerformed
         // TODO add your handling code here:
         String dichvu = null;
+        ThueDichVu tdv = new ThueDichVu();
         dichvu = cbb_DichVu.getSelectedItem().toString();
         try {
             DichVu dv = dvd.selectByID_1(dichvu);
-            ThueDichVu tdv = new ThueDichVu();
             tdv.setMaxe(maxe);
             tdv.setDichvu(dv.getMadichvu());
             tdvd.insert(tdv);
             DialogHelper.alert(this, "Chọn Thành Công");
         } catch (Exception e) {
+            tdvd.update_1(tdv);
             DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             System.out.println(e.getMessage());
         }

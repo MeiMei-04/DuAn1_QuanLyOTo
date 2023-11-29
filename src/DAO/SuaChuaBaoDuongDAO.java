@@ -97,5 +97,10 @@ public class SuaChuaBaoDuongDAO extends QuanLyOToDAO<SuaChuaBaoDuong, String>{
     public SuaChuaBaoDuong selectByID_1(String key) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public void update_2(SuaChuaBaoDuong entity) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
 }
