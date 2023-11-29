@@ -22,7 +22,7 @@ public class Email {
     static final String from = "quanlyotofpoly@gmail.com";
     static final String password = "ufcpnxgvlefjfbhj";
 
-    public static boolean sendEmail(String to, String tieuDe, String noiDung, String nameimg) {
+    public static boolean sendEmail(String to, String tieuDe, String noiDung,String path ,String nameimg) {
         // Properties : khai báo các thuộc tính
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); // SMTP HOST
@@ -73,7 +73,7 @@ public class Email {
             if (nameimg != null && !nameimg.isEmpty()) {
                 // Phần ảnh
                 messageBodyPart = new MimeBodyPart();
-                DataSource fds = new FileDataSource("src/imgqrcode/"+nameimg);
+                DataSource fds = new FileDataSource(path+nameimg);
                 messageBodyPart.setDataHandler(new DataHandler(fds));
                 messageBodyPart.setHeader("Content-ID", "<image>");
                 multipart.addBodyPart(messageBodyPart);
@@ -94,7 +94,7 @@ public class Email {
     }
 
     public static void main(String[] args) {
-        Email.sendEmail("hieudzpro4444@gmail.com", "Xác Minh Tài Khoản", "123123", "123.png");
+        Email.sendEmail("hieudzpro4444@gmail.com", "Xác Minh Tài Khoản", "123123", null,"123.png");
 
     }
 

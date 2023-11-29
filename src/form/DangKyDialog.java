@@ -452,7 +452,7 @@ public class DangKyDialog extends java.awt.Dialog {
                 Random rand = new Random();
                 int code = rand.nextInt(999999);
                 formattedCode = String.format("%06d", code);
-                Hepler.Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode),null);
+                Hepler.Email.sendEmail(txt_email.getText(), "Xác Minh Tài Khoản", String.valueOf(formattedCode),null,null);
                 DialogHelper.alert(this, "Vui Lòng Check Email");
             } else {
                 DialogHelper.alert(this, "Email Không Đúng Định Dạng");

@@ -11,6 +11,7 @@ import DAO.ThueDichVuDAO;
 import DAO.ThueXeDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
+import Hepler.ImagesHelper;
 import entyti.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Hieu
  */
 public class TaoHopDongDialog extends javax.swing.JDialog {
-
+    String path = "src/imghopdong/";
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ThueXeDAO txd = new ThueXeDAO();
     DichVuDAO dvd = new DichVuDAO();
@@ -37,7 +38,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     int tiendichvu = 0;
     int giatrivoucher = 0;
     int tienvoucher = 0;
-
+    
     public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher) {
         super(parent, modal);
         maxe = Maxe;
@@ -47,7 +48,17 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setForm();
     }
+    public void sendcode_qr(String string) throws WriterException, IOException {
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            ImagesHelper.capturePanel(MAIN_PAGE, );
+            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(),path, nc.getManap() + ".png");
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Lỗi Truy Vấn");
+            return;
+        }
 
+    }
     private void filltable_dichvu() {
         DefaultTableModel model = (DefaultTableModel) tbl_dichvu.getModel();
         model.setRowCount(0);
@@ -164,6 +175,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
                 return;
             }
+        
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

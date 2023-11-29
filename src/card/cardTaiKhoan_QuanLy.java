@@ -31,6 +31,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     String userid = null;
     NapCardDAO ndao = new NapCardDAO();
+    String path = "src/imgqrcode/";
 
     /**
      * Creates new form cardTaiKhoan_QuanLy
@@ -46,7 +47,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         try {
             TaiKhoan tk = tkd.selectByID(string);
             ImagesHelper.createimgqr(nc.getManap());
-            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(), nc.getManap() + ".png");
+            Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(),path, nc.getManap() + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
             return;
@@ -123,7 +124,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }
 
     public void sendemailverifly(String email) {
-        Hepler.Email.sendEmail(email, "Yêu Cầu Xác Thực Tài Khoản", "Tài Khoản Của Bạn Chưa Đủ Điều Kiện Xác Thực, Vui Lòng Cập Nhật Lại Thông Tin Để Tiến Hành Xác Thực Tài Khoản", null);
+        Hepler.Email.sendEmail(email, "Yêu Cầu Xác Thực Tài Khoản", "Tài Khoản Của Bạn Chưa Đủ Điều Kiện Xác Thực, Vui Lòng Cập Nhật Lại Thông Tin Để Tiến Hành Xác Thực Tài Khoản", null,null);
     }
 
     private void filltableNapCard() {
