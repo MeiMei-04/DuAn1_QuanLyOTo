@@ -15,6 +15,8 @@ import card.cardHopDong;
 import card.cardSuaChuaBaoDuong;
 import card.cardTaiKhoan_QuanLy;
 import card.cardThueXe;
+import card.cardTraXe;
+import card.cardTraXe;
 import card.cardTrangChu;
 import card.cardXeThue;
 
@@ -76,7 +78,7 @@ public class TrangChu extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
-
+    // bó tay
     public void openBaoDuong() {
         try {
             if (!AuthHelper.authenticated()) {

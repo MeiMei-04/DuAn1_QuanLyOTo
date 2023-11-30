@@ -975,6 +975,11 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         jLabel53.setText("- Với Số Tiền Dịch Vụ Kèm Theo Là:");
 
         txt_tienvoucher.setEnabled(false);
+        txt_tienvoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_tienvoucherActionPerformed(evt);
+            }
+        });
 
         jLabel56.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel56.setForeground(new java.awt.Color(255, 255, 255));
@@ -1080,7 +1085,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                                 .addComponent(txt_tongtien, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel72, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         PAGE2Layout.setVerticalGroup(
             PAGE2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1507,6 +1512,10 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
         thanhtoan();
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
+
+    private void txt_tienvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tienvoucherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_tienvoucherActionPerformed
 
     /**
      * @param args the command line arguments
