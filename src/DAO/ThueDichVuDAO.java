@@ -16,7 +16,7 @@ import java.util.List;
  * @author truon
  */
 public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
-    String INSERT_SQL = "INSERT INTO themdichvu (maxe,madichvu) values(?,?)";
+    String INSERT_SQL = "INSERT INTO themdichvu (userid,maxe,madichvu) values(?,?,?)";
     String UPDATE_SQL = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
     String UPDATE_SQL_1 = "UPDATE themdichvu set Maxe =?  WHERE madichvu =?";
     String UPDATE_SQL_2 = "UPDATE themdichvu SET TrangThai=? WHERE userid =?";
@@ -27,7 +27,7 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
     
     @Override
     public void insert(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getMaxe(), entity.getDichvu());
+        JDBCHelper.executeUpdate(INSERT_SQL,entity.getUserid() ,entity.getMaxe(), entity.getDichvu());
     }
 
     @Override
@@ -80,6 +80,7 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 ThueDichVu tdv = new ThueDichVu();
+                tdv.setUserid(rs.getInt("userid"));
                 tdv.setMaxe(rs.getString("maxe"));
                 tdv.setDichvu(rs.getString("madichvu"));
                 list.add(tdv);

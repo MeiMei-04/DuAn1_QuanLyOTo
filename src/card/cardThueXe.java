@@ -28,10 +28,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardThueXe extends javax.swing.JPanel {
 
+    private TaoHopDongDialog hopDongDialog;
     DanhGiaDAO dgd = new DanhGiaDAO();
     DichVuDAO dvd = new DichVuDAO();
     ThueXeDAO txd = new ThueXeDAO();
     ThueDichVuDAO tdvd = new ThueDichVuDAO();
+    List<ThueDichVu> list_dichvu = new ArrayList<>();
     int index = 0;
     int size = 0;
     int row = -1;
@@ -39,7 +41,7 @@ public class cardThueXe extends javax.swing.JPanel {
     String maxe = null;
     int songaythue = 1;
     int tiendichvu = 0;
-    String mavoucher =null;
+    String mavoucher = null;
 
     /**
      * Creates new form ThueXe
@@ -48,13 +50,22 @@ public class cardThueXe extends javax.swing.JPanel {
         initComponents();
         fillcbbDichVu();
         setForm(locxe(item), 0);
+        list_dichvu.clear();
     }
 
     public void openHopDong() {
         try {
-            new TaoHopDongDialog(null, true, maxe,songaythue,mavoucher).setVisible(true);
+            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu);
+            hopDongDialog.setVisible(true);
 
+            // Kiểm tra trạng thái của form sau khi nó đã đóng
+            if (!hopDongDialog.isVisible()) {
+                setForm(locxe(item), 0);
+            } else {
+                System.out.println("Form vẫn còn mở.");
+            }
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -115,13 +126,13 @@ public class cardThueXe extends javax.swing.JPanel {
             List<Xe> allXe = txd.selectAll();
             if (soghe != null) {
                 for (Xe xe : allXe) {
-                    if (xe.getSoghe() == Integer.valueOf(soghe)&&xe.isTrangthaixethue()==false) {
+                    if (xe.getSoghe() == Integer.valueOf(soghe) && xe.isTrangthaixethue() == false) {
                         list.add(xe);
                     }
                 }
             } else {
                 for (Xe xe : allXe) {
-                    if (xe.isTrangthaixethue()==false) {
+                    if (xe.isTrangthaixethue() == false) {
                         list.add(xe);
                     }
                 }
@@ -542,6 +553,7 @@ public class cardThueXe extends javax.swing.JPanel {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
             index = 0;
             btn_back.setEnabled(false);
+            list_dichvu.clear();
         } else {
             setForm(locxe(item), index);
         }
@@ -556,6 +568,7 @@ public class cardThueXe extends javax.swing.JPanel {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
             index = size;
             btn_next.setEnabled(false);
+            list_dichvu.clear();
         } else {
             setForm(locxe(item), index);
         }
@@ -590,13 +603,15 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_chondichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chondichvuActionPerformed
         // TODO add your handling code here:
         String dichvu = null;
+        TaiKhoan tk = Hepler.AuthHelper.user;
         ThueDichVu tdv = new ThueDichVu();
         dichvu = cbb_DichVu.getSelectedItem().toString();
         try {
             DichVu dv = dvd.selectByID_1(dichvu);
+            tdv.setUserid(tk.getUserid());
             tdv.setMaxe(maxe);
             tdv.setDichvu(dv.getMadichvu());
-            tdvd.insert(tdv);
+            list_dichvu.add(tdv);
             DialogHelper.alert(this, "Chọn Thành Công");
         } catch (Exception e) {
             tdvd.update_1(tdv);

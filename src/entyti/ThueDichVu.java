@@ -9,15 +9,25 @@ package entyti;
  * @author truon
  */
 public class ThueDichVu {
+    private int userid;
     private String maxe;
     private String dichvu;
 
     public ThueDichVu() {
     }
 
-    public ThueDichVu(String maxe, String dichvu) {
+    public ThueDichVu(int userid, String maxe, String dichvu) {
+        this.userid = userid;
         this.maxe = maxe;
         this.dichvu = dichvu;
+    }
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
     }
 
     public String getMaxe() {
@@ -35,6 +45,5 @@ public class ThueDichVu {
     public void setDichvu(String dichvu) {
         this.dichvu = dichvu;
     }
-    
     
 }
