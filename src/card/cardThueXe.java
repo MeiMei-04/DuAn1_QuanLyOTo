@@ -602,20 +602,36 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_chondichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chondichvuActionPerformed
         // TODO add your handling code here:
+        boolean flag = false;
         String dichvu = null;
         TaiKhoan tk = Hepler.AuthHelper.user;
-        ThueDichVu tdv = new ThueDichVu();
         dichvu = cbb_DichVu.getSelectedItem().toString();
         try {
             DichVu dv = dvd.selectByID_1(dichvu);
-            tdv.setUserid(tk.getUserid());
-            tdv.setMaxe(maxe);
-            tdv.setDichvu(dv.getMadichvu());
-            list_dichvu.add(tdv);
-            DialogHelper.alert(this, "Chọn Thành Công");
+            if (list_dichvu.isEmpty()) {
+                flag = true;
+            } else {
+                for (ThueDichVu tdv : list_dichvu) {
+                    System.out.println(tdv.getDichvu());
+                    System.out.println(dv.getMadichvu());
+                    if (tdv.getDichvu().equalsIgnoreCase(dv.getMadichvu())) {
+                        flag = false;
+                    }else{
+                        flag = true;
+                    }
+                }
+            }
+            if (flag) {
+                ThueDichVu tdv = new ThueDichVu();
+                tdv.setUserid(tk.getUserid());
+                tdv.setMaxe(maxe);
+                tdv.setDichvu(dv.getMadichvu());
+                list_dichvu.add(tdv);
+                DialogHelper.alert(this, "Chọn Thành Công");
+            } else {
+                DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
+            }
         } catch (Exception e) {
-            tdvd.update_1(tdv);
-            DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_chondichvuActionPerformed
