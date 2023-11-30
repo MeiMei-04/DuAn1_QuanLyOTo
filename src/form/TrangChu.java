@@ -15,8 +15,6 @@ import card.cardHopDong;
 import card.cardSuaChuaBaoDuong;
 import card.cardTaiKhoan_QuanLy;
 import card.cardThueXe;
-import card.cardTraXe;
-import card.cardTraXe;
 import card.cardTrangChu;
 import card.cardXeThue;
 
