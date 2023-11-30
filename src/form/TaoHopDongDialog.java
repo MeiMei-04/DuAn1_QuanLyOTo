@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Hieu
  */
 public class TaoHopDongDialog extends javax.swing.JDialog {
+
     String path = "src/imghopdong/";
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ThueXeDAO txd = new ThueXeDAO();
@@ -33,33 +34,37 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     String maxe = null;
     String mavoucher = null;
     List<DichVu> list_dv = new ArrayList<>();
+    List<ThueDichVu> list_tdv = new ArrayList<>();
     int songaythue = 1;
     int tongtien = 0;
     int tiendichvu = 0;
     int giatrivoucher = 0;
     int tienvoucher = 0;
-    
-    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher) {
+
+    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher, List<ThueDichVu> list) {
         super(parent, modal);
         maxe = Maxe;
         songaythue = Songaythue;
         this.mavoucher = Mavoucher;
+        list_tdv = list;
         initComponents();
         setLocationRelativeTo(null);
         setForm();
     }
-    public void sendcode_qr(String name){
+
+    public void sendcode_qr(String name) {
         try {
             Xe xe = txd.selectByID(this.maxe);
             TaiKhoan tk = Hepler.AuthHelper.user;
-            ImagesHelper.capturePanel(MAIN_PAGE,name);
-            Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng", "Hợp Đồng Thuê Xe" +"\nXe: "+xe.getTenxe()+"\nMã Hợp Đồng"+name,path, name + ".png");
+            ImagesHelper.capturePanel(MAIN_PAGE, name);
+            Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng", "Hợp Đồng Thuê Xe" + "\nXe: " + xe.getTenxe() + "\nMã Hợp Đồng" + name, path, name + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
             return;
         }
 
     }
+
     private void filltable_dichvu() {
         DefaultTableModel model = (DefaultTableModel) tbl_dichvu.getModel();
         model.setRowCount(0);
@@ -97,17 +102,12 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     }
 
     public int tiendichvu() {
-        try {
-            List<ThueDichVu> list = tdvd.selectByKey(maxe);
-            list_dv.clear();
-            for (ThueDichVu tdv : list) {
-                DichVu dv = dvd.selectByID(tdv.getDichvu());
-                tiendichvu = dv.getDongia() + tiendichvu;
-                list_dv.add(dv);
-            }
-            filltable_dichvu();
-        } catch (Exception e) {
+        for (ThueDichVu tdv : list_tdv) {
+            DichVu dv = dvd.selectByID(tdv.getDichvu());
+            tiendichvu = dv.getDongia() + tiendichvu;
+            list_dv.add(dv);
         }
+        filltable_dichvu();
         return tiendichvu;
     }
 
@@ -172,12 +172,15 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 xe.setTrangthaixethue(true);
                 txd.update_1(xe);
                 DialogHelper.alert(this, "Thanh Toán Thành Công");
+                for(ThueDichVu tdv : list_tdv){
+                    tdvd.insert(tdv);
+                }
                 this.dispose();
             } else {
                 DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
                 return;
             }
-        
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

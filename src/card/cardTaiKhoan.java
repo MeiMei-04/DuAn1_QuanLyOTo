@@ -18,7 +18,7 @@ import form.NapTheCaoDialog;
  * @author hieud
  */
 public class cardTaiKhoan extends javax.swing.JPanel {
-
+    private NapTheCaoDialog napcardDialog;
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     ChiTietTaiKhoanDAO cttkdao = new ChiTietTaiKhoanDAO();
     String banglai = null;
@@ -186,7 +186,13 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;
             if(tk.isTrangthai()){
-                new NapTheCaoDialog(null, true).setVisible(true);
+                napcardDialog = new NapTheCaoDialog(null, true);
+                napcardDialog.setVisible(true);
+                if (!napcardDialog.isVisible()) {
+                setForm();
+            } else {
+                System.out.println("Form vẫn còn mở.");
+            }
             }else{
                 DialogHelper.alert(this, "Vui Lòng Xác Thực Tài Khoản");
             }
