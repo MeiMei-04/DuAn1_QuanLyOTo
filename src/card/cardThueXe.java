@@ -540,13 +540,13 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
+        list_dichvu.clear();
         index--;
         btn_next.setEnabled(true);
         if (index < 0) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
             index = 0;
             btn_back.setEnabled(false);
-            list_dichvu.clear();
         } else {
             setForm(locxe(item), index);
         }
@@ -556,12 +556,12 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
         // TODO add your handling code here:
         index++;
+        list_dichvu.clear();
         btn_back.setEnabled(true);
         if (index > size) {
             Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
             index = size;
             btn_next.setEnabled(false);
-            list_dichvu.clear();
         } else {
             setForm(locxe(item), index);
         }
