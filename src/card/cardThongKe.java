@@ -137,6 +137,9 @@ public class cardThongKe extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
         jLabel1 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -149,6 +152,12 @@ public class cardThongKe extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHopDong = new javax.swing.JTable();
 
+        jMenu1.setText("File");
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
         setBackground(new java.awt.Color(255, 102, 51));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -158,6 +167,8 @@ public class cardThongKe extends javax.swing.JPanel {
         jTabbedPane1.setBackground(new java.awt.Color(255, 102, 51));
         jTabbedPane1.setForeground(new java.awt.Color(255, 255, 255));
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        jPanel1.setBackground(new java.awt.Color(255, 102, 51));
 
         jPanel3.setBackground(new java.awt.Color(255, 102, 51));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Tháng", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -175,13 +186,13 @@ public class cardThongKe extends javax.swing.JPanel {
         tblDoanhThu.setBackground(new java.awt.Color(255, 102, 51));
         tblDoanhThu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Loại xe", "Số Xe", "Doanh Thu", "Thấp Nhất", "Cao Nhất", "Trung Binh"
+                "MÃ XE", "TÊN XE", "LOẠI XE", "SỐ LƯỢNG", "THẤP NHẤT", "CAO NHẤT", "DOANH THU"
             }
         ));
         jScrollPane3.setViewportView(tblDoanhThu);
@@ -220,7 +231,7 @@ public class cardThongKe extends javax.swing.JPanel {
                 .addGap(18, 18, 18))
         );
 
-        jTabbedPane1.addTab("Doanh Thu Theo Tháng", jPanel1);
+        jTabbedPane1.addTab("DOANH THU THEO THÁNG", jPanel1);
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 51));
 
@@ -253,7 +264,7 @@ public class cardThongKe extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Hợp Đồng", jPanel2);
+        jTabbedPane1.addTab("HỢP ĐỒNG", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -289,6 +300,9 @@ public class cardThongKe extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

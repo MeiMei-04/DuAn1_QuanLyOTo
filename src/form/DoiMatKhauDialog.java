@@ -101,10 +101,11 @@ public class DoiMatKhauDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(255, 102, 51));
 
         lbl_matkhaucu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_matkhaucu.setText("Mật Khẩu Cũ");
+        lbl_matkhaucu.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_matkhaucu.setText("MẬT KHẨU CŨ");
         lbl_matkhaucu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_matkhaucuMouseClicked(evt);
@@ -114,7 +115,8 @@ public class DoiMatKhauDialog extends javax.swing.JDialog {
         txt_matkhaucu.setText("jPasswordField1");
 
         lbl_matkhaumoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_matkhaumoi.setText("Mật Khẩu Mới");
+        lbl_matkhaumoi.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_matkhaumoi.setText("MẬT KHẨU MỚI");
         lbl_matkhaumoi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_matkhaumoiMouseClicked(evt);
@@ -124,7 +126,8 @@ public class DoiMatKhauDialog extends javax.swing.JDialog {
         txt_matkhaumoi.setText("jPasswordField1");
 
         lbl_matkhauxacnhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_matkhauxacnhan.setText("Xác Nhận Mật Khẩu");
+        lbl_matkhauxacnhan.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_matkhauxacnhan.setText("XÁC NHẬN MẬT KHẨU MỚI");
         lbl_matkhauxacnhan.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lbl_matkhauxacnhanMouseClicked(evt);
@@ -133,6 +136,8 @@ public class DoiMatKhauDialog extends javax.swing.JDialog {
 
         txt_matkhauxacnhan.setText("jPasswordField1");
 
+        btn_xacnhan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xacnhan.setForeground(new java.awt.Color(255, 102, 51));
         btn_xacnhan.setText("Xác Nhận");
         btn_xacnhan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,6 +145,7 @@ public class DoiMatKhauDialog extends javax.swing.JDialog {
             }
         });
 
+        cb_hienthimatkhau.setForeground(new java.awt.Color(255, 255, 255));
         cb_hienthimatkhau.setText("HIỂN THỊ MẬT KHẨU");
         cb_hienthimatkhau.setContentAreaFilled(false);
         cb_hienthimatkhau.setFocusPainted(false);

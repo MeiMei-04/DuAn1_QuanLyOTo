@@ -146,6 +146,7 @@ public class cardTraXe extends javax.swing.JPanel {
         txt_ghichu.setPreferredSize(new java.awt.Dimension(232, 42));
         jScrollPane2.setViewportView(txt_ghichu);
 
+        jTable2.setBackground(new java.awt.Color(255, 102, 51));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

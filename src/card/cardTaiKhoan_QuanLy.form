@@ -48,8 +48,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="T&#xe0;i Kho&#x1ea3;n">
-                <Property name="tabTitle" type="java.lang.String" value="T&#xe0;i Kho&#x1ea3;n"/>
+              <JTabbedPaneConstraints tabName="T&#xc0;I KHO&#x1ea2;N">
+                <Property name="tabTitle" type="java.lang.String" value="T&#xc0;I KHO&#x1ea2;N"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -74,8 +74,8 @@
                                   <Component id="txt_hoten" pref="260" max="32767" attributes="0"/>
                                   <Component id="txt_cancuoc" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txt_email" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="lbl_sodienthoai" alignment="0" min="-2" pref="97" max="-2" attributes="0"/>
                                   <Component id="txt_sodienthoai" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="lbl_sodienthoai" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -122,7 +122,7 @@
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace pref="13" max="32767" attributes="0"/>
+                              <EmptySpace pref="9" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="btn_guiemail" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="btn_xacthuc" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -142,6 +142,9 @@
           <SubComponents>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="66" red="ff" type="rgb"/>
+                </Property>
                 <Property name="opaque" type="boolean" value="false"/>
               </Properties>
 
@@ -149,18 +152,21 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tbl_taikhoan">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="66" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="10" rowCount="0">
-                        <Column editable="true" title="UserID" type="java.lang.Object"/>
-                        <Column editable="true" title="H&#x1ecd; T&#xea;n" type="java.lang.Object"/>
-                        <Column editable="true" title="AnhDaiDien" type="java.lang.Object"/>
+                        <Column editable="true" title="USERID" type="java.lang.Object"/>
+                        <Column editable="true" title="H&#x1ecc; T&#xca;N" type="java.lang.Object"/>
+                        <Column editable="true" title="&#x1ea2;NH &#x110;&#x1ea0;I DI&#x1ec6;N" type="java.lang.Object"/>
                         <Column editable="true" title="CCCD" type="java.lang.Object"/>
-                        <Column editable="true" title="BangLaiXe" type="java.lang.Object"/>
-                        <Column editable="true" title="SDT" type="java.lang.Object"/>
-                        <Column editable="true" title="NgaySinh" type="java.lang.Object"/>
-                        <Column editable="true" title="GioiTinh" type="java.lang.Object"/>
-                        <Column editable="true" title="DiaChi" type="java.lang.Object"/>
-                        <Column editable="true" title="SoDu" type="java.lang.Object"/>
+                        <Column editable="true" title="GPLX" type="java.lang.Object"/>
+                        <Column editable="true" title="S&#x110;T" type="java.lang.Object"/>
+                        <Column editable="true" title="NG&#xc0;Y SINH" type="java.lang.Object"/>
+                        <Column editable="true" title="GI&#x1eda;I T&#xcd;NH" type="java.lang.Object"/>
+                        <Column editable="true" title="&#x110;&#x1eca;A CH&#x1ec8;" type="java.lang.Object"/>
+                        <Column editable="true" title="S&#x1ed0; D&#x1af;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -232,8 +238,8 @@
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="&#x1ea2;nh B&#x1eb1;ng L&#xe1;i">
-                      <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                    <TitledBorder title="&#x1ea2;NH B&#x1eb0;NG L&#xc1;I">
+                      <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
                       <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                     </TitledBorder>
                   </Border>
@@ -284,12 +290,12 @@
             <Component class="javax.swing.JLabel" name="lbl_hovaten">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="2"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="H&#x1ecd; V&#xe0; T&#xea;n"/>
+                <Property name="text" type="java.lang.String" value="H&#x1ecc; V&#xc0; T&#xca;N"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_hoten">
@@ -302,12 +308,12 @@
             <Component class="javax.swing.JLabel" name="lbl_cancuoc">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="2"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="C&#x103;n C&#x1b0;&#x1edb;c"/>
+                <Property name="text" type="java.lang.String" value="C&#x102;N C&#x1af;&#x1eda;C"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_cancuoc">
@@ -327,20 +333,20 @@
             <Component class="javax.swing.JLabel" name="lbl_email">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="2"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Email"/>
+                <Property name="text" type="java.lang.String" value="EMAIL"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JPanel" name="pnl_anhdaidien">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                    <TitledBorder title="&#x1ea2;nh &#x110;&#x1ea1;i Di&#x1ec7;n">
-                      <Font PropertyName="font" name="Segoe UI" size="12" style="3"/>
+                    <TitledBorder title="&#x1ea2;NH &#x110;&#x1ea0;I DI&#x1ec6;N">
+                      <Font PropertyName="font" name="Segoe UI" size="12" style="1"/>
                       <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                     </TitledBorder>
                   </Border>
@@ -388,12 +394,12 @@
             <Component class="javax.swing.JLabel" name="lbl_sodienthoai">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="2"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; &#x110;i&#x1ec7;n Tho&#x1ea1;i"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed0; &#x110;I&#x1ec6;N THO&#x1ea0;I"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_sodienthoai">
@@ -405,7 +411,13 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_guiemail">
               <Properties>
-                <Property name="text" type="java.lang.String" value="G&#x1eed;i Email Y&#xea;u C&#x1ea7;u X&#xe1;c Th&#x1ef1;c"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="66" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="G&#x1eec;I EMAIL Y&#xca;U C&#x1ea6;U X&#xc1;C TH&#x1ef0;C"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_guiemailActionPerformed"/>
@@ -413,7 +425,13 @@
             </Component>
             <Component class="javax.swing.JButton" name="btn_xacthuc">
               <Properties>
-                <Property name="text" type="java.lang.String" value="X&#xe1;c Th&#x1ef1;c T&#xe0;i Kho&#x1ea3;n"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="66" red="ff" type="rgb"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="X&#xc1;C TH&#x1ef0;C T&#xc0;I KHO&#x1ea2;N"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_xacthucActionPerformed"/>
@@ -425,13 +443,13 @@
                   <Color blue="33" green="66" red="ff" type="rgb"/>
                 </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="18" style="3"/>
+                  <Font name="Segoe UI" size="18" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i :"/>
+                <Property name="text" type="java.lang.String" value="TR&#x1ea0;NG TH&#xc1;I :"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
               </Properties>
             </Component>
@@ -443,8 +461,8 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="M&#xe3; N&#x1ea1;p">
-                <Property name="tabTitle" type="java.lang.String" value="M&#xe3; N&#x1ea1;p"/>
+              <JTabbedPaneConstraints tabName="M&#xc3; N&#x1ea0;P">
+                <Property name="tabTitle" type="java.lang.String" value="M&#xc3; N&#x1ea0;P"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -465,7 +483,7 @@
                           <Component id="pnl_chucnang" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jScrollPane2" pref="540" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="556" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">

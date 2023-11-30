@@ -267,12 +267,13 @@ public class cardThueXe extends javax.swing.JPanel {
 
         jScrollPane3.setOpaque(false);
 
+        tbl_danhgia.setBackground(new java.awt.Color(255, 102, 51));
         tbl_danhgia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Họ Tên", "Nội Dung", "Số Sao", "Ngày Đánh GIá"
+                "HỌ TÊN", "NỘI DUNG", "SỐ SAO", "NGÀY ĐÁNH GIÁ"
             }
         ));
         tbl_danhgia.setOpaque(false);
@@ -291,40 +292,41 @@ public class cardThueXe extends javax.swing.JPanel {
             .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)
         );
 
-        ttxe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông Tin Xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        ttxe.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN XE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         ttxe.setOpaque(false);
 
-        lbl_maxe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_maxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_maxe.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_maxe.setText("Mã Xe");
+        lbl_maxe.setText("MÃ XE");
 
-        lbl_tenxe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_tenxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_tenxe.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_tenxe.setText("Tên Xe");
+        lbl_tenxe.setText("TÊN XE");
 
-        lbl_soghe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_soghe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_soghe.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_soghe.setText("Số Ghế");
+        lbl_soghe.setText("SỐ GHẾ");
 
-        lbl_trangthai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_trangthai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_trangthai.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_trangthai.setText("Trạng Thái");
+        lbl_trangthai.setText("TRẠNG THÁI");
 
-        lbl_giathue.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_giathue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_giathue.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_giathue.setText("Giá Thuê");
+        lbl_giathue.setText("GIÁ THUÊ");
 
-        lbl_maloaixe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_maloaixe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_maloaixe.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_maloaixe.setText("Mã Loại Xe");
+        lbl_maloaixe.setText("MÃ LOẠI XE");
 
+        txt_noidung.setBackground(new java.awt.Color(255, 102, 51));
         txt_noidung.setColumns(20);
         txt_noidung.setRows(5);
         jScrollPane1.setViewportView(txt_noidung);
 
-        lbl_noidung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_noidung.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_noidung.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_noidung.setText("Ghi Chú");
+        lbl_noidung.setText("GHI CHÚ");
 
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
@@ -366,7 +368,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thuê Xe", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THUÊ XE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
         jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(350, 178));
 
@@ -374,24 +376,29 @@ public class cardThueXe extends javax.swing.JPanel {
         cbb_DichVu.setForeground(new java.awt.Color(255, 102, 51));
         cbb_DichVu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả" }));
 
+        lbl_voucher.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_voucher.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_voucher.setText("Voucher");
+        lbl_voucher.setText("VOUCHER");
 
+        lbl_dichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_dichvu.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_dichvu.setText("Dich Vụ");
+        lbl_dichvu.setText("DỊCH VỤ");
 
         btn_Thuexe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_Thuexe.setForeground(new java.awt.Color(255, 102, 51));
-        btn_Thuexe.setText("Thuê Xe");
+        btn_Thuexe.setText("THUÊ XE");
         btn_Thuexe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_ThuexeActionPerformed(evt);
             }
         });
 
+        lbl_songaythue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_songaythue.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_songaythue.setText("Số Ngày Thuê");
+        lbl_songaythue.setText("SỐ NGÀY THUÊ");
 
+        btn_chondichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_chondichvu.setForeground(new java.awt.Color(255, 102, 51));
         btn_chondichvu.setText("Chọn Dịch Vụ");
         btn_chondichvu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +416,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(txt_voucher)
                     .addComponent(txt_songaythue)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 346, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_Thuexe))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -440,14 +447,14 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addComponent(lbl_songaythue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_songaythue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btn_Thuexe)
                 .addGap(23, 23, 23))
         );
 
         cbb_loaixe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbb_loaixe.setForeground(new java.awt.Color(255, 102, 51));
-        cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tất Cả", "4", "7", "16", "29" }));
+        cbb_loaixe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TẤT CẢ", "4", "7", "16", "29" }));
         cbb_loaixe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbb_loaixeActionPerformed(evt);
@@ -456,7 +463,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         lbl_timtheosoghe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_timtheosoghe.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_timtheosoghe.setText("Tìm Theo Số Ghế:");
+        lbl_timtheosoghe.setText("TÌM THEO SỐ GHẾ");
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
         background.setLayout(backgroundLayout);
@@ -478,7 +485,7 @@ public class cardThueXe extends javax.swing.JPanel {
                             .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(backgroundLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
                         .addComponent(pnl_danhgia, javax.swing.GroupLayout.PREFERRED_SIZE, 454, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(backgroundLayout.createSequentialGroup()

@@ -291,6 +291,8 @@ public class DangKyDialog extends java.awt.Dialog {
             }
         });
 
+        cb_hienthimatkhau.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        cb_hienthimatkhau.setForeground(new java.awt.Color(255, 255, 255));
         cb_hienthimatkhau.setText("HIỂN THỊ MẬT KHẨU");
         cb_hienthimatkhau.setContentAreaFilled(false);
         cb_hienthimatkhau.setFocusPainted(false);
@@ -377,7 +379,7 @@ public class DangKyDialog extends java.awt.Dialog {
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btn_dangky, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_nhanma, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
