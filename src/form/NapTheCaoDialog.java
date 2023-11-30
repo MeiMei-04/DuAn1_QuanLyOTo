@@ -171,24 +171,28 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             }
         });
 
-        background.setBackground(new java.awt.Color(255, 255, 255));
+        background.setBackground(new java.awt.Color(255, 102, 51));
         background.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        pnl_qrcam.setBackground(new java.awt.Color(250, 250, 250));
+        pnl_qrcam.setBackground(new java.awt.Color(255, 102, 51));
         pnl_qrcam.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 230, 230)));
         pnl_qrcam.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         background.add(pnl_qrcam, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 470, 300));
-        background.add(txt_manap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 280, -1));
+        background.add(txt_manap, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 342, 280, 30));
 
+        btn_nap.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_nap.setForeground(new java.awt.Color(255, 102, 51));
         btn_nap.setText("Nạp");
         btn_nap.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_napActionPerformed(evt);
             }
         });
-        background.add(btn_nap, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 350, -1, -1));
+        background.add(btn_nap, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, 30));
 
-        jLabel1.setText("Mã Nạp");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("MÃ NẠP");
         background.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

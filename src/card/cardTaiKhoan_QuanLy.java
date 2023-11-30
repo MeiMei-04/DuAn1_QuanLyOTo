@@ -98,7 +98,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         } else {
             trangthai = "Chưa Xác Thực ";
         }
-        lbl_trangthaithaikhoan.setText("Trạng Thái :" + trangthai);
+        lbl_trangthaithaikhoan.setText("TRẠNG THÁI :" + trangthai);
         setImg(cttk.getAnhdaidien(), cttk.getBanglaixe());
     }
     int row = -1;
@@ -266,14 +266,16 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
         pnl_taikhoan.setOpaque(false);
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 102, 51));
         jScrollPane1.setOpaque(false);
 
+        tbl_taikhoan.setBackground(new java.awt.Color(255, 102, 51));
         tbl_taikhoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "UserID", "Họ Tên", "AnhDaiDien", "CCCD", "BangLaiXe", "SDT", "NgaySinh", "GioiTinh", "DiaChi", "SoDu"
+                "USERID", "HỌ TÊN", "ẢNH ĐẠI DIỆN", "CCCD", "GPLX", "SĐT", "NGÀY SINH", "GIỚI TÍNH", "ĐỊA CHỈ", "SỐ DƯ"
             }
         ));
         tbl_taikhoan.setOpaque(false);
@@ -284,7 +286,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tbl_taikhoan);
 
-        pnl_anhbanglai.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh Bằng Lái", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnl_anhbanglai.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ẢNH BẰNG LÁI", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         pnl_anhbanglai.setForeground(new java.awt.Color(255, 255, 255));
         pnl_anhbanglai.setOpaque(false);
         pnl_anhbanglai.setPreferredSize(new java.awt.Dimension(400, 200));
@@ -310,25 +312,25 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        lbl_hovaten.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbl_hovaten.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_hovaten.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_hovaten.setText("Họ Và Tên");
+        lbl_hovaten.setText("HỌ VÀ TÊN");
 
         txt_hoten.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbl_cancuoc.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbl_cancuoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_cancuoc.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_cancuoc.setText("Căn Cước");
+        lbl_cancuoc.setText("CĂN CƯỚC");
 
         txt_cancuoc.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lbl_email.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbl_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_email.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_email.setText("Email");
+        lbl_email.setText("EMAIL");
 
-        pnl_anhdaidien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ảnh Đại Diện", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 3, 12), new java.awt.Color(255, 255, 255))); // NOI18N
+        pnl_anhdaidien.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ẢNH ĐẠI DIỆN", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         pnl_anhdaidien.setForeground(new java.awt.Color(255, 255, 255));
         pnl_anhdaidien.setOpaque(false);
 
@@ -353,20 +355,24 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        lbl_sodienthoai.setFont(new java.awt.Font("Segoe UI", 2, 14)); // NOI18N
+        lbl_sodienthoai.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbl_sodienthoai.setForeground(new java.awt.Color(255, 255, 255));
-        lbl_sodienthoai.setText("Số Điện Thoại");
+        lbl_sodienthoai.setText("SỐ ĐIỆN THOẠI");
 
         txt_sodienthoai.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        btn_guiemail.setText("Gửi Email Yêu Cầu Xác Thực");
+        btn_guiemail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_guiemail.setForeground(new java.awt.Color(255, 102, 51));
+        btn_guiemail.setText("GỬI EMAIL YÊU CẦU XÁC THỰC");
         btn_guiemail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guiemailActionPerformed(evt);
             }
         });
 
-        btn_xacthuc.setText("Xác Thực Tài Khoản");
+        btn_xacthuc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xacthuc.setForeground(new java.awt.Color(255, 102, 51));
+        btn_xacthuc.setText("XÁC THỰC TÀI KHOẢN");
         btn_xacthuc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_xacthucActionPerformed(evt);
@@ -374,10 +380,10 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         });
 
         lbl_trangthaithaikhoan.setBackground(new java.awt.Color(255, 102, 51));
-        lbl_trangthaithaikhoan.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lbl_trangthaithaikhoan.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         lbl_trangthaithaikhoan.setForeground(new java.awt.Color(255, 255, 255));
         lbl_trangthaithaikhoan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        lbl_trangthaithaikhoan.setText("Trạng Thái :");
+        lbl_trangthaithaikhoan.setText("TRẠNG THÁI :");
         lbl_trangthaithaikhoan.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
         javax.swing.GroupLayout pnl_taikhoanLayout = new javax.swing.GroupLayout(pnl_taikhoan);
@@ -400,8 +406,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                             .addComponent(txt_hoten, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                             .addComponent(txt_cancuoc)
                             .addComponent(txt_email)
-                            .addComponent(lbl_sodienthoai, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_sodienthoai)))
+                            .addComponent(txt_sodienthoai)
+                            .addComponent(lbl_sodienthoai)))
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
                         .addComponent(btn_guiemail)
                         .addGap(161, 161, 161)
@@ -439,7 +445,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                     .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                         .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btn_guiemail)
                             .addComponent(btn_xacthuc))
@@ -450,7 +456,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
-        tabs.addTab("Tài Khoản", pnl_taikhoan);
+        tabs.addTab("TÀI KHOẢN", pnl_taikhoan);
 
         pnl_TheNap.setOpaque(false);
 
@@ -571,7 +577,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                     .addComponent(btn_sendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(pnl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(pnl_TheNapLayout.createSequentialGroup()
                 .addGap(317, 317, 317)
@@ -607,7 +613,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        tabs.addTab("Mã Nạp", pnl_TheNap);
+        tabs.addTab("MÃ NẠP", pnl_TheNap);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

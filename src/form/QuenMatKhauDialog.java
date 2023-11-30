@@ -102,7 +102,7 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
             }
         });
 
-        backgorund.setBackground(new java.awt.Color(255, 255, 255));
+        backgorund.setBackground(new java.awt.Color(255, 102, 51));
 
         anh.setBackground(new java.awt.Color(255, 102, 51));
 
@@ -119,7 +119,7 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
 
         txt_email.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         txt_email.setForeground(new java.awt.Color(255, 102, 51));
-        txt_email.setText("Vui lòng nhập Email");
+        txt_email.setText("VUI LÒNG NHẬP EMAIL");
         txt_email.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txt_emailMouseClicked(evt);
@@ -134,9 +134,10 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
             }
         });
 
-        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setForeground(new java.awt.Color(255, 102, 51));
+        jScrollPane1.setBackground(new java.awt.Color(255, 102, 51));
+        jScrollPane1.setForeground(new java.awt.Color(255, 255, 255));
 
+        tabletaikhoan.setBackground(new java.awt.Color(255, 102, 51));
         tabletaikhoan.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         tabletaikhoan.setForeground(new java.awt.Color(255, 102, 51));
         tabletaikhoan.setModel(new javax.swing.table.DefaultTableModel(
@@ -157,8 +158,8 @@ public class QuenMatKhauDialog extends java.awt.Dialog {
         jScrollPane1.setViewportView(tabletaikhoan);
 
         btn_laylaimk.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btn_laylaimk.setForeground(new java.awt.Color(255, 102, 51));
-        btn_laylaimk.setText("Lấy Lại Mật Khẩu");
+        btn_laylaimk.setForeground(new java.awt.Color(255, 255, 255));
+        btn_laylaimk.setText("LẤY LẠI MẬT KHẨU");
         btn_laylaimk.setContentAreaFilled(false);
         btn_laylaimk.setFocusPainted(false);
         btn_laylaimk.addActionListener(new java.awt.event.ActionListener() {

@@ -62,7 +62,7 @@
                   </Group>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace pref="18" max="32767" attributes="0"/>
+                          <EmptySpace pref="7" max="32767" attributes="0"/>
                           <Component id="pnl_danhgia" min="-2" pref="454" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       </Group>
@@ -249,12 +249,15 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tbl_danhgia">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="66" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
-                        <Column editable="true" title="H&#x1ecd; T&#xea;n" type="java.lang.Object"/>
-                        <Column editable="true" title="N&#x1ed9;i Dung" type="java.lang.Object"/>
-                        <Column editable="true" title="S&#x1ed1; Sao" type="java.lang.Object"/>
-                        <Column editable="true" title="Ng&#xe0;y &#x110;&#xe1;nh GI&#xe1;" type="java.lang.Object"/>
+                        <Column editable="true" title="H&#x1ecc; T&#xca;N" type="java.lang.Object"/>
+                        <Column editable="true" title="N&#x1ed8;I DUNG" type="java.lang.Object"/>
+                        <Column editable="true" title="S&#x1ed0; SAO" type="java.lang.Object"/>
+                        <Column editable="true" title="NG&#xc0;Y &#x110;&#xc1;NH GI&#xc1;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -295,7 +298,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Th&#xf4;ng Tin Xe">
+                <TitledBorder title="TH&#xd4;NG TIN XE">
                   <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
                   <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                 </TitledBorder>
@@ -354,67 +357,67 @@
             <Component class="javax.swing.JLabel" name="lbl_maxe">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#xe3; Xe"/>
+                <Property name="text" type="java.lang.String" value="M&#xc3; XE"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_tenxe">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="T&#xea;n Xe"/>
+                <Property name="text" type="java.lang.String" value="T&#xca;N XE"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_soghe">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; Gh&#x1ebf;"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed0; GH&#x1ebe;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_trangthai">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i"/>
+                <Property name="text" type="java.lang.String" value="TR&#x1ea0;NG TH&#xc1;I"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_giathue">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Gi&#xe1; Thu&#xea;"/>
+                <Property name="text" type="java.lang.String" value="GI&#xc1; THU&#xca;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_maloaixe">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#xe3; Lo&#x1ea1;i Xe"/>
+                <Property name="text" type="java.lang.String" value="M&#xc3; LO&#x1ea0;I XE"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -423,6 +426,9 @@
               <SubComponents>
                 <Component class="javax.swing.JTextArea" name="txt_noidung">
                   <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="33" green="66" red="ff" type="rgb"/>
+                    </Property>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
                   </Properties>
@@ -432,12 +438,12 @@
             <Component class="javax.swing.JLabel" name="lbl_noidung">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="0"/>
+                  <Font name="Segoe UI" size="14" style="1"/>
                 </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Ghi Ch&#xfa;"/>
+                <Property name="text" type="java.lang.String" value="GHI CH&#xda;"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -446,7 +452,7 @@
           <Properties>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Thu&#xea; Xe">
+                <TitledBorder title="THU&#xca; XE">
                   <Font PropertyName="font" name="Segoe UI" size="14" style="1"/>
                   <Color PropertyName="color" blue="ff" green="ff" red="ff" type="rgb"/>
                 </TitledBorder>
@@ -467,7 +473,7 @@
                           <Component id="txt_voucher" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_songaythue" alignment="0" max="32767" attributes="0"/>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace min="0" pref="346" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -481,7 +487,7 @@
                                       <Component id="btn_chondichvu" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace min="0" pref="17" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -506,7 +512,7 @@
                       <Component id="lbl_songaythue" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="txt_songaythue" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="40" max="32767" attributes="0"/>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Component id="btn_Thuexe" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                   </Group>
@@ -534,18 +540,24 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_voucher">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Voucher"/>
+                <Property name="text" type="java.lang.String" value="VOUCHER"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_dichvu">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Dich V&#x1ee5;"/>
+                <Property name="text" type="java.lang.String" value="D&#x1eca;CH V&#x1ee4;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_voucher">
@@ -558,7 +570,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="33" green="66" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Thu&#xea; Xe"/>
+                <Property name="text" type="java.lang.String" value="THU&#xca; XE"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_ThuexeActionPerformed"/>
@@ -568,14 +580,23 @@
             </Component>
             <Component class="javax.swing.JLabel" name="lbl_songaythue">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="S&#x1ed1; Ng&#xe0;y Thu&#xea;"/>
+                <Property name="text" type="java.lang.String" value="S&#x1ed0; NG&#xc0;Y THU&#xca;"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_chondichvu">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Segoe UI" size="14" style="1"/>
+                </Property>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="33" green="66" red="ff" type="rgb"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Ch&#x1ecd;n D&#x1ecb;ch V&#x1ee5;"/>
               </Properties>
               <Events>
@@ -594,7 +615,7 @@
             </Property>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="5">
-                <StringItem index="0" value="T&#x1ea5;t C&#x1ea3;"/>
+                <StringItem index="0" value="T&#x1ea4;T C&#x1ea2;"/>
                 <StringItem index="1" value="4"/>
                 <StringItem index="2" value="7"/>
                 <StringItem index="3" value="16"/>
@@ -617,7 +638,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="T&#xec;m Theo S&#x1ed1; Gh&#x1ebf;:"/>
+            <Property name="text" type="java.lang.String" value="T&#xcc;M THEO S&#x1ed0; GH&#x1ebe;"/>
           </Properties>
         </Component>
       </SubComponents>
