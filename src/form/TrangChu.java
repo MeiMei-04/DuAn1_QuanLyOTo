@@ -38,7 +38,7 @@ public class TrangChu extends javax.swing.JFrame {
         updateStatus_off();
     }
     public void openGioiThieu(){
-        String filePath = "src\\POLYCAR-main\\loading.html";
+        String filePath = "src\\POLYCAR-main\\contact.html";
         try {
             Hepler.openweb.openWebPage(filePath);
             
