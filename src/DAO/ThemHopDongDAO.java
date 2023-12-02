@@ -20,6 +20,8 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
     String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien,DiaDiemNhanXe) values(?,?,?,?,?,?,?,?,?)";
     String SELECT_ALL_SQL = "SELECT * FROM HopDong";
     String SELECT_BY_ID_SQL = "SELECT*FROM HopDong WHERE MaHopDong = ?";
+    String SELECT_BY_ID_SQL_key = "SELECT*FROM HopDong WHERE userid = ?";
+    String update = "UPDATE HopDong SET ThoiHanHopDong = 0 WHERE userid =?";
 
     @Override
     public void insert(HopDong entity) {
@@ -29,7 +31,7 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
     @Override
     public void update(HopDong entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(update, entity.getUserid());
     }
 
     @Override
@@ -68,7 +70,16 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
     @Override
     public List<HopDong> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+           // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL_key, key);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
     }
 
     @Override
@@ -86,6 +97,7 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
                 hp.setNgaytra(rs.getDate("NgayTra"));
                 hp.setMavoucher(rs.getString("MaVouncher"));
                 hp.setThanhtien(rs.getInt("ThanhTien"));
+                hp.setTrangthaihopdong(rs.getBoolean("ThoiHanHopDong"));
                 hp.setDiadiemnhanxe(rs.getString("DiaDiemNhanXe"));
                 list.add(hp);
             }

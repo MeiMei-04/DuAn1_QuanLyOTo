@@ -2,11 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-
 package card;
 
 import DAO.HopDongDAO;
+import DAO.ThemHopDongDAO;
 import Hepler.DialogHelper;
+import entyti.HopDong;
+import entyti.TaiKhoan;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,13 +29,57 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class cardHopDong extends javax.swing.JPanel {
 
-    /** Creates new form HopDong */
+    ThemHopDongDAO thdd = new ThemHopDongDAO();
+
+    /**
+     * Creates new form HopDong
+     */
     public cardHopDong() {
         initComponents();
         filltableHopDong();
+        check_hsd();    
+        if (!Hepler.AuthHelper.isManager()) {
+            tabs.remove(1);
+        } else {
+            tabs.remove(0);
+        }
+        btn_traxe.setVisible(false);
     }
-    
-     HopDongDAO dao = new HopDongDAO();
+    public void check_hsd(){
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
+            for (HopDong hd : list) {
+                if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) > 0) {
+                    System.out.println("1");
+                    thdd.update(hd);
+                }
+            }
+            filltableHopDongKhachHang();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    void filltableHopDongKhachHang() {
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            DefaultTableModel model = (DefaultTableModel) tbl_hopdongkhachhang.getModel();
+            model.setRowCount(0);
+            List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
+            for (HopDong hd : list) {
+                Object[] row = {hd.getMahopdong(),
+                    hd.getMaxe(),
+                    hd.getNgaythue(),
+                    hd.getNgaytra(),
+                    hd.isTrangthaihopdong()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    HopDongDAO dao = new HopDongDAO();
 
     void filltableHopDong() {
         DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
@@ -43,47 +89,47 @@ public class cardHopDong extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
-    
+
     void xuatEXCL() {
-       try{
-           JFileChooser jFileChooser = new JFileChooser();
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet("Doanh thu");
-               
-               Row rowCol = sheet.createRow(4);
-               for(int i=0;i<tblHopDong.getColumnCount();i++){
-                   
-                   Cell cell = rowCol.createCell(4+i);// lui sang phải
-                   cell.setCellValue(tblHopDong.getColumnName(i));
-               }
-               
-               for(int j=0;j<tblHopDong.getRowCount();j++){
-                   Row row = sheet.createRow(j+5);// sang phải
-                   for(int k=0;k<tblHopDong.getColumnCount();k++){
-                       Cell cell = row.createCell(k+4);// lùi xuống
-                       if(tblHopDong.getValueAt(j, k)!=null){
-                           cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               onpenFile(saveFile.toString());
-           }else{
-               DialogHelper.alert(this, "loiiiii");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Doanh thu");
+
+                Row rowCol = sheet.createRow(4);
+                for (int i = 0; i < tblHopDong.getColumnCount(); i++) {
+
+                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
+                    cell.setCellValue(tblHopDong.getColumnName(i));
+                }
+
+                for (int j = 0; j < tblHopDong.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 5);// sang phải
+                    for (int k = 0; k < tblHopDong.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k + 4);// lùi xuống
+                        if (tblHopDong.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                onpenFile(saveFile.toString());
+            } else {
+                DialogHelper.alert(this, "loiiiii");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
 
     }
 
@@ -97,19 +143,19 @@ public class cardHopDong extends javax.swing.JPanel {
 
     }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabs = new javax.swing.JTabbedPane();
         jPanel6 = new javax.swing.JPanel();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        scol = new javax.swing.JScrollPane();
+        tbl_hopdongkhachhang = new javax.swing.JTable();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
@@ -142,7 +188,7 @@ public class cardHopDong extends javax.swing.JPanel {
         jLabel42 = new javax.swing.JLabel();
         txt_tienvoucher2 = new javax.swing.JTextField();
         jSeparator9 = new javax.swing.JSeparator();
-        jButton4 = new javax.swing.JButton();
+        btn_traxe = new javax.swing.JButton();
         btn_first2 = new javax.swing.JButton();
         btn_pre2 = new javax.swing.JButton();
         btn_next2 = new javax.swing.JButton();
@@ -162,11 +208,11 @@ public class cardHopDong extends javax.swing.JPanel {
 
         jPanel6.setBackground(new java.awt.Color(255, 102, 51));
 
-        jScrollPane6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        scol.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
-        jTable5.setBackground(new java.awt.Color(255, 102, 51));
-        jTable5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tbl_hopdongkhachhang.setBackground(new java.awt.Color(255, 102, 51));
+        tbl_hopdongkhachhang.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tbl_hopdongkhachhang.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -177,7 +223,7 @@ public class cardHopDong extends javax.swing.JPanel {
                 "MÃ HỢP ĐỒNG", "MÃ XE", "NGÀY THUÊ", "NGÀY TRẢ", "TÌNH TRẠNG"
             }
         ));
-        jScrollPane6.setViewportView(jTable5);
+        scol.setViewportView(tbl_hopdongkhachhang);
 
         jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
@@ -256,9 +302,9 @@ public class cardHopDong extends javax.swing.JPanel {
         jLabel42.setForeground(new java.awt.Color(255, 255, 255));
         jLabel42.setText("DISCOUNT");
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 102, 51));
-        jButton4.setText("TRẢ XE");
+        btn_traxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_traxe.setForeground(new java.awt.Color(255, 102, 51));
+        btn_traxe.setText("TRẢ XE");
 
         btn_first2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_first2.setForeground(new java.awt.Color(255, 102, 51));
@@ -324,7 +370,7 @@ public class cardHopDong extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scol, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator9)
                     .addGroup(jPanel6Layout.createSequentialGroup()
@@ -343,7 +389,7 @@ public class cardHopDong extends javax.swing.JPanel {
                                 .addGap(2, 2, 2)
                                 .addComponent(btn_last2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton4)))
+                                .addComponent(btn_traxe)))
                         .addContainerGap())))
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(366, 366, 366)
@@ -409,7 +455,7 @@ public class cardHopDong extends javax.swing.JPanel {
                                         .addComponent(txt_tongtien2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addComponent(tbl_dichvu2, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(scol, javax.swing.GroupLayout.PREFERRED_SIZE, 362, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel40)
@@ -424,11 +470,11 @@ public class cardHopDong extends javax.swing.JPanel {
                     .addComponent(btn_pre2)
                     .addComponent(btn_next2)
                     .addComponent(btn_last2)
-                    .addComponent(jButton4))
+                    .addComponent(btn_traxe))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("HỢP ĐỒNG", jPanel6);
+        tabs.addTab("HỢP ĐỒNG", jPanel6);
 
         jPanel3.setBackground(new java.awt.Color(255, 102, 0));
 
@@ -511,17 +557,17 @@ public class cardHopDong extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("DS. HỢP ĐỒNG", jPanel3);
+        tabs.addTab("DS. HỢP ĐỒNG", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabs)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -535,8 +581,8 @@ public class cardHopDong extends javax.swing.JPanel {
     private javax.swing.JButton btn_last2;
     private javax.swing.JButton btn_next2;
     private javax.swing.JButton btn_pre2;
+    private javax.swing.JButton btn_traxe;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel30;
@@ -556,18 +602,18 @@ public class cardHopDong extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
     private javax.swing.JSeparator jSeparator9;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
+    private javax.swing.JScrollPane scol;
+    private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tblHopDong;
     private javax.swing.JScrollPane tbl_dichvu2;
+    private javax.swing.JTable tbl_hopdongkhachhang;
     private javax.swing.JTextArea txt_ghichu2;
     private javax.swing.JTextField txt_giathue2;
     private javax.swing.JTextField txt_maloaixe2;
