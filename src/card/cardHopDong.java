@@ -37,7 +37,7 @@ public class cardHopDong extends javax.swing.JPanel {
     public cardHopDong() {
         initComponents();
         filltableHopDong();
-        check_hsd();    
+        check_hsd();
         if (!Hepler.AuthHelper.isManager()) {
             tabs.remove(1);
         } else {
@@ -45,21 +45,23 @@ public class cardHopDong extends javax.swing.JPanel {
         }
         btn_traxe.setVisible(false);
     }
-    public void check_hsd(){
-        try {
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
-            for (HopDong hd : list) {
-                if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) > 0) {
-                    System.out.println("1");
-                    thdd.update(hd);
+
+    public void check_hsd() {
+            try {
+                TaiKhoan tk = Hepler.AuthHelper.user;
+                List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
+                for (HopDong hd : list) {
+                    if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
+                        System.out.println(Hepler.DateHelper.now().compareTo(hd.getNgaytra()));
+                        thdd.update(hd);
+                    }
                 }
+                filltableHopDongKhachHang();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            filltableHopDongKhachHang();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
+
     void filltableHopDongKhachHang() {
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;

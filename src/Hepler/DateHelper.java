@@ -4,14 +4,10 @@
  */
 package Hepler;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 /**
@@ -50,12 +46,19 @@ public class DateHelper {
         return new Date();
     }
 
+    public static String nowdate() {
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        return formatter.format(date);
+    }
+
     //tạo ngày cách ngày hiện tại số ngày int
     public static Date add(int days) {
         Date now = DateHelper.now();
         now.setTime(now.getTime() + days * 24 * 60 * 60 * 1000);
         return now;
     }
+
     //convert to localdate
     public static LocalDate toLocalDate(String date, String pattern) {
         try {
@@ -65,5 +68,5 @@ public class DateHelper {
             throw new RuntimeException(e);
         }
     }
-    
+
 }

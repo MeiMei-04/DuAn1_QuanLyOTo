@@ -21,7 +21,7 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
     String SELECT_ALL_SQL = "SELECT * FROM HopDong";
     String SELECT_BY_ID_SQL = "SELECT*FROM HopDong WHERE MaHopDong = ?";
     String SELECT_BY_ID_SQL_key = "SELECT*FROM HopDong WHERE userid = ?";
-    String update = "UPDATE HopDong SET ThoiHanHopDong = 0 WHERE userid =?";
+    String update = "UPDATE HopDong SET ThoiHanHopDong = 0 WHERE MaHopDong =?";
 
     @Override
     public void insert(HopDong entity) {
@@ -31,7 +31,7 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
     @Override
     public void update(HopDong entity) {
-        JDBCHelper.executeUpdate(update, entity.getUserid());
+        JDBCHelper.executeUpdate(update, entity.getMahopdong());
     }
 
     @Override
