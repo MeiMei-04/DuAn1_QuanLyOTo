@@ -8,12 +8,14 @@ import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThueDichVuDAO;
 import DAO.ThueXeDAO;
+import DAO.VoucherDAO;
 import Hepler.AuthHelper;
 import Hepler.DialogHelper;
 import entyti.DanhGia;
 import entyti.DichVu;
 import entyti.TaiKhoan;
 import entyti.ThueDichVu;
+import entyti.Voucher;
 import entyti.Xe;
 import form.TaoHopDongDialog;
 import java.awt.Component;
@@ -33,6 +35,7 @@ public class cardThueXe extends javax.swing.JPanel {
     DichVuDAO dvd = new DichVuDAO();
     ThueXeDAO txd = new ThueXeDAO();
     ThueDichVuDAO tdvd = new ThueDichVuDAO();
+    VoucherDAO vcd = new VoucherDAO();
     List<ThueDichVu> list_dichvu = new ArrayList<>();
     int index = 0;
     int size = 0;
@@ -52,7 +55,25 @@ public class cardThueXe extends javax.swing.JPanel {
         setForm(locxe(item), 0);
         list_dichvu.clear();
     }
-
+    public void kiemtravoucher(){
+        String voucher  = txt_voucher.getText();
+        try {
+            Voucher vc = vcd.selectByID(voucher);
+            if(voucher.equalsIgnoreCase(vc.getMavoucher())){
+                if(vc.getGiatri()==1){
+                    DialogHelper.alert(this, "Voucher giảm giá 5%");
+                }else if(vc.getGiatri()==2){
+                    DialogHelper.alert(this, "Voucher giảm giá 10%");
+                }else if(vc.getGiatri()==3){
+                    DialogHelper.alert(this, "Voucher giảm giá 15%");
+                }else{
+                    DialogHelper.alert(this, "Voucher không tồn tại");
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void openHopDong() {
         try {
             hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu);
@@ -216,6 +237,7 @@ public class cardThueXe extends javax.swing.JPanel {
         txt_songaythue = new javax.swing.JTextField();
         lbl_songaythue = new javax.swing.JLabel();
         btn_chondichvu = new javax.swing.JButton();
+        btn_checkvoucher = new javax.swing.JButton();
         cbb_loaixe = new javax.swing.JComboBox<>();
         lbl_timtheosoghe = new javax.swing.JLabel();
 
@@ -417,6 +439,15 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
+        btn_checkvoucher.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_checkvoucher.setForeground(new java.awt.Color(255, 102, 51));
+        btn_checkvoucher.setText("Kiểm Tra");
+        btn_checkvoucher.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_checkvoucherActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -424,21 +455,25 @@ public class cardThueXe extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_voucher)
                     .addComponent(txt_songaythue)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_Thuexe))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_voucher)
-                            .addComponent(lbl_dichvu)
-                            .addComponent(lbl_songaythue)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(cbb_DichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btn_chondichvu)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btn_checkvoucher, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lbl_voucher)
+                                .addComponent(lbl_dichvu)
+                                .addComponent(lbl_songaythue)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(cbb_DichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(btn_chondichvu)))
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -453,12 +488,14 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_voucher)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_checkvoucher))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lbl_songaythue)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_songaythue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addComponent(btn_Thuexe)
                 .addGap(23, 23, 23))
         );
@@ -636,11 +673,16 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_chondichvuActionPerformed
 
+    private void btn_checkvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_checkvoucherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_checkvoucherActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
     private javax.swing.JButton btn_Thuexe;
     private javax.swing.JButton btn_back;
+    private javax.swing.JButton btn_checkvoucher;
     private javax.swing.JButton btn_chondichvu;
     private javax.swing.JButton btn_next;
     private javax.swing.JComboBox<String> cbb_DichVu;
