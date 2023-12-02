@@ -17,13 +17,13 @@ import java.util.List;
  */
 public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
 
-    String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien) values(?,?,?,?,?,?,?,?)";
+    String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien,DiaDiemNhanXe) values(?,?,?,?,?,?,?,?,?)";
     String SELECT_ALL_SQL = "SELECT * FROM HopDong";
     String SELECT_BY_ID_SQL = "SELECT*FROM HopDong WHERE MaHopDong = ?";
 
     @Override
     public void insert(HopDong entity) {
-         JDBCHelper.executeUpdate(INSERT_SQL, entity.getMahopdong(),entity.getMaxe(),entity.getUserid(),entity.getGhichu(),entity.getNgaythue(),entity.getNgaytra(),entity.getMavoucher(),entity.getThanhtien());
+         JDBCHelper.executeUpdate(INSERT_SQL, entity.getMahopdong(),entity.getMaxe(),entity.getUserid(),entity.getGhichu(),entity.getNgaythue(),entity.getNgaytra(),entity.getMavoucher(),entity.getThanhtien(),entity.getDiadiemnhanxe());
 
     }
 
@@ -86,6 +86,7 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
                 hp.setNgaytra(rs.getDate("NgayTra"));
                 hp.setMavoucher(rs.getString("MaVouncher"));
                 hp.setThanhtien(rs.getInt("ThanhTien"));
+                hp.setDiadiemnhanxe(rs.getString("DiaDiemNhanXe"));
                 list.add(hp);
             }
             rs.getStatement().getConnection().close();

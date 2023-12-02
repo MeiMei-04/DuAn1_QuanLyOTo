@@ -37,6 +37,7 @@ public class cardThueXe extends javax.swing.JPanel {
     ThueDichVuDAO tdvd = new ThueDichVuDAO();
     VoucherDAO vcd = new VoucherDAO();
     List<ThueDichVu> list_dichvu = new ArrayList<>();
+    String diadiemnhanxe = null;
     int index = 0;
     int size = 0;
     int row = -1;
@@ -77,7 +78,7 @@ public class cardThueXe extends javax.swing.JPanel {
     }
     public void openHopDong() {
         try {
-            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu);
+            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu,diadiemnhanxe);
             hopDongDialog.setVisible(true);
 
             // Kiểm tra trạng thái của form sau khi nó đã đóng
@@ -637,6 +638,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
     private void btn_ThuexeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ThuexeActionPerformed
         // TODO add your handling code here:
+        diadiemnhanxe = txt_diaChiNhanXe.getText();
         mavoucher = txt_voucher.getText();
         songaythue = Integer.parseInt(txt_songaythue.getText());
         TaiKhoan tk = Hepler.AuthHelper.user;

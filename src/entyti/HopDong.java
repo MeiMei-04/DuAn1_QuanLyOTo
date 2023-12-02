@@ -20,11 +20,12 @@ public class HopDong {
     private String mavoucher;
     private int thanhtien;
     private boolean trangthaihopdong;
+    private String diadiemnhanxe;
 
     public HopDong() {
     }
 
-    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String mavoucher, int thanhtien, boolean trangthaihopdong) {
+    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String mavoucher, int thanhtien, boolean trangthaihopdong, String diadiemnhanxe) {
         this.mahopdong = mahopdong;
         this.maxe = maxe;
         this.userid = userid;
@@ -34,6 +35,7 @@ public class HopDong {
         this.mavoucher = mavoucher;
         this.thanhtien = thanhtien;
         this.trangthaihopdong = trangthaihopdong;
+        this.diadiemnhanxe = diadiemnhanxe;
     }
 
     public String getMahopdong() {
@@ -108,6 +110,15 @@ public class HopDong {
         this.trangthaihopdong = trangthaihopdong;
     }
 
+    public String getDiadiemnhanxe() {
+        return diadiemnhanxe;
+    }
+
+    public void setDiadiemnhanxe(String diadiemnhanxe) {
+        this.diadiemnhanxe = diadiemnhanxe;
+    }
+
+    
     
 
 }
