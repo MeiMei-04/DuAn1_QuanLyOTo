@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JPanel;
 import Hepler.AuthHelper;
+import Hepler.openweb;
 import card.cardThongKe;
 import card.cardDichVu;
 import card.cardHopDong;
@@ -36,7 +37,15 @@ public class TrangChu extends javax.swing.JFrame {
         showFrom(new cardTrangChu());
         updateStatus_off();
     }
-
+    public void openGioiThieu(){
+        String filePath = "src\\POLYCAR-main\\loading.html";
+        try {
+            Hepler.openweb.openWebPage(filePath);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public void updateStatus_off() {
         pnl_baoduong.setVisible(false);
         pnl_thongke.setVisible(false);
@@ -987,6 +996,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
+        openGioiThieu();
     }//GEN-LAST:event_pnl_gioithieuMouseClicked
 
     private void pnl_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseClicked
