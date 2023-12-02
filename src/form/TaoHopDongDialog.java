@@ -1244,6 +1244,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
         txt_diadiemnhanxe.setColumns(20);
         txt_diadiemnhanxe.setRows(5);
+        txt_diadiemnhanxe.setEnabled(false);
         jScrollPane3.setViewportView(txt_diadiemnhanxe);
 
         javax.swing.GroupLayout PAGE3Layout = new javax.swing.GroupLayout(PAGE3);
