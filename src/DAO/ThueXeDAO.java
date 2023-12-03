@@ -7,7 +7,6 @@ package DAO;
 import entyti.Xe;
 import java.util.List;
 import Hepler.JDBCHelper;
-import entyti.TaiKhoan;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
@@ -15,39 +14,34 @@ import java.util.ArrayList;
  *
  * @author hieud
  */
-public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
+public class ThueXeDAO {
 
-    String INSERT_SQL = "INSERT INTO Xe (MaXe, TenXe, SoGhe, TrangThai, GiaThue, Anh_Xe, MaLoaiXe, GhiChu) VALUES (?,?,?,?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE Xe SET TenXe=?,SoGhe = ?,TrangThai=?, GiaThue = ?,Anh_Xe = ?,MaLoaiXe=?,GhiChu=? WHERE MaXe =?";
-    String DELETE_SQL = "DELETE FROM Xe WHERE MaXe =?";
-    String SELECT_ALL_SQL = "SELECT * FROM xe";
-    String SELECT_BY_ID_SQL = "SELECT*FROM xe WHERE MaXe = ?";
-    String UPDATE_SQL_1 = "UPDATE Xe SET TrangThai=? WHERE MaXe =?";
+    String INSERT = "INSERT INTO Xe (MaXe, TenXe, SoGhe, TrangThai, GiaThue, Anh_Xe, MaLoaiXe, GhiChu) VALUES (?,?,?,?,?,?,?,?)";
+    String UPDATE = "UPDATE Xe SET TenXe=?,SoGhe = ?,TrangThai=?, GiaThue = ?,Anh_Xe = ?,MaLoaiXe=?,GhiChu=? WHERE MaXe =?";
+    String DELETE = "DELETE FROM Xe WHERE MaXe =?";
+    String SELECT_ALL = "SELECT * FROM xe";
+    String SELECT_BY_ID_MAXE = "SELECT*FROM xe WHERE MaXe = ?";
+    String UPDATE_TRANGTHAI = "UPDATE Xe SET TrangThai=? WHERE MaXe =?";
 
-    @Override
     public void insert(Xe entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getMaxe(), entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu());
+        JDBCHelper.executeUpdate(INSERT, entity.getMaxe(), entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu());
     }
 
-    @Override
     public void update(Xe entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu(), entity.getMaxe());
+        JDBCHelper.executeUpdate(UPDATE, entity.getTenxe(), entity.getSoghe(), entity.isTrangthaixethue(),entity.getGiathue(), entity.getAnhxe(),entity.getMaloaixe(),entity.getGhichu(), entity.getMaxe());
     }
 
-    @Override
     public void delete(String key) {
-        JDBCHelper.executeUpdate(DELETE_SQL, key);
+        JDBCHelper.executeUpdate(DELETE, key);
     }
 
-    @Override
     public List<Xe> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public Xe selectByID(String id) {
+    public Xe selectByID_MAXE(String MAXE) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<Xe> list = selectBySQL(SELECT_BY_ID_SQL, id);
+        List<Xe> list = selectBySQL(SELECT_BY_ID_MAXE, MAXE);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -58,7 +52,6 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
         return list.get(0);
     }
 
-    @Override
     protected List<Xe> selectBySQL(String sql, Object... args) {
         List<Xe> list = new ArrayList<>();
         try {
@@ -83,24 +76,9 @@ public class ThueXeDAO extends QuanLyOToDAO<Xe, String> {
         }
     }
 
-    @Override
-    public List<Xe> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    @Override
-    public void update_1(Xe entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL_1, entity.isTrangthaixethue(), entity.getMaxe());
-    }
-
-    @Override
-    public Xe selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update_2(Xe entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update_TRANTHAI(Xe entity) {
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, entity.isTrangthaixethue(), entity.getMaxe());
     }
 
 }

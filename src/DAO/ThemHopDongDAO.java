@@ -15,44 +15,30 @@ import java.util.List;
  *
  * @author truon
  */
-public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
+public class ThemHopDongDAO {
 
-    String INSERT_SQL = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien,DiaDiemNhanXe) values(?,?,?,?,?,?,?,?,?)";
-    String SELECT_ALL_SQL = "SELECT * FROM HopDong";
-    String SELECT_BY_ID_SQL = "SELECT*FROM HopDong WHERE MaHopDong = ?";
-    String SELECT_BY_ID_SQL_key = "SELECT*FROM HopDong WHERE userid = ?";
+    String INSERT = "INSERT INTO HopDong(MaHopDong,MaXe,Userid,GhiChu,NgayThue,NgayTra,MaVouncher,ThanhTien,DiaDiemNhanXe) values(?,?,?,?,?,?,?,?,?)";
+    String SELECT_ALL = "SELECT * FROM HopDong";
+    String SELECT_BY_ID_SQL_MAHOPDONG = "SELECT*FROM HopDong WHERE MaHopDong = ?";
+    String SELECT_BY_ID_SQL_USERID = "SELECT*FROM HopDong WHERE userid = ?";
     String update = "UPDATE HopDong SET ThoiHanHopDong = 0 WHERE MaHopDong =?";
 
-    @Override
     public void insert(HopDong entity) {
-         JDBCHelper.executeUpdate(INSERT_SQL, entity.getMahopdong(),entity.getMaxe(),entity.getUserid(),entity.getGhichu(),entity.getNgaythue(),entity.getNgaytra(),entity.getMavoucher(),entity.getThanhtien(),entity.getDiadiemnhanxe());
+        JDBCHelper.executeUpdate(INSERT, entity.getMahopdong(), entity.getMaxe(), entity.getUserid(), entity.getGhichu(), entity.getNgaythue(), entity.getNgaytra(), entity.getMavoucher(), entity.getThanhtien(), entity.getDiadiemnhanxe());
 
     }
 
-    @Override
     public void update(HopDong entity) {
         JDBCHelper.executeUpdate(update, entity.getMahopdong());
     }
 
-    @Override
-    public void update_1(HopDong entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void delete(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public List<HopDong> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public HopDong selectByID(String key) {
-           // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL, key);
+    public HopDong selectByID_MAHOPDONG(String MAHOPDONG) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL_MAHOPDONG, MAHOPDONG);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -63,15 +49,10 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
         return list.get(0);
     }
 
-    @Override
-    public HopDong selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    @Override
-    public List<HopDong> selectByKey(String key) {
-           // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL_key, key);
+    public List<HopDong> selectByID_USERID(String USERID) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL_USERID, USERID);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -82,7 +63,6 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
         return list;
     }
 
-    @Override
     protected List<HopDong> selectBySQL(String sql, Object... args) {
         List<HopDong> list = new ArrayList<>();
         try {
@@ -109,9 +89,5 @@ public class ThemHopDongDAO extends QuanLyOToDAO<HopDong, String> {
         }
     }
 
-    @Override
-    public void update_2(HopDong entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
 }

@@ -117,7 +117,7 @@ public class cardXeThue extends javax.swing.JPanel {
     
     void edit(){
         String Maxe = (String) tblXeThue.getValueAt(this.row,0);
-        Xe xe = dao.selectByID(Maxe);
+        Xe xe = dao.selectByID_MAXE(Maxe);
         this.setForm(xe);
     }
     

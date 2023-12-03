@@ -15,33 +15,29 @@ import java.util.List;
  *
  * @author hieud
  */
-public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
+public class DanhGiaDAO{
     String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
     String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
     String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
     String SELECT_ALL_SQL = "SELECT * FROM danhgia";
     String SELECT_BY_ID_SQL = "SELECT TaiKhoan.UserID,danhgia.MaXe,ChiTietTaiKhoan.HoTen,ChiTietTaiKhoan.AnhDaiDien,danhgia.NoiDung,danhgia.NgayDanhGia,danhgia.SoSaoDanhGia FROM TaiKhoan  INNER JOIN ChiTietTaiKhoan  ON TaiKhoan.UserID = ChiTietTaiKhoan.UserID  INNER JOIN danhgia  ON ChiTietTaiKhoan.UserID = danhgia.UserID  where maxe = ?";
-    @Override
+    
     public void insert(DanhGia entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void update(DanhGia entity) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public void delete(String key) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
     public List<DanhGia> selectAll() {
         return selectBySQL(SELECT_ALL_SQL);
     }
 
-    @Override
     public DanhGia selectByID(String key) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<DanhGia> list = selectBySQL(SELECT_BY_ID_SQL, key);
@@ -55,7 +51,6 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
         return list.get(0);
     }
 
-    @Override
     protected List<DanhGia> selectBySQL(String sql, Object... args) {
         List<DanhGia> list = new ArrayList<>();
         try {
@@ -79,7 +74,6 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
         }
     }
 
-    @Override
     public List<DanhGia> selectByKey(String key) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<DanhGia> list = selectBySQL(SELECT_BY_ID_SQL, key);
@@ -93,19 +87,4 @@ public class DanhGiaDAO extends QuanLyOToDAO<DanhGia, String>{
         return list;
     }
 
-    @Override
-    public void update_1(DanhGia entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public DanhGia selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update_2(DanhGia entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

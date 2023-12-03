@@ -14,40 +14,35 @@ import java.util.ArrayList;
  *
  * @author hieud
  */
-public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
+public class TaiKhoanDAO{
 
-    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET matkhau=? WHERE taikhoan =?";
-    String UPDATE_SQL_1 = "UPDATE TaiKhoan SET TrangThai=? WHERE userid =?";
-    String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
-    String SELECT_ALL_SQL = "SELECT * FROM TaiKhoan";
-    String SELECT_BY_ID_SQL = "select * from taikhoan where taikhoan =?";
-    String SELECT_BY_ID_SQL_1 = "select * from taikhoan where userid =?";
+    String INSERT = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
+    String UPDATE = "UPDATE TaiKhoan SET matkhau=? WHERE taikhoan =?";
+    String UPDATE_TRANGTHAI = "UPDATE TaiKhoan SET TrangThai=? WHERE userid =?";
+    String DELETE = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
+    String SELECT_ALL = "SELECT * FROM TaiKhoan";
+    String SELECT_BY_ID_SQL_DOITUONG_TAIKHOAN = "select * from taikhoan where taikhoan =?";
+    String SELECT_BY_ID_SQL_LIST_USERID = "select * from taikhoan where userid =?";
 
-    @Override
     public void insert(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(), entity.isTrangthai(), entity.isVaitro());
+        JDBCHelper.executeUpdate(INSERT, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(), entity.isTrangthai(), entity.isVaitro());
     }
 
-    @Override
     public void update(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL,entity.getMatkhau(),entity.getTaikhoan());
+        JDBCHelper.executeUpdate(UPDATE,entity.getMatkhau(),entity.getTaikhoan());
     }
 
-    @Override
-    public void delete(String id) {
-        JDBCHelper.executeUpdate(DELETE_SQL, id);
+    public void delete(String TAIKHOAN) {
+        JDBCHelper.executeUpdate(DELETE, TAIKHOAN);
     }
 
-    @Override
     public List<TaiKhoan> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public TaiKhoan selectByID(String id) {
+    public TaiKhoan selectByID_TAIKHOAN(String TAIKHOAN) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL, id);
+        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL_DOITUONG_TAIKHOAN, TAIKHOAN);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -58,7 +53,6 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
         return list.get(0);
     }
 
-    @Override
     protected List<TaiKhoan> selectBySQL(String sql, Object... args) {
         List<TaiKhoan> list = new ArrayList<>();
         try {
@@ -81,20 +75,13 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
         }
     }
 
-    @Override
-    public List<TaiKhoan> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public void update_trangthai(TaiKhoan entity) {
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI,entity.isTrangthai(),entity.getUserid());
     }
 
-    @Override
-    public void update_1(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL_1,entity.isTrangthai(),entity.getUserid());
-    }
-
-    @Override
-    public TaiKhoan selectByID_1(String key) {
+    public TaiKhoan selectByID_USERID(String USERID) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL_1, key);
+        List<TaiKhoan> list = selectBySQL(SELECT_BY_ID_SQL_LIST_USERID, USERID);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -103,11 +90,6 @@ public class TaiKhoanDAO extends QuanLyOToDAO<TaiKhoan, String> {
 
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
-    }
-
-    @Override
-    public void update_2(TaiKhoan entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

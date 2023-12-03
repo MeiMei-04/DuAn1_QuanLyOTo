@@ -59,7 +59,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
     public void congtien() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         try {
-            ChiTietTaiKhoan cttk = cttkd.selectByID(String.valueOf(tk.getUserid()));
+            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             int tongtien = -1;
             tongtien = cttk.getSodu() + laygiatri();
             if (laygiatri() < 0) {
@@ -67,7 +67,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
                 return;
             }
             cttk.setSodu(tongtien);
-            cttkd.update_1(cttk);
+            cttkd.update_sodu(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
             ncd.delete(String.valueOf(result));
         } catch (Exception e) {

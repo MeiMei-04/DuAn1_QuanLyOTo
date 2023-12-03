@@ -14,50 +14,34 @@ import java.sql.ResultSet;
  *
  * @author Hieu
  */
-public class NapCardDAO extends QuanLyOToDAO<NapCard, String>{
+public class NapCardDAO{
     
-    String INSERT_SQL = "INSERT INTO MaNap(MaNapTien,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
-    String DELETE_SQL = "DELETE FROM MaNap WHERE MaNapTien =?";
-    String SELECT_ALL_SQL = "SELECT * FROM MaNap";
-    String SELECT_BY_ID_SQL = "SELECT*FROM MaNap WHERE MaNapTien = ?";
+    String INSERT= "INSERT INTO MaNap(MaNapTien,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
+    String DELETE = "DELETE FROM MaNap WHERE MaNapTien =?";
+    String SELECT_ALL = "SELECT * FROM MaNap";
+    String SELECT_BY_ID_DOITUONG_MANAPTIEN = "SELECT*FROM MaNap WHERE MaNapTien = ?";
     
 
-    @Override
     public void insert(NapCard entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL,entity.getManap(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
+        JDBCHelper.executeUpdate(INSERT,entity.getManap(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
 
     }
 
-    @Override
-    public void update(NapCard entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     public void delete(String key) {
-        JDBCHelper.executeUpdate(DELETE_SQL, key);
+        JDBCHelper.executeUpdate(DELETE, key);
     }
 
-    @Override
     public List<NapCard> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public NapCard selectByID(String key) {
-        List<NapCard> list = selectBySQL(SELECT_BY_ID_SQL, key);
+    public NapCard selectByID(String MANAPTIEN) {
+        List<NapCard> list = selectBySQL(SELECT_BY_ID_DOITUONG_MANAPTIEN, MANAPTIEN);
         if(list.isEmpty()){
             return null;
         }
         return list.get(0);
     }
-
-    @Override
-    public List<NapCard> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     protected List<NapCard> selectBySQL(String sql, Object... args) {
         List<NapCard> list = new ArrayList<>();
         try {
@@ -77,20 +61,4 @@ public class NapCardDAO extends QuanLyOToDAO<NapCard, String>{
             throw new RuntimeException(e);
         }  
     }
-
-    @Override
-    public void update_1(NapCard entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public NapCard selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update_2(NapCard entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

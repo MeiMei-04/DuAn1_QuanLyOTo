@@ -216,7 +216,7 @@ public class cardDichVu extends javax.swing.JPanel {
 
     void editVoucher() {
         String mavc = (String) tblVoucher.getValueAt(this.row, 0);
-        Voucher vh = vdao.selectByID(mavc);
+        Voucher vh = vdao.selectByID_MAVOUCHER(mavc);
         this.setFromvoucher(vh);
     }
 

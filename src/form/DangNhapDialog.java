@@ -66,7 +66,7 @@ public class DangNhapDialog extends java.awt.Dialog {
 
     public void dangNhap() {
         if (verify()) {
-            TaiKhoan tk = tkd.selectByID(txt_tendangnhap.getText());
+            TaiKhoan tk = tkd.selectByID_TAIKHOAN(txt_tendangnhap.getText());
             if (tk == null) {
                 txt_tendangnhap.requestFocus();
                 Hepler.DialogHelper.alert(this, "Tài Khoản Không Tồn Tại");

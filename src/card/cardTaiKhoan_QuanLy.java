@@ -42,10 +42,10 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         filltableNapCard();
     }
 
-    public void sendcode_qr(String string) throws WriterException, IOException {
+    public void sendcode_qr(String TAIKHOAN) throws WriterException, IOException {
         NapCard nc = getFromNapcard();
         try {
-            TaiKhoan tk = tkd.selectByID(string);
+            TaiKhoan tk = tkd.selectByID_TAIKHOAN(TAIKHOAN);
             ImagesHelper.createimgqr(nc.getManap());
             Hepler.Email.sendEmail(tk.getEmail(), "Mã Nạp Tiền", "Mã Nạp Giá Trị: " + String.valueOf(nc.getGiatri()) + "\nMã: " + nc.getManap(),path, nc.getManap() + ".png");
         } catch (Exception e) {
@@ -64,7 +64,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tbl_taikhoan.getModel();
         model.setRowCount(0);
         try {
-            List<ChiTietTaiKhoan> list = cttkd.selectByKey("True");
+            List<ChiTietTaiKhoan> list = cttkd.selectByID_DANHSACH("True");
             for (ChiTietTaiKhoan cttk : list) {
                 Object[] row = {
                     cttk.getUserid(),
@@ -88,7 +88,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
     void setForm(ChiTietTaiKhoan cttk) {
         String trangthai = null;
-        TaiKhoan tk = tkd.selectByID_1(String.valueOf(cttk.getUserid()));
+        TaiKhoan tk = tkd.selectByID_USERID(String.valueOf(cttk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
         txt_cancuoc.setText(cttk.getCccd());
         txt_sodienthoai.setText(cttk.getSdt());
@@ -105,7 +105,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
     void edit() {
         userid = String.valueOf(tbl_taikhoan.getValueAt(this.row, 0));
-        ChiTietTaiKhoan cttk = cttkd.selectByID(userid);
+        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(userid);
         this.setForm(cttk);
     }
 
@@ -114,7 +114,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         tk.setTrangthai(true);
         tk.setUserid(Integer.parseInt(userid));
         try {
-            tkd.update_1(tk);
+            tkd.update_trangthai(tk);
             filltableTaiKhoan();
             DialogHelper.alert(this, "Cập nhật thành công");
         } catch (Exception e) {

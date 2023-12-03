@@ -14,39 +14,34 @@ import java.sql.ResultSet;
  *
  * @author truon
  */
-public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
+public class DichVuDAO {
 
-    String INSERT_SQL = "INSERT INTO DichVu(MaDichVu,TenDichVu,GhiChu,DonGia) values(?,?,?,?)";
-    String UPDATE_SQL = "UPDATE DichVu SET TenDichVu=?,GhiChu = ?,DonGia=? WHERE MaDichVu =?";
-    String DELETE_SQL = "DELETE FROM DichVu WHERE MaDichVu =?";
-    String SELECT_ALL_SQL = "SELECT * FROM DichVu";
-    String SELECT_BY_ID_SQL = "SELECT*FROM DichVu WHERE MaDichVu = ?";
-    String SELECT_BY_ID_SQL_1 = "SELECT*FROM DichVu WHERE tendichvu = ?";
+    String INSERT = "INSERT INTO DichVu(MaDichVu,TenDichVu,GhiChu,DonGia) values(?,?,?,?)";
+    String UPDATE = "UPDATE DichVu SET TenDichVu=?,GhiChu = ?,DonGia=? WHERE MaDichVu =?";
+    String DELETE= "DELETE FROM DichVu WHERE MaDichVu =?";
+    String SELECT_ALL = "SELECT * FROM DichVu";
+    String SELECT_BY_ID_DOITUONG_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
+    String SELECT_BY_ID_DOITUONG_TENDICHVU = "SELECT*FROM DichVu WHERE tendichvu = ?";
 
-    @Override
     public void insert(DichVu entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL, entity.getMadichvu(), entity.getTendichvu(), entity.getGhichu(), entity.getDongia());
+        JDBCHelper.executeUpdate(INSERT, entity.getMadichvu(), entity.getTendichvu(), entity.getGhichu(), entity.getDongia());
     }
 
-    @Override
     public void update(DichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getTendichvu(), entity.getGhichu(), entity.getDongia(), entity.getMadichvu());
+        JDBCHelper.executeUpdate(UPDATE, entity.getTendichvu(), entity.getGhichu(), entity.getDongia(), entity.getMadichvu());
     }
 
-    @Override
     public void delete(String key) {
-        JDBCHelper.executeUpdate(DELETE_SQL, key);
+        JDBCHelper.executeUpdate(DELETE, key);
     }
 
-    @Override
     public List<DichVu> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public DichVu selectByID(String key) {
+    public DichVu selectByID(String madichvu) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DichVu> list = selectBySQL(SELECT_BY_ID_SQL, key);
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_DOITUONG_MADICHVU, madichvu);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -57,7 +52,6 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
         return list.get(0);
     }
 
-    @Override
     protected List<DichVu> selectBySQL(String sql, Object... args) {
         List<DichVu> list = new ArrayList<>();
         try {
@@ -78,20 +72,10 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
         }
     }
 
-    @Override
-    public List<DichVu> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update_1(DichVu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public DichVu selectByID_1(String key) {
+    
+    public DichVu selectByID_1(String TENDICHVU) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DichVu> list = selectBySQL(SELECT_BY_ID_SQL_1, key);
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_DOITUONG_TENDICHVU, TENDICHVU);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -101,10 +85,4 @@ public class DichVuDAO extends QuanLyOToDAO<DichVu, String> {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
-
-    @Override
-    public void update_2(DichVu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
 }

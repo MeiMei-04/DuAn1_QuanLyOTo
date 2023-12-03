@@ -15,54 +15,37 @@ import java.util.List;
  *
  * @author truon
  */
-public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
-    String INSERT_SQL = "INSERT INTO themdichvu (userid,maxe,madichvu) values(?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
-    String UPDATE_SQL_1 = "UPDATE themdichvu set Maxe =?  WHERE madichvu =?";
-    String UPDATE_SQL_2 = "UPDATE themdichvu SET TrangThai=? WHERE userid =?";
+public class ThueDichVuDAO {
+    String INSERT = "INSERT INTO themdichvu (userid,maxe,madichvu) values(?,?,?)";
+    String UPDATE = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
+    String UPDATE_MADICHVU = "UPDATE themdichvu set Maxe =?  WHERE madichvu =?";
     String DELETE_SQL = "DELETE FROM themdichvu WHERE maxe =?";
-    String SELECT_ALL_SQL = "SELECT * FROM themdichvu";
-    String SELECT_BY_ID_SQL = "select * from themdichvu where maxe =?";
-    String SELECT_BY_ID_SQL_1 = "select * from taikhoan where userid =?";
+    String SELECT_ALL = "SELECT * FROM themdichvu";
+    String SELECT_BY_ID_MAXE = "select * from themdichvu where maxe =?";
     
-    @Override
     public void insert(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(INSERT_SQL,entity.getUserid() ,entity.getMaxe(), entity.getDichvu());
+        JDBCHelper.executeUpdate(INSERT,entity.getUserid() ,entity.getMaxe(), entity.getDichvu());
     }
 
-    @Override
     public void update(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL, entity.getDichvu(), entity.getMaxe());
+        JDBCHelper.executeUpdate(UPDATE, entity.getDichvu(), entity.getMaxe());
     }
 
-    @Override
-    public void update_1(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE_SQL_1, entity.getMaxe(), entity.getDichvu());
+    public void update_MADICHVU(ThueDichVu entity) {
+        JDBCHelper.executeUpdate(UPDATE_MADICHVU, entity.getMaxe(), entity.getDichvu());
     }
 
-    @Override
     public void delete(String key) {
         JDBCHelper.executeUpdate(DELETE_SQL, key);
     }
 
-    @Override
     public List<ThueDichVu> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public ThueDichVu selectByID(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
-    @Override
-    public ThueDichVu selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public List<ThueDichVu> selectByKey(String key) {
-        List<ThueDichVu> list = selectBySQL(SELECT_BY_ID_SQL, key);
+    public List<ThueDichVu> selectByKey_MAXE(String MAXE) {
+        List<ThueDichVu> list = selectBySQL(SELECT_BY_ID_MAXE, MAXE);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -73,7 +56,6 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
         return list;
     }
 
-    @Override
     protected List<ThueDichVu> selectBySQL(String sql, Object... args) {
         List<ThueDichVu> list = new ArrayList<>();
         try {
@@ -92,10 +74,4 @@ public class ThueDichVuDAO extends QuanLyOToDAO<ThueDichVu, String>{
             throw new RuntimeException(e);
         }
     }
-
-    @Override
-    public void update_2(ThueDichVu entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

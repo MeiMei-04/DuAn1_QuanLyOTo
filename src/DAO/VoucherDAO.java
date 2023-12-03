@@ -14,48 +14,37 @@ import java.sql.ResultSet;
  *
  * @author truon
  */
-public class VoucherDAO extends QuanLyOToDAO<Voucher, String>{
-    String INSERT_SQL="INSERT INTO Vouncher(MaVouncher,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
-    String UPDATE_SQL="UPDATE Vouncher set NoiDung=?,GiaTri=?,TrangThai=? where MaVouncher=?";
-    String DELETE_SQL="  DELETE FROM Vouncher WHERE MaVouncher=?";
-    String SELECT_ALL_SQL="SELECT * FROM Vouncher";
-    String SELECT_BY_ID_SQL=" SELECT * FROM Vouncher WHERE MaVouncher=?";
+public class VoucherDAO{
+    String INSERT="INSERT INTO Vouncher(MaVouncher,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
+    String UPDATE="UPDATE Vouncher set NoiDung=?,GiaTri=?,TrangThai=? where MaVouncher=?";
+    String DELETE="  DELETE FROM Vouncher WHERE MaVouncher=?";
+    String SELECT_ALL="SELECT * FROM Vouncher";
+    String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Vouncher WHERE MaVouncher=?";
     
-    @Override
     public void insert(Voucher entity) {
-       JDBCHelper.executeUpdate(INSERT_SQL, entity.getMavoucher(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
+       JDBCHelper.executeUpdate(INSERT, entity.getMavoucher(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
     }
 
-    @Override
     public void update(Voucher entity) {
-       JDBCHelper.executeUpdate(UPDATE_SQL, entity.getNoidung(),entity.getGiatri(),entity.isTrangthai(),entity.getMavoucher());
+       JDBCHelper.executeUpdate(UPDATE, entity.getNoidung(),entity.getGiatri(),entity.isTrangthai(),entity.getMavoucher());
     }
 
-    @Override
     public void delete(String key) {
-        JDBCHelper.executeUpdate(DELETE_SQL, key);
+        JDBCHelper.executeUpdate(DELETE, key);
     }
 
-    @Override
     public List<Voucher> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    @Override
-    public Voucher selectByID(String key) {
-        List<Voucher> list = selectBySQL(SELECT_BY_ID_SQL, key);
+    public Voucher selectByID_MAVOUCHER(String MAVOUCHER) {
+        List<Voucher> list = selectBySQL(SELECT_BY_ID_MAVOUCHER, MAVOUCHER);
         if(list.isEmpty()){
             return null;
         }
         return list.get(0);
     }
 
-    @Override
-    public List<Voucher> selectByKey(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
     protected List<Voucher> selectBySQL(String sql, Object... args) {
        List<Voucher> list = new ArrayList<>();
         try {
@@ -76,19 +65,4 @@ public class VoucherDAO extends QuanLyOToDAO<Voucher, String>{
         }  
     }
 
-    @Override
-    public void update_1(Voucher entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Voucher selectByID_1(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void update_2(Voucher entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
 }

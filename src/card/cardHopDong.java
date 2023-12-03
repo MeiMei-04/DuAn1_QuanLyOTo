@@ -49,7 +49,7 @@ public class cardHopDong extends javax.swing.JPanel {
     public void check_hsd() {
             try {
                 TaiKhoan tk = Hepler.AuthHelper.user;
-                List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
+                List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
                 for (HopDong hd : list) {
                     if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
                         thdd.update(hd);
@@ -66,7 +66,7 @@ public class cardHopDong extends javax.swing.JPanel {
             TaiKhoan tk = Hepler.AuthHelper.user;
             DefaultTableModel model = (DefaultTableModel) tbl_hopdongkhachhang.getModel();
             model.setRowCount(0);
-            List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
+            List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
             for (HopDong hd : list) {
                 Object[] row = {hd.getMahopdong(),
                     hd.getMaxe(),

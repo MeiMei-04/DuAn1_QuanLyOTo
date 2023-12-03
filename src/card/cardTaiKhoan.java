@@ -73,7 +73,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         }
         lbl_trangthaithaikhoan.setText("Trạng Thái :" + trangthai);
         try {
-            ChiTietTaiKhoan cttk = cttkdao.selectByID(String.valueOf(tk.getUserid()));
+            ChiTietTaiKhoan cttk = cttkdao.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             txt_hoten.setText(cttk.getHoten());
             txt_ngaysinh.setText(DateHelper.toString(cttk.getNgaysinh(), "dd/MM/yyyy"));
             System.out.println(cttk.getNgaysinh());
