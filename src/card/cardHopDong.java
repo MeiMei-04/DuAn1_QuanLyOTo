@@ -52,7 +52,6 @@ public class cardHopDong extends javax.swing.JPanel {
                 List<HopDong> list = thdd.selectByKey(String.valueOf(tk.getUserid()));
                 for (HopDong hd : list) {
                     if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
-                        System.out.println(Hepler.DateHelper.now().compareTo(hd.getNgaytra()));
                         thdd.update(hd);
                     }
                 }
