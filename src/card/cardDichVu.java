@@ -10,7 +10,6 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author 04dkh
  */
 public class cardDichVu extends javax.swing.JPanel {
 

@@ -44,14 +44,29 @@ public class ThongKeDAO {
         return this.getListOfArray(sql, cols);
     }
 
-    public List<Object[]> getDoanhThu(int thang) {
-        String sql = "{CALL sp_DoanhThu(?)}";
-        String[] cols = {"LoaiXe", "soxe", "Doanhthu", "ThapNhat", "CaoNhat", "TrungBinh"};
-        return this.getListOfArray(sql, cols, thang);
+    public List<Object[]> getDoanhThu(int thang,int nam) {
+        String sql = "{CALL sp_DoanhThu(?,?)}";
+        String[] cols = {"tenxe", "soghe", "soluong","Doanhthu", "ThapNhat", "CaoNhat", "TrungBinh"};
+        return this.getListOfArray(sql, cols,thang,nam);
     }
+   
 
     public List<Integer> selectMonth() {
         String sql = "SELECT DISTINCT Month(NgayThue) month FROM HopDong ORDER BY month ASC";
+        List<Integer> list = new ArrayList<>();
+        try {
+            ResultSet rs = JDBCHelper.executeQuery(sql);
+            while (rs.next()) {
+                list.add(rs.getInt(1));
+            }
+            rs.getStatement().getConnection().close();
+            return list;
+        } catch (SQLException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+        public List<Integer> selectYear() {
+        String sql = "SELECT DISTINCT Year(NgayThue) year FROM HopDong ORDER BY year ASC";
         List<Integer> list = new ArrayList<>();
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql);
