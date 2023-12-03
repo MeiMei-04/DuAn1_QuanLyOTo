@@ -57,7 +57,7 @@ public class cardThongKe extends javax.swing.JPanel {
             model.addElement(month);
         }
         this.fillTableDoanhThu();
-       
+
     }
 
     void fillComboboxnam() {
@@ -78,7 +78,7 @@ public class cardThongKe extends javax.swing.JPanel {
             model.setRowCount(0);
             int nam = Integer.parseInt(String.valueOf(cboNam.getSelectedItem()));
             int thang = Integer.parseInt(String.valueOf(cboThang.getSelectedItem()));
-            List<Object[]> list = tkdao.getDoanhThu(thang,nam);   
+            List<Object[]> list = tkdao.getDoanhThu(thang, nam);
             list.stream().forEach((row) -> {
                 model.addRow(row);
             });
@@ -317,7 +317,7 @@ public class cardThongKe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
-     
+        fillTableDoanhThu();
 
     }//GEN-LAST:event_cboThangActionPerformed
 
