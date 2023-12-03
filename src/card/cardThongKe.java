@@ -23,7 +23,6 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-
 /**
  *
  * @author truon
@@ -36,7 +35,8 @@ public class cardThongKe extends javax.swing.JPanel {
     public cardThongKe() {
         initComponents();
         filltableHopDong();
-        fillComboboxNam();
+
+        fillComboboxnam();
     }
     ThongKeDAO tkdao = new ThongKeDAO();
 
@@ -49,14 +49,26 @@ public class cardThongKe extends javax.swing.JPanel {
         }
     }
 
-    void fillComboboxNam() {
+    void fillComboboxthang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
         model.removeAllElements();
         List<Integer> list = tkdao.selectMonth();
         for (Integer month : list) {
             model.addElement(month);
         }
-        cboThang.setSelectedIndex(0);
+        this.fillTableDoanhThu();
+       
+    }
+
+    void fillComboboxnam() {
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cboNam.getModel();
+        model.removeAllElements();
+        List<Integer> list = tkdao.selectYear();
+        for (Integer year : list) {
+            model.addElement(year);
+        }
+        cboNam.setSelectedIndex(0);
+        this.fillComboboxthang();
     }
 
     void fillTableDoanhThu() {
@@ -64,11 +76,13 @@ public class cardThongKe extends javax.swing.JPanel {
         try {
             DefaultTableModel model = (DefaultTableModel) tblDoanhThu.getModel();
             model.setRowCount(0);
+            int nam = Integer.parseInt(String.valueOf(cboNam.getSelectedItem()));
             int thang = Integer.parseInt(String.valueOf(cboThang.getSelectedItem()));
-            List<Object[]> list = tkdao.getDoanhThu(thang);
+            List<Object[]> list = tkdao.getDoanhThu(thang,nam);   
             list.stream().forEach((row) -> {
                 model.addRow(row);
             });
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -76,45 +90,45 @@ public class cardThongKe extends javax.swing.JPanel {
     }
 
     void xuatEXCL() {
-       try{
-           JFileChooser jFileChooser = new JFileChooser();
-           jFileChooser.showSaveDialog(this);
-           File saveFile = jFileChooser.getSelectedFile();
-           
-           if(saveFile != null){
-               saveFile = new File(saveFile.toString()+".xlsx");
-               Workbook wb = new XSSFWorkbook();
-               Sheet sheet = wb.createSheet("Doanh thu");
-               
-               Row rowCol = sheet.createRow(4);
-               for(int i=0;i<tblDoanhThu.getColumnCount();i++){
-                   
-                   Cell cell = rowCol.createCell(4+i);// lui sang phải
-                   cell.setCellValue(tblDoanhThu.getColumnName(i));
-               }
-               
-               for(int j=0;j<tblDoanhThu.getRowCount();j++){
-                   Row row = sheet.createRow(j+5);// sang phải
-                   for(int k=0;k<tblDoanhThu.getColumnCount();k++){
-                       Cell cell = row.createCell(k+4);// lùi xuống
-                       if(tblDoanhThu.getValueAt(j, k)!=null){
-                           cell.setCellValue(tblDoanhThu.getValueAt(j, k).toString());
-                       }
-                   }
-               }
-               FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-               wb.write(out);
-               wb.close();
-               out.close();
-               onpenFile(saveFile.toString());
-           }else{
-               DialogHelper.alert(this, "loiiiii");
-           }
-       }catch(FileNotFoundException e){
-           System.out.println(e);
-       }catch(IOException io){
-           System.out.println(io);
-       }
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
+
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Doanh thu");
+
+                Row rowCol = sheet.createRow(4);
+                for (int i = 0; i < tblDoanhThu.getColumnCount(); i++) {
+
+                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
+                    cell.setCellValue(tblDoanhThu.getColumnName(i));
+                }
+
+                for (int j = 0; j < tblDoanhThu.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 5);// sang phải
+                    for (int k = 0; k < tblDoanhThu.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k + 4);// lùi xuống
+                        if (tblDoanhThu.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblDoanhThu.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                onpenFile(saveFile.toString());
+            } else {
+                DialogHelper.alert(this, "loiiiii");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
 
     }
 
@@ -148,6 +162,8 @@ public class cardThongKe extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblDoanhThu = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        cboNam = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblHopDong = new javax.swing.JTable();
@@ -192,7 +208,7 @@ public class cardThongKe extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "MÃ XE", "TÊN XE", "LOẠI XE", "SỐ LƯỢNG", "THẤP NHẤT", "CAO NHẤT", "DOANH THU"
+                "ten xe", "so ghe", "soluong", "doanh thu", "THẤP NHẤT", "CAO NHẤT", "trung binh"
             }
         ));
         jScrollPane3.setViewportView(tblDoanhThu);
@@ -204,26 +220,40 @@ public class cardThongKe extends javax.swing.JPanel {
             }
         });
 
+        jPanel4.setBackground(new java.awt.Color(255, 102, 51));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "nam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
+        jPanel4.setLayout(new java.awt.GridLayout());
+
+        cboNam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboNamActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cboNam);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1)
                 .addContainerGap())
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,16 +317,21 @@ public class cardThongKe extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
-        fillTableDoanhThu();
+     
 
     }//GEN-LAST:event_cboThangActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       xuatEXCL();
+        xuatEXCL();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
+        fillTableDoanhThu();
+    }//GEN-LAST:event_cboNamActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboNam;
     private javax.swing.JComboBox<String> cboThang;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
@@ -306,6 +341,7 @@ public class cardThongKe extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
