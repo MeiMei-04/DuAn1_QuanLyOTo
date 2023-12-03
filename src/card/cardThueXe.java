@@ -663,8 +663,6 @@ public class cardThueXe extends javax.swing.JPanel {
                 flag = true;
             } else {
                 for (ThueDichVu tdv : list_dichvu) {
-                    System.out.println(tdv.getDichvu());
-                    System.out.println(dv.getMadichvu());
                     if (tdv.getDichvu().equalsIgnoreCase(dv.getMadichvu())) {
                         flag = false;
                     }else{
