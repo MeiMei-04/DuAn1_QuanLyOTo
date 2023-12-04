@@ -245,7 +245,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         jComboBox4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jComboBox4.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "TOYOTA", "CHEVROLET", "FORD", "HONDA", "", "SSANGYONG", "LANDROVER" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "TOYOTA", "CHEVROLET", "FORD", "HONDA", "SSANGYONG", "LANDROVER" }));
 
         jComboBox5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jComboBox5.setForeground(new java.awt.Color(255, 102, 51));
