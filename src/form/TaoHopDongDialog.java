@@ -7,7 +7,7 @@ package form;
 import DAO.ChiTietTaiKhoanDAO;
 import DAO.DichVuDAO;
 import DAO.ThemHopDongDAO;
-import DAO.ThueDichVuDAO;
+import DAO.ThemDichVuDAO;
 import DAO.ThueXeDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
@@ -28,7 +28,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ThueXeDAO txd = new ThueXeDAO();
     DichVuDAO dvd = new DichVuDAO();
-    ThueDichVuDAO tdvd = new ThueDichVuDAO();
+    ThemDichVuDAO tdvd = new ThemDichVuDAO();
     VoucherDAO vcd = new VoucherDAO();
     ThemHopDongDAO thdd = new ThemHopDongDAO();
     String maxe = null;
@@ -105,7 +105,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public int tiendichvu() {
         for (ThueDichVu tdv : list_tdv) {
-            DichVu dv = dvd.selectByID(tdv.getDichvu());
+            DichVu dv = dvd.selectByID_TENDICHVU(tdv.getDichvu());
             tiendichvu = dv.getDongia() + tiendichvu;
             list_dv.add(dv);
         }

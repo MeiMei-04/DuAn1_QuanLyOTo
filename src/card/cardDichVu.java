@@ -66,7 +66,7 @@ public class cardDichVu extends javax.swing.JPanel {
 
     void edit() {
         String madv = (String) tbldichvu.getValueAt(this.row, 0);
-        DichVu dv = dao.selectByID(madv);
+        DichVu dv = dao.selectByID_MADICHVU(madv);
         this.setFrom(dv);
     }
     // Load tu bang len from
@@ -300,6 +300,9 @@ public class cardDichVu extends javax.swing.JPanel {
         tbldichvu = new javax.swing.JTable();
         jScrollPane4 = new javax.swing.JScrollPane();
         txtghichu = new javax.swing.JTextArea();
+        jLabel11 = new javax.swing.JLabel();
+        txt_NhapTenDichVU = new javax.swing.JTextField();
+        btn_timKiem = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -451,7 +454,7 @@ public class cardDichVu extends javax.swing.JPanel {
                         .addComponent(btnsau, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btncuoi, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -494,15 +497,23 @@ public class cardDichVu extends javax.swing.JPanel {
         txtghichu.setRows(5);
         jScrollPane4.setViewportView(txtghichu);
 
+        jLabel11.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Tìm Kiếm Tên Dịch Vụ");
+
+        btn_timKiem.setText("Tìm Kiếm");
+        btn_timKiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timKiemActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(404, 404, 404)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtTenDichVu)
@@ -511,24 +522,40 @@ public class cardDichVu extends javax.swing.JPanel {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(291, 291, 291))
-                    .addComponent(txtMaDichVu, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 397, Short.MAX_VALUE)
                     .addComponent(jScrollPane4)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_NhapTenDichVU, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_timKiem))
+                            .addComponent(txtMaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 11, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel11))
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txt_NhapTenDichVU, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -815,6 +842,25 @@ public class cardDichVu extends javax.swing.JPanel {
         deleteVoucher();
     }//GEN-LAST:event_xoa1ActionPerformed
 
+    private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) tbldichvu.getModel();
+        model.setRowCount(0);
+        try {
+            List<DichVu> list = dao.selectByID_ListTendichvu(txt_NhapTenDichVU.getText());
+            for (DichVu dv : list) {
+                Object[] row = {dv.getMadichvu(),
+                    dv.getTendichvu(),
+                    dv.getDongia(),
+                    dv.getGhichu()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btn_timKiemActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btndau;
@@ -823,11 +869,13 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
+    private javax.swing.JButton btn_timKiem;
     private javax.swing.JButton btncuoi;
     private javax.swing.JButton btnlui;
     private javax.swing.JButton btnsau;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -859,6 +907,7 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JTextField txtMavoucher;
     private javax.swing.JTextArea txtNoiDung;
     private javax.swing.JTextField txtTenDichVu;
+    private javax.swing.JTextField txt_NhapTenDichVU;
     private javax.swing.JTextArea txtghichu;
     private javax.swing.JButton xoa1;
     // End of variables declaration//GEN-END:variables

@@ -18,10 +18,10 @@ public class DichVuDAO {
 
     String INSERT = "INSERT INTO DichVu(MaDichVu,TenDichVu,GhiChu,DonGia) values(?,?,?,?)";
     String UPDATE = "UPDATE DichVu SET TenDichVu=?,GhiChu = ?,DonGia=? WHERE MaDichVu =?";
-    String DELETE= "DELETE FROM DichVu WHERE MaDichVu =?";
+    String DELETE = "DELETE FROM DichVu WHERE MaDichVu =?";
     String SELECT_ALL = "SELECT * FROM DichVu";
-    String SELECT_BY_ID_DOITUONG_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
-    String SELECT_BY_ID_DOITUONG_TENDICHVU = "SELECT*FROM DichVu WHERE tendichvu = ?";
+    String SELECT_BY_ID_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
+    String SELECT_BY_ID_TENDICHVU = "SELECT*FROM DichVu WHERE tendichvu = ?";
 
     public void insert(DichVu entity) {
         JDBCHelper.executeUpdate(INSERT, entity.getMadichvu(), entity.getTendichvu(), entity.getGhichu(), entity.getDongia());
@@ -39,9 +39,22 @@ public class DichVuDAO {
         return selectBySQL(SELECT_ALL);
     }
 
-    public DichVu selectByID(String madichvu) {
+    public List<DichVu> selectByID_ListTendichvu(String TENDICHVU) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DichVu> list = selectBySQL(SELECT_BY_ID_DOITUONG_MADICHVU, madichvu);
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_TENDICHVU, TENDICHVU);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
+
+    public DichVu selectByID_MADICHVU(String madichvu) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_MADICHVU, madichvu);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -72,10 +85,9 @@ public class DichVuDAO {
         }
     }
 
-    
-    public DichVu selectByID_1(String TENDICHVU) {
+    public DichVu selectByID_TENDICHVU(String TENDICHVU) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DichVu> list = selectBySQL(SELECT_BY_ID_DOITUONG_TENDICHVU, TENDICHVU);
+        List<DichVu> list = selectBySQL(SELECT_BY_ID_TENDICHVU, TENDICHVU);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null

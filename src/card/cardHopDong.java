@@ -30,6 +30,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class cardHopDong extends javax.swing.JPanel {
 
     ThemHopDongDAO thdd = new ThemHopDongDAO();
+    HopDongDAO dao = new HopDongDAO();
 
     /**
      * Creates new form HopDong
@@ -37,49 +38,27 @@ public class cardHopDong extends javax.swing.JPanel {
     public cardHopDong() {
         initComponents();
         filltableHopDong();
-        check_hsd();
         if (!Hepler.AuthHelper.isManager()) {
             tabs.remove(1);
         } else {
             tabs.remove(0);
         }
     }
-
-    public void check_hsd() {
-            try {
-                TaiKhoan tk = Hepler.AuthHelper.user;
-                List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
-                for (HopDong hd : list) {
-                    if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
-                        thdd.update(hd);
-                    }
-                }
-                filltableHopDongKhachHang();
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-    }
-
-    void filltableHopDongKhachHang() {
-        try {
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            DefaultTableModel model = (DefaultTableModel) tbl_hopdongkhachhang.getModel();
-            model.setRowCount(0);
-            List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
-            for (HopDong hd : list) {
-                Object[] row = {hd.getMahopdong(),
-                    hd.getMaxe(),
-                    hd.getNgaythue(),
-                    hd.getNgaytra(),
-                    hd.isTrangthaihopdong()
-                };
-                model.addRow(row);
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    HopDongDAO dao = new HopDongDAO();
+//
+//    public void check_hsd() {
+//            try {
+//                TaiKhoan tk = Hepler.AuthHelper.user;
+//                List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
+//                for (HopDong hd : list) {
+//                    if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
+//                        thdd.update(hd);
+//                    }
+//                }
+//                filltableHopDongKhachHang();
+//            } catch (Exception e) {
+//                System.out.println(e.getMessage());
+//            }
+//    }
 
     void filltableHopDong() {
         DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
@@ -787,30 +766,11 @@ public class cardHopDong extends javax.swing.JPanel {
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
         // TODO add your handling code here:
-        list_dichvu.clear();
-        index--;
-        btn_next.setEnabled(true);
-        if (index < 0) {
-            Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
-            index = 0;
-            btn_back.setEnabled(false);
-        } else {
-            setForm(locxe(item), index);
-        }
+
     }//GEN-LAST:event_btn_backActionPerformed
 
     private void btn_nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_nextActionPerformed
-        // TODO add your handling code here:
-        index++;
-        list_dichvu.clear();
-        btn_back.setEnabled(true);
-        if (index > size) {
-            Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
-            index = size;
-            btn_next.setEnabled(false);
-        } else {
-            setForm(locxe(item), index);
-        }
+
     }//GEN-LAST:event_btn_nextActionPerformed
 
     private void jTextField11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField11ActionPerformed

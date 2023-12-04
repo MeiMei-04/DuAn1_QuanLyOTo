@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @author truon
  */
-public class ThueDichVuDAO {
+public class ThemDichVuDAO {
     String INSERT = "INSERT INTO themdichvu (userid,maxe,madichvu) values(?,?,?)";
     String UPDATE = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
     String UPDATE_MADICHVU = "UPDATE themdichvu set Maxe =?  WHERE madichvu =?";
