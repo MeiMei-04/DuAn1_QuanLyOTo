@@ -16,7 +16,12 @@ import java.util.ArrayList;
  */
 public class TaiKhoanDAO{
 
-    String INSERT = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
+    String INSERT = "INSERT INTO TaiKhoan ("
+            + "TaiKhoan,"
+            + "MatKhau,"
+            + "Email,"
+            + "Trangthai,"
+            + "VaiTro) values(?,?,?,?,?)";
     String UPDATE = "UPDATE TaiKhoan SET matkhau=? WHERE taikhoan =?";
     String UPDATE_TRANGTHAI = "UPDATE TaiKhoan SET TrangThai=? WHERE userid =?";
     String DELETE = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
@@ -25,7 +30,13 @@ public class TaiKhoanDAO{
     String SELECT_BY_ID_SQL_LIST_USERID = "select * from taikhoan where userid =?";
 
     public void insert(TaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT, entity.getTaikhoan(), entity.getMatkhau(), entity.getEmail(), entity.isTrangthai(), entity.isVaitro());
+        JDBCHelper.executeUpdate(INSERT, 
+                entity.getTaikhoan(), 
+                entity.getMatkhau(), 
+                entity.getEmail(),
+                entity.isTrangthai(), 
+                entity.isVaitro()
+        );
     }
 
     public void update(TaiKhoan entity) {

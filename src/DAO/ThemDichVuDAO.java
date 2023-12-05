@@ -5,8 +5,7 @@
 package DAO;
 
 import Hepler.JDBCHelper;
-import entyti.TaiKhoan;
-import entyti.ThueDichVu;
+import entyti.ThemDichVu;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,36 +15,30 @@ import java.util.List;
  * @author truon
  */
 public class ThemDichVuDAO {
-    String INSERT = "INSERT INTO themdichvu (userid,maxe,madichvu) values(?,?,?)";
-    String UPDATE = "UPDATE TaiKhoan SET  madichvu=? WHERE maxe =?";
-    String UPDATE_MADICHVU = "UPDATE themdichvu set Maxe =?  WHERE madichvu =?";
-    String DELETE_SQL = "DELETE FROM themdichvu WHERE maxe =?";
+    String INSERT = "INSERT INTO themdichvu (mahopdong,madichvu) values(?,?)";
+    String UPDATE = "UPDATE TaiKhoan SET  madichvu=? WHERE mahopdong =?";
+    String DELETE_SQL = "DELETE FROM themdichvu WHERE mahopdong =?";
     String SELECT_ALL = "SELECT * FROM themdichvu";
-    String SELECT_BY_ID_MAXE = "select * from themdichvu where maxe =?";
+    String SELECT_BY_ID_MAHOPDONG = "select * from themdichvu where mahopdong =?";
     
-    public void insert(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(INSERT,entity.getUserid() ,entity.getMaxe(), entity.getDichvu());
+    public void insert(ThemDichVu entity) {
+        JDBCHelper.executeUpdate(INSERT,entity.getMahopdong(),entity.getMadichvu());
     }
 
-    public void update(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE, entity.getDichvu(), entity.getMaxe());
+    public void update(ThemDichVu entity) {
+        JDBCHelper.executeUpdate(UPDATE, entity.getMadichvu(), entity.getMahopdong());
     }
-
-    public void update_MADICHVU(ThueDichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE_MADICHVU, entity.getMaxe(), entity.getDichvu());
-    }
-
     public void delete(String key) {
         JDBCHelper.executeUpdate(DELETE_SQL, key);
     }
 
-    public List<ThueDichVu> selectAll() {
+    public List<ThemDichVu> selectAll() {
         return selectBySQL(SELECT_ALL);
     }
 
 
-    public List<ThueDichVu> selectByKey_MAXE(String MAXE) {
-        List<ThueDichVu> list = selectBySQL(SELECT_BY_ID_MAXE, MAXE);
+    public List<ThemDichVu> selectByKey_MAHOPDONG(String MAHOPDONG) {
+        List<ThemDichVu> list = selectBySQL(SELECT_BY_ID_MAHOPDONG, MAHOPDONG);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -56,15 +49,14 @@ public class ThemDichVuDAO {
         return list;
     }
 
-    protected List<ThueDichVu> selectBySQL(String sql, Object... args) {
-        List<ThueDichVu> list = new ArrayList<>();
+    protected List<ThemDichVu> selectBySQL(String sql, Object... args) {
+        List<ThemDichVu> list = new ArrayList<>();
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
-                ThueDichVu tdv = new ThueDichVu();
-                tdv.setUserid(rs.getInt("userid"));
-                tdv.setMaxe(rs.getString("maxe"));
-                tdv.setDichvu(rs.getString("madichvu"));
+                ThemDichVu tdv = new ThemDichVu();
+                tdv.setMadichvu(rs.getString("madichvu"));
+                tdv.setMahopdong(rs.getString("mahopdong"));
                 list.add(tdv);
             }
             rs.getStatement().getConnection().close();

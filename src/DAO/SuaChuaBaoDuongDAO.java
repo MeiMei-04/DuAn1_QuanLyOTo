@@ -15,7 +15,12 @@ import java.sql.ResultSet;
  * @author Hieu
  */
 public class SuaChuaBaoDuongDAO{
-    String INSERT="INSERT INTO SuaChuaBaoDuong(maxe,noidung,langannhat,ngaysuachua) values(?,?,?,?)";
+    String INSERT="INSERT INTO SuaChuaBaoDuong("
+            + "maxe,"
+            + "noidung,"
+            + "langannhat,"
+            + "ngaysuachua) "
+            + "values(?,?,?,?)";
     String UPDATE= "UPDATE SuaChuaBaoDuong SET noidung=? WHERE maxe =?";
     String DELETE= "DELETE FROM SuaChuaBaoDuong WHERE maxe =?";
     String SELECT_ALL = "SELECT * FROM SuaChuaBaoDuong";

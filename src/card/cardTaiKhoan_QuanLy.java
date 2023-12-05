@@ -5,12 +5,12 @@
 package card;
 
 import DAO.ChiTietTaiKhoanDAO;
-import DAO.NapCardDAO;
+import DAO.MaNapDAO;
 import DAO.TaiKhoanDAO;
 import Hepler.*;
 import com.google.zxing.WriterException;
 import entyti.ChiTietTaiKhoan;
-import entyti.NapCard;
+import entyti.MaNap;
 import entyti.TaiKhoan;
 import java.io.IOException;
 import java.util.Date;
@@ -30,7 +30,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     String userid = null;
-    NapCardDAO ndao = new NapCardDAO();
+    MaNapDAO ndao = new MaNapDAO();
     String path = "src/imgqrcode/";
 
     /**
@@ -43,7 +43,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }
 
     public void sendcode_qr(String TAIKHOAN) throws WriterException, IOException {
-        NapCard nc = getFromNapcard();
+        MaNap nc = getFromNapcard();
         try {
             TaiKhoan tk = tkd.selectByID_TAIKHOAN(TAIKHOAN);
             ImagesHelper.createimgqr(nc.getManap());
@@ -131,8 +131,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblmanap.getModel();
         model.setRowCount(0);
         try {
-            List<NapCard> list = ndao.selectAll();
-            for (NapCard nc : list) {
+            List<MaNap> list = ndao.selectAll();
+            for (MaNap nc : list) {
                 Object[] row = {nc.getManap(),
                     nc.getNoidung(),
                     nc.getGiatri(),
@@ -146,7 +146,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         }
     }
 
-    void setFromNapcard(NapCard nc) {
+    void setFromNapcard(MaNap nc) {
         txtMaNap.setText(nc.getManap());
         TxtNoiDung.setText(nc.getNoidung());
         txtGiaTri.setText(String.valueOf(nc.getGiatri()));
@@ -154,14 +154,14 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     }
 
     void clearFromnapcard() {
-        NapCard nc = new NapCard();
+        MaNap nc = new MaNap();
         this.setFromNapcard(nc);
         this.row = -1;
     }
 
-    NapCard getFromNapcard() {
+    MaNap getFromNapcard() {
 
-        NapCard nc = new NapCard();
+        MaNap nc = new MaNap();
         nc.setManap(txtMaNap.getText());
         nc.setNoidung(TxtNoiDung.getText());
         nc.setGiatri(Integer.parseInt(txtGiaTri.getText()));
@@ -171,12 +171,12 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
     void editNapcard() {
         String maNC = (String) tblmanap.getValueAt(this.row, 0);
-        NapCard nc = ndao.selectByID(maNC);
+        MaNap nc = ndao.selectByID(maNC);
         this.setFromNapcard(nc);
     }
 
     void insertNapCard() {
-        NapCard nc = getFromNapcard();
+        MaNap nc = getFromNapcard();
         if (nc != null) {
             try {
                 ndao.insert(nc);

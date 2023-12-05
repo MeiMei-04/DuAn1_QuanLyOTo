@@ -6,9 +6,9 @@ package form;
 
 import DAO.ChiTietTaiKhoanDAO;
 import DAO.DichVuDAO;
-import DAO.ThemHopDongDAO;
+import DAO.HopDongDAO;
 import DAO.ThemDichVuDAO;
-import DAO.ThueXeDAO;
+import DAO.ChiTietXeDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
 import Hepler.ImagesHelper;
@@ -26,23 +26,23 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     String path = "src/imghopdong/";
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
-    ThueXeDAO txd = new ThueXeDAO();
+    ChiTietXeDAO txd = new ChiTietXeDAO();
     DichVuDAO dvd = new DichVuDAO();
     ThemDichVuDAO tdvd = new ThemDichVuDAO();
     VoucherDAO vcd = new VoucherDAO();
-    ThemHopDongDAO thdd = new ThemHopDongDAO();
+    HopDongDAO thdd = new HopDongDAO();
     String maxe = null;
     String diadiemnhanxe = null;
     String mavoucher = null;
     List<DichVu> list_dv = new ArrayList<>();
-    List<ThueDichVu> list_tdv = new ArrayList<>();
+    List<ThemDichVu> list_tdv = new ArrayList<>();
     int songaythue = 1;
     int tongtien = 0;
     int tiendichvu = 0;
     int giatrivoucher = 0;
     int tienvoucher = 0;
 
-    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher, List<ThueDichVu> list,String Diadiemnhanxe) {
+    public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, int Songaythue, String Mavoucher, List<ThemDichVu> list,String Diadiemnhanxe) {
         super(parent, modal);
         maxe = Maxe;
         songaythue = Songaythue;
@@ -56,7 +56,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public void sendcode_qr(String name) {
         try {
-            Xe xe = txd.selectByID_MAXE(this.maxe);
+            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
             TaiKhoan tk = Hepler.AuthHelper.user;
             ImagesHelper.capturePanel(MAIN_PAGE, name);
             Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng", "Hợp Đồng Thuê Xe" + "\nXe: " + xe.getTenxe() + "\nMã Hợp Đồng" + name, path, name + ".png");
@@ -104,7 +104,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     }
 
     public int tiendichvu() {
-        for (ThueDichVu tdv : list_tdv) {
+        for (ThemDichVu tdv : list_tdv) {
             DichVu dv = dvd.selectByID_TENDICHVU(tdv.getDichvu());
             tiendichvu = dv.getDongia() + tiendichvu;
             list_dv.add(dv);
@@ -117,7 +117,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         TaiKhoan tk = Hepler.AuthHelper.user;
         String gioitinh = null;
         try {
-            Xe xe = txd.selectByID_MAXE(this.maxe);
+            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             txt_hotenbenthue.setText(cttk.getHoten());
             if (cttk.isGioitinh()) {
@@ -170,12 +170,12 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 cttkd.update_sodu(cttknew);
                 vcd.delete(mavoucher);
                 tdvd.delete(maxe);
-                Xe xe = new Xe();
+                ChiTietXe xe = new ChiTietXe();
                 xe.setMaxe(maxe);
                 xe.setTrangthaixethue(true);
                 txd.update_TRANTHAI(xe);
                 DialogHelper.alert(this, "Thanh Toán Thành Công");
-                for(ThueDichVu tdv : list_tdv){
+                for(ThemDichVu tdv : list_tdv){
                     tdvd.insert(tdv);
                 }
                 this.dispose();
@@ -191,10 +191,10 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public void insert() {
         try {
-            Xe xe = txd.selectByID_MAXE(this.maxe);
+            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
             TaiKhoan tk = Hepler.AuthHelper.user;
             String hopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
-            HopDong hp = new HopDong();
+            HopDongDAO hp = new HopDongDAO();
             hp.setMahopdong(hopdong);
             hp.setMaxe(maxe);
             hp.setUserid(tk.getUserid());

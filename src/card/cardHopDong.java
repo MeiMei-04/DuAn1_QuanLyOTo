@@ -5,7 +5,7 @@
 package card;
 
 import DAO.HopDongDAO;
-import DAO.ThemHopDongDAO;
+import DAO.HopDongDAO;
 import Hepler.DialogHelper;
 import entyti.HopDong;
 import entyti.TaiKhoan;
@@ -29,7 +29,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class cardHopDong extends javax.swing.JPanel {
 
-    ThemHopDongDAO thdd = new ThemHopDongDAO();
+    HopDong thdd = new HopDong();
     HopDongDAO dao = new HopDongDAO();
 
     /**

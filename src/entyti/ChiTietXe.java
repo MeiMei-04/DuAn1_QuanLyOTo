@@ -8,28 +8,26 @@ package entyti;
  *
  * @author hieud
  */
-public class Xe {
+public class ChiTietXe {
     private String maxe;
     private String tenxe;
     private int soghe;
-    private boolean trangthaixethue;
     private int giathue;
     private String anhxe;
-    private String maloaixe;
-    private String ghichu;
+    private int mahangxe;
+    private String trangthaixe;
 
-    public Xe() {
+    public ChiTietXe() {
     }
 
-    public Xe(String maxe, String tenxe, int soghe, boolean trangthaixethue, int giathue, String anhxe, String maloaixe, String ghichu) {
+    public ChiTietXe(String maxe, String tenxe, int soghe, int giathue, String anhxe, int mahangxe, String trangthaixe) {
         this.maxe = maxe;
         this.tenxe = tenxe;
         this.soghe = soghe;
-        this.trangthaixethue = trangthaixethue;
         this.giathue = giathue;
         this.anhxe = anhxe;
-        this.maloaixe = maloaixe;
-        this.ghichu = ghichu;
+        this.mahangxe = mahangxe;
+        this.trangthaixe = trangthaixe;
     }
 
     public String getMaxe() {
@@ -56,14 +54,6 @@ public class Xe {
         this.soghe = soghe;
     }
 
-    public boolean isTrangthaixethue() {
-        return trangthaixethue;
-    }
-
-    public void setTrangthaixethue(boolean trangthaixethue) {
-        this.trangthaixethue = trangthaixethue;
-    }
-
     public int getGiathue() {
         return giathue;
     }
@@ -80,20 +70,21 @@ public class Xe {
         this.anhxe = anhxe;
     }
 
-    public String getMaloaixe() {
-        return maloaixe;
+    public int getMahangxe() {
+        return mahangxe;
     }
 
-    public void setMaloaixe(String maloaixe) {
-        this.maloaixe = maloaixe;
+    public void setMahangxe(int mahangxe) {
+        this.mahangxe = mahangxe;
     }
 
-    public String getGhichu() {
-        return ghichu;
+    public String getTrangthaixe() {
+        return trangthaixe;
     }
 
-    public void setGhichu(String ghichu) {
-        this.ghichu = ghichu;
+    public void setTrangthaixe(String trangthaixe) {
+        this.trangthaixe = trangthaixe;
     }
+
     
 }

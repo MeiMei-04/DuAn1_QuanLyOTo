@@ -15,14 +15,24 @@ import java.sql.ResultSet;
  * @author truon
  */
 public class VoucherDAO{
-    String INSERT="INSERT INTO Vouncher(MaVouncher,NoiDung,GiaTri,TrangThai) values(?,?,?,?)";
-    String UPDATE="UPDATE Vouncher set NoiDung=?,GiaTri=?,TrangThai=? where MaVouncher=?";
-    String DELETE="  DELETE FROM Vouncher WHERE MaVouncher=?";
+    String INSERT="INSERT INTO Voucher("
+            + "MaVoucher,"
+            + "NoiDung,"
+            + "GiaTri,"
+            + "TrangThai) "
+            + "values(?,?,?,?)";
+    String UPDATE="UPDATE Voucher set NoiDung=?,GiaTri=?,TrangThai=? where MaVoucher=?";
+    String DELETE="  DELETE FROM Voucher WHERE MaVoucher=?";
     String SELECT_ALL="SELECT * FROM Vouncher";
-    String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Vouncher WHERE MaVouncher=?";
+    String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=?";
     
     public void insert(Voucher entity) {
-       JDBCHelper.executeUpdate(INSERT, entity.getMavoucher(),entity.getNoidung(),entity.getGiatri(),entity.isTrangthai());
+       JDBCHelper.executeUpdate(INSERT, 
+               entity.getMavoucher(),
+               entity.getNoidung(),
+               entity.getGiatri(),
+               entity.isTrangthai()
+       );
     }
 
     public void update(Voucher entity) {
@@ -51,7 +61,7 @@ public class VoucherDAO{
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 Voucher ch = new Voucher();
-                ch.setMavoucher(rs.getString("MaVouncher"));
+                ch.setMavoucher(rs.getString("MaVoucher"));
                 ch.setNoidung(rs.getString("NoiDung"));
                 ch.setGiatri(rs.getInt("GiaTri"));
                 ch.setTrangthai(rs.getBoolean("TrangThai"));

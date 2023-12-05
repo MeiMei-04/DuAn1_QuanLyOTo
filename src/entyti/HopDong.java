@@ -14,28 +14,32 @@ public class HopDong {
     private String mahopdong;
     private String maxe;
     private int userid;
-    private String ghichu;
     private Date ngaythue;
-    private Date ngaytra;
+    private Date ngayhethan;
+    private Date ngaytraxe;
+    private int songayquahan;
     private String mavoucher;
     private int thanhtien;
-    private boolean trangthaihopdong;
+    private int thoihanhopdong;
     private String diadiemnhanxe;
+    private int tinhtranghopdong;
 
     public HopDong() {
     }
 
-    public HopDong(String mahopdong, String maxe, int userid, String ghichu, Date ngaythue, Date ngaytra, String mavoucher, int thanhtien, boolean trangthaihopdong, String diadiemnhanxe) {
+    public HopDong(String mahopdong, String maxe, int userid, Date ngaythue, Date ngayhethan, Date ngaytraxe, int songayquahan, String mavoucher, int thanhtien, int thoihanhopdong, String diadiemnhanxe, int tinhtranghopdong) {
         this.mahopdong = mahopdong;
         this.maxe = maxe;
         this.userid = userid;
-        this.ghichu = ghichu;
         this.ngaythue = ngaythue;
-        this.ngaytra = ngaytra;
+        this.ngayhethan = ngayhethan;
+        this.ngaytraxe = ngaytraxe;
+        this.songayquahan = songayquahan;
         this.mavoucher = mavoucher;
         this.thanhtien = thanhtien;
-        this.trangthaihopdong = trangthaihopdong;
+        this.thoihanhopdong = thoihanhopdong;
         this.diadiemnhanxe = diadiemnhanxe;
+        this.tinhtranghopdong = tinhtranghopdong;
     }
 
     public String getMahopdong() {
@@ -62,14 +66,6 @@ public class HopDong {
         this.userid = userid;
     }
 
-    public String getGhichu() {
-        return ghichu;
-    }
-
-    public void setGhichu(String ghichu) {
-        this.ghichu = ghichu;
-    }
-
     public Date getNgaythue() {
         return ngaythue;
     }
@@ -78,12 +74,28 @@ public class HopDong {
         this.ngaythue = ngaythue;
     }
 
-    public Date getNgaytra() {
-        return ngaytra;
+    public Date getNgayhethan() {
+        return ngayhethan;
     }
 
-    public void setNgaytra(Date ngaytra) {
-        this.ngaytra = ngaytra;
+    public void setNgayhethan(Date ngayhethan) {
+        this.ngayhethan = ngayhethan;
+    }
+
+    public Date getNgaytraxe() {
+        return ngaytraxe;
+    }
+
+    public void setNgaytraxe(Date ngaytraxe) {
+        this.ngaytraxe = ngaytraxe;
+    }
+
+    public int getSongayquahan() {
+        return songayquahan;
+    }
+
+    public void setSongayquahan(int songayquahan) {
+        this.songayquahan = songayquahan;
     }
 
     public String getMavoucher() {
@@ -102,12 +114,12 @@ public class HopDong {
         this.thanhtien = thanhtien;
     }
 
-    public boolean isTrangthaihopdong() {
-        return trangthaihopdong;
+    public int getThoihanhopdong() {
+        return thoihanhopdong;
     }
 
-    public void setTrangthaihopdong(boolean trangthaihopdong) {
-        this.trangthaihopdong = trangthaihopdong;
+    public void setThoihanhopdong(int thoihanhopdong) {
+        this.thoihanhopdong = thoihanhopdong;
     }
 
     public String getDiadiemnhanxe() {
@@ -118,7 +130,13 @@ public class HopDong {
         this.diadiemnhanxe = diadiemnhanxe;
     }
 
-    
-    
+    public int getTinhtranghopdong() {
+        return tinhtranghopdong;
+    }
 
+    public void setTinhtranghopdong(int tinhtranghopdong) {
+        this.tinhtranghopdong = tinhtranghopdong;
+    }
+
+    
 }

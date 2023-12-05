@@ -7,14 +7,14 @@ package card;
 import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThemDichVuDAO;
-import DAO.ThueXeDAO;
+import DAO.ChiTietXeDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
 import entyti.DanhGia;
 import entyti.DichVu;
-import entyti.ThueDichVu;
+import entyti.ThemDichVu;
 import entyti.Voucher;
-import entyti.Xe;
+import entyti.ChiTietXe;
 import form.TaoHopDongDialog;
 import java.awt.Component;
 import java.util.ArrayList;
@@ -31,10 +31,10 @@ public class cardThueXe extends javax.swing.JPanel {
     private TaoHopDongDialog hopDongDialog;
     DanhGiaDAO dgd = new DanhGiaDAO();
     DichVuDAO dvd = new DichVuDAO();
-    ThueXeDAO txd = new ThueXeDAO();
+    ChiTietXeDAO txd = new ChiTietXeDAO();
     ThemDichVuDAO tdvd = new ThemDichVuDAO();
     VoucherDAO vcd = new VoucherDAO();
-    List<ThueDichVu> list_dichvu = new ArrayList<>();
+    List<ThemDichVu> list_dichvu = new ArrayList<>();
     String diadiemnhanxe = null;
     int index = 0;
     int size = 0;
@@ -94,18 +94,18 @@ public class cardThueXe extends javax.swing.JPanel {
 
     }
 
-    public List<Xe> locxe(String soghe) {
-        List<Xe> list = new ArrayList<>();
+    public List<ChiTietXe> locxe(String soghe) {
+        List<ChiTietXe> list = new ArrayList<>();
         try {
-            List<Xe> allXe = txd.selectAll();
+            List<ChiTietXe> allXe = txd.selectAll();
             if (soghe != null) {
-                for (Xe xe : allXe) {
+                for (ChiTietXe xe : allXe) {
                     if (xe.getSoghe() == Integer.valueOf(soghe) && xe.isTrangthaixethue() == false) {
                         list.add(xe);
                     }
                 }
             } else {
-                for (Xe xe : allXe) {
+                for (ChiTietXe xe : allXe) {
                     if (xe.isTrangthaixethue() == false) {
                         list.add(xe);
                     }
@@ -119,7 +119,7 @@ public class cardThueXe extends javax.swing.JPanel {
         return list;
     }
 
-    public void setForm(List<Xe> list, int index) {
+    public void setForm(List<ChiTietXe> list, int index) {
   
     }
 

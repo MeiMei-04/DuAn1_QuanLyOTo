@@ -5,7 +5,7 @@
 package form;
 
 import DAO.ChiTietTaiKhoanDAO;
-import DAO.NapCardDAO;
+import DAO.MaNapDAO;
 import com.github.sarxos.webcam.Webcam;
 import com.github.sarxos.webcam.WebcamPanel;
 import com.github.sarxos.webcam.WebcamResolution;
@@ -18,7 +18,7 @@ import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
 import entyti.ChiTietTaiKhoan;
-import entyti.NapCard;
+import entyti.MaNap;
 import entyti.TaiKhoan;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -36,7 +36,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
 
     boolean flag = false;
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
-    NapCardDAO ncd = new NapCardDAO();
+    MaNapDAO ncd = new MaNapDAO();
     private WebcamPanel panel = null;
     private Webcam webcam = null;
     private boolean stop = false;
@@ -79,7 +79,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
 
     public int laygiatri() {
         try {
-            NapCard nc = ncd.selectByID(String.valueOf(result));
+            MaNap nc = ncd.selectByID(String.valueOf(result));
             return nc.getGiatri();
         } catch (Exception e) {
             System.out.println(e.getMessage());

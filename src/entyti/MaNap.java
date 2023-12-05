@@ -8,17 +8,17 @@ package entyti;
  *
  * @author Hieu
  */
-public class NapCard {
+public class MaNap {
     private int ID;
     private String manap;
     private String noidung;
     private int giatri;
     private boolean trangthai;
 
-    public NapCard() {
+    public MaNap() {
     }
 
-    public NapCard(int ID, String manap, String noidung, int giatri, boolean trangthai) {
+    public MaNap(int ID, String manap, String noidung, int giatri, boolean trangthai) {
         this.ID = ID;
         this.manap = manap;
         this.noidung = noidung;

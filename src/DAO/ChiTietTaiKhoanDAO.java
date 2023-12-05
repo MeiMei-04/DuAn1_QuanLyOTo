@@ -16,21 +16,65 @@ import java.util.List;
  */
 public class ChiTietTaiKhoanDAO {
 
-    String INSERT_CHITIETAIKHOAN = "INSERT INTO ChiTietTaiKhoan (userid,hoten,anhdaidien,cccd,banglaixe,sdt,ngaysinh,gioitinh,diachi,yeucauxacthuc) values(?,?,?,?,?,?,?,?,?,?)";
-    String UPDATE_CHITIETAIKHOAN_THONGTIN = "UPDATE ChiTietTaiKhoan SET hoten=?,anhdaidien=?, cccd = ?,banglaixe = ?,sdt=?,ngaysinh=?,gioitinh=?,diachi=? WHERE userid =?";
+    String INSERT_CHITIETAIKHOAN = "INSERT INTO ChiTietTaiKhoan ("
+            + "userid,"
+            + "hoten,"
+            + "anhdaidien,"
+            + "cccd,"
+            + "banglaixe,"
+            + "sdt,"
+            + "ngaysinh,"
+            + "gioitinh,"
+            + "diachi,"
+            + "yeucauxacthuc) "
+            + "values(?,?,?,?,?,?,?,?,?,?)";
+    String UPDATE_CHITIETAIKHOAN_THONGTIN = "UPDATE ChiTietTaiKhoan SET "
+            + "hoten=?,"
+            + "anhdaidien=?, "
+            + "cccd = ?,"
+            + "banglaixe = ?,"
+            + "sdt=?,"
+            + "ngaysinh=?,"
+            + "gioitinh=?,"
+            + "diachi=? "
+            + "WHERE userid =?";
     String UPDATE_CHITIETAIKHOAN_SODU = "UPDATE ChiTietTaiKhoan SET sodu = ? WHERE userid =?";
     String DELETE_CHITIETTAIKHOAN_WHERE_USERID = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_USERID = "select * from ChiTietTaiKhoan where userid =?";
-    String SELECT_BY_ID_YEUCAUXACTHUC = "select * from ChiTietTaiKhoan INNER JOIN TaiKhoan ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID where yeucauxacthuc = ? and Trangthai = 0";
+    String SELECT_BY_ID_YEUCAUXACTHUC = "select * from ChiTietTaiKhoan"
+            + " INNER JOIN TaiKhoan "
+            + "ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID "
+            + "where yeucauxacthuc = ? and Trangthai = 0";
 
     //thêm
     public void insert(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(INSERT_CHITIETAIKHOAN, entity.getUserid(), entity.getHoten(), entity.getAnhdaidien(), entity.getCccd(), entity.getBanglaixe(), entity.getSdt(), entity.getNgaysinh(), entity.isGioitinh(), entity.getDiachi(), entity.isYeucauxacthuc());
+        JDBCHelper.executeUpdate(INSERT_CHITIETAIKHOAN,
+                entity.getUserid(),
+                entity.getHoten(),
+                entity.getAnhdaidien(),
+                entity.getCccd(), 
+                entity.getBanglaixe(), 
+                entity.getSdt(),
+                entity.getNgaysinh(), 
+                entity.isGioitinh(), 
+                entity.getDiachi(), 
+                entity.isYeucauxacthuc()
+        );
     }
     //sửa
     public void update(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_THONGTIN, entity.getHoten(), entity.getAnhdaidien(), entity.getCccd(), entity.getBanglaixe(), entity.getSdt(), entity.getNgaysinh(), entity.isGioitinh(), entity.getDiachi(), entity.getUserid());
+        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_THONGTIN, 
+                entity.getHoten(), 
+                entity.getAnhdaidien(), 
+                entity.getCccd(), 
+                entity.getBanglaixe(), 
+                entity.getSdt(), 
+                entity.getNgaysinh(), 
+                entity.isGioitinh(), 
+                entity.getDiachi(), 
+                entity.getUserid()
+        );
     }
     //xóa
     public void delete(String userid) {
@@ -95,6 +139,9 @@ public class ChiTietTaiKhoanDAO {
     }
 
     public void update_sodu(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_SODU, entity.getSodu(), entity.getUserid());
+        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_SODU,
+                entity.getSodu(),
+                entity.getUserid()
+        );
     }
 }

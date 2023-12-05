@@ -6,41 +6,64 @@ package DAO;
 
 import Hepler.JDBCHelper;
 import entyti.DanhGia;
-import entyti.TaiKhoan;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.sql.ResultSet;
 
 /**
  *
- * @author hieud
+ * @author Hieu
  */
-public class DanhGiaDAO{
-    String INSERT_SQL = "INSERT INTO TaiKhoan (TaiKhoan,MatKhau,Email,Trangthai,VaiTro) values(?,?,?,?,?)";
-    String UPDATE_SQL = "UPDATE TaiKhoan SET MatKhau=?,email = ?,TrangThai=?, VaiTro = ? WHERE TaiKhoan =?";
-    String DELETE_SQL = "DELETE FROM TaiKhoan WHERE TaiKhoan =?";
-    String SELECT_ALL_SQL = "SELECT * FROM danhgia";
-    String SELECT_BY_ID_SQL = "SELECT TaiKhoan.UserID,danhgia.MaXe,ChiTietTaiKhoan.HoTen,ChiTietTaiKhoan.AnhDaiDien,danhgia.NoiDung,danhgia.NgayDanhGia,danhgia.SoSaoDanhGia FROM TaiKhoan  INNER JOIN ChiTietTaiKhoan  ON TaiKhoan.UserID = ChiTietTaiKhoan.UserID  INNER JOIN danhgia  ON ChiTietTaiKhoan.UserID = danhgia.UserID  where maxe = ?";
-    
+public class DanhGiaDAO {
+
+    String INSERT = "INSERT INTO danhgia ("
+            + "userid, "
+            + "maxe, "
+            + "noidung, "
+            + "ngaydanhgia, "
+            + "sosaodanhgia "
+            + "VALUES (?,?,?,?,?)";
+    String UPDATE = "UPDATE danhgia SET"
+            + "maxe=?,"
+            + "noidung = ?,"
+            + "ngaydanhgia = ?,"
+            + "sosaodanhgia = ?"
+            + "WHERE userid =?";
+    String DELETE = "DELETE FROM danhgia WHERE userid =?";
+    String SELECT_ALL = "SELECT * FROM danhgia";
+    String SELECT_BY_ID_MAXE = "SELECT*FROM xe WHERE userid = ?";
+
     public void insert(DanhGia entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(INSERT,
+                entity.getUserid(),
+                entity.getMaxe(),
+                entity.getNoidung(),
+                entity.getNgaydanhgia(),
+                entity.getSosaodanhgia()
+        );
     }
 
     public void update(DanhGia entity) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(UPDATE,
+                entity.getMaxe(),
+                entity.getNoidung(),
+                entity.getNgaydanhgia(),
+                entity.getSosaodanhgia(),
+                entity.getUserid()
+        );
     }
 
     public void delete(String key) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        JDBCHelper.executeUpdate(DELETE, key);
     }
 
     public List<DanhGia> selectAll() {
-        return selectBySQL(SELECT_ALL_SQL);
+        return selectBySQL(SELECT_ALL);
     }
 
-    public DanhGia selectByID(String key) {
+    public DanhGia selectByID_userid(String userid) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DanhGia> list = selectBySQL(SELECT_BY_ID_SQL, key);
+        List<DanhGia> list = selectBySQL(SELECT_BY_ID_MAXE, userid);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -57,13 +80,11 @@ public class DanhGiaDAO{
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 DanhGia dg = new DanhGia();
-                dg.setId(rs.getInt("userid"));
-                dg.setMaxe(rs.getString("Maxe"));
-                dg.setNoidung(rs.getString("noidung"));
-                dg.setAnhdaidien(rs.getString("anhdaidien"));
-                dg.setHoten(rs.getString("hoten"));
-                dg.setNgaydanhgia(rs.getDate("ngaydanhgia"));
-                dg.setSosaodanhgia(rs.getInt("sosaodanhgia"));
+                dg.setUserid(rs.getString("UserID"));
+                dg.setMaxe(rs.getString("MaXe"));
+                dg.setNoidung(rs.getString("NoiDung"));
+                dg.setNgaydanhgia(rs.getDate("NgayDanhGia"));
+                dg.setSosaodanhgia(rs.getInt("SoSaoDanhGia"));
                 list.add(dg);
             }
             rs.getStatement().getConnection().close();
@@ -73,18 +94,4 @@ public class DanhGiaDAO{
             throw new RuntimeException(e);
         }
     }
-
-    public List<DanhGia> selectByKey(String key) {
-        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DanhGia> list = selectBySQL(SELECT_BY_ID_SQL, key);
-        // Kiểm tra xem danh sách có trống không
-        if (list.isEmpty()) {
-            // Nếu danh sách trống, trả về null
-            return null;
-        }
-
-        // Nếu không, trả về phần tử đầu tiên trong danh sách
-        return list;
-    }
-
 }

@@ -16,19 +16,38 @@ import java.sql.ResultSet;
  */
 public class DichVuDAO {
 
-    String INSERT = "INSERT INTO DichVu(MaDichVu,TenDichVu,GhiChu,DonGia) values(?,?,?,?)";
-    String UPDATE = "UPDATE DichVu SET TenDichVu=?,GhiChu = ?,DonGia=? WHERE MaDichVu =?";
+    String INSERT = "INSERT INTO DichVu("
+            + "MaDichVu,"
+            + "TenDichVu,"
+            + "GhiChu,"
+            + "DonGia) "
+            + "values(?,?,?,?)";
+    String UPDATE = "UPDATE DichVu SET"
+            + " TenDichVu=?,"
+            + "GhiChu = ?,"
+            + "DonGia=? "
+            + "WHERE MaDichVu =?";
     String DELETE = "DELETE FROM DichVu WHERE MaDichVu =?";
     String SELECT_ALL = "SELECT * FROM DichVu";
     String SELECT_BY_ID_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
     String SELECT_BY_ID_TENDICHVU = "SELECT*FROM DichVu WHERE tendichvu = ?";
 
     public void insert(DichVu entity) {
-        JDBCHelper.executeUpdate(INSERT, entity.getMadichvu(), entity.getTendichvu(), entity.getGhichu(), entity.getDongia());
+        JDBCHelper.executeUpdate(INSERT,
+                entity.getMadichvu(), 
+                entity.getTendichvu(), 
+                entity.getGhichu(), 
+                entity.getDongia()
+        );
     }
 
     public void update(DichVu entity) {
-        JDBCHelper.executeUpdate(UPDATE, entity.getTendichvu(), entity.getGhichu(), entity.getDongia(), entity.getMadichvu());
+        JDBCHelper.executeUpdate(UPDATE, 
+                entity.getTendichvu(), 
+                entity.getGhichu(), 
+                entity.getDongia(), 
+                entity.getMadichvu()
+        );
     }
 
     public void delete(String key) {

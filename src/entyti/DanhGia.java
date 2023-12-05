@@ -12,9 +12,8 @@ import java.util.Date;
  */
 public class DanhGia {
     private int id;
+    private String userid;
     private String maxe;
-    private String hoten;
-    private String anhdaidien;
     private String noidung;
     private Date ngaydanhgia;
     private int sosaodanhgia;
@@ -22,11 +21,10 @@ public class DanhGia {
     public DanhGia() {
     }
 
-    public DanhGia(int id, String maxe, String hoten, String anhdaidien, String noidung, Date ngaydanhgia, int sosaodanhgia) {
+    public DanhGia(int id, String userid, String maxe, String noidung, Date ngaydanhgia, int sosaodanhgia) {
         this.id = id;
+        this.userid = userid;
         this.maxe = maxe;
-        this.hoten = hoten;
-        this.anhdaidien = anhdaidien;
         this.noidung = noidung;
         this.ngaydanhgia = ngaydanhgia;
         this.sosaodanhgia = sosaodanhgia;
@@ -40,28 +38,20 @@ public class DanhGia {
         this.id = id;
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid;
+    }
+
     public String getMaxe() {
         return maxe;
     }
 
     public void setMaxe(String maxe) {
         this.maxe = maxe;
-    }
-
-    public String getHoten() {
-        return hoten;
-    }
-
-    public void setHoten(String hoten) {
-        this.hoten = hoten;
-    }
-
-    public String getAnhdaidien() {
-        return anhdaidien;
-    }
-
-    public void setAnhdaidien(String anhdaidien) {
-        this.anhdaidien = anhdaidien;
     }
 
     public String getNoidung() {
@@ -88,5 +78,6 @@ public class DanhGia {
         this.sosaodanhgia = sosaodanhgia;
     }
 
+    
     
 }
