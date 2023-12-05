@@ -50,7 +50,7 @@ public class cardThueXe extends javax.swing.JPanel {
      */
     public cardThueXe() {
         initComponents();
-        setForm(locxe(item), 0);
+//        setForm(locxe(item), 0);
         list_dichvu.clear();
     }
     public void kiemtravoucher(){
@@ -73,51 +73,51 @@ public class cardThueXe extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public void openHopDong() {
-        try {
-            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu,diadiemnhanxe);
-            hopDongDialog.setVisible(true);
-
-            // Kiểm tra trạng thái của form sau khi nó đã đóng
-            if (!hopDongDialog.isVisible()) {
-                setForm(locxe(item), 0);
-            } else {
-                System.out.println("Form vẫn còn mở.");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public void openHopDong() {
+//        try {
+//            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu,diadiemnhanxe);
+//            hopDongDialog.setVisible(true);
+//
+//            // Kiểm tra trạng thái của form sau khi nó đã đóng
+//            if (!hopDongDialog.isVisible()) {
+//                setForm(locxe(item), 0);
+//            } else {
+//                System.out.println("Form vẫn còn mở.");
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
     }
 
-    public List<ChiTietXe> locxe(String soghe) {
-        List<ChiTietXe> list = new ArrayList<>();
-        try {
-            List<ChiTietXe> allXe = txd.selectAll();
-            if (soghe != null) {
-                for (ChiTietXe xe : allXe) {
-                    if (xe.getSoghe() == Integer.valueOf(soghe) && xe.isTrangthaixethue() == false) {
-                        list.add(xe);
-                    }
-                }
-            } else {
-                for (ChiTietXe xe : allXe) {
-                    if (xe.isTrangthaixethue() == false) {
-                        list.add(xe);
-                    }
-                }
-//                list = allXe;
-            }
-        } catch (Exception e) {
-            // handle exception
-            System.out.println(e.getMessage());
-        }
-        return list;
-    }
+//    public List<ChiTietXe> locxe(String soghe) {
+//        List<ChiTietXe> list = new ArrayList<>();
+//        try {
+//            List<ChiTietXe> allXe = txd.selectAll();
+//            if (soghe != null) {
+//                for (ChiTietXe xe : allXe) {
+//                    if (xe.getSoghe() == Integer.valueOf(soghe) && xe.isTrangthaixethue() == false) {
+//                        list.add(xe);
+//                    }
+//                }
+//            } else {
+//                for (ChiTietXe xe : allXe) {
+//                    if (xe.isTrangthaixethue() == false) {
+//                        list.add(xe);
+//                    }
+//                }
+////                list = allXe;
+//            }
+//        } catch (Exception e) {
+//            // handle exception
+//            System.out.println(e.getMessage());
+//        }
+//        return list;
+//    }
 
     public void setForm(List<ChiTietXe> list, int index) {
   

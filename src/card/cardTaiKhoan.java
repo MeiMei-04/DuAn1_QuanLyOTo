@@ -8,10 +8,13 @@ import DAO.ChiTietTaiKhoanDAO;
 import DAO.TaiKhoanDAO;
 import Hepler.DateHelper;
 import Hepler.DialogHelper;
+import Hepler.ImagesHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.TaiKhoan;
 import form.DoiMatKhauDialog;
 import form.NapTheCaoDialog;
+import java.io.File;
+import org.bridj.util.Pair;
 
 /**
  *
@@ -21,11 +24,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private NapTheCaoDialog napcardDialog;
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     ChiTietTaiKhoanDAO cttkdao = new ChiTietTaiKhoanDAO();
-    String banglai = null;
-    String anhdaidien = null;
-    private static final String readurl_banglai = "src/imgbanglainew/";
+    String selectedFilePath_anhdaidien = null;
+    String selectedFileName_anhdaidien = null;
+    String selectedFilePath_banglai = null;
+    String selectedFileName_banglai = null;
     private static final String writeurl_banglai = "src/imgbanglai/";
-    private static final String readurl_anhdaidien = "src/imganhdaidiennew/";
     private static final String writeurl_anhdaidien = "src/imganhdaidien/";
 
     /**
@@ -50,8 +53,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         cttk.setSdt(txt_sodienthoai.getText());
         cttk.setCccd(txt_cancuoc.getText());
         cttk.setDiachi(txt_diachi.getText());
-        cttk.setAnhdaidien(anhdaidien);
-        cttk.setBanglaixe(banglai);
+        cttk.setAnhdaidien(selectedFileName_anhdaidien);
+        cttk.setBanglaixe(selectedFileName_banglai);
         if (rdo_nu.isSelected()) {
             cttk.setGioitinh(true);
         } else {
@@ -85,9 +88,9 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             } else {
                 rdo_nam.setSelected(true);
             }
-            anhdaidien = cttk.getAnhdaidien();
-            banglai = cttk.getBanglaixe();   
-            setImg(anhdaidien, banglai);
+            selectedFileName_anhdaidien = cttk.getAnhdaidien();
+            selectedFileName_banglai = cttk.getBanglaixe();   
+            setImg(selectedFileName_anhdaidien, selectedFileName_banglai);
             lbl_sodu.setText("Số Dư: " + String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
         }
@@ -166,11 +169,11 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             txt_sodienthoai.requestFocus();
             return false;
         }
-        if (anhdaidien == null) {
+        if (selectedFileName_anhdaidien == null) {
             DialogHelper.alert(this, "Vui lòng thêm ảnh đại diện");
             return false;
         }
-        if (banglai == null) {
+        if (selectedFileName_banglai == null) {
             DialogHelper.alert(this, "Vui lòng thêm ảnh đại diện");
             return false;
         }
@@ -553,15 +556,27 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_capnhatthongtinActionPerformed
 
     private void lbl_anhdaidienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhdaidienMouseClicked
-        anhdaidien = Hepler.ImagesHelper.chonAnh();
-        Hepler.ImagesHelper.convertImgTo110x164(readurl_anhdaidien, anhdaidien, writeurl_anhdaidien);
-        setImg(anhdaidien, banglai);
+        ImagesHelper.Pair<String, String> anhdaidien= Hepler.ImagesHelper.chonAnh();
+        if (anhdaidien != null) {
+            selectedFilePath_anhdaidien = anhdaidien.getFirst();
+            selectedFileName_anhdaidien = anhdaidien.getSecond();
+        } else {
+            System.out.println("Lỗi chọn ảnh");
+        }
+        Hepler.ImagesHelper.convertImgTo110x164(selectedFilePath_anhdaidien, selectedFileName_anhdaidien, writeurl_anhdaidien);
+        setImg(selectedFileName_anhdaidien, selectedFileName_banglai);
     }//GEN-LAST:event_lbl_anhdaidienMouseClicked
 
     private void lbl_anhbanglaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhbanglaiMouseClicked
-        banglai = Hepler.ImagesHelper.chonAnh();
-        Hepler.ImagesHelper.convertImgTo280x180(readurl_banglai, banglai, writeurl_banglai);
-        setImg(anhdaidien, banglai);
+        ImagesHelper.Pair<String, String> banglai= Hepler.ImagesHelper.chonAnh();
+        if (banglai != null) {
+            selectedFilePath_banglai = banglai.getFirst();
+            selectedFileName_banglai = banglai.getSecond();
+        } else {
+            System.out.println("Lỗi chọn ảnh");
+        }
+        Hepler.ImagesHelper.convertImgTo280x180(selectedFilePath_banglai, selectedFileName_banglai, writeurl_banglai);
+        setImg(selectedFileName_anhdaidien, selectedFileName_banglai);
     }//GEN-LAST:event_lbl_anhbanglaiMouseClicked
 
     private void btn_doimatkhauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_doimatkhauActionPerformed

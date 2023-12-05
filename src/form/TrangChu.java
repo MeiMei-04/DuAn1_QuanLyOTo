@@ -921,7 +921,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openThueXe();
+//        openThueXe();
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
@@ -936,7 +936,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openHopDong();
+//        openHopDong();
     }//GEN-LAST:event_pnl_hopdongMouseClicked
 
     private void pnl_dichvuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dichvuMouseClicked
@@ -951,7 +951,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openDichVu();
+//        openDichVu();
     }//GEN-LAST:event_pnl_dichvuMouseClicked
 
     private void pnl_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseClicked
@@ -966,7 +966,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openThongKe();
+//        openThongKe();
     }//GEN-LAST:event_pnl_thongkeMouseClicked
 
     private void pnl_baoduongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_baoduongMouseClicked
@@ -981,7 +981,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openBaoDuong();
+//        openBaoDuong();
     }//GEN-LAST:event_pnl_baoduongMouseClicked
 
     private void pnl_gioithieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseClicked
@@ -996,7 +996,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-        openGioiThieu();
+//        openGioiThieu();
     }//GEN-LAST:event_pnl_gioithieuMouseClicked
 
     private void pnl_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseClicked

@@ -51,7 +51,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         list_tdv = list;
         initComponents();
         setLocationRelativeTo(null);
-        setForm();
+//        setForm();
     }
 
     public void sendcode_qr(String name) {
@@ -103,115 +103,115 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         return tienvoucher;
     }
 
-    public int tiendichvu() {
-        for (ThemDichVu tdv : list_tdv) {
-            DichVu dv = dvd.selectByID_TENDICHVU(tdv.getDichvu());
-            tiendichvu = dv.getDongia() + tiendichvu;
-            list_dv.add(dv);
-        }
-        filltable_dichvu();
-        return tiendichvu;
-    }
+//    public int tiendichvu() {
+//        for (ThemDichVu tdv : list_tdv) {
+//            DichVu dv = dvd.selectByID_TENDICHVU(tdv.getDichvu());
+//            tiendichvu = dv.getDongia() + tiendichvu;
+//            list_dv.add(dv);
+//        }
+//        filltable_dichvu();
+//        return tiendichvu;
+//    }
 
-    public void setForm() {
-        TaiKhoan tk = Hepler.AuthHelper.user;
-        String gioitinh = null;
-        try {
-            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
-            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
-            txt_hotenbenthue.setText(cttk.getHoten());
-            if (cttk.isGioitinh()) {
-                gioitinh = "Nữ";
-            } else {
-                gioitinh = "Nam";
-            }
-            txt_gioitinh.setText(gioitinh);
-            txt_cccd.setText(cttk.getCccd());
-            txt_Email.setText(tk.getEmail());
-            txt_sdt.setText(cttk.getSdt());
-            txt_diachi.setText(cttk.getDiachi());
-            txt_maxe.setText(maxe);
-            txt_tenxe.setText(xe.getTenxe());
-            txt_soghe.setText(String.valueOf(xe.getSoghe()));
-            txt_maloaixe.setText(xe.getMaloaixe());
-            txt_ghichu.setText(xe.getGhichu());
-            txt_giathue.setText(String.valueOf(xe.getGiathue()));
-            txt_ngaythue.setText(String.valueOf(Hepler.DateHelper.now()));
-            txt_songaythue.setText(String.valueOf(songaythue));
-            int tienthuexe = xe.getGiathue() * songaythue;
-            txt_tienthuexe.setText(String.valueOf(tienthuexe));
-            tiendichvu = tiendichvu() * songaythue;
-            txt_tiendichvu.setText(String.valueOf(tiendichvu));
-            txt_mavoucher.setText(mavoucher);
-            tongtien = tienthuexe + tiendichvu;
-            txt_tienvoucher.setText(String.valueOf(giatrigiamgia()));
-            tongtien = tongtien - giatrigiamgia();
-            txt_tongtien.setText(String.valueOf(tongtien));
-            txt_diadiemnhanxe.setText(diadiemnhanxe);
-        } catch (Exception e) {
-        }
+//    public void setForm() {
+//        TaiKhoan tk = Hepler.AuthHelper.user;
+//        String gioitinh = null;
+//        try {
+//            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
+//            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+//            txt_hotenbenthue.setText(cttk.getHoten());
+//            if (cttk.isGioitinh()) {
+//                gioitinh = "Nữ";
+//            } else {
+//                gioitinh = "Nam";
+//            }
+//            txt_gioitinh.setText(gioitinh);
+//            txt_cccd.setText(cttk.getCccd());
+//            txt_Email.setText(tk.getEmail());
+//            txt_sdt.setText(cttk.getSdt());
+//            txt_diachi.setText(cttk.getDiachi());
+//            txt_maxe.setText(maxe);
+//            txt_tenxe.setText(xe.getTenxe());
+//            txt_soghe.setText(String.valueOf(xe.getSoghe()));
+//            txt_maloaixe.setText(xe.getMaloaixe());
+//            txt_ghichu.setText(xe.getGhichu());
+//            txt_giathue.setText(String.valueOf(xe.getGiathue()));
+//            txt_ngaythue.setText(String.valueOf(Hepler.DateHelper.now()));
+//            txt_songaythue.setText(String.valueOf(songaythue));
+//            int tienthuexe = xe.getGiathue() * songaythue;
+//            txt_tienthuexe.setText(String.valueOf(tienthuexe));
+//            tiendichvu = tiendichvu() * songaythue;
+//            txt_tiendichvu.setText(String.valueOf(tiendichvu));
+//            txt_mavoucher.setText(mavoucher);
+//            tongtien = tienthuexe + tiendichvu;
+//            txt_tienvoucher.setText(String.valueOf(giatrigiamgia()));
+//            tongtien = tongtien - giatrigiamgia();
+//            txt_tongtien.setText(String.valueOf(tongtien));
+//            txt_diadiemnhanxe.setText(diadiemnhanxe);
+//        } catch (Exception e) {
+//        }
+//
+//    }
 
-    }
+//    public void thanhtoan() {
+//        int mymoney = 0;
+//        try {
+//            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
+//            TaiKhoan tk = Hepler.AuthHelper.user;
+//            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+//            mymoney = cttk.getSodu();
+//            if (mymoney - tongtien >= 0) {
+//                int tienconlai = 0;
+//                tienconlai = mymoney - tongtien;
+//                System.out.println(tienconlai);
+//                insert();
+//                cttknew.setUserid(tk.getUserid());
+//                cttknew.setSodu(tienconlai);
+//                cttkd.update_sodu(cttknew);
+//                vcd.delete(mavoucher);
+//                tdvd.delete(maxe);
+//                ChiTietXe xe = new ChiTietXe();
+//                xe.setMaxe(maxe);
+//                xe.setTrangthaixethue(true);
+//                txd.update_TRANTHAI(xe);
+//                DialogHelper.alert(this, "Thanh Toán Thành Công");
+//                for(ThemDichVu tdv : list_tdv){
+//                    tdvd.insert(tdv);
+//                }
+//                this.dispose();
+//            } else {
+//                DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
+//                return;
+//            }
+//
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
 
-    public void thanhtoan() {
-        int mymoney = 0;
-        try {
-            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
-            mymoney = cttk.getSodu();
-            if (mymoney - tongtien >= 0) {
-                int tienconlai = 0;
-                tienconlai = mymoney - tongtien;
-                System.out.println(tienconlai);
-                insert();
-                cttknew.setUserid(tk.getUserid());
-                cttknew.setSodu(tienconlai);
-                cttkd.update_sodu(cttknew);
-                vcd.delete(mavoucher);
-                tdvd.delete(maxe);
-                ChiTietXe xe = new ChiTietXe();
-                xe.setMaxe(maxe);
-                xe.setTrangthaixethue(true);
-                txd.update_TRANTHAI(xe);
-                DialogHelper.alert(this, "Thanh Toán Thành Công");
-                for(ThemDichVu tdv : list_tdv){
-                    tdvd.insert(tdv);
-                }
-                this.dispose();
-            } else {
-                DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
-                return;
-            }
-
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void insert() {
-        try {
-            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            String hopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
-            HopDongDAO hp = new HopDongDAO();
-            hp.setMahopdong(hopdong);
-            hp.setMaxe(maxe);
-            hp.setUserid(tk.getUserid());
-            hp.setGhichu(xe.getGhichu());
-            hp.setNgaythue(Hepler.DateHelper.now());
-            hp.setNgaytra(Hepler.DateHelper.add(songaythue));
-            hp.setMavoucher(mavoucher);
-            hp.setThanhtien(tongtien);
-            hp.setDiadiemnhanxe(diadiemnhanxe);
-            thdd.insert(hp);
-            sendcode_qr(hopdong);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return;
-
-        }
-    }
+//    public void insert() {
+//        try {
+//            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
+//            TaiKhoan tk = Hepler.AuthHelper.user;
+//            String hopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
+//            HopDongDAO hp = new HopDongDAO();
+//            hp.setMahopdong(hopdong);
+//            hp.setMaxe(maxe);
+//            hp.setUserid(tk.getUserid());
+//            hp.setGhichu(xe.getGhichu());
+//            hp.setNgaythue(Hepler.DateHelper.now());
+//            hp.setNgaytra(Hepler.DateHelper.add(songaythue));
+//            hp.setMavoucher(mavoucher);
+//            hp.setThanhtien(tongtien);
+//            hp.setDiadiemnhanxe(diadiemnhanxe);
+//            thdd.insert(hp);
+//            sendcode_qr(hopdong);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return;
+//
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -1538,7 +1538,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         // TODO add your handling code here:
-        thanhtoan();
+//        thanhtoan();
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     private void txt_tienvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tienvoucherActionPerformed

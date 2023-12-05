@@ -9,16 +9,12 @@ import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import java.awt.AWTException;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Robot;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -29,6 +25,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.filechooser.FileSystemView;
+import org.bridj.util.Pair;
 
 /**
  *
@@ -58,21 +56,40 @@ public class ImagesHelper {
     }
 
     //chọn file
-    public static String chonAnh() {
-        JFileChooser f = new JFileChooser("/src");
+    public static Pair<String, String> chonAnh() {
+        JFileChooser f = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
         f.setDialogTitle("Chọn ảnh");
-        f.showOpenDialog(null);
-        File file = f.getSelectedFile();
-        if (file != null) {
-            String urlanh = file.getAbsolutePath();
+        int result = f.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = f.getSelectedFile();
+            String selectedFilePath = selectedFile.getAbsolutePath();
+            String selectedFileName = selectedFile.getName();
             System.out.println("Chọn ảnh thành công");
-            return file.getName();
+
+            return new Pair<>(selectedFilePath, selectedFileName);
         } else {
-            System.out.println("lỗi chọn ảnh");
+            System.out.println("Lỗi chọn ảnh");
             return null;
         }
     }
+    public static class Pair<F, S> {
+        private final F first;
+        private final S second;
 
+        public Pair(F first, S second) {
+            this.first = first;
+            this.second = second;
+        }
+
+        public F getFirst() {
+            return first;
+        }
+
+        public S getSecond() {
+            return second;
+        }
+    }
     //đặt icon cho nhãn
     public static void setIconlabel(JLabel label, String path) {
         ImageIcon icon = new ImageIcon(path);

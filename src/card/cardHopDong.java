@@ -37,7 +37,7 @@ public class cardHopDong extends javax.swing.JPanel {
      */
     public cardHopDong() {
         initComponents();
-        filltableHopDong();
+//        filltableHopDong();
         if (!Hepler.AuthHelper.isManager()) {
             tabs.remove(1);
         } else {
@@ -60,14 +60,14 @@ public class cardHopDong extends javax.swing.JPanel {
 //            }
 //    }
 
-    void filltableHopDong() {
-        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
-        model.setRowCount(0);
-        List<Object[]> list = dao.getSoHopDong();
-        for (Object[] row : list) {
-            model.addRow(row);
-        }
-    }
+//    void filltableHopDong() {
+//        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
+//        model.setRowCount(0);
+//        List<Object[]> list = dao.getSoHopDong();
+//        for (Object[] row : list) {
+//            model.addRow(row);
+//        }
+//    }
 
     void xuatEXCL() {
         try {
