@@ -60,7 +60,7 @@ public class cardDichVu extends javax.swing.JPanel {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Loi Try van");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -182,7 +182,7 @@ public class cardDichVu extends javax.swing.JPanel {
                 model.addRow(row);
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Loi Try van");
+            System.out.println(e.getMessage());
         }
     }
 
@@ -844,10 +844,11 @@ public class cardDichVu extends javax.swing.JPanel {
 
     private void btn_timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timKiemActionPerformed
         // TODO add your handling code here:
+        String tendv= "%"+txt_NhapTenDichVU.getText()+"%";
         DefaultTableModel model = (DefaultTableModel) tbldichvu.getModel();
         model.setRowCount(0);
         try {
-            List<DichVu> list = dao.selectByID_ListTendichvu(txt_NhapTenDichVU.getText());
+            List<DichVu> list = dao.selectByID_ListTendichvu(tendv);
             for (DichVu dv : list) {
                 Object[] row = {dv.getMadichvu(),
                     dv.getTendichvu(),

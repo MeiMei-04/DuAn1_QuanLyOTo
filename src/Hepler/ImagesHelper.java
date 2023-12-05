@@ -127,7 +127,7 @@ public class ImagesHelper {
     public static void convertImgTo280x180(String readurl, String patch, String writeurl) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File(readurl + patch));
+            BufferedImage image = ImageIO.read(new File(readurl));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(280, 180, Image.SCALE_SMOOTH);
@@ -156,7 +156,7 @@ public class ImagesHelper {
     public static void convertImgTo110x164(String readurl, String patch, String writeurl) {
         try {
             // Đọc hình ảnh
-            BufferedImage image = ImageIO.read(new File(readurl + patch));
+            BufferedImage image = ImageIO.read(new File(readurl));
 
             // Thay đổi kích thước hình ảnh thành 24x35
             Image tempImage = image.getScaledInstance(110, 164, Image.SCALE_SMOOTH);

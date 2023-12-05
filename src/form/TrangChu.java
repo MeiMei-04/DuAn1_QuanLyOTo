@@ -921,7 +921,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-//        openThueXe();
+        openThueXe();
     }//GEN-LAST:event_pnl_thuexeMouseClicked
 
     private void pnl_hopdongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_hopdongMouseClicked
@@ -951,7 +951,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-//        openDichVu();
+        openDichVu();
     }//GEN-LAST:event_pnl_dichvuMouseClicked
 
     private void pnl_thongkeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_thongkeMouseClicked

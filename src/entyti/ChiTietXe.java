@@ -85,6 +85,35 @@ public class ChiTietXe {
     public void setTrangthaixe(String trangthaixe) {
         this.trangthaixe = trangthaixe;
     }
+    public String tenhangxe(int mahangxe){
+        if(mahangxe == 1){
+            return "KIA";
+        }else if(mahangxe == 2 ){
+            return "Vinfast";
+        }else if(mahangxe == 3 ){
+            return "Mercedes";
+        }else if(mahangxe == 4 ){
+            return "Toyota";
+        }else if(mahangxe == 5 ){
+            return "Audi";
+        }else if(mahangxe == 6 ){
+            return "Lexus";
+        }else if(mahangxe == 7 ){
+            return "BMW";
+        }else if(mahangxe == 8 ){
+            return "Honda";
+        }else if(mahangxe == 9 ){
+            return "Mazda";
+        }else if(mahangxe == 10 ){
+            return "Ford";
+        }else if(mahangxe == 11 ){
+            return "Hyundai";
+        }else if(mahangxe == 12 ){
+            return "Samco";
+        }
+        
+        return null;
+    }
 
     
 }

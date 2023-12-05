@@ -23,7 +23,7 @@ public class VoucherDAO{
             + "values(?,?,?,?)";
     String UPDATE="UPDATE Voucher set NoiDung=?,GiaTri=?,TrangThai=? where MaVoucher=?";
     String DELETE="  DELETE FROM Voucher WHERE MaVoucher=?";
-    String SELECT_ALL="SELECT * FROM Vouncher";
+    String SELECT_ALL="SELECT * FROM Voucher";
     String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=?";
     
     public void insert(Voucher entity) {

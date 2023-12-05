@@ -21,6 +21,7 @@ import org.bridj.util.Pair;
  * @author hieud
  */
 public class cardTaiKhoan extends javax.swing.JPanel {
+
     private NapTheCaoDialog napcardDialog;
     TaiKhoanDAO tkd = new TaiKhoanDAO();
     ChiTietTaiKhoanDAO cttkdao = new ChiTietTaiKhoanDAO();
@@ -79,7 +80,6 @@ public class cardTaiKhoan extends javax.swing.JPanel {
             ChiTietTaiKhoan cttk = cttkdao.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             txt_hoten.setText(cttk.getHoten());
             txt_ngaysinh.setText(DateHelper.toString(cttk.getNgaysinh(), "dd/MM/yyyy"));
-            System.out.println(cttk.getNgaysinh());
             txt_sodienthoai.setText(cttk.getSdt());
             txt_cancuoc.setText(cttk.getCccd());
             txt_diachi.setText(cttk.getDiachi());
@@ -89,7 +89,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 rdo_nam.setSelected(true);
             }
             selectedFileName_anhdaidien = cttk.getAnhdaidien();
-            selectedFileName_banglai = cttk.getBanglaixe();   
+            selectedFileName_banglai = cttk.getBanglaixe();
             setImg(selectedFileName_anhdaidien, selectedFileName_banglai);
             lbl_sodu.setText("Số Dư: " + String.valueOf(cttk.getSodu()));
         } catch (Exception e) {
@@ -104,7 +104,6 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 DialogHelper.alert(this, "Thêm thông tin thành công !!!");
             } catch (Exception e) {
                 System.out.println(e.getMessage());
-                System.out.println("them thong tin that bai");
                 update();
             }
         }
@@ -179,24 +178,24 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         }
         return true;
     }
+
     public void openDoiMatKhau() {
         try {
             new DoiMatKhauDialog(null, true).setVisible(true);
         } catch (Exception e) {
         }
     }
+
     public void openNapCard() {
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;
-            if(tk.isTrangthai()){
+            if (tk.isTrangthai()) {
                 napcardDialog = new NapTheCaoDialog(null, true);
                 napcardDialog.setVisible(true);
                 if (!napcardDialog.isVisible()) {
-                setForm();
+                    setForm();
+                }
             } else {
-                System.out.println("Form vẫn còn mở.");
-            }
-            }else{
                 DialogHelper.alert(this, "Vui Lòng Xác Thực Tài Khoản");
             }
         } catch (Exception e) {
@@ -556,24 +555,24 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     }//GEN-LAST:event_btn_capnhatthongtinActionPerformed
 
     private void lbl_anhdaidienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhdaidienMouseClicked
-        ImagesHelper.Pair<String, String> anhdaidien= Hepler.ImagesHelper.chonAnh();
+        ImagesHelper.Pair<String, String> anhdaidien = Hepler.ImagesHelper.chonAnh();
         if (anhdaidien != null) {
             selectedFilePath_anhdaidien = anhdaidien.getFirst();
             selectedFileName_anhdaidien = anhdaidien.getSecond();
         } else {
-            System.out.println("Lỗi chọn ảnh");
+            DialogHelper.alert(this, "Lỗi Chọn Ảnh");
         }
         Hepler.ImagesHelper.convertImgTo110x164(selectedFilePath_anhdaidien, selectedFileName_anhdaidien, writeurl_anhdaidien);
         setImg(selectedFileName_anhdaidien, selectedFileName_banglai);
     }//GEN-LAST:event_lbl_anhdaidienMouseClicked
 
     private void lbl_anhbanglaiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbl_anhbanglaiMouseClicked
-        ImagesHelper.Pair<String, String> banglai= Hepler.ImagesHelper.chonAnh();
+        ImagesHelper.Pair<String, String> banglai = Hepler.ImagesHelper.chonAnh();
         if (banglai != null) {
             selectedFilePath_banglai = banglai.getFirst();
             selectedFileName_banglai = banglai.getSecond();
         } else {
-            System.out.println("Lỗi chọn ảnh");
+            DialogHelper.alert(this, "Lỗi Chọn Ảnh");
         }
         Hepler.ImagesHelper.convertImgTo280x180(selectedFilePath_banglai, selectedFileName_banglai, writeurl_banglai);
         setImg(selectedFileName_anhdaidien, selectedFileName_banglai);

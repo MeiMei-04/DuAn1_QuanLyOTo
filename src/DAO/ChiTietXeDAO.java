@@ -16,26 +16,26 @@ import java.util.ArrayList;
  */
 public class ChiTietXeDAO {
 
-    String INSERT = "INSERT INTO Xe ("
+    String INSERT = "INSERT INTO ChiTietXe ("
             + "MaXe, "
             + "TenXe, "
             + "SoGhe, "
             + "GiaThue, "
             + "Anh_Xe, "
             + "Mahangxe, "
-            + "trangthaithue) "
-            + "VALUES (?,?,?,?,?,?,?,?)";
-    String UPDATE = "UPDATE Xe SET"
-            + "TenXe=?,"
+            + "trangthaixe) "
+            + "VALUES (?,?,?,?,?,?,?)";
+    String UPDATE = "UPDATE ChiTietXe SET "
+            + "TenXe =?,"
             + "SoGhe = ?,"
             + "GiaThue = ?,"
             + "Anh_Xe = ?,"
             + "mahangxe=?,"
-            + "trangthaithue=? "
+            + "trangthaixe=? "
             + "WHERE MaXe =?";
-    String DELETE = "DELETE FROM Xe WHERE MaXe =?";
-    String SELECT_ALL = "SELECT * FROM xe";
-    String SELECT_BY_ID_MAXE = "SELECT*FROM xe WHERE MaXe = ?";
+    String DELETE = "DELETE FROM ChiTietXe WHERE MaXe =?";
+    String SELECT_ALL = "SELECT * FROM ChiTietXe";
+    String SELECT_BY_ID_MAXE = "SELECT*FROM ChiTietXe WHERE MaXe = ?";
 
     public void insert(ChiTietXe entity) {
         JDBCHelper.executeUpdate(INSERT, 
