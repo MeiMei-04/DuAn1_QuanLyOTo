@@ -4,22 +4,18 @@
  */
 package card;
 
-import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
-import DAO.ThemDichVuDAO;
 import DAO.ChiTietXeDAO;
 import DAO.HangXeDAO;
 import DAO.VoucherDAO;
+import static Hepler.DateHelper.isValidDate;
 import Hepler.DialogHelper;
-import entyti.DanhGia;
 import entyti.DichVu;
-import entyti.ThemDichVu;
-import entyti.Voucher;
 import entyti.ChiTietXe;
 import entyti.HangXe;
-import form.TaoHopDongDialog;
-import java.awt.Component;
+import entyti.Voucher;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,18 +28,21 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardThueXe extends javax.swing.JPanel {
 
-    List<DichVu> list_dichvu = new ArrayList<>();
     HangXeDAO hxd = new HangXeDAO();
     DichVuDAO dvd = new DichVuDAO();
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
+    VoucherDAO vcd = new VoucherDAO();
     List<ChiTietXe> list_xe = new ArrayList<>();
     List<ChiTietXe> listallxe = new ArrayList<>();
-    private Set<DichVu> set_dichvu = new HashSet<>();
-    int maloaixe = 1;
+    List<DichVu> list_dichvu = new ArrayList<>();
+    String voucher = null;
     String soghe = "4";
+    String diaChi = null;
     int index = 0;
+    int maloaixe = 1;
     int size_list = -1;
-
+    Date ngayThue = null;
+    int songaythue = 0;
     /**
      * Creates new form ThueXe
      */
@@ -54,19 +53,64 @@ public class cardThueXe extends javax.swing.JPanel {
         fillcbb_soghe();
         setForm(getListXe(soghe, maloaixe), 0);
     }
-
-    public List<DichVu> loc_listdichvu(List<DichVu> list, String maxe) {
-        boolean flag = false;
-        if (list_dichvu.isEmpty()) {
-            flag = true;
+ 
+    public boolean vadidate(){
+        try {
+            int songaythue = Integer.parseInt(txt_songaythue.getText());
+        } catch (Exception e) {
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this,"Vui Lòng Nhập Định Dạng Số");
+            return false;
         }
-        return list_dichvu;
+        if(Integer.parseInt(txt_songaythue.getText())<1){
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this,"Số NGày THuê Lớn Hơn 0");
+            return false;
+        }
+        if(txt_songaythue.getText().equals("")){
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this,"Số Ngày Thuê Không Được Để Trống");
+            return false;
+        }
+        if (txt_ngaythue.getText().equals("")) {
+            txt_ngaythue.requestFocus();
+            DialogHelper.alert(this,"Ngày Thuê Không Được Để Trống");
+            return false;
+        }
+        if (!isValidDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
+            txt_ngaythue.requestFocus();
+            DialogHelper.alert(this,"Vui Lòng Nhập Đúng định dạng dd/MM/yyyy");
+            return false;
+        }
+        return true;
+   }
+    public void kiemtravoucher() {
+        String phantramgiamgia = null;
+        voucher = txt_voucher.getText();
+        try {
+            Voucher vc = vcd.selectByID_MAVOUCHER(voucher);
+            if (vc.getGiatri() == 1) {
+                phantramgiamgia = "Bạn Được Giảm 5% Tổng Giá Trị Hợp Đồng";
+            } else if (vc.getGiatri() == 2) {
+                phantramgiamgia = "Bạn Được Giảm 10% Tổng Giá Trị Hợp Đồng";
+            } else if (vc.getGiatri() == 3) {
+                phantramgiamgia = "Bạn Được Giảm 15% Tổng Giá Trị Hợp Đồng";
+            } else {
+                phantramgiamgia = null;
+            }
+            DialogHelper.alert(this, "Voucher Tồn Tại"
+                    + "\n" + phantramgiamgia);
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Voucher Không Tồn Tại");
+            voucher = null;
+            System.out.println(e.getMessage());
+        }
     }
 
-    public void fill_table_dichvu(List<DichVu> list) {
+    public void fill_table_dichvu() {
         DefaultTableModel model = (DefaultTableModel) tbl_tdv.getModel();
         model.setRowCount(0);
-        for (DichVu dv : list) {
+        for (DichVu dv : list_dichvu) {
             Object[] row = {
                 dv.getMadichvu(),
                 dv.getTendichvu(),
@@ -76,21 +120,24 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
-    public Set<DichVu> getListDichVu(String tendichvu) {
+    public void getListDichVu(String tendichvu) {
         try {
             DichVu dv = dvd.selectByID_TENDICHVU(tendichvu);
-
-            if (!set_dichvu.contains(dv)) {
-                set_dichvu.add(dv);
+            boolean flag = false;
+            for (DichVu dichVu : list_dichvu) {
+                if (dichVu.getTendichvu().equals(tendichvu)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                list_dichvu.add(dv);
             } else {
-                System.out.println("1");
                 DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        return set_dichvu;
     }
 
     public List<ChiTietXe> getListXe(String soghe, int maloaixe) {
@@ -252,12 +299,17 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TÊN XE");
 
+        txt_maxe.setEnabled(false);
+
+        txt_tenxe.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("TRẠNG THÁI XE");
 
         txt_trangthai.setColumns(20);
         txt_trangthai.setRows(5);
+        txt_trangthai.setEnabled(false);
         jScrollPane1.setViewportView(txt_trangthai);
 
         anh.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -302,6 +354,8 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ĐƠN GIÁ");
+
+        txt_giathue.setEnabled(false);
 
         btn_dau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_dau.setForeground(new java.awt.Color(255, 102, 51));
@@ -502,10 +556,20 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_kiemtra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_kiemtra.setForeground(new java.awt.Color(255, 102, 51));
         btn_kiemtra.setText("KIỂM TRA");
+        btn_kiemtra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kiemtraActionPerformed(evt);
+            }
+        });
 
         btn_thue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_thue.setForeground(new java.awt.Color(255, 102, 51));
         btn_thue.setText("THUÊ");
+        btn_thue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_thueActionPerformed(evt);
+            }
+        });
 
         tbl_tdv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -724,7 +788,28 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         String tendv = cbb_dichvu.getSelectedItem().toString();
         getListDichVu(tendv);
+        fill_table_dichvu();
     }//GEN-LAST:event_btn_chondichvuActionPerformed
+
+    private void btn_thueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thueActionPerformed
+        // TODO add your handling code here:
+        if(vadidate()){
+        String thanhpho = cbb_thanhpho.getSelectedItem().toString();
+        String huyen = cbb_huyen.getSelectedItem().toString();
+        String xa = cbb_xa.getSelectedItem().toString();
+        String dctt = txt_diachi.getText();
+        diaChi = thanhpho + " - " + huyen + " - " + xa + " - " + dctt;
+        ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+        songaythue = Integer.parseInt(txt_songaythue.getText());
+        DialogHelper.alert(this, diaChi);
+        }
+        
+    }//GEN-LAST:event_btn_thueActionPerformed
+
+    private void btn_kiemtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kiemtraActionPerformed
+        // TODO add your handling code here:
+         kiemtravoucher();
+    }//GEN-LAST:event_btn_kiemtraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;

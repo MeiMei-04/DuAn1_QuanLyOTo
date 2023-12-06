@@ -213,8 +213,14 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_maxe">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_tenxe">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel9">
               <Properties>
@@ -238,6 +244,7 @@
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -371,6 +378,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_giathue">
+              <Properties>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btn_dau">
               <Properties>
@@ -968,6 +978,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="KI&#x1ec2;M TRA"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_kiemtraActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btn_thue">
               <Properties>
@@ -979,6 +992,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="THU&#xca;"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_thueActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
 

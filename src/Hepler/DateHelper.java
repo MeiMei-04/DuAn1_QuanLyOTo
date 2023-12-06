@@ -4,6 +4,7 @@
  */
 package Hepler;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -68,5 +69,15 @@ public class DateHelper {
             throw new RuntimeException(e);
         }
     }
+    public static boolean isValidDate(String input, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        sdf.setLenient(false);
 
+        try {
+            sdf.parse(input);
+            return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 }
