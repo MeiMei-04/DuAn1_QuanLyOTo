@@ -8,6 +8,7 @@ import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
 import DAO.ThemDichVuDAO;
 import DAO.ChiTietXeDAO;
+import DAO.HangXeDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
 import entyti.DanhGia;
@@ -15,10 +16,13 @@ import entyti.DichVu;
 import entyti.ThemDichVu;
 import entyti.Voucher;
 import entyti.ChiTietXe;
+import entyti.HangXe;
 import form.TaoHopDongDialog;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,101 +32,151 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardThueXe extends javax.swing.JPanel {
 
-    private TaoHopDongDialog hopDongDialog;
-    DanhGiaDAO dgd = new DanhGiaDAO();
+    List<DichVu> list_dichvu = new ArrayList<>();
+    HangXeDAO hxd = new HangXeDAO();
     DichVuDAO dvd = new DichVuDAO();
-    ChiTietXeDAO txd = new ChiTietXeDAO();
-    ThemDichVuDAO tdvd = new ThemDichVuDAO();
-    VoucherDAO vcd = new VoucherDAO();
-    List<ThemDichVu> list_dichvu = new ArrayList<>();
-    String diadiemnhanxe = null;
+    ChiTietXeDAO ctxd = new ChiTietXeDAO();
+    List<ChiTietXe> list_xe = new ArrayList<>();
+    List<ChiTietXe> listallxe = new ArrayList<>();
+    private Set<DichVu> set_dichvu = new HashSet<>();
+    int maloaixe = 1;
+    String soghe = "4";
     int index = 0;
-    int size = 0;
-    int row = -1;
-    String item = null;
-    String maxe = null;
-    int songaythue = 1;
-    int tiendichvu = 0;
-    String mavoucher = null;
+    int size_list = -1;
 
     /**
      * Creates new form ThueXe
      */
     public cardThueXe() {
         initComponents();
-//        setForm(locxe(item), 0);
-        list_dichvu.clear();
+        fillcbb_dichvu();
+        fillcbb_hangxe();
+        fillcbb_soghe();
+        setForm(getListXe(soghe, maloaixe), 0);
     }
-    public void kiemtravoucher(){
-        String voucher  = txt_voucher.getText();
+
+    public List<DichVu> loc_listdichvu(List<DichVu> list, String maxe) {
+        boolean flag = false;
+        if (list_dichvu.isEmpty()) {
+            flag = true;
+        }
+        return list_dichvu;
+    }
+
+    public void fill_table_dichvu(List<DichVu> list) {
+        DefaultTableModel model = (DefaultTableModel) tbl_tdv.getModel();
+        model.setRowCount(0);
+        for (DichVu dv : list) {
+            Object[] row = {
+                dv.getMadichvu(),
+                dv.getTendichvu(),
+                dv.getDongia()
+            };
+            model.addRow(row);
+        }
+    }
+
+    public Set<DichVu> getListDichVu(String tendichvu) {
         try {
-            Voucher vc = vcd.selectByID_MAVOUCHER(voucher);
-            if(voucher.equalsIgnoreCase(vc.getMavoucher())){
-                if(vc.getGiatri()==1){
-                    DialogHelper.alert(this, "Voucher giảm giá 5%");
-                }else if(vc.getGiatri()==2){
-                    DialogHelper.alert(this, "Voucher giảm giá 10%");
-                }else if(vc.getGiatri()==3){
-                    DialogHelper.alert(this, "Voucher giảm giá 15%");
-                }else{
-                    DialogHelper.alert(this, "Voucher không tồn tại");
-                }
+            DichVu dv = dvd.selectByID_TENDICHVU(tendichvu);
+
+            if (!set_dichvu.contains(dv)) {
+                set_dichvu.add(dv);
+            } else {
+                System.out.println("1");
+                DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             }
         } catch (Exception e) {
-            DialogHelper.alert(this, "Voucher không tồn tại");
+            System.out.println(e.getMessage());
+        }
+
+        return set_dichvu;
+    }
+
+    public List<ChiTietXe> getListXe(String soghe, int maloaixe) {
+        list_xe.clear();
+        try {
+            listallxe = ctxd.selectAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        if (maloaixe == 0 && soghe == null) {
+            return listallxe;
+        }
+        for (ChiTietXe ctx : listallxe) {
+            if (ctx.getMahangxe() == maloaixe && ctx.getSoghe() == Integer.parseInt(soghe)) {
+                list_xe.add(ctx);
+            }
+        }
+        return list_xe;
+    }
+
+    public void setForm(List<ChiTietXe> list, int index) {
+        if (list.isEmpty()) {
+            DialogHelper.alert(this, "Dòng Xe Này Hiện Chưa CÓ Xe");
+            return;
+        }
+        ChiTietXe ctx = list.get(index);
+        size_list = list.size() - 1;
+        txt_maxe.setText(ctx.getMaxe());
+        txt_tenxe.setText(ctx.getTenxe());
+        seticon(ctx.getAnhxe());
+        txt_giathue.setText(String.valueOf(ctx.getGiathue()));
+        txt_trangthai.setText(ctx.getTrangthaixe());
+    }
+
+    public void fillcbb_dichvu() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_dichvu.getModel();
+            model.removeAllElements();
+            List<DichVu> list = dvd.selectAll();
+            for (DichVu dv : list) {
+                model.addElement(dv.getTendichvu());
+            }
+            cbb_hangxe.setSelectedIndex(0);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-//    public void openHopDong() {
-//        try {
-//            hopDongDialog = new TaoHopDongDialog(null, true, maxe, songaythue, mavoucher, list_dichvu,diadiemnhanxe);
-//            hopDongDialog.setVisible(true);
-//
-//            // Kiểm tra trạng thái của form sau khi nó đã đóng
-//            if (!hopDongDialog.isVisible()) {
-//                setForm(locxe(item), 0);
-//            } else {
-//                System.out.println("Form vẫn còn mở.");
-//            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    public void fillcbb_hangxe() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_hangxe.getModel();
+            model.removeAllElements();
+            List<HangXe> list = hxd.selectAll();
+            for (HangXe hx : list) {
+                model.addElement(hx.getTenhangxe());
+            }
+            cbb_hangxe.setSelectedIndex(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void fillcbb_soghe() {
+
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_soghe.getModel();
+            model.removeAllElements();
+            Set<String> uniqueSeatNumbers = new HashSet<>();
+            List<ChiTietXe> list = ctxd.selectAll();
+            for (ChiTietXe ctx : list) {
+                String soghe = String.valueOf(ctx.getSoghe());
+                // Kiểm tra xem số ghế đã xuất hiện hay chưa
+                if (uniqueSeatNumbers.add(soghe)) {
+                    model.addElement(soghe);
+                }
+            }
+            cbb_soghe.setSelectedIndex(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     public void seticon(String string) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + string);
 
     }
-
-//    public List<ChiTietXe> locxe(String soghe) {
-//        List<ChiTietXe> list = new ArrayList<>();
-//        try {
-//            List<ChiTietXe> allXe = txd.selectAll();
-//            if (soghe != null) {
-//                for (ChiTietXe xe : allXe) {
-//                    if (xe.getSoghe() == Integer.valueOf(soghe) && xe.isTrangthaixethue() == false) {
-//                        list.add(xe);
-//                    }
-//                }
-//            } else {
-//                for (ChiTietXe xe : allXe) {
-//                    if (xe.isTrangthaixethue() == false) {
-//                        list.add(xe);
-//                    }
-//                }
-////                list = allXe;
-//            }
-//        } catch (Exception e) {
-//            // handle exception
-//            System.out.println(e.getMessage());
-//        }
-//        return list;
-//    }
-
-    public void setForm(List<ChiTietXe> list, int index) {
-  
-    }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -136,28 +190,26 @@ public class cardThueXe extends javax.swing.JPanel {
         background = new javax.swing.JPanel();
         ttxe = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txt_maxe = new javax.swing.JTextField();
+        txt_tenxe = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        txt_trangthai = new javax.swing.JTextArea();
         anh = new javax.swing.JPanel();
         lbl_anhxe = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lbl_timtheosoghe = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
-        jComboBox4 = new javax.swing.JComboBox<>();
-        jComboBox5 = new javax.swing.JComboBox<>();
+        cbb_hangxe = new javax.swing.JComboBox<>();
+        cbb_soghe = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        txt_giathue = new javax.swing.JTextField();
+        btn_dau = new javax.swing.JButton();
+        btn_truoc = new javax.swing.JButton();
+        btn_sau = new javax.swing.JButton();
+        btn_cuoi = new javax.swing.JButton();
+        btn_timkiem = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         lbl_voucher = new javax.swing.JLabel();
         lbl_dichvu = new javax.swing.JLabel();
@@ -166,24 +218,24 @@ public class cardThueXe extends javax.swing.JPanel {
         lbl_songaythue = new javax.swing.JLabel();
         lbl_songaythue1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        txt_ngaythue = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txt_diachi = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
-        jComboBox6 = new javax.swing.JComboBox<>();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        cbb_xa = new javax.swing.JComboBox<>();
+        cbb_huyen = new javax.swing.JComboBox<>();
+        cbb_thanhpho = new javax.swing.JComboBox<>();
+        btn_chondichvu = new javax.swing.JButton();
+        cbb_dichvu = new javax.swing.JComboBox<>();
+        btn_kiemtra = new javax.swing.JButton();
+        btn_thue = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbl_tdv = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 102, 51));
 
@@ -196,10 +248,6 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("MÃ XE");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("MÃ LOẠI XE");
-
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TÊN XE");
@@ -208,9 +256,9 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("TRẠNG THÁI XE");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        txt_trangthai.setColumns(20);
+        txt_trangthai.setRows(5);
+        jScrollPane1.setViewportView(txt_trangthai);
 
         anh.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         anh.setOpaque(false);
@@ -243,33 +291,60 @@ public class cardThueXe extends javax.swing.JPanel {
         lbl_timtheosoghe.setForeground(new java.awt.Color(255, 255, 255));
         lbl_timtheosoghe.setText("SỐ GHẾ");
 
-        jComboBox4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox4.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "TOYOTA", "CHEVROLET", "FORD", "HONDA", "SSANGYONG", "LANDROVER" }));
+        cbb_hangxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_hangxe.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_hangxe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "TOYOTA", "CHEVROLET", "FORD", "HONDA", "SSANGYONG", "LANDROVER" }));
 
-        jComboBox5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox5.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "4", "7", "16", "29" }));
+        cbb_soghe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_soghe.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_soghe.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "4", "7", "16", "29" }));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ĐƠN GIÁ");
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 102, 51));
-        jButton4.setText("|<");
+        btn_dau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_dau.setForeground(new java.awt.Color(255, 102, 51));
+        btn_dau.setText("|<");
+        btn_dau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_dauActionPerformed(evt);
+            }
+        });
 
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 102, 51));
-        jButton5.setText("<<");
+        btn_truoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_truoc.setForeground(new java.awt.Color(255, 102, 51));
+        btn_truoc.setText("<<");
+        btn_truoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_truocActionPerformed(evt);
+            }
+        });
 
-        jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton6.setForeground(new java.awt.Color(255, 102, 51));
-        jButton6.setText(">>");
+        btn_sau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_sau.setForeground(new java.awt.Color(255, 102, 51));
+        btn_sau.setText(">>");
+        btn_sau.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_sauActionPerformed(evt);
+            }
+        });
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 102, 51));
-        jButton7.setText(">|");
+        btn_cuoi.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_cuoi.setForeground(new java.awt.Color(255, 102, 51));
+        btn_cuoi.setText(">|");
+        btn_cuoi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_cuoiActionPerformed(evt);
+            }
+        });
+
+        btn_timkiem.setText("Tìm Kiếm");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
@@ -279,41 +354,42 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(ttxeLayout.createSequentialGroup()
-                        .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField10)
-                            .addComponent(jComboBox4, 0, 169, Short.MAX_VALUE)
-                            .addGroup(ttxeLayout.createSequentialGroup()
-                                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lbl_timtheosoghe)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel4))
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jComboBox5, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addGroup(ttxeLayout.createSequentialGroup()
                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5)
                             .addComponent(jLabel8)
                             .addComponent(jLabel9)
                             .addComponent(jLabel6))
                         .addGap(36, 36, 36)
                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(ttxeLayout.createSequentialGroup()
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton6)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7))
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField6)
+                            .addComponent(txt_tenxe)
                             .addComponent(jScrollPane1)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField2)))))
+                            .addComponent(txt_maxe)
+                            .addComponent(txt_giathue)))
+                    .addGroup(ttxeLayout.createSequentialGroup()
+                        .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(ttxeLayout.createSequentialGroup()
+                                .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbb_hangxe, 0, 169, Short.MAX_VALUE)
+                                    .addComponent(cbb_soghe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(ttxeLayout.createSequentialGroup()
+                                        .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lbl_timtheosoghe)
+                                            .addComponent(jLabel1)
+                                            .addComponent(jLabel4)
+                                            .addComponent(btn_timkiem))
+                                        .addGap(0, 0, Short.MAX_VALUE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btn_dau)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_truoc)
+                                .addGap(18, 18, 18)
+                                .addComponent(btn_sau)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_cuoi)))
+                        .addContainerGap())))
         );
         ttxeLayout.setVerticalGroup(
             ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,43 +398,39 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_timkiem)
+                        .addGap(4, 4, 4)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbb_hangxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(lbl_timtheosoghe)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbb_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(21, 21, 21)))
                 .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_maxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
-                .addGap(20, 20, 20)
-                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_tenxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_giathue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton6)
-                    .addComponent(jButton5)
-                    .addComponent(jButton4))
+                    .addComponent(btn_cuoi)
+                    .addComponent(btn_sau)
+                    .addComponent(btn_truoc)
+                    .addComponent(btn_dau))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -402,37 +474,51 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("ĐỊA CHỈ CHI TIẾT");
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setRows(5);
-        jScrollPane2.setViewportView(jTextArea2);
+        cbb_xa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_xa.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_xa.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "An Đồng", "An Hòa", "An Hòa", "An Hồng", "An Hưng", "An Lư", "An Sơn", "An Thái", "An Thắng", "An Thọ", "An Tiến", "Bạch Đằng", "Bát Trang", "Bắc Hưng", "Bắc Sơn", "Cao Minh", "Cao Nhân", "Cấp Tiến", "Chiến Thắng", "Chính Mỹ", "Cổ Am", "Cộng Hiền", "Du Lễ", "Dũng Tiến", "Dương Quan", "Đại Bản", "Đại Đồng", "Đại Hà", "Đại Hợp", "Đại Thắng", "Đặng Cương", "Đoàn Lập", "Đoàn Xá", "Đồng Bài", "Đông Hưng", "Đồng Minh", "Đông Phương", "Đông Sơn", "Đồng Thái", "Gia Đức", "Gia Luận", "Gia Minh", "Giang Biên", "Hiền Hào", "Hiệp Hòa", "Hòa Bình", "Hòa Bình", "Hoa Động", "Hoàng Châu", "Hoàng Động", "Hồng Phong", "Hồng Thái", "Hợp Thành", "Hùng Thắng", "Hùng Tiến", "Hưng Nhân", "Hữu Bằng", "Kênh Giang", "Khởi Nghĩa", "Kiền Bái", "Kiến Quốc", "Kiến Thiết", "Kỳ Sơn", "Lại Xuân", "Lâm Động", "Lập Lễ", "Lê Lợi", "Lê Thiện", "Liên Am", "Liên Khê", "Lưu Kiếm", "Lưu Kỳ", "Lý Học", "Minh Tân", "Minh Tân", "Mỹ Đồng", "Mỹ Đức", "Nam Hưng", "Nam Sơn", "Nghĩa Lộ", "Ngũ Đoan", "Ngũ Lão", "Ngũ Phúc", "Nhân Hòa", "Phả Lễ", "Phù Long", "Phù Ninh", "Phục Lễ", "Quang Hưng", "Quang Phục", "Quảng Thanh", "Quang Trung", "Quốc Tuấn", "Quốc Tuấn", "Quyết Tiến", "Tam Cường", "Tam Đa", "Tam Hưng", "Tân Dân", "Tân Dương", "Tân Hưng", "Tân Liên", "Tân Phong", "Tân Tiến", "Tân Trào", "Tân Viên", "Tây Hưng", "Thái Sơn", "Thanh Lương", "Thanh Sơn", "Thắng Thủy", "Thiên Hương", "Thuận Thiên", "Thủy Đường", "Thụy Hương", "Thủy Sơn", "Thủy Triều", "Tiên Cường", "Tiên Minh", "Tiền Phong", "Tiên Thanh", "Tiên Thắng", "Toàn Thắng", "Trân Châu", "Trấn Dương", "Trung Hà", "Trung Lập", "Trường Thành", "Trường Thọ", "Tú Sơn", "Tự Cường", "Văn Phong", "Việt Hải", "Việt Tiến", "Vĩnh An", "Vĩnh Long", "Vĩnh Phong", "Vinh Quang", "Vinh Quang", "Vĩnh Tiến", "Xuân Đám" }));
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox1.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "An Đồng", "An Hòa", "An Hòa", "An Hồng", "An Hưng", "An Lư", "An Sơn", "An Thái", "An Thắng", "An Thọ", "An Tiến", "Bạch Đằng", "Bát Trang", "Bắc Hưng", "Bắc Sơn", "Cao Minh", "Cao Nhân", "Cấp Tiến", "Chiến Thắng", "Chính Mỹ", "Cổ Am", "Cộng Hiền", "Du Lễ", "Dũng Tiến", "Dương Quan", "Đại Bản", "Đại Đồng", "Đại Hà", "Đại Hợp", "Đại Thắng", "Đặng Cương", "Đoàn Lập", "Đoàn Xá", "Đồng Bài", "Đông Hưng", "Đồng Minh", "Đông Phương", "Đông Sơn", "Đồng Thái", "Gia Đức", "Gia Luận", "Gia Minh", "Giang Biên", "Hiền Hào", "Hiệp Hòa", "Hòa Bình", "Hòa Bình", "Hoa Động", "Hoàng Châu", "Hoàng Động", "Hồng Phong", "Hồng Thái", "Hợp Thành", "Hùng Thắng", "Hùng Tiến", "Hưng Nhân", "Hữu Bằng", "Kênh Giang", "Khởi Nghĩa", "Kiền Bái", "Kiến Quốc", "Kiến Thiết", "Kỳ Sơn", "Lại Xuân", "Lâm Động", "Lập Lễ", "Lê Lợi", "Lê Thiện", "Liên Am", "Liên Khê", "Lưu Kiếm", "Lưu Kỳ", "Lý Học", "Minh Tân", "Minh Tân", "Mỹ Đồng", "Mỹ Đức", "Nam Hưng", "Nam Sơn", "Nghĩa Lộ", "Ngũ Đoan", "Ngũ Lão", "Ngũ Phúc", "Nhân Hòa", "Phả Lễ", "Phù Long", "Phù Ninh", "Phục Lễ", "Quang Hưng", "Quang Phục", "Quảng Thanh", "Quang Trung", "Quốc Tuấn", "Quốc Tuấn", "Quyết Tiến", "Tam Cường", "Tam Đa", "Tam Hưng", "Tân Dân", "Tân Dương", "Tân Hưng", "Tân Liên", "Tân Phong", "Tân Tiến", "Tân Trào", "Tân Viên", "Tây Hưng", "Thái Sơn", "Thanh Lương", "Thanh Sơn", "Thắng Thủy", "Thiên Hương", "Thuận Thiên", "Thủy Đường", "Thụy Hương", "Thủy Sơn", "Thủy Triều", "Tiên Cường", "Tiên Minh", "Tiền Phong", "Tiên Thanh", "Tiên Thắng", "Toàn Thắng", "Trân Châu", "Trấn Dương", "Trung Hà", "Trung Lập", "Trường Thành", "Trường Thọ", "Tú Sơn", "Tự Cường", "Văn Phong", "Việt Hải", "Việt Tiến", "Vĩnh An", "Vĩnh Long", "Vĩnh Phong", "Vinh Quang", "Vinh Quang", "Vĩnh Tiến", "Xuân Đám" }));
+        cbb_huyen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_huyen.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_huyen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "Đồ Sơn", "Dương Kinh", "Hải An", "Hồng Bàng", "Kiến An", "Lê Chân", "Ngô Quyền", "An Dương", "An Lão", "Bạch Long Vĩ", "Cát Hải", "Kiến Thuỵ", "Thủy Nguyên", "Tiên Lãng", "Vĩnh Bảo", "Hồng Bàng" }));
 
-        jComboBox2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox2.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "Đồ Sơn", "Dương Kinh", "Hải An", "Hồng Bàng", "Kiến An", "Lê Chân", "Ngô Quyền", "An Dương", "An Lão", "Bạch Long Vĩ", "Cát Hải", "Kiến Thuỵ", "Thủy Nguyên", "Tiên Lãng", "Vĩnh Bảo", "Hồng Bàng" }));
+        cbb_thanhpho.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_thanhpho.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_thanhpho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hải Phòng" }));
 
-        jComboBox3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox3.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hải Phòng" }));
+        btn_chondichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_chondichvu.setForeground(new java.awt.Color(255, 102, 51));
+        btn_chondichvu.setText("CHỌN DỊCH VỤ");
+        btn_chondichvu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_chondichvuActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 102, 51));
-        jButton1.setText("CHỌN DỊCH VỤ");
+        cbb_dichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_dichvu.setForeground(new java.awt.Color(255, 102, 51));
+        cbb_dichvu.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Vui lòng chọn dịch vụ)", "Xăng xe", "Đưa đón sân bay", "Cứu hộ đường cao tốc", "Thuê người lái" }));
 
-        jComboBox6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jComboBox6.setForeground(new java.awt.Color(255, 102, 51));
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Vui lòng chọn dịch vụ)", "Xăng xe", "Đưa đón sân bay", "Cứu hộ đường cao tốc", "Thuê người lái" }));
+        btn_kiemtra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_kiemtra.setForeground(new java.awt.Color(255, 102, 51));
+        btn_kiemtra.setText("KIỂM TRA");
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 102, 51));
-        jButton2.setText("KIỂM TRA");
+        btn_thue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_thue.setForeground(new java.awt.Color(255, 102, 51));
+        btn_thue.setText("THUÊ");
 
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 102, 51));
-        jButton3.setText("THUÊ");
+        tbl_tdv.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Mã Dịch Vụ", "Tên Dịch Vụ", "Giá Dịch Vụ"
+            }
+        ));
+        jScrollPane3.setViewportView(tbl_tdv);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -446,21 +532,14 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(lbl_dichvu)
                                     .addGap(283, 283, 283))
-                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
-                                        .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel4Layout.createSequentialGroup()
+                                    .addComponent(cbb_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(btn_chondichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,28 +547,34 @@ public class cardThueXe extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel10)
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(cbb_xa, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(cbb_huyen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel11)))
-                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btn_thue, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lbl_voucher, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton2))
-                                .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_kiemtra))
+                                .addComponent(txt_diachi, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel4Layout.createSequentialGroup()
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel3)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGap(35, 35, 35)
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbl_songaythue)
                                         .addComponent(txt_songaythue)))))
-                        .addContainerGap(71, Short.MAX_VALUE))))
+                        .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -499,7 +584,7 @@ public class cardThueXe extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txt_songaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addContainerGap()
@@ -515,26 +600,26 @@ public class cardThueXe extends javax.swing.JPanel {
                             .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(cbb_xa, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbb_huyen, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
                 .addComponent(lbl_dichvu)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbb_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_chondichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -542,9 +627,9 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txt_voucher, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_kiemtra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3)
+                .addComponent(btn_thue)
                 .addContainerGap())
         );
 
@@ -583,22 +668,81 @@ public class cardThueXe extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        String tenxe = (String) cbb_hangxe.getSelectedItem();
+        soghe = cbb_soghe.getSelectedItem().toString();
+        try {
+            HangXe hx = hxd.selectByID_TENHANGXE(tenxe);
+            maloaixe = hx.getMahangxe();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        setForm(getListXe(soghe, maloaixe), 0);
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
+    private void btn_dauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_dauActionPerformed
+        // TODO add your handling code here:
+        index = 0;
+        setForm(getListXe(soghe, maloaixe), index);
+    }//GEN-LAST:event_btn_dauActionPerformed
+
+    private void btn_cuoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cuoiActionPerformed
+        // TODO add your handling code here:
+        index = size_list;
+        setForm(getListXe(soghe, maloaixe), index);
+
+    }//GEN-LAST:event_btn_cuoiActionPerformed
+
+    private void btn_sauActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sauActionPerformed
+        // TODO add your handling code here:
+        index++;
+        btn_truoc.setEnabled(true);
+        if (index > size_list) {
+            Hepler.DialogHelper.alert(this, "Danh Sách Đang Cuối");
+            index = size_list;
+            btn_sau.setEnabled(false);
+        } else {
+            setForm(getListXe(soghe, maloaixe), index);
+        }
+    }//GEN-LAST:event_btn_sauActionPerformed
+
+    private void btn_truocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_truocActionPerformed
+        // TODO add your handling code here:
+        index--;
+        btn_sau.setEnabled(true);
+        if (index < 0) {
+            Hepler.DialogHelper.alert(this, "Danh Sách Đang ở đầu");
+            index = 0;
+            btn_truoc.setEnabled(false);
+        } else {
+            setForm(getListXe(soghe, maloaixe), index);
+        }
+    }//GEN-LAST:event_btn_truocActionPerformed
+
+    private void btn_chondichvuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_chondichvuActionPerformed
+        // TODO add your handling code here:
+        String tendv = cbb_dichvu.getSelectedItem().toString();
+        getListDichVu(tendv);
+    }//GEN-LAST:event_btn_chondichvuActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
-    private javax.swing.JComboBox<String> jComboBox5;
-    private javax.swing.JComboBox<String> jComboBox6;
+    private javax.swing.JButton btn_chondichvu;
+    private javax.swing.JButton btn_cuoi;
+    private javax.swing.JButton btn_dau;
+    private javax.swing.JButton btn_kiemtra;
+    private javax.swing.JButton btn_sau;
+    private javax.swing.JButton btn_thue;
+    private javax.swing.JButton btn_timkiem;
+    private javax.swing.JButton btn_truoc;
+    private javax.swing.JComboBox<String> cbb_dichvu;
+    private javax.swing.JComboBox<String> cbb_hangxe;
+    private javax.swing.JComboBox<String> cbb_huyen;
+    private javax.swing.JComboBox<String> cbb_soghe;
+    private javax.swing.JComboBox<String> cbb_thanhpho;
+    private javax.swing.JComboBox<String> cbb_xa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -607,33 +751,30 @@ public class cardThueXe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel lbl_anhxe;
     private javax.swing.JLabel lbl_dichvu;
     private javax.swing.JLabel lbl_songaythue;
     private javax.swing.JLabel lbl_songaythue1;
     private javax.swing.JLabel lbl_timtheosoghe;
     private javax.swing.JLabel lbl_voucher;
+    private javax.swing.JTable tbl_tdv;
     private javax.swing.JPanel ttxe;
+    private javax.swing.JTextField txt_diachi;
+    private javax.swing.JTextField txt_giathue;
+    private javax.swing.JTextField txt_maxe;
+    private javax.swing.JTextField txt_ngaythue;
     private javax.swing.JTextField txt_songaythue;
+    private javax.swing.JTextField txt_tenxe;
+    private javax.swing.JTextArea txt_trangthai;
     private javax.swing.JTextField txt_voucher;
     // End of variables declaration//GEN-END:variables
 }
