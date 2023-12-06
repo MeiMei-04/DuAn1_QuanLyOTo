@@ -286,7 +286,6 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_sau = new javax.swing.JButton();
         btn_cuoi = new javax.swing.JButton();
         btn_timkiem = new javax.swing.JButton();
-        btn_kiemtraxe = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         lbl_voucher = new javax.swing.JLabel();
         lbl_dichvu = new javax.swing.JLabel();
@@ -426,13 +425,6 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
-        btn_kiemtraxe.setText("Kiểm Tra Xe");
-        btn_kiemtraxe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_kiemtraxeActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
         ttxeLayout.setHorizontalGroup(
@@ -464,8 +456,7 @@ public class cardThueXe extends javax.swing.JPanel {
                                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbl_timtheosoghe)
                                             .addComponent(jLabel1)
-                                            .addComponent(btn_timkiem)
-                                            .addComponent(btn_kiemtraxe))
+                                            .addComponent(btn_timkiem))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -481,13 +472,11 @@ public class cardThueXe extends javax.swing.JPanel {
         ttxeLayout.setVerticalGroup(
             ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btn_timkiem)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(35, 35, 35)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
-                        .addComponent(btn_kiemtraxe)
-                        .addGap(18, 18, 18)
+                    .addGroup(ttxeLayout.createSequentialGroup()
+                        .addComponent(btn_timkiem)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbb_hangxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -518,7 +507,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(btn_sau)
                     .addComponent(btn_truoc)
                     .addComponent(btn_dau))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN THUÊ XE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -703,7 +692,7 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -747,7 +736,7 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -845,10 +834,6 @@ public class cardThueXe extends javax.swing.JPanel {
         kiemtravoucher();
     }//GEN-LAST:event_btn_kiemtraActionPerformed
 
-    private void btn_kiemtraxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kiemtraxeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_kiemtraxeActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
@@ -856,7 +841,6 @@ public class cardThueXe extends javax.swing.JPanel {
     private javax.swing.JButton btn_cuoi;
     private javax.swing.JButton btn_dau;
     private javax.swing.JButton btn_kiemtra;
-    private javax.swing.JButton btn_kiemtraxe;
     private javax.swing.JButton btn_sau;
     private javax.swing.JButton btn_thue;
     private javax.swing.JButton btn_timkiem;
