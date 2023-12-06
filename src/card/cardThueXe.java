@@ -4,22 +4,21 @@
  */
 package card;
 
-import DAO.DanhGiaDAO;
 import DAO.DichVuDAO;
-import DAO.ThemDichVuDAO;
 import DAO.ChiTietXeDAO;
 import DAO.HangXeDAO;
+import DAO.HopDongDAO;
 import DAO.VoucherDAO;
+import static Hepler.DateHelper.addDays;
+import static Hepler.DateHelper.isValidDate;
 import Hepler.DialogHelper;
-import entyti.DanhGia;
 import entyti.DichVu;
-import entyti.ThemDichVu;
-import entyti.Voucher;
 import entyti.ChiTietXe;
 import entyti.HangXe;
-import form.TaoHopDongDialog;
-import java.awt.Component;
+import entyti.HopDong;
+import entyti.Voucher;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,17 +31,22 @@ import javax.swing.table.DefaultTableModel;
  */
 public class cardThueXe extends javax.swing.JPanel {
 
-    List<DichVu> list_dichvu = new ArrayList<>();
     HangXeDAO hxd = new HangXeDAO();
     DichVuDAO dvd = new DichVuDAO();
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
+    VoucherDAO vcd = new VoucherDAO();
+    HopDongDAO hdd = new HopDongDAO();
     List<ChiTietXe> list_xe = new ArrayList<>();
     List<ChiTietXe> listallxe = new ArrayList<>();
-    private Set<DichVu> set_dichvu = new HashSet<>();
-    int maloaixe = 1;
+    List<DichVu> list_dichvu = new ArrayList<>();
+    String voucher = null;
     String soghe = "4";
+    String diaChi = null;
     int index = 0;
+    int maloaixe = 1;
     int size_list = -1;
+    Date ngayThue = null;
+    int songaythue = 0;
 
     /**
      * Creates new form ThueXe
@@ -55,18 +59,88 @@ public class cardThueXe extends javax.swing.JPanel {
         setForm(getListXe(soghe, maloaixe), 0);
     }
 
-    public List<DichVu> loc_listdichvu(List<DichVu> list, String maxe) {
+    public void kiemtraxe() {
+        String maxe = txt_maxe.getText();
+        ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+        songaythue = Integer.parseInt(txt_songaythue.getText());
         boolean flag = false;
-        if (list_dichvu.isEmpty()) {
-            flag = true;
+        try {
+            List<HopDong> list = hdd.selectByID_MAXE(maxe);
+            for (HopDong hd : list) {
+                if (ngayThue.equals(hd.getNgaythue()) || (ngayThue.after(hd.getNgaythue()) && ngayThue.before(addDays(hd.getNgaythue(), hd.getThoihanhopdong())))) {
+                    // Ngày thuê đã tồn tại trong một hợp đồng
+                    flag = true;
+                    break;
+                }
+            }
+            if(flag){
+                DialogHelper.alert(this, "Ngày thuê đã tồn tại trong hợp đồng khác.");
+            }else{
+                DialogHelper.alert(this, "Xe Hiện Có Thể Thuê");
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
-        return list_dichvu;
     }
 
-    public void fill_table_dichvu(List<DichVu> list) {
+    public boolean vadidate() {
+        try {
+            int songaythue = Integer.parseInt(txt_songaythue.getText());
+        } catch (Exception e) {
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this, "Vui Lòng Nhập Định Dạng Số");
+            return false;
+        }
+        if (Integer.parseInt(txt_songaythue.getText()) < 1) {
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this, "Số NGày THuê Lớn Hơn 0");
+            return false;
+        }
+        if (txt_songaythue.getText().equals("")) {
+            txt_songaythue.requestFocus();
+            DialogHelper.alert(this, "Số Ngày Thuê Không Được Để Trống");
+            return false;
+        }
+        if (txt_ngaythue.getText().equals("")) {
+            txt_ngaythue.requestFocus();
+            DialogHelper.alert(this, "Ngày Thuê Không Được Để Trống");
+            return false;
+        }
+        if (!isValidDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
+            txt_ngaythue.requestFocus();
+            DialogHelper.alert(this, "Vui Lòng Nhập Đúng định dạng dd/MM/yyyy");
+            return false;
+        }
+        return true;
+    }
+
+    public void kiemtravoucher() {
+        String phantramgiamgia = null;
+        voucher = txt_voucher.getText();
+        try {
+            Voucher vc = vcd.selectByID_MAVOUCHER(voucher);
+            if (vc.getGiatri() == 1) {
+                phantramgiamgia = "Bạn Được Giảm 5% Tổng Giá Trị Hợp Đồng";
+            } else if (vc.getGiatri() == 2) {
+                phantramgiamgia = "Bạn Được Giảm 10% Tổng Giá Trị Hợp Đồng";
+            } else if (vc.getGiatri() == 3) {
+                phantramgiamgia = "Bạn Được Giảm 15% Tổng Giá Trị Hợp Đồng";
+            } else {
+                phantramgiamgia = null;
+            }
+            DialogHelper.alert(this, "Voucher Tồn Tại"
+                    + "\n" + phantramgiamgia);
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Voucher Không Tồn Tại");
+            voucher = null;
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void fill_table_dichvu() {
         DefaultTableModel model = (DefaultTableModel) tbl_tdv.getModel();
         model.setRowCount(0);
-        for (DichVu dv : list) {
+        for (DichVu dv : list_dichvu) {
             Object[] row = {
                 dv.getMadichvu(),
                 dv.getTendichvu(),
@@ -76,21 +150,24 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
-    public Set<DichVu> getListDichVu(String tendichvu) {
+    public void getListDichVu(String tendichvu) {
         try {
             DichVu dv = dvd.selectByID_TENDICHVU(tendichvu);
-
-            if (!set_dichvu.contains(dv)) {
-                set_dichvu.add(dv);
+            boolean flag = false;
+            for (DichVu dichVu : list_dichvu) {
+                if (dichVu.getTendichvu().equals(tendichvu)) {
+                    flag = true;
+                    break;
+                }
+            }
+            if (!flag) {
+                list_dichvu.add(dv);
             } else {
-                System.out.println("1");
                 DialogHelper.alert(this, "Dịch Vụ Đã Được Chọn");
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-
-        return set_dichvu;
     }
 
     public List<ChiTietXe> getListXe(String soghe, int maloaixe) {
@@ -198,7 +275,6 @@ public class cardThueXe extends javax.swing.JPanel {
         txt_trangthai = new javax.swing.JTextArea();
         anh = new javax.swing.JPanel();
         lbl_anhxe = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lbl_timtheosoghe = new javax.swing.JLabel();
         cbb_hangxe = new javax.swing.JComboBox<>();
@@ -252,12 +328,17 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("TÊN XE");
 
+        txt_maxe.setEnabled(false);
+
+        txt_tenxe.setEnabled(false);
+
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("TRẠNG THÁI XE");
 
         txt_trangthai.setColumns(20);
         txt_trangthai.setRows(5);
+        txt_trangthai.setEnabled(false);
         jScrollPane1.setViewportView(txt_trangthai);
 
         anh.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -279,10 +360,6 @@ public class cardThueXe extends javax.swing.JPanel {
             .addComponent(lbl_anhxe, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("TÌM KIẾM");
-
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("HÃNG");
@@ -302,6 +379,8 @@ public class cardThueXe extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("ĐƠN GIÁ");
+
+        txt_giathue.setEnabled(false);
 
         btn_dau.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_dau.setForeground(new java.awt.Color(255, 102, 51));
@@ -369,7 +448,7 @@ public class cardThueXe extends javax.swing.JPanel {
                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(ttxeLayout.createSequentialGroup()
                                 .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cbb_hangxe, 0, 169, Short.MAX_VALUE)
                                     .addComponent(cbb_soghe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,7 +456,6 @@ public class cardThueXe extends javax.swing.JPanel {
                                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbl_timtheosoghe)
                                             .addComponent(jLabel1)
-                                            .addComponent(jLabel4)
                                             .addComponent(btn_timkiem))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
@@ -394,21 +472,19 @@ public class cardThueXe extends javax.swing.JPanel {
         ttxeLayout.setVerticalGroup(
             ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
-                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(ttxeLayout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_timkiem)
-                        .addGap(4, 4, 4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbb_hangxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(lbl_timtheosoghe)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbb_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(21, 21, 21)))
+                        .addComponent(cbb_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_maxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -431,7 +507,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addComponent(btn_sau)
                     .addComponent(btn_truoc)
                     .addComponent(btn_dau))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "THÔNG TIN THUÊ XE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
@@ -502,10 +578,20 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_kiemtra.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_kiemtra.setForeground(new java.awt.Color(255, 102, 51));
         btn_kiemtra.setText("KIỂM TRA");
+        btn_kiemtra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_kiemtraActionPerformed(evt);
+            }
+        });
 
         btn_thue.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_thue.setForeground(new java.awt.Color(255, 102, 51));
         btn_thue.setText("THUÊ");
+        btn_thue.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_thueActionPerformed(evt);
+            }
+        });
 
         tbl_tdv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -606,7 +692,7 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -650,7 +736,7 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 625, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -660,7 +746,7 @@ public class cardThueXe extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(background, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -724,7 +810,29 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         String tendv = cbb_dichvu.getSelectedItem().toString();
         getListDichVu(tendv);
+        fill_table_dichvu();
     }//GEN-LAST:event_btn_chondichvuActionPerformed
+
+    private void btn_thueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thueActionPerformed
+        // TODO add your handling code here:
+        if (vadidate()) {
+            kiemtraxe();
+            String thanhpho = cbb_thanhpho.getSelectedItem().toString();
+            String huyen = cbb_huyen.getSelectedItem().toString();
+            String xa = cbb_xa.getSelectedItem().toString();
+            String dctt = txt_diachi.getText();
+            diaChi = thanhpho + " - " + huyen + " - " + xa + " - " + dctt;
+//            ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+//            songaythue = Integer.parseInt(txt_songaythue.getText());
+            DialogHelper.alert(this, diaChi);
+        }
+
+    }//GEN-LAST:event_btn_thueActionPerformed
+
+    private void btn_kiemtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_kiemtraActionPerformed
+        // TODO add your handling code here:
+        kiemtravoucher();
+    }//GEN-LAST:event_btn_kiemtraActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
@@ -750,7 +858,6 @@ public class cardThueXe extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;

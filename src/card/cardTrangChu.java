@@ -23,7 +23,6 @@ public class cardTrangChu extends javax.swing.JPanel {
 
     public void showLoader() {
         //URL url = getClass().getResource("/gif/dragon.gif");
-        Hepler.ImagesHelper.checkfile("src\\gif\\dragon.gif");
         Icon icon = new ImageIcon("src\\gif\\dragon.gif");
         lbl_gif.setIcon(icon);
     }
