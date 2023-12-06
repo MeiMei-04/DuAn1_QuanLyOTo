@@ -15,19 +15,19 @@ import java.sql.ResultSet;
  * @author Hieu
  */
 public class PhuPhiDAO {
-    String INSERT = "INSERT INTO PhuPhi ("
-            + "maphuphi,"
-            + "tenphuphi,"
-            + "giatri"
+    String INSERT = "INSERT INTO PhuPhi("
+            + "MaPhuPhi,"
+            + "TenPhuPhi,"
+            + "GiaTri)"
             + "values(?,?,?)";
     String UPDATE = "UPDATE PhuPhi SET "
-            + "Tenphuphi = ?,"
-            + "giatri = ?"
-            + "WHERE maphuphi =?";
+            + "TenPhuPhi = ?,"
+            + "GiaTri = ?"
+            + "WHERE MaPhuPhi =?";
     
-    String DELETE = "DELETE FROM PhuPhi WHERE maphuphi =?";
+    String DELETE = "DELETE FROM PhuPhi WHERE MaPhuPhi =?";
     String SELECT_ALL = "SELECT * FROM PhuPhi";
-    String SELECT_BY_ID_MAPHUPHI = "select * from PhuPhi where maphuphi =?";
+    String SELECT_BY_ID_MAPHUPHI = "select * from PhuPhi where MaPhuPhi =?";
     
     public void insert(PhuPhi entity) {
         JDBCHelper.executeUpdate(INSERT,

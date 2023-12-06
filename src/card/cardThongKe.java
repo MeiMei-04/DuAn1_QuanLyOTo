@@ -34,20 +34,20 @@ public class cardThongKe extends javax.swing.JPanel {
      */
     public cardThongKe() {
         initComponents();
-        filltableHopDong();
+//        filltableHopDong();
 
         fillComboboxnam();
     }
     ThongKeDAO tkdao = new ThongKeDAO();
 
-    void filltableHopDong() {
-        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
-        model.setRowCount(0);
-        List<Object[]> list = tkdao.getSoHopDong();
-        for (Object[] row : list) {
-            model.addRow(row);
-        }
-    }
+//    void filltableHopDong() {
+//        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
+//        model.setRowCount(0);
+//        List<Object[]> list = tkdao.getSoHopDong();
+//        for (Object[] row : list) {
+//            model.addRow(row);
+//        }
+//    }
 
     void fillComboboxthang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
@@ -103,14 +103,14 @@ public class cardThongKe extends javax.swing.JPanel {
                 Row rowCol = sheet.createRow(4);
                 for (int i = 0; i < tblDoanhThu.getColumnCount(); i++) {
 
-                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
+                    Cell cell = rowCol.createCell( i);// lui sang phải
                     cell.setCellValue(tblDoanhThu.getColumnName(i));
                 }
 
                 for (int j = 0; j < tblDoanhThu.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 5);// sang phải
+                    Row row = sheet.createRow(j +5);// lui xuong
                     for (int k = 0; k < tblDoanhThu.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k + 4);// lùi xuống
+                        Cell cell = row.createCell(k);// sang phải
                         if (tblDoanhThu.getValueAt(j, k) != null) {
                             cell.setCellValue(tblDoanhThu.getValueAt(j, k).toString());
                         }

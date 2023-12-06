@@ -38,11 +38,6 @@ public class ThongKeDAO {
 
     public static ResultSet rs = null;
 
-    public List<Object[]> getSoHopDong() {
-        String sql = "{CALL sp_ThongKeHoaDon}";
-        String[] cols = {"Thang", "SoLuong", "DauTien", "CuoiCung"};
-        return this.getListOfArray(sql, cols);
-    }
 
     public List<Object[]> getDoanhThu(int thang,int nam) {
         String sql = "{CALL sp_DoanhThu(?,?)}";
