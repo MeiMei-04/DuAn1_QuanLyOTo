@@ -355,6 +355,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_thue = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         tbl_tdv = new javax.swing.JTable();
+        btn_XoaDichVu = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 102, 51));
 
@@ -659,6 +660,15 @@ public class cardThueXe extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tbl_tdv);
 
+        btn_XoaDichVu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_XoaDichVu.setForeground(new java.awt.Color(255, 102, 51));
+        btn_XoaDichVu.setText("XÓA DỊCH VỤ");
+        btn_XoaDichVu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_XoaDichVuActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -671,13 +681,16 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                    .addComponent(lbl_dichvu)
-                                    .addGap(283, 283, 283))
-                                .addGroup(jPanel4Layout.createSequentialGroup()
-                                    .addComponent(cbb_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(cbb_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                                        .addComponent(lbl_dichvu)
+                                        .addGap(150, 150, 150)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btn_XoaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(btn_chondichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
@@ -707,7 +720,7 @@ public class cardThueXe extends javax.swing.JPanel {
                                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(lbl_songaythue)
                                         .addComponent(txt_songaythue)))))
-                        .addContainerGap(71, Short.MAX_VALUE))
+                        .addContainerGap(66, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -745,14 +758,16 @@ public class cardThueXe extends javax.swing.JPanel {
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbb_thanhpho, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txt_diachi, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(lbl_dichvu)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbl_dichvu)
+                    .addComponent(btn_XoaDichVu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbb_dichvu, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -885,9 +900,21 @@ public class cardThueXe extends javax.swing.JPanel {
         openDanhGia();
     }//GEN-LAST:event_btn_danhgiaActionPerformed
 
+    private void btn_XoaDichVuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_XoaDichVuActionPerformed
+        // TODO add your handling code here:
+        try {
+            int row = tbl_tdv.getSelectedRow();
+        list_dichvu.remove(row);
+        fill_table_dichvu();
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Vui Lòng Chọn DỊch Vụ Ạ");
+        }
+    }//GEN-LAST:event_btn_XoaDichVuActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
+    private javax.swing.JButton btn_XoaDichVu;
     private javax.swing.JButton btn_chondichvu;
     private javax.swing.JButton btn_cuoi;
     private javax.swing.JButton btn_danhgia;
