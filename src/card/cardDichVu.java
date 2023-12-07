@@ -374,7 +374,7 @@ public class cardDichVu extends javax.swing.JPanel {
                 DialogHelper.alert(this, "Cập nhật thành công");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Cập nhật thất bại");
-                e.printStackTrace();
+                System.out.println(e.getMessage());
             }
 
         }

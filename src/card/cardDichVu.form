@@ -839,8 +839,11 @@
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
                                           <Component id="them2" min="-2" pref="75" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="sua2" min="-2" pref="75" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="xoa2" min="-2" pref="75" max="-2" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                                           <Component id="moi2" min="-2" pref="75" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>

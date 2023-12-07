@@ -22,7 +22,7 @@ public class PhuPhiDAO {
             + "values(?,?,?)";
     String UPDATE = "UPDATE PhuPhi SET "
             + "TenPhuPhi = ?,"
-            + "GiaTri = ?"
+            + "GiaTri = ? "
             + "WHERE MaPhuPhi =?";
     
     String DELETE = "DELETE FROM PhuPhi WHERE MaPhuPhi =?";
