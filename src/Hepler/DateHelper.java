@@ -69,6 +69,7 @@ public class DateHelper {
             throw new RuntimeException(e);
         }
     }
+    // kiểm tra định dạng ngày
     public static boolean isValidDate(String input, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         sdf.setLenient(false);
@@ -76,6 +77,23 @@ public class DateHelper {
         try {
             sdf.parse(input);
             return true;
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+    // kiểm tra xem ngày nhập có hơn ngày hiện tại không
+    public static boolean isFutureDate(String input, String format) {
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        sdf.setLenient(false);
+
+        try {
+            Date inputDate = sdf.parse(input);
+            
+            // Lấy ngày hiện tại
+            Date currentDate = new Date();
+            
+            // So sánh ngày nhập liệu với ngày hiện tại, bao gồm trường hợp bằng nhau
+            return !inputDate.before(currentDate);
         } catch (ParseException e) {
             return false;
         }

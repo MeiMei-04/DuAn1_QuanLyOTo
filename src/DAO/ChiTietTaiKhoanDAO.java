@@ -42,6 +42,7 @@ public class ChiTietTaiKhoanDAO {
     String DELETE_CHITIETTAIKHOAN_WHERE_USERID = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_USERID = "select * from ChiTietTaiKhoan where userid =?";
+    String SELECT_BY_ID_HOTEN= "select * from ChiTietTaiKhoan where HOTEN =?";
     String SELECT_BY_ID_YEUCAUXACTHUC = "select * from ChiTietTaiKhoan"
             + " INNER JOIN TaiKhoan "
             + "ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID "
@@ -97,7 +98,18 @@ public class ChiTietTaiKhoanDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+    public ChiTietTaiKhoan selectByID_DOITUONG_HOTEN(String HOTEN) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_HOTEN, HOTEN);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
 
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
+    }
     public List<ChiTietTaiKhoan> selectByID_DANHSACH(String yeucauxacthuc) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC, yeucauxacthuc);

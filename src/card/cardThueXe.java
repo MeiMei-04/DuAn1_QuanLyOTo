@@ -59,6 +59,33 @@ public class cardThueXe extends javax.swing.JPanel {
         fillcbb_soghe();
         setForm(getListXe(soghe, maloaixe), 0);
     }
+    public void getDiaChi(){
+        String thanhpho = null;
+        String huyen = null;
+        String xa = null;
+        String diachichitiet = null;
+        if(cbb_thanhpho.getSelectedIndex()==0){
+            thanhpho = null;
+        }else{
+            thanhpho = cbb_thanhpho.getSelectedItem().toString() + " ";
+        }
+        if(cbb_huyen.getSelectedIndex()==0){
+            huyen = null;
+        }else{
+            huyen = cbb_huyen.getSelectedItem().toString() + " ";
+        }
+        if(cbb_xa.getSelectedIndex()==0){
+            xa = null;
+        }else{
+            xa = cbb_xa.getSelectedItem().toString() + " ";
+        }
+        if(txt_diachi.getText()==null){
+            diachichitiet = null;
+        }else{
+            diachichitiet = txt_diachi.getText();
+        }
+        diaChi = thanhpho + huyen + xa + diachichitiet;
+    }
     public void openDanhGia(){
         try {
             DanhGiaDialog dgdialog = new DanhGiaDialog(null, true);
@@ -66,7 +93,7 @@ public class cardThueXe extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
-    public void kiemtraxe() {
+    public boolean kiemtraxe() {
         String maxe = txt_maxe.getText();
         ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
         songaythue = Integer.parseInt(txt_songaythue.getText());
@@ -82,12 +109,12 @@ public class cardThueXe extends javax.swing.JPanel {
             }
             if(flag){
                 DialogHelper.alert(this, "Ngày thuê đã tồn tại trong hợp đồng khác.");
-            }else{
-                DialogHelper.alert(this, "Xe Hiện Có Thể Thuê");
+                return false;
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+        return true;
     }
 
     public boolean vadidate() {
@@ -116,6 +143,14 @@ public class cardThueXe extends javax.swing.JPanel {
         if (!isValidDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
             txt_ngaythue.requestFocus();
             DialogHelper.alert(this, "Vui Lòng Nhập Đúng định dạng dd/MM/yyyy");
+            return false;
+        }
+        if (!Hepler.DateHelper.isFutureDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
+            txt_ngaythue.requestFocus();
+            DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Hoặc Bằng Ngày Hiện Tại");
+            return false;
+        }
+        if(!kiemtraxe()){
             return false;
         }
         return true;
@@ -834,14 +869,7 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_thueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thueActionPerformed
         // TODO add your handling code here:
         if (vadidate()) {
-            kiemtraxe();
-            String thanhpho = cbb_thanhpho.getSelectedItem().toString();
-            String huyen = cbb_huyen.getSelectedItem().toString();
-            String xa = cbb_xa.getSelectedItem().toString();
-            String dctt = txt_diachi.getText();
-            diaChi = thanhpho + " - " + huyen + " - " + xa + " - " + dctt;
-//            ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
-//            songaythue = Integer.parseInt(txt_songaythue.getText());
+            getDiaChi();
             DialogHelper.alert(this, diaChi);
         }
 

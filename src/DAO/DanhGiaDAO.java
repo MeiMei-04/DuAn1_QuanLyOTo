@@ -74,20 +74,21 @@ public class DanhGiaDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list;
     }
+    
+    
+    public DanhGia selectByID_userid_doituong(String userid) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<DanhGia> list = selectBySQL(SELECT_BY_ID_USERID, userid);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
 
-//    public DanhGia selectByID_userid(String userid) {
-//        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-//        List<DanhGia> list = selectBySQL(SELECT_BY_ID_MAXE, userid);
-//        // Kiểm tra xem danh sách có trống không
-//        if (list.isEmpty()) {
-//            // Nếu danh sách trống, trả về null
-//            return null;
-//        }
-//
-//        // Nếu không, trả về phần tử đầu tiên trong danh sách
-//        return list.get(0);
-//    }
-
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
+    }
+    
     protected List<DanhGia> selectBySQL(String sql, Object... args) {
         List<DanhGia> list = new ArrayList<>();
         try {

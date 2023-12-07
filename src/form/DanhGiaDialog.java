@@ -38,9 +38,13 @@ public class DanhGiaDialog extends java.awt.Dialog {
         setLocationRelativeTo(null);
         setTitle("Đánh Giá");
         fillcbb_sanpham();
-        setForm();
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        String userid = String.valueOf(tk.getUserid());
+        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(userid);
+        txt_hoten.setText(cttk.getHoten());
     }
-    public DanhGia getForm(){
+
+    public DanhGia getForm() {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         String tenxe = cbb_sanPham.getSelectedItem().toString();
         ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
@@ -53,7 +57,8 @@ public class DanhGiaDialog extends java.awt.Dialog {
         dg.setSosaodanhgia(sosao_danhgia);
         return dg;
     }
-    public void themDanhGia(){
+
+    public void themDanhGia() {
         DanhGia dg = getForm();
         try {
             dgd.insert(dg);
@@ -64,6 +69,7 @@ public class DanhGiaDialog extends java.awt.Dialog {
             System.out.println(e.getMessage());
         }
     }
+
     public List<DanhGia> getListDanhGia() {
         try {
             all_danhgia = dgd.selectAll();
@@ -82,13 +88,6 @@ public class DanhGiaDialog extends java.awt.Dialog {
             System.out.println(e.getMessage());
         }
     }
-
-    public void setForm() {
-        TaiKhoan tk = Hepler.AuthHelper.user;
-        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
-        txt_hoten.setText(cttk.getHoten());
-    }
-
     public void fillcbb_sanpham() {
         try {
             DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanPham.getModel();
@@ -167,6 +166,11 @@ public class DanhGiaDialog extends java.awt.Dialog {
                 "Họ Tên", "Sản Phẩm", "Nội Dung", "Ngày Đánh Giá", "SỐ Sao Đánh Giá"
             }
         ));
+        tbl_danhgia.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_danhgiaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_danhgia);
 
         btn_them.setText("Thêm");
@@ -284,10 +288,23 @@ public class DanhGiaDialog extends java.awt.Dialog {
         themDanhGia();
     }//GEN-LAST:event_btn_themActionPerformed
 
+    private void tbl_danhgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhgiaMouseClicked
+        // TODO add your handling code here:
+        int row = -1;
+        row = tbl_danhgia.getSelectedRow();
+        String hoten = (String) tbl_danhgia.getValueAt(row, 0);
+        try {
+            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
+            DanhGia dg = dgd.selectByID_userid_doituong(String.valueOf(cttk.getUserid()));
+            txt_noidung.setText(dg.getNoidung());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }//GEN-LAST:event_tbl_danhgiaMouseClicked
+
     /**
      * @param args the command line arguments
      */
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_sua;
