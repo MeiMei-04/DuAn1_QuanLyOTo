@@ -17,6 +17,7 @@ import entyti.ChiTietXe;
 import entyti.HangXe;
 import entyti.HopDong;
 import entyti.Voucher;
+import form.DanhGiaDialog;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -58,7 +59,13 @@ public class cardThueXe extends javax.swing.JPanel {
         fillcbb_soghe();
         setForm(getListXe(soghe, maloaixe), 0);
     }
-
+    public void openDanhGia(){
+        try {
+            DanhGiaDialog dgdialog = new DanhGiaDialog(null, true);
+            dgdialog.setVisible(true);
+        } catch (Exception e) {
+        }
+    }
     public void kiemtraxe() {
         String maxe = txt_maxe.getText();
         ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
@@ -286,6 +293,7 @@ public class cardThueXe extends javax.swing.JPanel {
         btn_sau = new javax.swing.JButton();
         btn_cuoi = new javax.swing.JButton();
         btn_timkiem = new javax.swing.JButton();
+        btn_danhgia = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         lbl_voucher = new javax.swing.JLabel();
         lbl_dichvu = new javax.swing.JLabel();
@@ -425,6 +433,13 @@ public class cardThueXe extends javax.swing.JPanel {
             }
         });
 
+        btn_danhgia.setText("Đánh Giá");
+        btn_danhgia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_danhgiaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
         ttxeLayout.setHorizontalGroup(
@@ -456,7 +471,8 @@ public class cardThueXe extends javax.swing.JPanel {
                                         .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lbl_timtheosoghe)
                                             .addComponent(jLabel1)
-                                            .addComponent(btn_timkiem))
+                                            .addComponent(btn_timkiem)
+                                            .addComponent(btn_danhgia))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -477,6 +493,8 @@ public class cardThueXe extends javax.swing.JPanel {
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(btn_timkiem)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_danhgia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbb_hangxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -834,11 +852,17 @@ public class cardThueXe extends javax.swing.JPanel {
         kiemtravoucher();
     }//GEN-LAST:event_btn_kiemtraActionPerformed
 
+    private void btn_danhgiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_danhgiaActionPerformed
+        // TODO add your handling code here:
+        openDanhGia();
+    }//GEN-LAST:event_btn_danhgiaActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
     private javax.swing.JButton btn_chondichvu;
     private javax.swing.JButton btn_cuoi;
+    private javax.swing.JButton btn_danhgia;
     private javax.swing.JButton btn_dau;
     private javax.swing.JButton btn_kiemtra;
     private javax.swing.JButton btn_sau;

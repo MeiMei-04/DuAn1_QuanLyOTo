@@ -114,6 +114,7 @@
                                                   <Component id="lbl_timtheosoghe" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                                                   <Component id="btn_timkiem" alignment="0" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="btn_danhgia" min="-2" max="-2" attributes="0"/>
                                               </Group>
                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           </Group>
@@ -144,6 +145,8 @@
                           <Group type="102" attributes="0">
                               <Component id="btn_timkiem" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btn_danhgia" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="cbb_hangxe" min="-2" pref="27" max="-2" attributes="0"/>
@@ -430,6 +433,14 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_timkiemActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="btn_danhgia">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x110;&#xe1;nh Gi&#xe1;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_danhgiaActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

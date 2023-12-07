@@ -21,7 +21,7 @@ public class DanhGiaDAO {
             + "maxe, "
             + "noidung, "
             + "ngaydanhgia, "
-            + "sosaodanhgia "
+            + "sosaodanhgia)"
             + "VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE danhgia SET"
             + "maxe=?,"
@@ -31,7 +31,8 @@ public class DanhGiaDAO {
             + "WHERE userid =?";
     String DELETE = "DELETE FROM danhgia WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM danhgia";
-    String SELECT_BY_ID_MAXE = "SELECT*FROM xe WHERE userid = ?";
+    String SELECT_BY_ID_MAXE = "SELECT*FROM DANHGIA WHERE userid = ?";
+    String SELECT_BY_ID_USERID = "SELECT*FROM DANHGIA WHERE USERID = ?";
 
     public void insert(DanhGia entity) {
         JDBCHelper.executeUpdate(INSERT,
@@ -61,9 +62,9 @@ public class DanhGiaDAO {
         return selectBySQL(SELECT_ALL);
     }
 
-    public DanhGia selectByID_userid(String userid) {
+    public List<DanhGia> selectByID_userid(String userid) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<DanhGia> list = selectBySQL(SELECT_BY_ID_MAXE, userid);
+        List<DanhGia> list = selectBySQL(SELECT_BY_ID_USERID, userid);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -71,8 +72,21 @@ public class DanhGiaDAO {
         }
 
         // Nếu không, trả về phần tử đầu tiên trong danh sách
-        return list.get(0);
+        return list;
     }
+
+//    public DanhGia selectByID_userid(String userid) {
+//        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+//        List<DanhGia> list = selectBySQL(SELECT_BY_ID_MAXE, userid);
+//        // Kiểm tra xem danh sách có trống không
+//        if (list.isEmpty()) {
+//            // Nếu danh sách trống, trả về null
+//            return null;
+//        }
+//
+//        // Nếu không, trả về phần tử đầu tiên trong danh sách
+//        return list.get(0);
+//    }
 
     protected List<DanhGia> selectBySQL(String sql, Object... args) {
         List<DanhGia> list = new ArrayList<>();
@@ -80,7 +94,7 @@ public class DanhGiaDAO {
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
                 DanhGia dg = new DanhGia();
-                dg.setUserid(rs.getString("UserID"));
+                dg.setUserid(rs.getInt("UserID"));
                 dg.setMaxe(rs.getString("MaXe"));
                 dg.setNoidung(rs.getString("NoiDung"));
                 dg.setNgaydanhgia(rs.getDate("NgayDanhGia"));

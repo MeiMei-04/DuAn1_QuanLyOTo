@@ -36,6 +36,7 @@ public class ChiTietXeDAO {
     String DELETE = "DELETE FROM ChiTietXe WHERE MaXe =?";
     String SELECT_ALL = "SELECT * FROM ChiTietXe";
     String SELECT_BY_ID_MAXE = "SELECT*FROM ChiTietXe WHERE MaXe = ?";
+    String SELECT_BY_ID_TENXE = "SELECT*FROM ChiTietXe WHERE TENXE = ?";
 
     public void insert(ChiTietXe entity) {
         JDBCHelper.executeUpdate(INSERT, 
@@ -80,7 +81,19 @@ public class ChiTietXeDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+    
+    public ChiTietXe selectByID_TENXE(String TENXE) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<ChiTietXe> list = selectBySQL(SELECT_BY_ID_TENXE, TENXE);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
 
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
+    }
     protected List<ChiTietXe> selectBySQL(String sql, Object... args) {
         List<ChiTietXe> list = new ArrayList<>();
         try {

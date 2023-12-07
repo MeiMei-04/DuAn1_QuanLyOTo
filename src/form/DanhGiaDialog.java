@@ -7,12 +7,14 @@ package form;
 import DAO.ChiTietTaiKhoanDAO;
 import DAO.ChiTietXeDAO;
 import DAO.DanhGiaDAO;
+import Hepler.DialogHelper;
 import entyti.ChiTietTaiKhoan;
 import entyti.ChiTietXe;
 import entyti.DanhGia;
 import entyti.TaiKhoan;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,39 +22,110 @@ import javax.swing.table.DefaultTableModel;
  * @author Hieu
  */
 public class DanhGiaDialog extends java.awt.Dialog {
+
     DanhGiaDAO dgd = new DanhGiaDAO();
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
+    List<DanhGia> all_danhgia = new ArrayList<>();
+
     /**
      * Creates new form DanhGiaDialog
      */
     public DanhGiaDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        filltable_danhgia();
+        filltable_danhgia(getListDanhGia());
+        setLocationRelativeTo(null);
+        setTitle("Đánh Giá");
+        fillcbb_sanpham();
+        setForm();
     }
-    public void filltable_danhgia(){
+    public DanhGia getForm(){
+        int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
+        String tenxe = cbb_sanPham.getSelectedItem().toString();
+        ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        DanhGia dg = new DanhGia();
+        dg.setUserid(tk.getUserid());
+        dg.setMaxe(ctx.getMaxe());
+        dg.setNoidung(txt_noidung.getText());
+        dg.setNgaydanhgia(Hepler.DateHelper.now());
+        dg.setSosaodanhgia(sosao_danhgia);
+        return dg;
+    }
+    public void themDanhGia(){
+        DanhGia dg = getForm();
+        try {
+            dgd.insert(dg);
+            DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
+            filltable_danhgia(getListDanhGia());
+        } catch (Exception e) {
+            DialogHelper.alert(this, "Thêm Đánh Giá Thất Bại");
+            System.out.println(e.getMessage());
+        }
+    }
+    public List<DanhGia> getListDanhGia() {
+        try {
+            all_danhgia = dgd.selectAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return all_danhgia;
+    }
+
+    public void timkiem() {
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            List<DanhGia> list_find_danhgia = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
+            filltable_danhgia(list_find_danhgia);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void setForm() {
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+        txt_hoten.setText(cttk.getHoten());
+    }
+
+    public void fillcbb_sanpham() {
+        try {
+            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanPham.getModel();
+            model.removeAllElements();
+            List<ChiTietXe> list = ctxd.selectAll();
+            for (ChiTietXe ctx : list) {
+                model.addElement(ctx.getTenxe());
+            }
+            cbb_sanPham.setSelectedIndex(0);
+        } catch (Exception e) {
+            Hepler.DialogHelper.alert(this, "Hiện Tại Bạn Chưa Có Đánh Giá Nào");
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void filltable_danhgia(List<DanhGia> list) {
         DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
         model.setRowCount(0);
-        try {   
-                List<DanhGia> list = dgd.selectAll();
-                for (DanhGia dg : list) {
-                    ChiTietTaiKhoan cttk  = cttkd.selectByID_DOITUONG(dg.getUserid());
-                    ChiTietXe ctx = ctxd.selectByID_MAXE(dg.getMaxe()); 
-                    Object[] row = {
-                        cttk.getHoten(),
-                        ctx.getTenxe(),
-                        dg.getNoidung(),
-                        dg.getSosaodanhgia(),
-                        dg.getNgaydanhgia()
-                    };
-                    model.addRow(row);
-                }
+        try {
+            for (DanhGia dg : list) {
+                ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(dg.getUserid()));
+                ChiTietXe ctx = ctxd.selectByID_MAXE(dg.getMaxe());
+                Object[] row = {
+                    cttk.getHoten(),
+                    ctx.getTenxe(),
+                    dg.getNoidung(),
+                    dg.getNgaydanhgia(),
+                    dg.getSosaodanhgia()
+                };
+                model.addRow(row);
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -97,12 +170,19 @@ public class DanhGiaDialog extends java.awt.Dialog {
         jScrollPane1.setViewportView(tbl_danhgia);
 
         btn_them.setText("Thêm");
+        btn_them.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_themActionPerformed(evt);
+            }
+        });
 
         btn_sua.setText("Sửa");
 
         btn_xoa.setText("Xoá");
 
         jLabel1.setText("Họ Tên");
+
+        txt_hoten.setEnabled(false);
 
         jLabel2.setText("Nội Dung");
 
@@ -117,6 +197,11 @@ public class DanhGiaDialog extends java.awt.Dialog {
         jLabel4.setText("Sản Phẩm");
 
         btn_timkiem.setText("Tìm Kiếm");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_timkiemActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,22 +274,19 @@ public class DanhGiaDialog extends java.awt.Dialog {
         dispose();
     }//GEN-LAST:event_closeDialog
 
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        timkiem();
+    }//GEN-LAST:event_btn_timkiemActionPerformed
+
+    private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
+        // TODO add your handling code here:
+        themDanhGia();
+    }//GEN-LAST:event_btn_themActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                DanhGiaDialog dialog = new DanhGiaDialog(new java.awt.Frame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
