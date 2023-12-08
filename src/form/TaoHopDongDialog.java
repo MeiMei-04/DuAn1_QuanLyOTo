@@ -45,6 +45,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     int tienthuexe = 0;
     int tiendichvu = 0;
     int tien_not_VAT = 0;
+    int giatriphuphi = 0;
+    int tongtien = 0;
+    int tongtienphaitra = 0;
 
     public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, List<DichVu> list, Date ngaythue, int songaythue, String diadiem, String maVoucher) {
         super(parent, modal);
@@ -57,12 +60,21 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         initComponents();
         setLocationRelativeTo(null);
         filltable_dichvu();
-        setForm();
         filltable_phuphi();
+        setForm();
+    }
+
+    public int tienphuphi() {
+        int giatri = 0;
+        for (PhuPhi phuphi : list_tpp) {
+            giatri += phuphi.getGiatri();
+        }
+        tienphuphi = (tien_not_VAT * giatri) / 100;
+        return tienphuphi;
     }
 
     public int tiendichvu() {
-        for(DichVu dv : list_dv) {
+        for (DichVu dv : list_dv) {
             tiendichvu = tiendichvu + dv.getDongia();
         }
         return tiendichvu;
@@ -80,16 +92,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         return tienthuexe;
     }
 
-    public int tienphuphi(int tiennotvat) {
-        int giatri = 0;
-        for (PhuPhi pp : list_tpp) {
-            giatri = giatri + pp.getGiatri();
-        }
-        tienphuphi = (tiennotvat * giatri) / 100;
-        return tienphuphi;
-    }
-
-    private void filltable_phuphi() {
+    public void filltable_phuphi() {
         try {
             List<PhuPhi> list = ppd.selectAll();
             for (PhuPhi pp : list) {
@@ -97,8 +100,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                     if (pp.getMaphuphi().equalsIgnoreCase("VAT")) {
                         list_tpp.add(pp);
                     }
-                }else{
-                    if (pp.getMaphuphi().equalsIgnoreCase("VAT")||pp.getMaphuphi().equalsIgnoreCase("Phi_Ship")) {
+                } else {
+                    if (pp.getMaphuphi().equalsIgnoreCase("VAT") || pp.getMaphuphi().equalsIgnoreCase("Phi_Ship")) {
                         list_tpp.add(pp);
                     }
                 }
@@ -110,7 +113,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         DefaultTableModel model = (DefaultTableModel) tbl_phuphi.getModel();
         model.setRowCount(0);
         for (PhuPhi pp : list_tpp) {
-            String giatri = String.valueOf(pp.getGiatri()) + " %";
+            giatriphuphi += pp.getGiatri();
+            String giatri = String.valueOf(pp.getGiatri()) + "%";
             Object[] row = {
                 pp.getTenphuphi(),
                 giatri
@@ -119,7 +123,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         }
     }
 
-    private void filltable_dichvu() {
+    public void filltable_dichvu() {
         DefaultTableModel model = (DefaultTableModel) tbl_dichvu.getModel();
         model.setRowCount(0);
         for (DichVu dv : list_dv) {
@@ -133,7 +137,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public int tienvoucher(int tongtien) {
         int giamgia = -1;
-        txt_mavoucher.setText(mavoucher);
+        if(mavoucher == null){
+            tienvoucher = 0;
+       }
         try {
             Voucher voucher = vcd.selectByID_MAVOUCHER(mavoucher);
             giamgia = voucher.getGiatri();
@@ -152,33 +158,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         return tienvoucher;
     }
 
-//    public int giatrigiamgia() {
-//        try {
-//            Voucher vh = vcd.selectByID_MAVOUCHER(mavoucher);
-//            giatrivoucher = vh.getGiatri();
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        if (giatrivoucher == 1) {
-//            tienvoucher = (tongtien * 5) / 100;
-//        } else if (giatrivoucher == 2) {
-//            tienvoucher = (tongtien * 10) / 100;
-//        } else if (giatrivoucher == 3) {
-//            tienvoucher = (tongtien * 15) / 100;
-//        } else {
-//            tienvoucher = 0;
-//        }
-//        return tienvoucher;
-//    }
-//    public int tiendichvu() {
-//        for (ThemDichVu tdv : list_tdv) {
-//            DichVu dv = dvd.selectByID_TENDICHVU(tdv.getDichvu());
-//            tiendichvu = dv.getDongia() + tiendichvu;
-//            list_dv.add(dv);
-//        }
-//        filltable_dichvu();
-//        return tiendichvu;
-//    }
     public void setForm() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         String gioitinh = null;
@@ -211,8 +190,13 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             txt_tienthuexe.setText(Hepler.MoneyFormatter.formatMoney(tienthuexe()));
             txt_tiendichvu.setText(Hepler.MoneyFormatter.formatMoney(tiendichvu()));
             tien_not_VAT = tienthuexe() + tiendichvu();
-            System.out.println(tien_not_VAT);
-            txt_tienphuphi.setText(Hepler.MoneyFormatter.formatMoney(tienphuphi(tien_not_VAT)));
+            txt_tienphuphi.setText(Hepler.MoneyFormatter.formatMoney(tienphuphi()));
+            tongtien = tien_not_VAT + tienphuphi();
+            txt_mavoucher.setText(mavoucher);
+            txt_tienvoucher.setText(Hepler.MoneyFormatter.formatMoney(tienvoucher(tongtien)));
+            tongtienphaitra = tongtien-tienvoucher(tongtien);
+            txt_tongtien.setText(Hepler.MoneyFormatter.formatMoney(tongtienphaitra));
+            txt_diadiemnhanxe.setText(diaDiem);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -845,45 +829,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         PAGE1Layout.setHorizontalGroup(
             PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(PAGE1Layout.createSequentialGroup()
-                .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(PAGE1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel31)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel28)
-                            .addGroup(PAGE1Layout.createSequentialGroup()
-                                .addComponent(jLabel32)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel33)))
-                    .addGroup(PAGE1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel29)))
-                .addGap(0, 102, Short.MAX_VALUE))
-            .addGroup(PAGE1Layout.createSequentialGroup()
                 .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(PAGE1Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel27))
-                    .addGroup(PAGE1Layout.createSequentialGroup()
-                        .addGap(47, 47, 47)
-                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel40)
-                            .addComponent(jLabel41)
-                            .addComponent(jLabel42)
-                            .addComponent(jLabel43)
-                            .addComponent(jLabel44)
-                            .addComponent(jLabel45))
-                        .addGap(18, 18, 18)
-                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txt_maxe, javax.swing.GroupLayout.DEFAULT_SIZE, 287, Short.MAX_VALUE)
-                            .addComponent(txt_tenxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_soghe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_giathue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_hangxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jScrollPane1)))
                     .addGroup(PAGE1Layout.createSequentialGroup()
                         .addGap(281, 281, 281)
                         .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -891,8 +837,48 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                             .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(PAGE1Layout.createSequentialGroup()
                         .addGap(196, 196, 196)
-                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(PAGE1Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel31)
+                                    .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel28)
+                                    .addGroup(PAGE1Layout.createSequentialGroup()
+                                        .addComponent(jLabel32)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(txt_ngaythue, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel33))
+                                .addGroup(PAGE1Layout.createSequentialGroup()
+                                    .addGap(10, 10, 10)
+                                    .addComponent(jLabel29)))
+                            .addGroup(PAGE1Layout.createSequentialGroup()
+                                .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(PAGE1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(jLabel27))
+                                    .addGroup(PAGE1Layout.createSequentialGroup()
+                                        .addGap(30, 30, 30)
+                                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel40)
+                                            .addComponent(jLabel41)
+                                            .addComponent(jLabel42)
+                                            .addComponent(jLabel43)
+                                            .addComponent(jLabel44)
+                                            .addComponent(jLabel45))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(txt_maxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_tenxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_soghe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_giathue, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(txt_hangxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         PAGE1Layout.setVerticalGroup(
             PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -900,10 +886,10 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel22)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel24)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel25)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel26)
@@ -945,7 +931,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
                 .addGroup(PAGE1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel45)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(61, 61, 61))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("TRANG 1", PAGE1);

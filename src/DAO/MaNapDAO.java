@@ -24,6 +24,9 @@ public class MaNapDAO{
             + "values(?,?,?,?)";
     String DELETE = "DELETE FROM MaNap WHERE MaNapTien =?";
     String SELECT_ALL = "SELECT * FROM MaNap";
+    String UPDATE = "UPDATE MAPNAP SET "
+            + "TRANGTHAI = 1 "
+            + "WHERE MANAPTIEN = ?";
     String SELECT_BY_ID_DOITUONG_MANAPTIEN = "SELECT*FROM MaNap WHERE MaNapTien = ?";
     
 
@@ -36,7 +39,9 @@ public class MaNapDAO{
         );
 
     }
-
+    public void update(String key){
+        JDBCHelper.executeUpdate(UPDATE, key);
+    }
     public void delete(String key) {
         JDBCHelper.executeUpdate(DELETE, key);
     }

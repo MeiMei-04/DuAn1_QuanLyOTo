@@ -69,7 +69,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             cttk.setSodu(tongtien);
             cttkd.update_sodu(cttk);
             Hepler.DialogHelper.alert(this, "Nạp Thành Công");
-            ncd.delete(String.valueOf(result));
+            ncd.update(String.valueOf(result));
         } catch (Exception e) {
             Hepler.DialogHelper.alert(this, "Nạp Thất Bại");
             System.out.println(e.getMessage());
