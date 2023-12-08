@@ -179,10 +179,8 @@ public class cardDichVu extends javax.swing.JPanel {
             for (Voucher vh : list) {
                 Object[] row = {vh.getMavoucher(),
                     vh.getNoidung(),
-                    vh.getGiatri(),
-                    vh.isTrangthai()
-
-                };
+                    vh.getGiatri(), //                    vh.isTrangthai()
+            };
                 model.addRow(row);
             }
         } catch (Exception e) {
@@ -194,11 +192,11 @@ public class cardDichVu extends javax.swing.JPanel {
         txtMavoucher.setText(vh.getMavoucher());
         txtNoiDung.setText(vh.getNoidung());
         txtGiaTri.setText(String.valueOf(vh.getGiatri()));
-        if (!vh.isTrangthai()) {
-            rdoChuaDung.setSelected(true);
-        } else {
-            rdoDaDung.setSelected(true);
-        }
+//        if (!vh.isTrangthai()) {
+//            rdoChuaDung.setSelected(true);
+//        } else {
+//            rdoDaDung.setSelected(true);
+//        }
 
     }
 
@@ -214,7 +212,7 @@ public class cardDichVu extends javax.swing.JPanel {
         vh.setMavoucher(txtMavoucher.getText());
         vh.setNoidung(txtNoiDung.getText());
         vh.setGiatri(Integer.parseInt(txtGiaTri.getText()));
-        vh.setTrangthai(rdoChuaDung.isSelected());
+//        vh.setTrangthai(rdoChuaDung.isSelected());
         return vh;
     }
 
@@ -275,7 +273,7 @@ public class cardDichVu extends javax.swing.JPanel {
         }
         filltableVoucher();
     }
-    
+
     private boolean verify2() {
         if (txtMaPhuPhi.getText().equals("")) {
             DialogHelper.alert(this, "Mã phụ không được để trống");
@@ -320,7 +318,6 @@ public class cardDichVu extends javax.swing.JPanel {
         txtMaPhuPhi.setText(ph.getMaphuphi());
         txtTenPhuPhi.setText(ph.getTenphuphi());
         txtGiaTri1.setText(String.valueOf(ph.getGiatri()));
-
 
     }
 
@@ -436,10 +433,7 @@ public class cardDichVu extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtNoiDung = new javax.swing.JTextArea();
-        jLabel9 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        rdoChuaDung = new javax.swing.JRadioButton();
-        rdoDaDung = new javax.swing.JRadioButton();
         jPanel5 = new javax.swing.JPanel();
         them1 = new javax.swing.JButton();
         sua1 = new javax.swing.JButton();
@@ -447,6 +441,8 @@ public class cardDichVu extends javax.swing.JPanel {
         moi1 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         txtGiaTri = new javax.swing.JTextField();
+        txtcheck = new javax.swing.JTextField();
+        btncheck = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -463,6 +459,8 @@ public class cardDichVu extends javax.swing.JPanel {
         xoa2 = new javax.swing.JButton();
         moi2 = new javax.swing.JButton();
         them2 = new javax.swing.JButton();
+        txtcheck1 = new javax.swing.JTextField();
+        btncheck1 = new javax.swing.JButton();
 
         jTabbedPane1.setPreferredSize(new java.awt.Dimension(946, 692));
 
@@ -739,13 +737,13 @@ public class cardDichVu extends javax.swing.JPanel {
         tblVoucher.setBackground(new java.awt.Color(255, 102, 51));
         tblVoucher.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Mã Voucher", "Nội dung", "Giá trị", "Trạng thái"
+                "Mã Voucher", "Nội dung", "Giá trị"
             }
         ));
         tblVoucher.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -754,9 +752,6 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
         jScrollPane2.setViewportView(tblVoucher);
-        if (tblVoucher.getColumnModel().getColumnCount() > 0) {
-            tblVoucher.getColumnModel().getColumn(3).setHeaderValue("");
-        }
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -770,25 +765,9 @@ public class cardDichVu extends javax.swing.JPanel {
         txtNoiDung.setRows(5);
         jScrollPane3.setViewportView(txtNoiDung);
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Trang thái:");
-
         jPanel4.setBackground(new java.awt.Color(255, 102, 51));
         jPanel4.setForeground(new java.awt.Color(255, 255, 255));
         jPanel4.setLayout(new java.awt.GridLayout(1, 0));
-
-        Trangthai.add(rdoChuaDung);
-        rdoChuaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rdoChuaDung.setForeground(new java.awt.Color(255, 255, 255));
-        rdoChuaDung.setText("Chưa dùng");
-        jPanel4.add(rdoChuaDung);
-
-        Trangthai.add(rdoDaDung);
-        rdoDaDung.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        rdoDaDung.setForeground(new java.awt.Color(255, 255, 255));
-        rdoDaDung.setText("Đã dùng");
-        jPanel4.add(rdoDaDung);
 
         jPanel5.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -836,6 +815,13 @@ public class cardDichVu extends javax.swing.JPanel {
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Giá trị:");
 
+        btncheck.setText("Tìm kiếm");
+        btncheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -845,26 +831,32 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                            .addComponent(txtMavoucher)))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMavoucher, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jLabel10))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtGiaTri)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                        .addComponent(txtcheck, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(btncheck)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -876,24 +868,30 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtcheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btncheck))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMavoucher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(106, 106, 106)
+                                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(69, 69, 69))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(63, 63, 63)))
                         .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
+                        .addGap(57, 57, 57)
                         .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("VOUCHER", jPanel3);
@@ -936,7 +934,7 @@ public class cardDichVu extends javax.swing.JPanel {
 
         jPanel8.setBackground(new java.awt.Color(255, 102, 51));
         jPanel8.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel8.setLayout(new java.awt.GridLayout());
+        jPanel8.setLayout(new java.awt.GridLayout(1, 0));
 
         jLabel17.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -988,6 +986,13 @@ public class cardDichVu extends javax.swing.JPanel {
             }
         });
 
+        btncheck1.setText("Tìm kiếm");
+        btncheck1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheck1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
@@ -1005,18 +1010,15 @@ public class cardDichVu extends javax.swing.JPanel {
                                     .addContainerGap()
                                     .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addComponent(jLabel14)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(jLabel12))
-                                        .addGroup(jPanel7Layout.createSequentialGroup()
-                                            .addGap(12, 12, 12)
-                                            .addComponent(jLabel15))))
+                                        .addComponent(jLabel14)))
                                 .addGroup(jPanel7Layout.createSequentialGroup()
                                     .addGap(43, 43, 43)
                                     .addComponent(them2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
                                     .addComponent(sua2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
                                     .addComponent(xoa2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 0, 0)
                                     .addComponent(moi2, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGap(81, 81, 81))
                         .addGroup(jPanel7Layout.createSequentialGroup()
@@ -1027,7 +1029,14 @@ public class cardDichVu extends javax.swing.JPanel {
                                 .addComponent(txtGiaTri1, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txtMaPhuPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMaPhuPhi, javax.swing.GroupLayout.PREFERRED_SIZE, 406, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addComponent(txtcheck1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(btncheck1)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 485, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1040,11 +1049,15 @@ public class cardDichVu extends javax.swing.JPanel {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtcheck1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btncheck1))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel14)
+                        .addGap(12, 12, 12)
                         .addComponent(jLabel12)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14)
-                        .addGap(34, 34, 34)
                         .addComponent(txtMaPhuPhi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel15)
@@ -1091,7 +1104,7 @@ public class cardDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_xoa2ActionPerformed
 
     private void sua2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sua2ActionPerformed
-       updatePhuPhi();
+        updatePhuPhi();
     }//GEN-LAST:event_sua2ActionPerformed
 
     private void them2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_them2ActionPerformed
@@ -1103,7 +1116,7 @@ public class cardDichVu extends javax.swing.JPanel {
     }//GEN-LAST:event_jScrollPane5MousePressed
 
     private void tblPhuPhiMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhuPhiMousePressed
-       if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 2) {
             this.row = tblPhuPhi.getSelectedRow();
             this.editPhuPhi();
         }
@@ -1208,6 +1221,46 @@ public class cardDichVu extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtGiaTri1ActionPerformed
 
+    private void btncheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncheckActionPerformed
+        String noidungVC = "%" + txtcheck.getText() + "%";
+        DefaultTableModel model = (DefaultTableModel) tblVoucher.getModel();
+        model.setRowCount(0);
+        try {
+            List<Voucher> list = vdao.selectByID_NoiDung(noidungVC);
+
+            for (Voucher vc : list) {
+                Object[] row = {vc.getMavoucher(),
+                    vc.getNoidung(),
+                    vc.getGiatri(),
+                    vc.isTrangthai()
+
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btncheckActionPerformed
+
+    private void btncheck1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncheck1ActionPerformed
+        String Ten = "%" + txtcheck1.getText() + "%";
+        DefaultTableModel model = (DefaultTableModel) tblPhuPhi.getModel();
+        model.setRowCount(0);
+        try {
+            List<PhuPhi> list = pdao.selectByID_tenphuphi(Ten);
+            for (PhuPhi PP : list) {
+                Object[] row = {PP.getMaphuphi(),
+                    PP.getTenphuphi(),
+                    PP.getGiatri()
+
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btncheck1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btndau;
@@ -1217,6 +1270,8 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JButton btnThem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btn_timKiem;
+    private javax.swing.JButton btncheck;
+    private javax.swing.JButton btncheck1;
     private javax.swing.JButton btncuoi;
     private javax.swing.JButton btnlui;
     private javax.swing.JButton btnsau;
@@ -1235,7 +1290,6 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1251,8 +1305,6 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JButton moi1;
     private javax.swing.JButton moi2;
-    private javax.swing.JRadioButton rdoChuaDung;
-    private javax.swing.JRadioButton rdoDaDung;
     private javax.swing.JButton sua1;
     private javax.swing.JButton sua2;
     private javax.swing.JTable tblPhuPhi;
@@ -1270,6 +1322,8 @@ public class cardDichVu extends javax.swing.JPanel {
     private javax.swing.JTextField txtTenDichVu;
     private javax.swing.JTextField txtTenPhuPhi;
     private javax.swing.JTextField txt_NhapTenDichVU;
+    private javax.swing.JTextField txtcheck;
+    private javax.swing.JTextField txtcheck1;
     private javax.swing.JTextArea txtghichu;
     private javax.swing.JButton xoa1;
     private javax.swing.JButton xoa2;

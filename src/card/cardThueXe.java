@@ -614,7 +614,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         cbb_thanhpho.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbb_thanhpho.setForeground(new java.awt.Color(255, 102, 51));
-        cbb_thanhpho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hải Phòng" }));
+        cbb_thanhpho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "Hải Phòng" }));
 
         btn_chondichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_chondichvu.setForeground(new java.awt.Color(255, 102, 51));

@@ -28,7 +28,7 @@ public class PhuPhiDAO {
     String DELETE = "DELETE FROM PhuPhi WHERE MaPhuPhi =?";
     String SELECT_ALL = "SELECT * FROM PhuPhi";
     String SELECT_BY_ID_MAPHUPHI = "select * from PhuPhi where MaPhuPhi =?";
-    
+    String SELECT_BY_ID_tenphuphi = "select * from PhuPhi where TenPhuPhi like ? ";
     public void insert(PhuPhi entity) {
         JDBCHelper.executeUpdate(INSERT,
                 entity.getMaphuphi(),
@@ -64,6 +64,19 @@ public class PhuPhiDAO {
 
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
+    }
+    
+     public List<PhuPhi> selectByID_tenphuphi(String tenphuphi) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<PhuPhi> list = selectBySQL(SELECT_BY_ID_tenphuphi, tenphuphi);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
     }
 
 

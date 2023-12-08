@@ -22,7 +22,7 @@ import javax.swing.table.DefaultTableModel;
  * @author 04dkh
  */
 public class cardXeThue extends javax.swing.JPanel {
-    
+
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
     HangXeDAO hxd = new HangXeDAO();
     List<ChiTietXe> list_soghe = new ArrayList<>();
@@ -39,7 +39,8 @@ public class cardXeThue extends javax.swing.JPanel {
         fillcbb_soghe();
         filltable_danhsachxe();
     }
-    public void setFom(ChiTietXe ctx){
+
+    public void setFom(ChiTietXe ctx) {
         String tenxe = null;
         try {
             HangXe hx = hxd.selectByID_MAHANGXE(ctx.getMahangxe());
@@ -56,7 +57,8 @@ public class cardXeThue extends javax.swing.JPanel {
         txt_tenxe.setText(ctx.getTenxe());
         selectedFileName_xe = ctx.getAnhxe();
     }
-    public void xoaxe(){
+
+    public void xoaxe() {
         String maxe = txt_maxe.getText();
         try {
             ctxd.delete(maxe);
@@ -67,7 +69,8 @@ public class cardXeThue extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public void suaxe(){
+
+    public void suaxe() {
         ChiTietXe ctx = getform();
         try {
             ctxd.update(ctx);
@@ -78,7 +81,8 @@ public class cardXeThue extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public void themxe(){
+
+    public void themxe() {
         ChiTietXe ctx = getform();
         try {
             ctxd.insert(ctx);
@@ -89,7 +93,8 @@ public class cardXeThue extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public ChiTietXe getform(){
+
+    public ChiTietXe getform() {
         int mahangxe = 0;
         try {
             HangXe hx = hxd.selectByID_TENHANGXE(cbb_hangxe.getSelectedItem().toString());
@@ -107,7 +112,8 @@ public class cardXeThue extends javax.swing.JPanel {
         ctx.setAnhxe(selectedFileName_xe);
         return ctx;
     }
-    public void xoa_form(){
+
+    public void xoa_form() {
         selectedFileName_xe = null;
         setimg(selectedFileName_xe);
         cbb_soghe.setSelectedIndex(0);
@@ -116,7 +122,7 @@ public class cardXeThue extends javax.swing.JPanel {
         txt_tenxe.setText("");
         txt_giathue.setText("");
         txt_trangthai.setText("");
-        
+
     }
 
     public void setimg(String anhxe) {
@@ -126,20 +132,20 @@ public class cardXeThue extends javax.swing.JPanel {
     public void filltable_danhsachxe() {
         DefaultTableModel model = (DefaultTableModel) tbl_danhsachxe.getModel();
         model.setRowCount(0);
-        try {   
-                List<ChiTietXe> list = ctxd.selectAll();
-                for (ChiTietXe ctx : list) {
-                    Object[] row = {
-                        ctx.getMaxe(),
-                        ctx.getTenxe(),
-                        ctx.getSoghe(),
-                        ctx.getGiathue(),
-                        ctx.getAnhxe(),
-                        ctx.tenhangxe(ctx.getMahangxe()),
-                        ctx.getTrangthaixe()
-                    };
-                    model.addRow(row);
-                }
+        try {
+            List<ChiTietXe> list = ctxd.selectAll();
+            for (ChiTietXe ctx : list) {
+                Object[] row = {
+                    ctx.getMaxe(),
+                    ctx.getTenxe(),
+                    ctx.getSoghe(),
+                    ctx.getGiathue(),
+                    ctx.getAnhxe(),
+                    ctx.tenhangxe(ctx.getMahangxe()),
+                    ctx.getTrangthaixe()
+                };
+                model.addRow(row);
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -212,6 +218,8 @@ public class cardXeThue extends javax.swing.JPanel {
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
         btn_chonanh = new javax.swing.JButton();
+        btnTim = new javax.swing.JButton();
+        txtTim = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_danhsachxe = new javax.swing.JTable();
@@ -322,6 +330,13 @@ public class cardXeThue extends javax.swing.JPanel {
             }
         });
 
+        btnTim.setText("Tìm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
         ttxeLayout.setHorizontalGroup(
@@ -329,8 +344,18 @@ public class cardXeThue extends javax.swing.JPanel {
             .addGroup(ttxeLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(ttxeLayout.createSequentialGroup()
+                    .addGroup(ttxeLayout.createSequentialGroup()
+                        .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(btn_chonanh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
+                            .addComponent(btnTim)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtTim))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
                             .addComponent(jButton4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton5)
@@ -338,7 +363,7 @@ public class cardXeThue extends javax.swing.JPanel {
                             .addComponent(jButton6)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jButton7))
-                        .addGroup(ttxeLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
                             .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(lbl_timtheosoghe)
                                 .addComponent(cbb_soghe, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -346,7 +371,7 @@ public class cardXeThue extends javax.swing.JPanel {
                             .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(cbb_hangxe, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGroup(ttxeLayout.createSequentialGroup()
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
                             .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel8)
@@ -357,13 +382,7 @@ public class cardXeThue extends javax.swing.JPanel {
                                 .addComponent(txt_maxe, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txt_tenxe, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txt_giathue, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(ttxeLayout.createSequentialGroup()
-                        .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(btn_chonanh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         ttxeLayout.setVerticalGroup(
@@ -374,10 +393,9 @@ public class cardXeThue extends javax.swing.JPanel {
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(btn_chonanh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(183, 183, 183))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ttxeLayout.createSequentialGroup()
-                        .addComponent(anh, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(52, 52, 52)))
+                        .addGap(137, 137, 137))
+                    .addComponent(anh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(lbl_timtheosoghe)
@@ -388,7 +406,11 @@ public class cardXeThue extends javax.swing.JPanel {
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(32, 32, 32)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnTim)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_maxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -501,7 +523,7 @@ public class cardXeThue extends javax.swing.JPanel {
                     .addComponent(btn_moi)
                     .addComponent(btn_sua)
                     .addComponent(btn_xoa))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(70, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout backgroundLayout = new javax.swing.GroupLayout(background);
@@ -518,14 +540,10 @@ public class cardXeThue extends javax.swing.JPanel {
         backgroundLayout.setVerticalGroup(
             backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(backgroundLayout.createSequentialGroup()
-                .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(backgroundLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)))
+                .addGap(15, 15, 15)
+                .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 606, Short.MAX_VALUE)
                 .addContainerGap())
+            .addComponent(ttxe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -598,10 +616,34 @@ public class cardXeThue extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_tbl_danhsachxeMouseClicked
 
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+        String tenXe = "%" + txtTim.getText() + "%";
+        DefaultTableModel model = (DefaultTableModel) tbl_danhsachxe.getModel();
+        model.setRowCount(0);
+        try {
+            List<ChiTietXe> list = ctxd.selectByID_TENXETim(tenXe);
+            for (ChiTietXe ctx : list) {
+                Object[] row = {
+                    ctx.getMaxe(),
+                    ctx.getTenxe(),
+                    ctx.getSoghe(),
+                    ctx.getGiathue(),
+                    ctx.getAnhxe(),
+                    ctx.tenhangxe(ctx.getMahangxe()),
+                    ctx.getTrangthaixe()
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
+    private javax.swing.JButton btnTim;
     private javax.swing.JButton btn_chonanh;
     private javax.swing.JButton btn_moi;
     private javax.swing.JButton btn_sua;
@@ -626,6 +668,7 @@ public class cardXeThue extends javax.swing.JPanel {
     private javax.swing.JLabel lbl_timtheosoghe;
     private javax.swing.JTable tbl_danhsachxe;
     private javax.swing.JPanel ttxe;
+    private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txt_giathue;
     private javax.swing.JTextField txt_maxe;
     private javax.swing.JTextField txt_tenxe;

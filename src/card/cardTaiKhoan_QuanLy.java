@@ -260,6 +260,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         lbl_taikhoan = new javax.swing.JLabel();
         txt_taikhoan = new javax.swing.JTextField();
         btn_gui = new javax.swing.JButton();
+        txtcheck = new javax.swing.JTextField();
+        btncheck = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 102, 51));
         setPreferredSize(new java.awt.Dimension(985, 660));
@@ -561,23 +563,35 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
+        btncheck.setText("Tìm kiếm");
+        btncheck.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btncheckActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_TheNapLayout = new javax.swing.GroupLayout(pnl_TheNap);
         pnl_TheNap.setLayout(pnl_TheNapLayout);
         pnl_TheNapLayout.setHorizontalGroup(
             pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_TheNapLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbl_manaptien)
-                    .addComponent(txtMaNap)
-                    .addComponent(jLabel4)
-                    .addComponent(jScrollPane3)
-                    .addComponent(lbl_giatri)
-                    .addComponent(txtGiaTri)
-                    .addComponent(btn_sendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lbl_manaptien)
+                        .addComponent(txtMaNap)
+                        .addComponent(jLabel4)
+                        .addComponent(jScrollPane3)
+                        .addComponent(lbl_giatri)
+                        .addComponent(txtGiaTri)
+                        .addComponent(btn_sendmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(pnl_chucnang, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnl_TheNapLayout.createSequentialGroup()
+                        .addComponent(txtcheck, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btncheck)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(pnl_TheNapLayout.createSequentialGroup()
                 .addGap(317, 317, 317)
@@ -593,11 +607,15 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
                     .addGroup(pnl_TheNapLayout.createSequentialGroup()
-                        .addGap(39, 39, 39)
+                        .addGap(31, 31, 31)
+                        .addGroup(pnl_TheNapLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtcheck, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btncheck))
+                        .addGap(59, 59, 59)
                         .addComponent(lbl_manaptien)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtMaNap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -605,7 +623,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                         .addComponent(lbl_giatri)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtGiaTri, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
+                        .addGap(18, 18, 18)
                         .addComponent(pnl_chucnang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_sendmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -691,6 +709,25 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btn_guiActionPerformed
 
+    private void btncheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncheckActionPerformed
+         String NoiDUng = "%" + txtcheck.getText() + "%";
+        DefaultTableModel model = (DefaultTableModel) tblmanap.getModel();
+        model.setRowCount(0);
+        try {
+            List<MaNap> list = ndao.selectByNoiDung(NoiDUng);
+            for (MaNap Mn : list) {
+                Object[] row = {Mn.getManap(),
+                    Mn.getNoidung(),
+                    Mn.getGiatri(),
+                   
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btncheckActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TxtNoiDung;
@@ -701,6 +738,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JButton btn_guiemail;
     private javax.swing.JPanel btn_sendmail;
     private javax.swing.JButton btn_xacthuc;
+    private javax.swing.JButton btncheck;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -732,5 +770,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.JTextField txt_hoten;
     private javax.swing.JTextField txt_sodienthoai;
     private javax.swing.JTextField txt_taikhoan;
+    private javax.swing.JTextField txtcheck;
     // End of variables declaration//GEN-END:variables
 }
