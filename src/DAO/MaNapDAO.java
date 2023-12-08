@@ -24,7 +24,7 @@ public class MaNapDAO {
             + "values(?,?,?,?)";
     String DELETE = "DELETE FROM MaNap WHERE MaNapTien =?";
     String SELECT_ALL = "SELECT * FROM MaNap";
-    String UPDATE = "UPDATE MAPNAP SET "
+    String UPDATE = "UPDATE MANAP SET "
             + "TRANGTHAI = 1 "
             + "WHERE MANAPTIEN = ?";
     String SELECT_BY_ID_DOITUONG_MANAPTIEN = "SELECT*FROM MaNap WHERE MaNapTien = ?";
