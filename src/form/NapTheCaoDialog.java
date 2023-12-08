@@ -64,8 +64,13 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             if (laygiatri() < 0) {
                 Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
                 return;
-            }else{
-                tongtien = cttk.getSodu() + laygiatri();
+            } else {
+                if (cttk.getSodu() < 2000000000) {
+                    tongtien = cttk.getSodu() + laygiatri();
+                }else{
+                    tongtien = 2000000000;
+                }
+
             }
             cttk.setSodu(tongtien);
             cttkd.update_sodu(cttk);
@@ -83,7 +88,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
             MaNap nc = ncd.selectByID(String.valueOf(result));
             if (nc.isTrangthai() == true) {
                 return 0;
-            }else{
+            } else {
                 return nc.getGiatri();
             }
         } catch (Exception e) {
