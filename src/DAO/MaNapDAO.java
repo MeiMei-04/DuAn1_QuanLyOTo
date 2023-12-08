@@ -14,9 +14,9 @@ import java.sql.ResultSet;
  *
  * @author Hieu
  */
-public class MaNapDAO{
-    
-    String INSERT= "INSERT INTO MaNap("
+public class MaNapDAO {
+
+    String INSERT = "INSERT INTO MaNap("
             + "MaNapTien,"
             + "NoiDung,"
             + "GiaTri,"
@@ -28,7 +28,7 @@ public class MaNapDAO{
             + "TRANGTHAI = 1 "
             + "WHERE MANAPTIEN = ?";
     String SELECT_BY_ID_DOITUONG_MANAPTIEN = "SELECT*FROM MaNap WHERE MaNapTien = ?";
-    
+    String SELECT_BY_ID_DOITUONG_NoiDung = "SELECT*FROM MaNap WHERE NoiDung like ?";
 
     public void insert(MaNap entity) {
         JDBCHelper.executeUpdate(INSERT,
@@ -52,11 +52,19 @@ public class MaNapDAO{
 
     public MaNap selectByID(String MANAPTIEN) {
         List<MaNap> list = selectBySQL(SELECT_BY_ID_DOITUONG_MANAPTIEN, MANAPTIEN);
-        if(list.isEmpty()){
+        if (list.isEmpty()) {
             return null;
         }
         return list.get(0);
     }
+     public List<MaNap> selectByNoiDung(String NoiDung) {
+        List<MaNap> list = selectBySQL(SELECT_BY_ID_DOITUONG_NoiDung, NoiDung);
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list;
+    }
+
     protected List<MaNap> selectBySQL(String sql, Object... args) {
         List<MaNap> list = new ArrayList<>();
         try {
@@ -69,11 +77,11 @@ public class MaNapDAO{
                 NC.setTrangthai(rs.getBoolean("TrangThai"));
                 list.add(NC);
             }
-           rs.getStatement().getConnection().close();
-           return list;
+            rs.getStatement().getConnection().close();
+            return list;
         } catch (Exception e) {
             e.getMessage();
             throw new RuntimeException(e);
-        }  
+        }
     }
 }

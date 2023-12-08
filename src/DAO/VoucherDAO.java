@@ -25,7 +25,7 @@ public class VoucherDAO{
     String DELETE="  DELETE FROM Voucher WHERE MaVoucher=?";
     String SELECT_ALL="SELECT * FROM Voucher";
     String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=?";
-    
+    String SELECT_BY_ID_NoiDung=" SELECT * FROM Voucher WHERE NoiDung like ?";
     public void insert(Voucher entity) {
        JDBCHelper.executeUpdate(INSERT, 
                entity.getMavoucher(),
@@ -53,6 +53,14 @@ public class VoucherDAO{
             return null;
         }
         return list.get(0);
+    }
+    
+    public List<Voucher> selectByID_NoiDung(String NoiDung) {
+        List<Voucher> list = selectBySQL(SELECT_BY_ID_NoiDung, NoiDung);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list;
     }
 
     protected List<Voucher> selectBySQL(String sql, Object... args) {

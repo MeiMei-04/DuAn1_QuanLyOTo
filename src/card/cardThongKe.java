@@ -6,7 +6,6 @@ package card;
 
 import DAO.ThongKeDAO;
 import Hepler.DialogHelper;
-import Hepler.JDBCHelper;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +14,6 @@ import java.io.IOException;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -48,7 +46,6 @@ public class cardThongKe extends javax.swing.JPanel {
 //            model.addRow(row);
 //        }
 //    }
-
     void fillComboboxthang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
         model.removeAllElements();
@@ -103,12 +100,12 @@ public class cardThongKe extends javax.swing.JPanel {
                 Row rowCol = sheet.createRow(4);
                 for (int i = 0; i < tblDoanhThu.getColumnCount(); i++) {
 
-                    Cell cell = rowCol.createCell( i);// lui sang phải
+                    Cell cell = rowCol.createCell(i);// lui sang phải
                     cell.setCellValue(tblDoanhThu.getColumnName(i));
                 }
 
                 for (int j = 0; j < tblDoanhThu.getRowCount(); j++) {
-                    Row row = sheet.createRow(j +5);// lui xuong
+                    Row row = sheet.createRow(j + 5);// lui xuong
                     for (int k = 0; k < tblDoanhThu.getColumnCount(); k++) {
                         Cell cell = row.createCell(k);// sang phải
                         if (tblDoanhThu.getValueAt(j, k) != null) {
@@ -164,9 +161,6 @@ public class cardThongKe extends javax.swing.JPanel {
         jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         cboNam = new javax.swing.JComboBox<>();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tblHopDong = new javax.swing.JTable();
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -222,7 +216,7 @@ public class cardThongKe extends javax.swing.JPanel {
 
         jPanel4.setBackground(new java.awt.Color(255, 102, 51));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "nam", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 14), new java.awt.Color(255, 255, 255))); // NOI18N
-        jPanel4.setLayout(new java.awt.GridLayout());
+        jPanel4.setLayout(new java.awt.GridLayout(1, 0));
 
         cboNam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,39 +257,6 @@ public class cardThongKe extends javax.swing.JPanel {
 
         jTabbedPane1.addTab("DOANH THU THEO THÁNG", jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(255, 102, 51));
-
-        jScrollPane2.setBackground(new java.awt.Color(255, 102, 51));
-
-        tblHopDong.setBackground(new java.awt.Color(255, 102, 51));
-        tblHopDong.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Tháng", "Số lượng", "Ký HĐ Đầu Tiên", "Ký HĐ Cuối Cùng"
-            }
-        ));
-        jScrollPane2.setViewportView(tblHopDong);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        jTabbedPane1.addTab("HỢP ĐỒNG", jPanel2);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,18 +277,17 @@ public class cardThongKe extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
+    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
         fillTableDoanhThu();
-
-    }//GEN-LAST:event_cboThangActionPerformed
+    }//GEN-LAST:event_cboNamActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         xuatEXCL();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void cboNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboNamActionPerformed
+    private void cboThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboThangActionPerformed
         fillTableDoanhThu();
-    }//GEN-LAST:event_cboNamActionPerformed
+    }//GEN-LAST:event_cboThangActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -339,13 +299,10 @@ public class cardThongKe extends javax.swing.JPanel {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblDoanhThu;
-    private javax.swing.JTable tblHopDong;
     // End of variables declaration//GEN-END:variables
 }

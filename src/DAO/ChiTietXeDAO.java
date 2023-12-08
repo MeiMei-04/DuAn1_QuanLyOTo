@@ -37,13 +37,14 @@ public class ChiTietXeDAO {
     String SELECT_ALL = "SELECT * FROM ChiTietXe";
     String SELECT_BY_ID_MAXE = "SELECT*FROM ChiTietXe WHERE MaXe = ?";
     String SELECT_BY_ID_TENXE = "SELECT*FROM ChiTietXe WHERE TENXE = ?";
+    String SELECT_BY_ID_TENXEtim = "SELECT*FROM ChiTietXe WHERE TENXE like ?";
 
     public void insert(ChiTietXe entity) {
-        JDBCHelper.executeUpdate(INSERT, 
-                entity.getMaxe(), 
-                entity.getTenxe(), 
-                entity.getSoghe(), 
-                entity.getGiathue(), 
+        JDBCHelper.executeUpdate(INSERT,
+                entity.getMaxe(),
+                entity.getTenxe(),
+                entity.getSoghe(),
+                entity.getGiathue(),
                 entity.getAnhxe(),
                 entity.getMahangxe(),
                 entity.getTrangthaixe()
@@ -51,13 +52,13 @@ public class ChiTietXeDAO {
     }
 
     public void update(ChiTietXe entity) {
-        JDBCHelper.executeUpdate(UPDATE, 
-                entity.getTenxe(), 
+        JDBCHelper.executeUpdate(UPDATE,
+                entity.getTenxe(),
                 entity.getSoghe(),
-                entity.getGiathue(), 
+                entity.getGiathue(),
                 entity.getAnhxe(),
                 entity.getMahangxe(),
-                entity.getTrangthaixe(), 
+                entity.getTrangthaixe(),
                 entity.getMaxe());
     }
 
@@ -81,7 +82,7 @@ public class ChiTietXeDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
-    
+
     public ChiTietXe selectByID_TENXE(String TENXE) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietXe> list = selectBySQL(SELECT_BY_ID_TENXE, TENXE);
@@ -94,6 +95,20 @@ public class ChiTietXeDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+
+    public List<ChiTietXe> selectByID_TENXETim(String TENXE) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<ChiTietXe> list = selectBySQL(SELECT_BY_ID_TENXEtim, TENXE);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
+
     protected List<ChiTietXe> selectBySQL(String sql, Object... args) {
         List<ChiTietXe> list = new ArrayList<>();
         try {
