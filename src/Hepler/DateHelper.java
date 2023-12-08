@@ -4,12 +4,15 @@
  */
 package Hepler;
 
+import entyti.HopDong;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -97,5 +100,27 @@ public class DateHelper {
         } catch (ParseException e) {
             return false;
         }
+    }
+    // Phương thức hỗ trợ để tính số ngày thuê còn lại
+    public static int calculateRemainingDays(List<HopDong> contracts, Date rentalStart, Date rentalEnd,int songaythue){
+        int remainingDays = songaythue;
+
+        for (HopDong hd : contracts) {
+            if (rentalStart.after(hd.getNgaythue()) && rentalStart.before(hd.getNgayhethan())) {
+                // Ngày thuê nằm trong một hợp đồng hiện tại
+                remainingDays -= calculateDaysBetween(rentalStart, hd.getNgayhethan());
+            } else if (rentalEnd.after(hd.getNgaythue()) && rentalEnd.before(hd.getNgayhethan())) {
+                // Ngày trả nằm trong một hợp đồng hiện tại
+                remainingDays -= calculateDaysBetween(hd.getNgaythue(), rentalEnd);
+            }
+        }
+
+        return remainingDays;
+    }
+
+// Phương thức hỗ trợ để tính số ngày giữa hai ngày
+    private static int calculateDaysBetween(Date startDate, Date endDate) {
+        long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
+        return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
     }
 }

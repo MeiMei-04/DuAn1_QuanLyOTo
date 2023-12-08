@@ -928,8 +928,9 @@
                   <Color blue="33" green="66" red="ff" type="rgb"/>
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="1">
-                    <StringItem index="0" value="H&#x1ea3;i Ph&#xf2;ng"/>
+                  <StringArray count="2">
+                    <StringItem index="0" value="(Tr&#x1ed1;ng)"/>
+                    <StringItem index="1" value="H&#x1ea3;i Ph&#xf2;ng"/>
                   </StringArray>
                 </Property>
               </Properties>

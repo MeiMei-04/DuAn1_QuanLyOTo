@@ -8,14 +8,14 @@ package entyti;
  *
  * @author Hieu
  */
-public class NopPhuPhi {
+public class ThemPhuPhi {
     private String mahopdong;
     private String maphuphi;
 
-    public NopPhuPhi() {
+    public ThemPhuPhi() {
     }
 
-    public NopPhuPhi(String mahopdong, String maphuphi) {
+    public ThemPhuPhi(String mahopdong, String maphuphi) {
         this.mahopdong = mahopdong;
         this.maphuphi = maphuphi;
     }

@@ -5,7 +5,7 @@
 package DAO;
 
 import Hepler.JDBCHelper;
-import entyti.NopPhuPhi;
+import entyti.ThemPhuPhi;
 import java.util.ArrayList;
 import java.util.List;
 import java.sql.ResultSet;
@@ -14,7 +14,7 @@ import java.sql.ResultSet;
  *
  * @author Hieu
  */
-public class NopPhuPhiDAO {
+public class ThemPhuPhiDAO {
     String INSERT = "INSERT INTO NopPhuPhi ("
             + "mahopdong,"
             + "maphuphi"
@@ -23,7 +23,7 @@ public class NopPhuPhiDAO {
     String SELECT_ALL = "SELECT * FROM NopPhuPhi";
     String SELECT_BY_ID_MAHOPDONG = "select * from NopPhuPhi where mahopdong =?";
     
-    public void insert(NopPhuPhi entity) {
+    public void insert(ThemPhuPhi entity) {
         JDBCHelper.executeUpdate(INSERT,
                 entity.getMahopdong(),
                 entity.getMaphuphi()
@@ -34,13 +34,13 @@ public class NopPhuPhiDAO {
         JDBCHelper.executeUpdate(DELETE, mahopdong);
     }
     //trả về danh sách tất cả các bản ghi
-    public List<NopPhuPhi> selectAll() {
+    public List<ThemPhuPhi> selectAll() {
         return selectBySQL(SELECT_ALL);
     }
     //trả về 1 đối tượng NopPhuPhi khi userid =
-    public NopPhuPhi selectByID_MAHOPDONG(String mahopdong) {
+    public ThemPhuPhi selectByID_MAHOPDONG(String mahopdong) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<NopPhuPhi> list = selectBySQL(SELECT_BY_ID_MAHOPDONG, mahopdong);
+        List<ThemPhuPhi> list = selectBySQL(SELECT_BY_ID_MAHOPDONG, mahopdong);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
@@ -52,12 +52,12 @@ public class NopPhuPhiDAO {
     }
 
 
-    protected List<NopPhuPhi> selectBySQL(String sql, Object... args) {
-        List<NopPhuPhi> list = new ArrayList<>();
+    protected List<ThemPhuPhi> selectBySQL(String sql, Object... args) {
+        List<ThemPhuPhi> list = new ArrayList<>();
         try {
             ResultSet rs = JDBCHelper.executeQuery(sql, args);
             while (rs.next()) {
-                NopPhuPhi npp = new NopPhuPhi();
+                ThemPhuPhi npp = new ThemPhuPhi();
                 npp.setMahopdong(rs.getString("mahopdong"));
                 npp.setMaphuphi(rs.getString("MaNopPhuPhi"));
                 list.add(npp);

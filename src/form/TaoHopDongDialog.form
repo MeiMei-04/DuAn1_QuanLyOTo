@@ -691,7 +691,7 @@
                                   <Component id="txt_tenxe" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txt_soghe" alignment="0" max="32767" attributes="0"/>
                                   <Component id="txt_giathue" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txt_maloaixe" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txt_hangxe" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jScrollPane1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -762,7 +762,7 @@
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel44" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_maloaixe" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_hangxe" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1016,10 +1016,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="M&#xc3; LO&#x1ea0;I XE"/>
+                <Property name="text" type="java.lang.String" value="H&#xe3;ng Xe"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_maloaixe">
+            <Component class="javax.swing.JTextField" name="txt_hangxe">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
@@ -1038,7 +1038,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="GHI CH&#xda;"/>
+                <Property name="text" type="java.lang.String" value="Tr&#x1ea1;ng Th&#xe1;i Xe"/>
               </Properties>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane1">
@@ -1048,7 +1048,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextArea" name="txt_ghichu">
+                <Component class="javax.swing.JTextArea" name="txt_trangthaixe">
                   <Properties>
                     <Property name="columns" type="int" value="20"/>
                     <Property name="rows" type="int" value="5"/>
@@ -1092,7 +1092,7 @@
                                       <Component id="jLabel46" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="txt_songaythue1" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="txt_Ngaytra" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jLabel80" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -1134,7 +1134,7 @@
                                                           <EmptySpace type="separate" max="-2" attributes="0"/>
                                                           <Component id="jLabel56" min="-2" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
-                                                          <Component id="txt_tiendichvu1" min="-2" pref="136" max="-2" attributes="0"/>
+                                                          <Component id="txt_tienphuphi" min="-2" pref="136" max="-2" attributes="0"/>
                                                           <EmptySpace max="-2" attributes="0"/>
                                                           <Component id="jLabel76" min="-2" pref="43" max="-2" attributes="0"/>
                                                       </Group>
@@ -1221,7 +1221,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txt_songaythue1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_Ngaytra" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel80" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1241,7 +1241,7 @@
                           <Component id="jLabel53" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel56" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_tiendichvu" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txt_tiendichvu1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txt_tienphuphi" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel76" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -1652,7 +1652,7 @@
                 <Property name="text" type="java.lang.String" value="VN&#x110;."/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_tiendichvu1">
+            <Component class="javax.swing.JTextField" name="txt_tienphuphi">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -1672,12 +1672,12 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTable" name="tbl_dichvu1">
+                <Component class="javax.swing.JTable" name="tbl_phuphi">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="2" rowCount="0">
                         <Column editable="true" title="T&#xea;n Ph&#x1ee5; Ph&#xed;" type="java.lang.Object"/>
-                        <Column editable="true" title="Gi&#xe1;" type="java.lang.Object"/>
+                        <Column editable="true" title="Gi&#xe1; Tr&#x1ecb;" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -1701,7 +1701,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="txt_songaythue1">
+            <Component class="javax.swing.JTextField" name="txt_Ngaytra">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>

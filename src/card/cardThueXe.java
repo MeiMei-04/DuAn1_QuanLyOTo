@@ -9,6 +9,7 @@ import DAO.ChiTietXeDAO;
 import DAO.HangXeDAO;
 import DAO.HopDongDAO;
 import DAO.VoucherDAO;
+import Hepler.DateHelper;
 import static Hepler.DateHelper.addDays;
 import static Hepler.DateHelper.isValidDate;
 import Hepler.DialogHelper;
@@ -18,11 +19,13 @@ import entyti.HangXe;
 import entyti.HopDong;
 import entyti.Voucher;
 import form.DanhGiaDialog;
+import form.TaoHopDongDialog;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -47,7 +50,8 @@ public class cardThueXe extends javax.swing.JPanel {
     int maloaixe = 1;
     int size_list = -1;
     Date ngayThue = null;
-    int songaythue = 0;
+    int songaythue = 1;
+    String maxe = null;
 
     /**
      * Creates new form ThueXe
@@ -59,64 +63,110 @@ public class cardThueXe extends javax.swing.JPanel {
         fillcbb_soghe();
         setForm(getListXe(soghe, maloaixe), 0);
     }
-    public void getDiaChi(){
+
+    public void openHopDong() {
+        try {
+            TaoHopDongDialog hopdong = new TaoHopDongDialog(null, true, maxe, list_dichvu, ngayThue, songaythue, diaChi, voucher);
+            hopdong.setVisible(true);
+        } catch (Exception e) {
+        }
+    }
+
+    public void getDiaChi() {
         String thanhpho = null;
         String huyen = null;
         String xa = null;
         String diachichitiet = null;
-        if(cbb_thanhpho.getSelectedIndex()==0){
+        if (cbb_thanhpho.getSelectedIndex() == 0) {
             thanhpho = null;
-        }else{
+        } else {
             thanhpho = cbb_thanhpho.getSelectedItem().toString() + " ";
         }
-        if(cbb_huyen.getSelectedIndex()==0){
+        if (cbb_huyen.getSelectedIndex() == 0) {
             huyen = null;
-        }else{
+        } else {
             huyen = cbb_huyen.getSelectedItem().toString() + " ";
         }
-        if(cbb_xa.getSelectedIndex()==0){
+        if (cbb_xa.getSelectedIndex() == 0) {
             xa = null;
-        }else{
+        } else {
             xa = cbb_xa.getSelectedItem().toString() + " ";
         }
-        if(txt_diachi.getText()==null){
+        if (txt_diachi.getText() == null) {
             diachichitiet = null;
-        }else{
+        } else {
             diachichitiet = txt_diachi.getText();
         }
         diaChi = thanhpho + huyen + xa + diachichitiet;
     }
-    public void openDanhGia(){
+
+    public void openDanhGia() {
         try {
             DanhGiaDialog dgdialog = new DanhGiaDialog(null, true);
             dgdialog.setVisible(true);
         } catch (Exception e) {
         }
     }
+
     public boolean kiemtraxe() {
         String maxe = txt_maxe.getText();
-        ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+        ngayThue = DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
         songaythue = Integer.parseInt(txt_songaythue.getText());
+        Date ngayTra = Hepler.DateHelper.addDays(ngayThue, songaythue);
         boolean flag = false;
+
         try {
             List<HopDong> list = hdd.selectByID_MAXE(maxe);
             for (HopDong hd : list) {
-                if (ngayThue.equals(hd.getNgaythue()) || (ngayThue.after(hd.getNgaythue()) && ngayThue.before(addDays(hd.getNgaythue(), hd.getThoihanhopdong())))) {
-                    // Ngày thuê đã tồn tại trong một hợp đồng
+                if ((ngayThue.equals(hd.getNgaythue()) || ngayThue.after(hd.getNgaythue()))
+                        && (ngayTra.equals(hd.getNgayhethan()) || ngayTra.before(hd.getNgayhethan()))) {
+                    // Ngày thuê hoặc ngày trả đã tồn tại trong một hợp đồng
                     flag = true;
                     break;
                 }
             }
-            if(flag){
-                DialogHelper.alert(this, "Ngày thuê đã tồn tại trong hợp đồng khác.");
+
+            if (flag) {
+                DialogHelper.alert(this, "Ngày thuê hoặc ngày trả đã tồn tại trong hợp đồng khác.");
                 return false;
+            } else {
+                // Tính số ngày thuê còn lại để tránh va chạm với các hợp đồng hiện tại
+                int remainingDays = Hepler.DateHelper.calculateRemainingDays(list, ngayThue, ngayTra,songaythue);
+                if (remainingDays < songaythue) {
+                    DialogHelper.alert(this, "Không đủ số ngày để thuê do va chạm với hợp đồng khác.");
+                    return false;
+                } else {
+                    DialogHelper.alert(this, "Còn lại " + remainingDays + " ngày có thể thuê.");
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
         return true;
     }
-
+//    public boolean kiemtraxe() {
+//        String maxe = txt_maxe.getText();
+//        ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+//        songaythue = Integer.parseInt(txt_songaythue.getText());
+//        boolean flag = false;
+//        try {
+//            List<HopDong> list = hdd.selectByID_MAXE(maxe);
+//            for (HopDong hd : list) {
+//                if (ngayThue.equals(hd.getNgaythue()) || (ngayThue.after(hd.getNgaythue()) && ngayThue.before(addDays(hd.getNgaythue(), hd.getThoihanhopdong())))) {
+//                    // Ngày thuê đã tồn tại trong một hợp đồng
+//                    flag = true;
+//                    break;
+//                }
+//            }
+//            if(flag){
+//                DialogHelper.alert(this, "Ngày thuê đã tồn tại trong hợp đồng khác.");
+//                return false;
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return true;
+//    }
     public boolean vadidate() {
         try {
             int songaythue = Integer.parseInt(txt_songaythue.getText());
@@ -150,7 +200,7 @@ public class cardThueXe extends javax.swing.JPanel {
             DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Hoặc Bằng Ngày Hiện Tại");
             return false;
         }
-        if(!kiemtraxe()){
+        if (!kiemtraxe()) {
             return false;
         }
         return true;
@@ -186,7 +236,7 @@ public class cardThueXe extends javax.swing.JPanel {
             Object[] row = {
                 dv.getMadichvu(),
                 dv.getTendichvu(),
-                dv.getDongia()
+                Hepler.MoneyFormatter.formatMoney(dv.getDongia())
             };
             model.addRow(row);
         }
@@ -240,7 +290,7 @@ public class cardThueXe extends javax.swing.JPanel {
         txt_maxe.setText(ctx.getMaxe());
         txt_tenxe.setText(ctx.getTenxe());
         seticon(ctx.getAnhxe());
-        txt_giathue.setText(String.valueOf(ctx.getGiathue()));
+        txt_giathue.setText(Hepler.MoneyFormatter.formatMoney(ctx.getGiathue()));
         txt_trangthai.setText(ctx.getTrangthaixe());
     }
 
@@ -614,7 +664,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
         cbb_thanhpho.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbb_thanhpho.setForeground(new java.awt.Color(255, 102, 51));
-        cbb_thanhpho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hải Phòng" }));
+        cbb_thanhpho.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Trống)", "Hải Phòng" }));
 
         btn_chondichvu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_chondichvu.setForeground(new java.awt.Color(255, 102, 51));
@@ -885,7 +935,10 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (vadidate()) {
             getDiaChi();
-            DialogHelper.alert(this, diaChi);
+            maxe = txt_maxe.getText();
+            voucher= txt_voucher.getText();
+            System.out.println(diaChi);
+            openHopDong();
         }
 
     }//GEN-LAST:event_btn_thueActionPerformed
@@ -904,8 +957,8 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             int row = tbl_tdv.getSelectedRow();
-        list_dichvu.remove(row);
-        fill_table_dichvu();
+            list_dichvu.remove(row);
+            fill_table_dichvu();
         } catch (Exception e) {
             DialogHelper.alert(this, "Vui Lòng Chọn DỊch Vụ Ạ");
         }
