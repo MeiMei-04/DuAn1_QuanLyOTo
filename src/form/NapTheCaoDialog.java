@@ -61,10 +61,11 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             int tongtien = -1;
-            tongtien = cttk.getSodu() + laygiatri();
             if (laygiatri() < 0) {
                 Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
                 return;
+            }else{
+                tongtien = cttk.getSodu() + laygiatri();
             }
             cttk.setSodu(tongtien);
             cttkd.update_sodu(cttk);
@@ -80,11 +81,15 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
     public int laygiatri() {
         try {
             MaNap nc = ncd.selectByID(String.valueOf(result));
-            return nc.getGiatri();
+            if (nc.isTrangthai() == true) {
+                return 0;
+            }else{
+                return nc.getGiatri();
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return -2;
         }
+        return 0;
     }
 
     private void initWebcam() {
