@@ -148,16 +148,9 @@ public class cardThueXe extends javax.swing.JPanel {
                 Date ngayTaoHD = resetTime(hd.getNgaythue());
                 Date ngayHenHanHD = resetTime(hd.getNgayhethan());
                 // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
-                if (ngayThue.after(ngayTaoHD) || ngayTra.before(ngayHenHanHD) && ngayTra.before(ngayThue)) {
-                // Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng
-                System.out.println("Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng.");
-//                return false;
-            } else {
-                    System.out.println("NGAY THUE MOI" + Hepler.DateHelper.toString(ngayThue, "dd/MM/yyyy"));
-                    System.out.println("NGAY TRA MOI" + Hepler.DateHelper.toString(ngayTra, "dd/MM/yyyy"));
-                    System.out.println("NGAY THUE HOP DONG" + Hepler.DateHelper.toString(ngayTaoHD, "dd/MM/yyyy"));
-                    System.out.println("NGAY TRA HOP DONG" + Hepler.DateHelper.toString(ngayHenHanHD, "dd/MM/yyyy"));
-                    System.out.println("True");
+                if (ngayThue.after(ngayTaoHD) || ngayTra.after(ngayTaoHD)) {
+                    // Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng     
+                    return false;
                 }
             }
         } catch (Exception e) {
@@ -930,13 +923,12 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (vadidate()) {
             getFrom();
-            System.out.println(kiemtraxe(songaythue));
-
-//            if (tinhSoNgayThue(songaythue) <= songaythue) {
-//                openHopDong();
-//            } else {
-//                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + tinhSoNgayThue(songaythue) + " Ngày");
-//            }
+            int songaycothethue = tinhSoNgayThue(songaythue);
+            if (songaycothethue <= songaythue) {
+                openHopDong();
+            } else {
+                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + tinhSoNgayThue(songaythue) + " Ngày");
+            }
         }
 
     }//GEN-LAST:event_btn_thueActionPerformed
