@@ -34,7 +34,7 @@ public class HopDongDAO {
     String SELECT_BY_ID_SQL_MAHOPDONG = "SELECT*FROM HopDong WHERE MaHopDong = ?";
     String SELECT_BY_ID_SQL_USERID = "SELECT*FROM HopDong WHERE userid = ?";
     String SELECT_BY_ID_MAXE = "SELECT*FROM HopDong WHERE MAXE = ?";
-    String SELECT_BY_ID_MAXE_NULL = "SELECT*FROM HopDong WHERE MAXE = ? AND NGAYTRAXE = NULL ";
+    String SELECT_BY_ID_MAXE_NULL = "SELECT*FROM HopDong WHERE MAXE = ? AND  NGAYTRAXE IS NULL ";
     String UPDATE = "UPDATE HopDong SET "
             + "MaXe = ?,"
             + "NgayThue = ?,"
