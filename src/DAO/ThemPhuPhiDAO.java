@@ -17,7 +17,7 @@ import java.sql.ResultSet;
 public class ThemPhuPhiDAO {
     String INSERT = "INSERT INTO NopPhuPhi ("
             + "mahopdong,"
-            + "maphuphi"
+            + "maphuphi)"
             + "values(?,?)";
     String DELETE = "DELETE FROM NopPhuPhi WHERE mahopdong =?";
     String SELECT_ALL = "SELECT * FROM NopPhuPhi";

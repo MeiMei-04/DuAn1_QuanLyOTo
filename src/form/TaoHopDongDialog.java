@@ -71,7 +71,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         ThemPhuPhi tpp = new ThemPhuPhi();
         tpp.setMahopdong(mahopdong);
         for (PhuPhi pp : list_tpp) {
-            pp.setMaphuphi(pp.getMaphuphi());
+            tpp.setMaphuphi(pp.getMaphuphi());
             tppd.insert(tpp);
         }
     }
@@ -158,7 +158,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public int tienvoucher(int tongtien) {
         int giamgia = -1;
-        if (mavoucher == null) {
+        if (mavoucher.isEmpty()) {
             tienvoucher = 0;
         } else {
             try {
@@ -207,9 +207,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             txt_trangthaixe.setText(ctx.getTrangthaixe());
             txt_giathue.setText(Hepler.MoneyFormatter.formatMoney(ctx.getGiathue()));
             //Thông Tin Thuê xe
-            txt_ngaythue.setText(String.valueOf(ngayThue));
+            txt_ngaythue.setText(Hepler.DateHelper.toString(ngayThue, "dd/MM/yyyy"));
             txt_songaythue.setText(String.valueOf(songaythue));
-            txt_Ngaytra.setText(String.valueOf(Hepler.DateHelper.addDays(ngayThue, songaythue)));
+            txt_Ngaytra.setText(Hepler.DateHelper.toString(Hepler.DateHelper.addDays(ngayThue, songaythue), "dd/MM/yyyy"));
             txt_tienthuexe.setText(Hepler.MoneyFormatter.formatMoney(tienthuexe()));
             txt_tiendichvu.setText(Hepler.MoneyFormatter.formatMoney(tiendichvu()));
             tien_not_VAT = tienthuexe() + tiendichvu();
@@ -236,7 +236,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             if (mymoney - tongtien >= 0) {
                 int tienconlai = 0;
                 tienconlai = mymoney - tongtien;
-                insert();
                 cttknew.setUserid(tk.getUserid());
                 cttknew.setSodu(tienconlai);
                 cttkd.update_sodu(cttknew);
@@ -267,7 +266,11 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hd.setNgayhethan(Hepler.DateHelper.addDays(ngayThue, songaythue));
             hd.setNgaytraxe(Hepler.DateHelper.addDays(ngayThue, songaythue));
             hd.setSongayquahan(0);
-            hd.setMavoucher(mavoucher);
+            if(mavoucher.isEmpty()){
+                hd.setMavoucher(null);
+            }else{
+                hd.setMavoucher(mavoucher);
+            }
             hd.setThanhtien(tongtienphaitra);
             hd.setThoihanhopdong(songaythue);
             hd.setDiadiemnhanxe(diaDiem);
@@ -277,7 +280,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e.getMessage());
             DialogHelper.alert(this, "Tạo Hợp Đồng Thất Bại");
-            return;
         }
     }
 
