@@ -22,6 +22,7 @@ public class VoucherDAO{
             + "TrangThai) "
             + "values(?,?,?,?)";
     String UPDATE="UPDATE Voucher set NoiDung=?,GiaTri=?,TrangThai=? where MaVoucher=?";
+    String UPDATE_TRANGTHAI = "UPDATE Voucher set TrangThai=1 where MaVoucher=?";
     String DELETE="  DELETE FROM Voucher WHERE MaVoucher=?";
     String SELECT_ALL="SELECT * FROM Voucher";
     String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=?";
@@ -34,7 +35,9 @@ public class VoucherDAO{
                entity.isTrangthai()
        );
     }
-
+    public void update_Trangthai(String key){
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, key);
+    }
     public void update(Voucher entity) {
        JDBCHelper.executeUpdate(UPDATE, entity.getNoidung(),entity.getGiatri(),entity.isTrangthai(),entity.getMavoucher());
     }

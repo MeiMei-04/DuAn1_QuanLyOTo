@@ -10,6 +10,7 @@ import DAO.HopDongDAO;
 import DAO.ThemDichVuDAO;
 import DAO.ChiTietXeDAO;
 import DAO.PhuPhiDAO;
+import DAO.ThemPhuPhiDAO;
 import DAO.VoucherDAO;
 import Hepler.DialogHelper;
 import Hepler.ImagesHelper;
@@ -30,6 +31,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
     DichVuDAO dvd = new DichVuDAO();
     ThemDichVuDAO tdvd = new ThemDichVuDAO();
+    ThemPhuPhiDAO tppd = new ThemPhuPhiDAO();
     VoucherDAO vcd = new VoucherDAO();
     HopDongDAO hdd = new HopDongDAO();
     PhuPhiDAO ppd = new PhuPhiDAO();
@@ -48,6 +50,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     int giatriphuphi = 0;
     int tongtien = 0;
     int tongtienphaitra = 0;
+    String mahopdong = null;
 
     public TaoHopDongDialog(java.awt.Frame parent, boolean modal, String Maxe, List<DichVu> list, Date ngaythue, int songaythue, String diadiem, String maVoucher) {
         super(parent, modal);
@@ -62,6 +65,24 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         filltable_dichvu();
         filltable_phuphi();
         setForm();
+    }
+
+    public void themPhuPhi() {
+        ThemPhuPhi tpp = new ThemPhuPhi();
+        tpp.setMahopdong(mahopdong);
+        for (PhuPhi pp : list_tpp) {
+            pp.setMaphuphi(pp.getMaphuphi());
+            tppd.insert(tpp);
+        }
+    }
+
+    public void themDichVu() {
+        ThemDichVu tdv = new ThemDichVu();
+        tdv.setMahopdong(mahopdong);
+        for (DichVu dv : list_dv) {
+            tdv.setMadichvu(dv.getMadichvu());
+            tdvd.insert(tdv);
+        }
     }
 
     public int tienphuphi() {
@@ -137,24 +158,26 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public int tienvoucher(int tongtien) {
         int giamgia = -1;
-        if(mavoucher == null){
+        if (mavoucher == null) {
             tienvoucher = 0;
-       }
-        try {
-            Voucher voucher = vcd.selectByID_MAVOUCHER(mavoucher);
-            giamgia = voucher.getGiatri();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        if (giamgia == 1) {
-            tienvoucher = (tongtien * 5) / 100;
-        } else if (giamgia == 2) {
-            tienvoucher = (tongtien * 10) / 100;
-        } else if (giamgia == 3) {
-            tienvoucher = (tongtien * 15) / 100;
         } else {
-            tienvoucher = 0;
+            try {
+                Voucher voucher = vcd.selectByID_MAVOUCHER(mavoucher);
+                giamgia = voucher.getGiatri();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            if (giamgia == 1) {
+                tienvoucher = (tongtien * 5) / 100;
+            } else if (giamgia == 2) {
+                tienvoucher = (tongtien * 10) / 100;
+            } else if (giamgia == 3) {
+                tienvoucher = (tongtien * 15) / 100;
+            } else {
+                tienvoucher = 0;
+            }
         }
+
         return tienvoucher;
     }
 
@@ -194,7 +217,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             tongtien = tien_not_VAT + tienphuphi();
             txt_mavoucher.setText(mavoucher);
             txt_tienvoucher.setText(Hepler.MoneyFormatter.formatMoney(tienvoucher(tongtien)));
-            tongtienphaitra = tongtien-tienvoucher(tongtien);
+            tongtienphaitra = tongtien - tienvoucher(tongtien);
             txt_tongtien.setText(Hepler.MoneyFormatter.formatMoney(tongtienphaitra));
             txt_diadiemnhanxe.setText(diaDiem);
         } catch (Exception e) {
@@ -203,64 +226,61 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     }
 
-//    public void thanhtoan() {
-//        int mymoney = 0;
-//        try {
-//            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
-//            TaiKhoan tk = Hepler.AuthHelper.user;
-//            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
-//            mymoney = cttk.getSodu();
-//            if (mymoney - tongtien >= 0) {
-//                int tienconlai = 0;
-//                tienconlai = mymoney - tongtien;
-//                System.out.println(tienconlai);
-//                insert();
-//                cttknew.setUserid(tk.getUserid());
-//                cttknew.setSodu(tienconlai);
-//                cttkd.update_sodu(cttknew);
-//                vcd.delete(mavoucher);
-//                tdvd.delete(maxe);
-//                ChiTietXe xe = new ChiTietXe();
-//                xe.setMaxe(maxe);
-//                xe.setTrangthaixethue(true);
-//                txd.update_TRANTHAI(xe);
-//                DialogHelper.alert(this, "Thanh Toán Thành Công");
-//                for(ThemDichVu tdv : list_tdv){
-//                    tdvd.insert(tdv);
-//                }
-//                this.dispose();
-//            } else {
-//                DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
-//                return;
-//            }
-//
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
-//    public void insert() {
-//        try {
-//            ChiTietXe xe = txd.selectByID_MAXE(this.maxe);
-//            TaiKhoan tk = Hepler.AuthHelper.user;
-//            String hopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
-//            HopDongDAO hp = new HopDongDAO();
-//            hp.setMahopdong(hopdong);
-//            hp.setMaxe(maxe);
-//            hp.setUserid(tk.getUserid());
-//            hp.setGhichu(xe.getGhichu());
-//            hp.setNgaythue(Hepler.DateHelper.now());
-//            hp.setNgaytra(Hepler.DateHelper.add(songaythue));
-//            hp.setMavoucher(mavoucher);
-//            hp.setThanhtien(tongtien);
-//            hp.setDiadiemnhanxe(diadiemnhanxe);
-//            thdd.insert(hp);
-//            sendcode_qr(hopdong);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            return;
-//
-//        }
-//    }
+    public void thanhtoan() {
+        int mymoney = 0;
+        try {
+            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+            mymoney = cttk.getSodu();
+            if (mymoney - tongtien >= 0) {
+                int tienconlai = 0;
+                tienconlai = mymoney - tongtien;
+                insert();
+                cttknew.setUserid(tk.getUserid());
+                cttknew.setSodu(tienconlai);
+                cttkd.update_sodu(cttknew);
+                insert();
+                themDichVu();
+                themPhuPhi();
+                vcd.update_Trangthai(mavoucher);
+                DialogHelper.alert(this, "Thanh Toán Thành Công");
+                this.dispose();
+            } else {
+                DialogHelper.alert(this, "Bạn Không Đủ Tiền, Vui Lòng Nạp Thêm");
+                return;
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void insert() {
+        try {
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            mahopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
+            HopDong hd = new HopDong();
+            hd.setMahopdong(mahopdong);
+            hd.setMaxe(maxe);
+            hd.setUserid(tk.getUserid());
+            hd.setNgaythue(ngayThue);
+            hd.setNgayhethan(Hepler.DateHelper.addDays(ngayThue, songaythue));
+            hd.setNgaytraxe(Hepler.DateHelper.addDays(ngayThue, songaythue));
+            hd.setSongayquahan(0);
+            hd.setMavoucher(mavoucher);
+            hd.setThanhtien(tongtienphaitra);
+            hd.setThoihanhopdong(songaythue);
+            hd.setDiadiemnhanxe(diaDiem);
+            hd.setTinhtranghopdong(1);
+            hdd.insert(hd);
+            DialogHelper.alert(this, "Tạo Hợp Đồng Thành Công");
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            DialogHelper.alert(this, "Tạo Hợp Đồng Thất Bại");
+            return;
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1645,7 +1665,13 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     private void btn_thanhtoanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thanhtoanActionPerformed
         // TODO add your handling code here:
-//        thanhtoan();
+        if (DialogHelper.confirm(this, "Bạn Có Đồng Ý Thanh Toán Không ?")) {
+            thanhtoan();
+        } else {
+            return;
+        }
+
+
     }//GEN-LAST:event_btn_thanhtoanActionPerformed
 
     private void txt_tienvoucherActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_tienvoucherActionPerformed
