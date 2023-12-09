@@ -34,6 +34,7 @@ public class HopDongDAO {
     String SELECT_BY_ID_SQL_MAHOPDONG = "SELECT*FROM HopDong WHERE MaHopDong = ?";
     String SELECT_BY_ID_SQL_USERID = "SELECT*FROM HopDong WHERE userid = ?";
     String SELECT_BY_ID_MAXE = "SELECT*FROM HopDong WHERE MAXE = ?";
+    String SELECT_BY_ID_MAXE_NULL = "SELECT*FROM HopDong WHERE MAXE = ? AND NGAYTRAXE = NULL ";
     String UPDATE = "UPDATE HopDong SET "
             + "MaXe = ?,"
             + "NgayThue = ?,"
@@ -103,11 +104,23 @@ public class HopDongDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
-
+    
 
     public List<HopDong> selectByID_USERID(String USERID) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<HopDong> list = selectBySQL(SELECT_BY_ID_SQL_USERID, USERID);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
+    public List<HopDong> selectByID_MAXE_NULL(String MAXE) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_MAXE_NULL, MAXE);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null

@@ -182,6 +182,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     }
 
     public void setForm() {
+        Date ngayThue_fake = null;
+        ngayThue_fake = (Date) ngayThue.clone();
         TaiKhoan tk = Hepler.AuthHelper.user;
         String gioitinh = null;
         try {
@@ -209,7 +211,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             //Thông Tin Thuê xe
             txt_ngaythue.setText(Hepler.DateHelper.toString(ngayThue, "dd/MM/yyyy"));
             txt_songaythue.setText(String.valueOf(songaythue));
-            txt_Ngaytra.setText(Hepler.DateHelper.toString(Hepler.DateHelper.addDays(ngayThue, songaythue), "dd/MM/yyyy"));
+            txt_Ngaytra.setText(Hepler.DateHelper.toString(Hepler.DateHelper.addDays(ngayThue_fake, songaythue), "dd/MM/yyyy"));
             txt_tienthuexe.setText(Hepler.MoneyFormatter.formatMoney(tienthuexe()));
             txt_tiendichvu.setText(Hepler.MoneyFormatter.formatMoney(tiendichvu()));
             tien_not_VAT = tienthuexe() + tiendichvu();
@@ -256,6 +258,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public void insert() {
         try {
+            Date ngaythue_fake = null;
+            ngaythue_fake = (Date) ngayThue.clone();
             TaiKhoan tk = Hepler.AuthHelper.user;
             mahopdong = "HD" + Hepler.RandomString.generateRandomString(6) + tk.getUserid();
             HopDong hd = new HopDong();
@@ -263,8 +267,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hd.setMaxe(maxe);
             hd.setUserid(tk.getUserid());
             hd.setNgaythue(ngayThue);
-            hd.setNgayhethan(Hepler.DateHelper.addDays(ngayThue, songaythue));
-            hd.setNgaytraxe(Hepler.DateHelper.addDays(ngayThue, songaythue));
+            hd.setNgayhethan(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
+            hd.setNgaytraxe(null);
             hd.setSongayquahan(0);
             if(mavoucher.isEmpty()){
                 hd.setMavoucher(null);

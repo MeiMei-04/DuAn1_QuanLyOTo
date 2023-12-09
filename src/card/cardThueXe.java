@@ -26,6 +26,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import javax.swing.DefaultComboBoxModel;
@@ -74,6 +75,32 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
+    public void getFrom() {
+        maxe = txt_maxe.getText();
+        ngayThue = DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+        songaythue = Integer.parseInt(txt_songaythue.getText());
+        getDiaChi();
+    }
+
+    public int tinhSoNgayThue(int songaythue) {
+        List<Integer> list = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        int max = -1;
+        for (int i = 1; i <= songaythue; i++) {
+            if (kiemtraxe(i)) {
+                System.out.println(i);
+                list.add(i);
+            }
+            System.out.println(kiemtraxe(songaythue));
+        }
+        for (int num : list) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        return max;
+    }
+
     public void getDiaChi() {
         String thanhpho = null;
         String huyen = null;
@@ -110,23 +137,27 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
-    public boolean kiemtraxe() {
-        String maxe = txt_maxe.getText();
-        ngayThue = resetTime(DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy"));
-        songaythue = Integer.parseInt(txt_songaythue.getText());
-        Date ngayTra = resetTime(Hepler.DateHelper.addDays(ngayThue, songaythue));
-
+    public boolean kiemtraxe(int songaythue) {
+        Date ngayTra = null;
+        Date ngaythue_fake = null;
+        ngaythue_fake = (Date) ngayThue.clone();
+        ngayTra = resetTime(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
         try {
-            List<HopDong> list = hdd.selectByID_MAXE(maxe);
+            List<HopDong> list = hdd.selectByID_MAXE_NULL(this.maxe);
             for (HopDong hd : list) {
                 Date ngayTaoHD = resetTime(hd.getNgaythue());
                 Date ngayHenHanHD = resetTime(hd.getNgayhethan());
-
                 // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
-                if (!(ngayTra.before(ngayTaoHD) || ngayThue.after(ngayHenHanHD))) {
-                    // Khoảng thời gian thuê của hợp đồng mới giao với hợp đồng hiện tại
-                    DialogHelper.alert(this, "Ngày thuê hoặc ngày trả đã tồn tại trong hợp đồng khác.");
-                    return false;
+                if (ngayThue.after(ngayTaoHD) || ngayTra.before(ngayHenHanHD) && ngayTra.before(ngayThue)) {
+                // Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng
+                System.out.println("Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng.");
+//                return false;
+            } else {
+                    System.out.println("NGAY THUE MOI" + Hepler.DateHelper.toString(ngayThue, "dd/MM/yyyy"));
+                    System.out.println("NGAY TRA MOI" + Hepler.DateHelper.toString(ngayTra, "dd/MM/yyyy"));
+                    System.out.println("NGAY THUE HOP DONG" + Hepler.DateHelper.toString(ngayTaoHD, "dd/MM/yyyy"));
+                    System.out.println("NGAY TRA HOP DONG" + Hepler.DateHelper.toString(ngayHenHanHD, "dd/MM/yyyy"));
+                    System.out.println("True");
                 }
             }
         } catch (Exception e) {
@@ -288,7 +319,6 @@ public class cardThueXe extends javax.swing.JPanel {
     }
 
     public void fillcbb_soghe() {
-
         try {
             DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_soghe.getModel();
             model.removeAllElements();
@@ -899,14 +929,14 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_thueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thueActionPerformed
         // TODO add your handling code here:
         if (vadidate()) {
-            kiemtraxe();
-            System.out.println(kiemtraxe());
-            getDiaChi();
-            ngayThue = DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
-            songaythue = Integer.parseInt(txt_songaythue.getText());
-            maxe = txt_maxe.getText();
-            voucher = txt_voucher.getText();
-            openHopDong();
+            getFrom();
+            System.out.println(kiemtraxe(songaythue));
+
+//            if (tinhSoNgayThue(songaythue) <= songaythue) {
+//                openHopDong();
+//            } else {
+//                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + tinhSoNgayThue(songaythue) + " Ngày");
+//            }
         }
 
     }//GEN-LAST:event_btn_thueActionPerformed
