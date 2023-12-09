@@ -197,7 +197,7 @@ public class cardThueXe extends javax.swing.JPanel {
         }
         if (!Hepler.DateHelper.isFutureDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
             txt_ngaythue.requestFocus();
-            DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Hoặc Bằng Ngày Hiện Tại");
+            DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Ngày Hiện Tại Ít Nhất 1 Ngày");
             return false;
         }
         if (!kiemtraxe()) {
