@@ -136,7 +136,7 @@ public class cardThueXe extends javax.swing.JPanel {
                     DialogHelper.alert(this, "Không đủ số ngày để thuê do va chạm với hợp đồng khác.");
                     return false;
                 } else {
-                    DialogHelper.alert(this, "Còn lại " + remainingDays + " ngày có thể thuê.");
+                    
                 }
             }
         } catch (Exception e) {
