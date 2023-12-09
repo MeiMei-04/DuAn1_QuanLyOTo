@@ -12,6 +12,7 @@ import DAO.VoucherDAO;
 import Hepler.DateHelper;
 import static Hepler.DateHelper.addDays;
 import static Hepler.DateHelper.isValidDate;
+import static Hepler.DateHelper.resetTime;
 import Hepler.DialogHelper;
 import entyti.DichVu;
 import entyti.ChiTietXe;
@@ -21,6 +22,7 @@ import entyti.Voucher;
 import form.DanhGiaDialog;
 import form.TaoHopDongDialog;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -110,33 +112,21 @@ public class cardThueXe extends javax.swing.JPanel {
 
     public boolean kiemtraxe() {
         String maxe = txt_maxe.getText();
-        ngayThue = DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+        ngayThue = resetTime(DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy"));
         songaythue = Integer.parseInt(txt_songaythue.getText());
-        Date ngayTra = Hepler.DateHelper.addDays(ngayThue, songaythue);
-        boolean flag = false;
+        Date ngayTra = resetTime(Hepler.DateHelper.addDays(ngayThue, songaythue));
 
         try {
             List<HopDong> list = hdd.selectByID_MAXE(maxe);
             for (HopDong hd : list) {
-                if ((ngayThue.equals(hd.getNgaythue()) || ngayThue.after(hd.getNgaythue()))
-                        && (ngayTra.equals(hd.getNgayhethan()) || ngayTra.before(hd.getNgayhethan()))) {
-                    // Ngày thuê hoặc ngày trả đã tồn tại trong một hợp đồng
-                    flag = true;
-                    break;
-                }
-            }
+                Date ngayTaoHD = resetTime(hd.getNgaythue());
+                Date ngayHenHanHD = resetTime(hd.getNgayhethan());
 
-            if (flag) {
-                DialogHelper.alert(this, "Ngày thuê hoặc ngày trả đã tồn tại trong hợp đồng khác.");
-                return false;
-            } else {
-                // Tính số ngày thuê còn lại để tránh va chạm với các hợp đồng hiện tại
-                int remainingDays = Hepler.DateHelper.calculateRemainingDays(list, ngayThue, ngayTra,songaythue);
-                if (remainingDays < songaythue) {
-                    DialogHelper.alert(this, "Không đủ số ngày để thuê do va chạm với hợp đồng khác.");
+                // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
+                if (!(ngayTra.before(ngayTaoHD) || ngayThue.after(ngayHenHanHD))) {
+                    // Khoảng thời gian thuê của hợp đồng mới giao với hợp đồng hiện tại
+                    DialogHelper.alert(this, "Ngày thuê hoặc ngày trả đã tồn tại trong hợp đồng khác.");
                     return false;
-                } else {
-                    
                 }
             }
         } catch (Exception e) {
@@ -144,29 +134,7 @@ public class cardThueXe extends javax.swing.JPanel {
         }
         return true;
     }
-//    public boolean kiemtraxe() {
-//        String maxe = txt_maxe.getText();
-//        ngayThue = Hepler.DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
-//        songaythue = Integer.parseInt(txt_songaythue.getText());
-//        boolean flag = false;
-//        try {
-//            List<HopDong> list = hdd.selectByID_MAXE(maxe);
-//            for (HopDong hd : list) {
-//                if (ngayThue.equals(hd.getNgaythue()) || (ngayThue.after(hd.getNgaythue()) && ngayThue.before(addDays(hd.getNgaythue(), hd.getThoihanhopdong())))) {
-//                    // Ngày thuê đã tồn tại trong một hợp đồng
-//                    flag = true;
-//                    break;
-//                }
-//            }
-//            if(flag){
-//                DialogHelper.alert(this, "Ngày thuê đã tồn tại trong hợp đồng khác.");
-//                return false;
-//            }
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//        return true;
-//    }
+
     public boolean vadidate() {
         try {
             int songaythue = Integer.parseInt(txt_songaythue.getText());
@@ -197,10 +165,7 @@ public class cardThueXe extends javax.swing.JPanel {
         }
         if (!Hepler.DateHelper.isFutureDate(txt_ngaythue.getText(), "dd/MM/yyyy")) {
             txt_ngaythue.requestFocus();
-            DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Ngày Hiện Tại Ít Nhất 1 Ngày");
-            return false;
-        }
-        if (!kiemtraxe()) {
+            DialogHelper.alert(this, "Vui Lòng Nhập Ngày Lớn Hơn Hoặc Bằng Ngày Hiện");
             return false;
         }
         return true;
@@ -934,10 +899,13 @@ public class cardThueXe extends javax.swing.JPanel {
     private void btn_thueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_thueActionPerformed
         // TODO add your handling code here:
         if (vadidate()) {
+            kiemtraxe();
+            System.out.println(kiemtraxe());
             getDiaChi();
+            ngayThue = DateHelper.toDate(txt_ngaythue.getText(), "dd/MM/yyyy");
+            songaythue = Integer.parseInt(txt_songaythue.getText());
             maxe = txt_maxe.getText();
-            voucher= txt_voucher.getText();
-            System.out.println(diaChi);
+            voucher = txt_voucher.getText();
             openHopDong();
         }
 

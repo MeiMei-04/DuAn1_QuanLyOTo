@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -20,10 +21,11 @@ import java.util.concurrent.TimeUnit;
  */
 public class DateHelper {
 
-    static SimpleDateFormat formater = new SimpleDateFormat();
+    SimpleDateFormat formater = new SimpleDateFormat();
 
     //chuyển chuỗi sang kiểu date
     public static Date toDate(String date, String pattern) {
+        SimpleDateFormat formater = new SimpleDateFormat();
         try {
             formater.applyPattern(pattern);//
             return formater.parse(date);
@@ -31,12 +33,11 @@ public class DateHelper {
             throw new RuntimeException(e);
         }
     }
-
     // chuyển kiểu date sang chuỗi
     public static String toString(Date date, String pattern) {
+        SimpleDateFormat formater = new SimpleDateFormat();
         formater.applyPattern(pattern);
         return formater.format(date);
-
     }
 
     // cộng ngày vào 1 ngày cụ thể
@@ -72,6 +73,7 @@ public class DateHelper {
             throw new RuntimeException(e);
         }
     }
+
     // kiểm tra định dạng ngày
     public static boolean isValidDate(String input, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -84,6 +86,7 @@ public class DateHelper {
             return false;
         }
     }
+
     // kiểm tra xem ngày nhập có hơn ngày hiện tại không
     public static boolean isFutureDate(String input, String format) {
         SimpleDateFormat sdf = new SimpleDateFormat(format);
@@ -91,18 +94,24 @@ public class DateHelper {
 
         try {
             Date inputDate = sdf.parse(input);
-            
-            // Lấy ngày hiện tại
-            Date currentDate = new Date();
-            
+
+            // Lấy ngày hiện tại và đặt thời gian về nửa đêm
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.HOUR_OF_DAY, 0);
+            cal.set(Calendar.MINUTE, 0);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            Date currentDate = cal.getTime();
+
             // So sánh ngày nhập liệu với ngày hiện tại, bao gồm trường hợp bằng nhau
             return !inputDate.before(currentDate);
-        } catch (ParseException e) {
+        } catch (Exception e) {
             return false;
         }
     }
+
     // Phương thức hỗ trợ để tính số ngày thuê còn lại
-    public static int calculateRemainingDays(List<HopDong> contracts, Date rentalStart, Date rentalEnd,int songaythue){
+    public static int calculateRemainingDays(List<HopDong> contracts, Date rentalStart, Date rentalEnd, int songaythue) {
         int remainingDays = songaythue;
 
         for (HopDong hd : contracts) {
@@ -122,5 +131,19 @@ public class DateHelper {
     private static int calculateDaysBetween(Date startDate, Date endDate) {
         long diffInMillies = Math.abs(endDate.getTime() - startDate.getTime());
         return (int) TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
+    }
+    // hàm đặt thời gian về 0
+    public static Date resetTime(Date date) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        return cal.getTime();
+    }
+    public static void main(String[] args) {
+        Date date = toDate("31/12/2023", "dd/MM/yyyy");
+        System.out.println(date);
     }
 }
