@@ -241,6 +241,8 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         btn_guiemail = new javax.swing.JButton();
         btn_xacthuc = new javax.swing.JButton();
         lbl_trangthaithaikhoan = new javax.swing.JLabel();
+        txtTim = new javax.swing.JTextField();
+        btnTim = new javax.swing.JButton();
         pnl_TheNap = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblmanap = new javax.swing.JTable();
@@ -388,6 +390,13 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         lbl_trangthaithaikhoan.setText("TRẠNG THÁI :");
         lbl_trangthaithaikhoan.setVerticalAlignment(javax.swing.SwingConstants.TOP);
 
+        btnTim.setText("Tìm Kiếm");
+        btnTim.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTimActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_taikhoanLayout = new javax.swing.GroupLayout(pnl_taikhoan);
         pnl_taikhoan.setLayout(pnl_taikhoanLayout);
         pnl_taikhoanLayout.setHorizontalGroup(
@@ -399,32 +408,43 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
-                        .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lbl_hovaten)
-                            .addComponent(lbl_cancuoc)
-                            .addComponent(lbl_email)
-                            .addComponent(txt_hoten, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                            .addComponent(txt_cancuoc)
-                            .addComponent(txt_email)
-                            .addComponent(txt_sodienthoai)
-                            .addComponent(lbl_sodienthoai)))
+                        .addComponent(btnTim)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
-                        .addComponent(btn_guiemail)
-                        .addGap(161, 161, 161)
-                        .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_xacthuc))
-                .addGap(201, 201, 201))
+                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnl_taikhoanLayout.createSequentialGroup()
+                                .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lbl_hovaten)
+                                    .addComponent(lbl_cancuoc)
+                                    .addComponent(lbl_email)
+                                    .addComponent(txt_hoten, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                                    .addComponent(txt_cancuoc)
+                                    .addComponent(txt_email)
+                                    .addComponent(txt_sodienthoai)
+                                    .addComponent(lbl_sodienthoai)))
+                            .addGroup(pnl_taikhoanLayout.createSequentialGroup()
+                                .addComponent(btn_guiemail)
+                                .addGap(161, 161, 161)
+                                .addComponent(lbl_trangthaithaikhoan, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(pnl_anhdaidien, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_xacthuc))
+                        .addGap(201, 201, 201))))
         );
         pnl_taikhoanLayout.setVerticalGroup(
             pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_taikhoanLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTim))
+                .addGap(4, 4, 4)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pnl_anhbanglai, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -728,11 +748,39 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btncheckActionPerformed
 
+    private void btnTimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimActionPerformed
+       String HoTen = "%" + txtTim.getText() + "%";
+        DefaultTableModel model = (DefaultTableModel) tbl_taikhoan.getModel();
+        model.setRowCount(0);
+        try {
+            List<ChiTietTaiKhoan> list = cttkd.selectByID_Tim(HoTen);
+            for (ChiTietTaiKhoan cttk : list) {
+                Object[] row = {cttk.getUserid(),
+                    cttk.getHoten(),
+                    cttk.getAnhdaidien(),
+                    cttk.getCccd(),
+                    cttk.getBanglaixe(),
+                    cttk.getSdt(),
+                    cttk.getNgaysinh(),
+                    cttk.isGioitinh(),
+                    cttk.getDiachi(),
+                    cttk.getSodu()
+
+                   
+                };
+                model.addRow(row);
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }//GEN-LAST:event_btnTimActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea TxtNoiDung;
     private javax.swing.JButton btnMoi;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnTim;
     private javax.swing.JButton btnXoa;
     private javax.swing.JButton btn_gui;
     private javax.swing.JButton btn_guiemail;
@@ -765,6 +813,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
     private javax.swing.ButtonGroup trangthai;
     private javax.swing.JTextField txtGiaTri;
     private javax.swing.JTextField txtMaNap;
+    private javax.swing.JTextField txtTim;
     private javax.swing.JTextField txt_cancuoc;
     private javax.swing.JTextField txt_email;
     private javax.swing.JTextField txt_hoten;

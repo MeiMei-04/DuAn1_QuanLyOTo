@@ -61,7 +61,7 @@ public class NapTheCaoDialog extends javax.swing.JDialog implements Runnable, Th
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             int tongtien = -1;
-            if (laygiatri() < 0) {
+            if (laygiatri() < 1) {
                 Hepler.DialogHelper.alert(this, "Thẻ Đã Tồn Tại");
                 return;
             } else {

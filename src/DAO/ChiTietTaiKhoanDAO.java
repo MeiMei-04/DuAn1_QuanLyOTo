@@ -49,6 +49,8 @@ public class ChiTietTaiKhoanDAO {
             + "where yeucauxacthuc = ? and Trangthai = 0";
 
     //thêm
+    
+    String SELECT_BY_ID_HOTENTim= "select * from ChiTietTaiKhoan where HOTEN like ?";
     public void insert(ChiTietTaiKhoan entity) {
         JDBCHelper.executeUpdate(INSERT_CHITIETAIKHOAN,
                 entity.getUserid(),
@@ -113,6 +115,18 @@ public class ChiTietTaiKhoanDAO {
     public List<ChiTietTaiKhoan> selectByID_DANHSACH(String yeucauxacthuc) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC, yeucauxacthuc);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
+    public List<ChiTietTaiKhoan> selectByID_Tim(String HoTen) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_HOTENTim, HoTen);
         // Kiểm tra xem danh sách có trống không
         if (list.isEmpty()) {
             // Nếu danh sách trống, trả về null
