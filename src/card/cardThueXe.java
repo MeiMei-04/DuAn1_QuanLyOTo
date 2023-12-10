@@ -82,25 +82,6 @@ public class cardThueXe extends javax.swing.JPanel {
         getDiaChi();
     }
 
-    public int tinhSoNgayThue(int songaythue) {
-        List<Integer> list = new ArrayList<>();
-        Scanner input = new Scanner(System.in);
-        int max = -1;
-        for (int i = 1; i <= songaythue; i++) {
-            if (kiemtraxe(i)) {
-                System.out.println(i);
-                list.add(i);
-            }
-            System.out.println(kiemtraxe(songaythue));
-        }
-        for (int num : list) {
-            if (num > max) {
-                max = num;
-            }
-        }
-        return max;
-    }
-
     public void getDiaChi() {
         String thanhpho = null;
         String huyen = null;
@@ -137,6 +118,24 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
+    public int tinhSoNgayThue(int songaythue) {
+        List<Integer> list = new ArrayList<>();
+        Scanner input = new Scanner(System.in);
+        int max = -1;
+        for (int i = 1; i <= songaythue; i++) {
+            if (kiemtraxe(i)) {
+                list.add(i);
+            }
+            System.out.println(kiemtraxe(songaythue));
+        }
+        for (int num : list) {
+            if (num > max) {
+                max = num;
+            }
+        }
+        return max;
+    }
+
     public boolean kiemtraxe(int songaythue) {
         Date ngayTra = null;
         Date ngaythue_fake = null;
@@ -148,15 +147,18 @@ public class cardThueXe extends javax.swing.JPanel {
                 Date ngayTaoHD = resetTime(hd.getNgaythue());
                 Date ngayHenHanHD = resetTime(hd.getNgayhethan());
                 // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
-                if (ngayThue.after(ngayTaoHD) || ngayTra.after(ngayTaoHD)) {
-                    // Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng     
-                    return false;
+                if (ngayThue.after(ngayHenHanHD)) {
+                    return true;
+                } else {
+                    if ((ngayThue.before(ngayTaoHD) && ngayTra.before(ngayTaoHD))) {
+                        return true;
+                    }
                 }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return true;
+        return false;
     }
 
     public boolean vadidate() {

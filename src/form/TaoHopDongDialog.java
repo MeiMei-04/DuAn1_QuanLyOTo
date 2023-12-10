@@ -225,7 +225,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             tongtienphaitra = tongtien - tienvoucher(tongtien);
             txt_tongtien.setText(Hepler.MoneyFormatter.formatMoney(tongtienphaitra));
             txt_diadiemnhanxe.setText(diaDiem);
-            System.out.println(tiendichvu());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
