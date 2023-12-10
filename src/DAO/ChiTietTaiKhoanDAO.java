@@ -42,51 +42,59 @@ public class ChiTietTaiKhoanDAO {
     String DELETE_CHITIETTAIKHOAN_WHERE_USERID = "DELETE FROM ChiTietTaiKhoan WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM ChiTietTaiKhoan";
     String SELECT_BY_ID_USERID = "select * from ChiTietTaiKhoan where userid =?";
-    String SELECT_BY_ID_HOTEN= "select * from ChiTietTaiKhoan where HOTEN =?";
+    String SELECT_BY_ID_HOTEN = "select * from ChiTietTaiKhoan where HOTEN =?";
     String SELECT_BY_ID_YEUCAUXACTHUC = "select * from ChiTietTaiKhoan"
             + " INNER JOIN TaiKhoan "
             + "ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID "
-            + "where yeucauxacthuc = ? and Trangthai = 0";
-
+            + "where yeucauxacthuc = ? and Trangthai = ?";
+    String SELECT_BY_ID_YEUCAUXACTHUC1 = "select * from ChiTietTaiKhoan INNER JOIN TaiKhoan ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID ORDER BY CASE WHEN TrangThai = 0 THEN 0 ELSE 1 END";
+//            + " INNER JOIN TaiKhoan "
+//            + "ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID "
+//            + "ORDER BY CASE WHEN TrangThai = 0 THEN 0 ELSE 1 END";
     //thêm
-    
-    String SELECT_BY_ID_HOTENTim= "select * from ChiTietTaiKhoan where HOTEN like ?";
+
+    String SELECT_BY_ID_HOTENTim = "select * from ChiTietTaiKhoan where HOTEN like ?";
+
     public void insert(ChiTietTaiKhoan entity) {
         JDBCHelper.executeUpdate(INSERT_CHITIETAIKHOAN,
                 entity.getUserid(),
                 entity.getHoten(),
                 entity.getAnhdaidien(),
-                entity.getCccd(), 
-                entity.getBanglaixe(), 
+                entity.getCccd(),
+                entity.getBanglaixe(),
                 entity.getSdt(),
-                entity.getNgaysinh(), 
-                entity.isGioitinh(), 
-                entity.getDiachi(), 
+                entity.getNgaysinh(),
+                entity.isGioitinh(),
+                entity.getDiachi(),
                 entity.isYeucauxacthuc()
         );
     }
+
     //sửa
     public void update(ChiTietTaiKhoan entity) {
-        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_THONGTIN, 
-                entity.getHoten(), 
-                entity.getAnhdaidien(), 
-                entity.getCccd(), 
-                entity.getBanglaixe(), 
-                entity.getSdt(), 
-                entity.getNgaysinh(), 
-                entity.isGioitinh(), 
-                entity.getDiachi(), 
+        JDBCHelper.executeUpdate(UPDATE_CHITIETAIKHOAN_THONGTIN,
+                entity.getHoten(),
+                entity.getAnhdaidien(),
+                entity.getCccd(),
+                entity.getBanglaixe(),
+                entity.getSdt(),
+                entity.getNgaysinh(),
+                entity.isGioitinh(),
+                entity.getDiachi(),
                 entity.getUserid()
         );
     }
+
     //xóa
     public void delete(String userid) {
         JDBCHelper.executeUpdate(DELETE_CHITIETTAIKHOAN_WHERE_USERID, userid);
     }
+
     //trả về danh sách tất cả các bản ghi
     public List<ChiTietTaiKhoan> selectAll() {
         return selectBySQL(SELECT_ALL);
     }
+
     //trả về 1 đối tượng ChiTietTaiKhoan khi userid =
     public ChiTietTaiKhoan selectByID_DOITUONG(String userid) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
@@ -100,6 +108,7 @@ public class ChiTietTaiKhoanDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+
     public ChiTietTaiKhoan selectByID_DOITUONG_HOTEN(String HOTEN) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_HOTEN, HOTEN);
@@ -112,6 +121,7 @@ public class ChiTietTaiKhoanDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+
     public List<ChiTietTaiKhoan> selectByID_DANHSACH(String yeucauxacthuc) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC, yeucauxacthuc);
@@ -124,6 +134,11 @@ public class ChiTietTaiKhoanDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list;
     }
+
+    public List<ChiTietTaiKhoan> selectByID_DANHSACH1() {
+        return selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC1);
+    }
+
     public List<ChiTietTaiKhoan> selectByID_Tim(String HoTen) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_HOTENTim, HoTen);
