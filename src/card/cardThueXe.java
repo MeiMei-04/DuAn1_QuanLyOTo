@@ -126,7 +126,6 @@ public class cardThueXe extends javax.swing.JPanel {
             if (kiemtraxe(i)) {
                 list.add(i);
             }
-            System.out.println(kiemtraxe(songaythue));
         }
         for (int num : list) {
             if (num > max) {
@@ -136,29 +135,18 @@ public class cardThueXe extends javax.swing.JPanel {
         return max;
     }
 
-    public boolean kiemtraxe(int songaythue) {
+    public boolean kiemtraxe(int ngaythue) {
         Date ngayTra = null;
         Date ngaythue_fake = null;
         ngaythue_fake = (Date) ngayThue.clone();
-        ngayTra = resetTime(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
+        ngayTra = Hepler.DateHelper.addDays(ngaythue_fake, ngaythue);
         try {
-            List<HopDong> list = hdd.selectByID_MAXE_NULL(this.maxe);
-            for (HopDong hd : list) {
-                Date ngayTaoHD = resetTime(hd.getNgaythue());
-                Date ngayHenHanHD = resetTime(hd.getNgayhethan());
-                // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
-                if (ngayThue.after(ngayHenHanHD)) {
-                    return true;
-                } else {
-                    if ((ngayThue.before(ngayTaoHD) && ngayTra.before(ngayTaoHD))) {
-                        return true;
-                    }
-                }
-            }
+            HopDong hd = hdd.selectByID_MAXE_NULL(this.maxe, ngayTra);
+            return false;
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return false;
+        return true;
     }
 
     public boolean vadidate() {
