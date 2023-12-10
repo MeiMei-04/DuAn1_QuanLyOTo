@@ -82,25 +82,6 @@ public class cardThueXe extends javax.swing.JPanel {
         getDiaChi();
     }
 
-    public int tinhSoNgayThue(int songaythue) {
-        List<Integer> list = new ArrayList<>();
-        Scanner input = new Scanner(System.in);
-        int max = -1;
-        for (int i = 1; i <= songaythue; i++) {
-            if (kiemtraxe(i)) {
-                System.out.println(i);
-                list.add(i);
-            }
-            System.out.println(kiemtraxe(songaythue));
-        }
-        for (int num : list) {
-            if (num > max) {
-                max = num;
-            }
-        }
-        return max;
-    }
-
     public void getDiaChi() {
         String thanhpho = null;
         String huyen = null;
@@ -137,26 +118,35 @@ public class cardThueXe extends javax.swing.JPanel {
         }
     }
 
-    public boolean kiemtraxe(int songaythue) {
+    public int tinhSoNgayThue(int songaythue) {
+        int max = -1;
+        for (int i = 1; i <= songaythue; i++) {
+            if (kiemtraxe(i)) {
+                break;
+            } else {
+                if (max < i) {
+                    max = i;
+                }
+            }
+        }
+        return max;
+    }
+
+    public boolean kiemtraxe(int ngaythue) {
         Date ngayTra = null;
         Date ngaythue_fake = null;
         ngaythue_fake = (Date) ngayThue.clone();
-        ngayTra = resetTime(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
+        ngayTra = Hepler.DateHelper.addDays(ngaythue_fake, ngaythue);
         try {
-            List<HopDong> list = hdd.selectByID_MAXE_NULL(this.maxe);
-            for (HopDong hd : list) {
-                Date ngayTaoHD = resetTime(hd.getNgaythue());
-                Date ngayHenHanHD = resetTime(hd.getNgayhethan());
-                // Khoảng thời gian thuê của hợp đồng mới không được giao với hợp đồng hiện tại
-                if (ngayThue.after(ngayTaoHD) || ngayTra.after(ngayTaoHD)) {
-                    // Ngày trả nằm trong thời hạn của hợp đồng và trước ngày thuê hợp đồng     
-                    return false;
-                }
+            HopDong hd = hdd.selectByID_MAXE_NULL(maxe, ngayTra);
+            if (hd != null) {
+                return true;  // Hợp đồng đã đặt cho ngày đó
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return true;
+        return false;
+
     }
 
     public boolean vadidate() {
@@ -923,11 +913,11 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (vadidate()) {
             getFrom();
-            int songaycothethue = tinhSoNgayThue(songaythue);
-            if (songaycothethue <= songaythue) {
+            int songaytoida = tinhSoNgayThue(songaythue);
+            if (songaytoida > songaythue || songaytoida == songaythue) {
                 openHopDong();
             } else {
-                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + tinhSoNgayThue(songaythue) + " Ngày");
+                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + songaytoida + " Ngày");
             }
         }
 

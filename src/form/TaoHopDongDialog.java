@@ -42,10 +42,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     String mavoucher = null;
     Date ngayThue = null;
     int songaythue = 1;
-    int tienvoucher = 0;
-    int tienphuphi = 0;
+    
+
     int tienthuexe = 0;
-    int tiendichvu = 0;
     int tien_not_VAT = 0;
     int giatriphuphi = 0;
     int tongtien = 0;
@@ -86,6 +85,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     }
 
     public int tienphuphi() {
+        int tienphuphi = 0;
         int giatri = 0;
         for (PhuPhi phuphi : list_tpp) {
             giatri += phuphi.getGiatri();
@@ -95,6 +95,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
     }
 
     public int tiendichvu() {
+        int tiendichvu = 0;
         for (DichVu dv : list_dv) {
             tiendichvu = tiendichvu + dv.getDongia();
         }
@@ -158,7 +159,8 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
 
     public int tienvoucher(int tongtien) {
         int giamgia = -1;
-        if (mavoucher.isEmpty()) {
+        int tienvoucher = 0;
+        if (mavoucher == null) {
             tienvoucher = 0;
         } else {
             try {
@@ -270,9 +272,9 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hd.setNgayhethan(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
             hd.setNgaytraxe(null);
             hd.setSongayquahan(0);
-            if(mavoucher.isEmpty()){
+            if (mavoucher == null) {
                 hd.setMavoucher(null);
-            }else{
+            } else {
                 hd.setMavoucher(mavoucher);
             }
             hd.setThanhtien(tongtienphaitra);
@@ -282,7 +284,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hdd.insert(hd);
             DialogHelper.alert(this, "Tạo Hợp Đồng Thành Công");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             DialogHelper.alert(this, "Tạo Hợp Đồng Thất Bại");
         }
     }
