@@ -119,17 +119,14 @@ public class cardThueXe extends javax.swing.JPanel {
     }
 
     public int tinhSoNgayThue(int songaythue) {
-        List<Integer> list = new ArrayList<>();
-        Scanner input = new Scanner(System.in);
         int max = -1;
         for (int i = 1; i <= songaythue; i++) {
             if (kiemtraxe(i)) {
-                list.add(i);
-            }
-        }
-        for (int num : list) {
-            if (num > max) {
-                max = num;
+                break;
+            } else {
+                if (max < i) {
+                    max = i;
+                }
             }
         }
         return max;
@@ -141,12 +138,15 @@ public class cardThueXe extends javax.swing.JPanel {
         ngaythue_fake = (Date) ngayThue.clone();
         ngayTra = Hepler.DateHelper.addDays(ngaythue_fake, ngaythue);
         try {
-            HopDong hd = hdd.selectByID_MAXE_NULL(this.maxe, ngayTra);
-            return false;
+            HopDong hd = hdd.selectByID_MAXE_NULL(maxe, ngayTra);
+            if (hd != null) {
+                return true;  // Hợp đồng đã đặt cho ngày đó
+            }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return true;
+        return false;
+
     }
 
     public boolean vadidate() {
@@ -913,11 +913,11 @@ public class cardThueXe extends javax.swing.JPanel {
         // TODO add your handling code here:
         if (vadidate()) {
             getFrom();
-            int songaycothethue = tinhSoNgayThue(songaythue);
-            if (songaycothethue <= songaythue) {
+            int songaytoida = tinhSoNgayThue(songaythue);
+            if (songaytoida > songaythue || songaytoida == songaythue) {
                 openHopDong();
             } else {
-                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + tinhSoNgayThue(songaythue) + " Ngày");
+                DialogHelper.alert(this, "Bạn Chỉ Có thể Thuê Tối Đa " + songaytoida + " Ngày");
             }
         }
 

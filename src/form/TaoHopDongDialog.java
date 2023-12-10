@@ -189,7 +189,6 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
         TaiKhoan tk = Hepler.AuthHelper.user;
         String gioitinh = null;
         try {
-
             ChiTietXe ctx = ctxd.selectByID_MAXE(this.maxe);
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
             //thông tin khách hàng
@@ -273,7 +272,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hd.setNgayhethan(Hepler.DateHelper.addDays(ngaythue_fake, songaythue));
             hd.setNgaytraxe(null);
             hd.setSongayquahan(0);
-            if (mavoucher.isEmpty()) {
+            if (mavoucher == null) {
                 hd.setMavoucher(null);
             } else {
                 hd.setMavoucher(mavoucher);
@@ -285,7 +284,7 @@ public class TaoHopDongDialog extends javax.swing.JDialog {
             hdd.insert(hd);
             DialogHelper.alert(this, "Tạo Hợp Đồng Thành Công");
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
             DialogHelper.alert(this, "Tạo Hợp Đồng Thất Bại");
         }
     }
