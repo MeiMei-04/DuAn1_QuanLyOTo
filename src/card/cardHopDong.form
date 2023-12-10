@@ -99,7 +99,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel4" alignment="0" pref="633" max="32767" attributes="0"/>
+                              <Component id="jPanel4" alignment="0" pref="617" max="32767" attributes="0"/>
                               <Component id="btn_next" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="ttxe" min="-2" max="-2" attributes="0"/>

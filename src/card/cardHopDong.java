@@ -44,83 +44,9 @@ public class cardHopDong extends javax.swing.JPanel {
             tabs.remove(0);
         }
     }
-//
-//    public void check_hsd() {
-//            try {
-//                TaiKhoan tk = Hepler.AuthHelper.user;
-//                List<HopDong> list = thdd.selectByID_USERID(String.valueOf(tk.getUserid()));
-//                for (HopDong hd : list) {
-//                    if (Hepler.DateHelper.now().compareTo(hd.getNgaytra()) >= 0) {
-//                        thdd.update(hd);
-//                    }
-//                }
-//                filltableHopDongKhachHang();
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//            }
-//    }
 
-//    void filltableHopDong() {
-//        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
-//        model.setRowCount(0);
-//        List<Object[]> list = dao.getSoHopDong();
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
-//    }
-
-    void xuatEXCL() {
-        try {
-            JFileChooser jFileChooser = new JFileChooser();
-            jFileChooser.showSaveDialog(this);
-            File saveFile = jFileChooser.getSelectedFile();
-
-            if (saveFile != null) {
-                saveFile = new File(saveFile.toString() + ".xlsx");
-                Workbook wb = new XSSFWorkbook();
-                Sheet sheet = wb.createSheet("Doanh thu");
-
-                Row rowCol = sheet.createRow(4);
-                for (int i = 0; i < tblHopDong.getColumnCount(); i++) {
-
-                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
-                    cell.setCellValue(tblHopDong.getColumnName(i));
-                }
-
-                for (int j = 0; j < tblHopDong.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 5);// sang phải
-                    for (int k = 0; k < tblHopDong.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k + 4);// lùi xuống
-                        if (tblHopDong.getValueAt(j, k) != null) {
-                            cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
-                        }
-                    }
-                }
-                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
-                wb.write(out);
-                wb.close();
-                out.close();
-                onpenFile(saveFile.toString());
-            } else {
-                DialogHelper.alert(this, "loiiiii");
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        } catch (IOException io) {
-            System.out.println(io);
-        }
-
-    }
-
-    void onpenFile(String file) {
-        try {
-            File path = new File(file);
-            Desktop.getDesktop().open(path);
-        } catch (IOException e) {
-            System.out.println("e");
-        }
-
-    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -669,7 +595,7 @@ public class cardHopDong extends javax.swing.JPanel {
             .addGroup(backgroundLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(backgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 633, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, 617, Short.MAX_VALUE)
                     .addComponent(btn_next, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(backgroundLayout.createSequentialGroup()
                         .addComponent(ttxe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -981,5 +907,56 @@ public class cardHopDong extends javax.swing.JPanel {
     private javax.swing.JTextField txt_songaythue;
     private javax.swing.JTextField txt_voucher;
     // End of variables declaration//GEN-END:variables
+    void xuatEXCL() {
+        try {
+            JFileChooser jFileChooser = new JFileChooser();
+            jFileChooser.showSaveDialog(this);
+            File saveFile = jFileChooser.getSelectedFile();
 
+            if (saveFile != null) {
+                saveFile = new File(saveFile.toString() + ".xlsx");
+                Workbook wb = new XSSFWorkbook();
+                Sheet sheet = wb.createSheet("Doanh thu");
+
+                Row rowCol = sheet.createRow(4);
+                for (int i = 0; i < tblHopDong.getColumnCount(); i++) {
+
+                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
+                    cell.setCellValue(tblHopDong.getColumnName(i));
+                }
+
+                for (int j = 0; j < tblHopDong.getRowCount(); j++) {
+                    Row row = sheet.createRow(j + 5);// sang phải
+                    for (int k = 0; k < tblHopDong.getColumnCount(); k++) {
+                        Cell cell = row.createCell(k + 4);// lùi xuống
+                        if (tblHopDong.getValueAt(j, k) != null) {
+                            cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
+                        }
+                    }
+                }
+                FileOutputStream out = new FileOutputStream(new File(saveFile.toString()));
+                wb.write(out);
+                wb.close();
+                out.close();
+                onpenFile(saveFile.toString());
+            } else {
+                DialogHelper.alert(this, "loiiiii");
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println(e);
+        } catch (IOException io) {
+            System.out.println(io);
+        }
+
+    }
+
+    void onpenFile(String file) {
+        try {
+            File path = new File(file);
+            Desktop.getDesktop().open(path);
+        } catch (IOException e) {
+            System.out.println("e");
+        }
+
+    }
 }
