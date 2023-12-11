@@ -141,13 +141,13 @@ public class HopDong {
 
     public String tenTrangThai(int tinhtranghopdong) {
         if (tinhtranghopdong == 1) {
-            return "Chờ Xác Nhận";
+            return "Đã Thanh Toán";
         } else if (tinhtranghopdong == 2) {
             return "Đã Huỷ";
         } else if (tinhtranghopdong == 3) {
-            return "Bàn Giao Xe";
+            return "Đang Thuê";
         } else if (tinhtranghopdong == 4) {
-            return "Quá Hạn";
+            return "Hết Hạn";
         } else if (tinhtranghopdong == 5) {
             return "Hoàn Thành";
         }

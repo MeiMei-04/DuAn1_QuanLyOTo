@@ -68,17 +68,30 @@ public class ThongTinTraXe extends javax.swing.JDialog {
             HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
             TaiKhoan tk = Hepler.AuthHelper.user;
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
-            ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
-            int tienlayxe = (hd.getThanhtien() * 5) / 100;
-            cttknew.setUserid(tk.getUserid());
-            if (cttk.getSodu() - tienlayxe < 0) {
-                Hepler.DialogHelper.alert(this, "Tiền Của Bạn Không Đủ Vui Lòng Nạp Thêm");
-                return;
+            if (hd.getThoihanhopdong() > 0) {
+                ChiTietTaiKhoan cttknew_1 = new ChiTietTaiKhoan();
+                cttknew_1.setUserid(tk.getUserid());
+                int phuphiquahan = hd.getThoihanhopdong() * 2 + 5;
+                int tienquahan = cttk.getSodu() * phuphiquahan / 100;
+                if (cttk.getSodu() - tienquahan < 0) {
+                    Hepler.DialogHelper.alert(this, "Tiền Của Bạn Không Đủ Vui Lòng Nạp Thêm");
+                    return;
+                } else {
+                    cttknew_1.setSodu(cttk.getSodu() - tienquahan);
+                    cttkd.update_sodu(cttknew_1);
+                }
             } else {
-                cttknew.setSodu(cttk.getSodu() - tienlayxe);
+                ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
+                int tienlayxe = (hd.getThanhtien() * 5) / 100;
+                if (cttk.getSodu() - tienlayxe < 0) {
+                    Hepler.DialogHelper.alert(this, "Tiền Của Bạn Không Đủ Vui Lòng Nạp Thêm");
+                    return;
+                } else {
+                    cttknew.setUserid(tk.getUserid());
+                    cttknew.setSodu(cttk.getSodu() - tienlayxe);
+                }
+                cttkd.update_sodu(cttknew);
             }
-            cttkd.update_sodu(cttknew);
-            System.out.println(hd.getMaxe());
             update_xe_TinhTrangXe(hd.getMaxe());
             update_HopDong_NGAYTRAXE();
             update_HopDong_TRANGTHAI();

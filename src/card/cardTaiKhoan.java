@@ -49,6 +49,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     ThemDichVuDAO tdvd = new ThemDichVuDAO();
     DichVuDAO dvd = new DichVuDAO();
     ThemPhuPhiDAO tppd = new ThemPhuPhiDAO();
+    ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     PhuPhiDAO ppd = new PhuPhiDAO();
     String selectedFilePath_anhdaidien = null;
     String selectedFileName_anhdaidien = null;
@@ -67,15 +68,46 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         fill_table_hopdong();
     }
 
+    public void huyHopDong() {
+        if (mahopdong != null) {
+            HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
+            if (hd.getTinhtranghopdong() == 1) {
+                TaiKhoan tk = Hepler.AuthHelper.user;
+                ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+                ChiTietTaiKhoan cttknew = new ChiTietTaiKhoan();
+                cttknew.setUserid(tk.getUserid());
+                int sotienhoanlai = hd.getThanhtien() * 90 / 100;
+                cttknew.setSodu(cttk.getSodu() + sotienhoanlai);
+                HopDong hdnew = new HopDong();
+                hdnew.setTinhtranghopdong(2);
+                hdnew.setMahopdong(mahopdong);
+                hdnew.setNgaytraxe(Hepler.DateHelper.now());
+                hdd.update_trangthai(hdnew);
+                hdd.update_NGAYTRAXE(hdnew);
+                cttkd.update_sodu(cttknew);
+            }else{
+                DialogHelper.alert(this, "Hợp Đồng Không Trong Diện Hỗ Trợ");
+            }
+        } else {
+            DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
+        }
+    }
+
     public void openTraXe() {
         try {
             if (mahopdong != null) {
-                ThongTinTraXe tttx = new ThongTinTraXe(null, true, mahopdong);
+                HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
+                if(hd.getTinhtranghopdong() == 4){
+                    ThongTinTraXe tttx = new ThongTinTraXe(null, true, mahopdong);
                 tttx.setVisible(true);
-                if(!tttx.isVisible()){
+                if (!tttx.isVisible()) {
                     setForm();
+                    setForm_XeCuatoi(mahopdong);
                 }
-            }else{
+                }else{
+                    DialogHelper.alert(this, "Hợp Đồng Không Trong Diện Hỗ Trợ");
+                }
+            } else {
                 DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
             }
         } catch (Exception e) {
@@ -421,6 +453,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         txt_tongtien = new javax.swing.JTextField();
         btn_traxe = new javax.swing.JButton();
+        btn_huyhopdong = new javax.swing.JButton();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(985, 660));
@@ -888,7 +921,17 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 btn_traxeActionPerformed(evt);
             }
         });
-        jPanel2.add(btn_traxe, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 156, -1));
+        jPanel2.add(btn_traxe, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 540, 156, -1));
+
+        btn_huyhopdong.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        btn_huyhopdong.setForeground(new java.awt.Color(255, 102, 51));
+        btn_huyhopdong.setText("Hủy Hợp Đồng");
+        btn_huyhopdong.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_huyhopdongActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btn_huyhopdong, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 540, 156, -1));
 
         javax.swing.GroupLayout pnl_xecuatoiLayout = new javax.swing.GroupLayout(pnl_xecuatoi);
         pnl_xecuatoi.setLayout(pnl_xecuatoiLayout);
@@ -966,10 +1009,16 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         openTraXe();
     }//GEN-LAST:event_btn_traxeActionPerformed
 
+    private void btn_huyhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyhopdongActionPerformed
+        // TODO add your handling code here:
+        huyHopDong();
+    }//GEN-LAST:event_btn_huyhopdongActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_capnhatthongtin;
     private javax.swing.JButton btn_doimatkhau;
+    private javax.swing.JButton btn_huyhopdong;
     private javax.swing.JButton btn_napsodu;
     private javax.swing.JButton btn_traxe;
     private javax.swing.ButtonGroup btngr_gioitinh;
