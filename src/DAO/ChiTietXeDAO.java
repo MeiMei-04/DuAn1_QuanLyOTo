@@ -38,6 +38,7 @@ public class ChiTietXeDAO {
     String SELECT_BY_ID_MAXE = "SELECT*FROM ChiTietXe WHERE MaXe = ?";
     String SELECT_BY_ID_TENXE = "SELECT*FROM ChiTietXe WHERE TENXE = ?";
     String SELECT_BY_ID_TENXEtim = "SELECT*FROM ChiTietXe WHERE TENXE like ?";
+    String UPDATE_CHITIETXE = "UPDATE CHITIETXE SET TRANGTHAIXE = ? WHERE MAXE = ?";
 
     public void insert(ChiTietXe entity) {
         JDBCHelper.executeUpdate(INSERT,
@@ -61,7 +62,11 @@ public class ChiTietXeDAO {
                 entity.getTrangthaixe(),
                 entity.getMaxe());
     }
-
+    public void update_CHITIETXE(ChiTietXe entity) {
+        JDBCHelper.executeUpdate(UPDATE_CHITIETXE,
+                entity.getTrangthaixe(),
+                entity.getMaxe());
+    }
     public void delete(String key) {
         JDBCHelper.executeUpdate(DELETE, key);
     }

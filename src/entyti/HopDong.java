@@ -11,6 +11,7 @@ import java.util.Date;
  * @author hieud
  */
 public class HopDong {
+
     private String mahopdong;
     private String maxe;
     private int userid;
@@ -138,5 +139,19 @@ public class HopDong {
         this.tinhtranghopdong = tinhtranghopdong;
     }
 
-    
+    public String tenTrangThai(int tinhtranghopdong) {
+        if (tinhtranghopdong == 1) {
+            return "Chờ Xác Nhận";
+        } else if (tinhtranghopdong == 2) {
+            return "Đã Huỷ";
+        } else if (tinhtranghopdong == 3) {
+            return "Bàn Giao Xe";
+        } else if (tinhtranghopdong == 4) {
+            return "Quá Hạn";
+        } else if (tinhtranghopdong == 5) {
+            return "Hoàn Thành";
+        }
+        return null;
+    }
+
 }

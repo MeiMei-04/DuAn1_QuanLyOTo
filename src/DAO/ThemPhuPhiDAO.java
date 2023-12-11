@@ -15,28 +15,32 @@ import java.sql.ResultSet;
  * @author Hieu
  */
 public class ThemPhuPhiDAO {
+
     String INSERT = "INSERT INTO NopPhuPhi ("
             + "mahopdong,"
             + "maphuphi)"
             + "values(?,?)";
     String DELETE = "DELETE FROM NopPhuPhi WHERE mahopdong =?";
     String SELECT_ALL = "SELECT * FROM NopPhuPhi";
-    String SELECT_BY_ID_MAHOPDONG = "select * from NopPhuPhi where mahopdong =?";
-    
+    String SELECT_BY_ID_MAHOPDONG = "select * from NopPhuPhi where mahopdong = ?";
+
     public void insert(ThemPhuPhi entity) {
         JDBCHelper.executeUpdate(INSERT,
                 entity.getMahopdong(),
                 entity.getMaphuphi()
         );
     }
+
     //xóa
     public void delete(String mahopdong) {
         JDBCHelper.executeUpdate(DELETE, mahopdong);
     }
+
     //trả về danh sách tất cả các bản ghi
     public List<ThemPhuPhi> selectAll() {
         return selectBySQL(SELECT_ALL);
     }
+
     //trả về 1 đối tượng NopPhuPhi khi userid =
     public ThemPhuPhi selectByID_MAHOPDONG(String mahopdong) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
@@ -51,6 +55,18 @@ public class ThemPhuPhiDAO {
         return list.get(0);
     }
 
+    public List<ThemPhuPhi> selectByID_MAHOPDONG_LIST(String mahopdong) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<ThemPhuPhi> list = selectBySQL(SELECT_BY_ID_MAHOPDONG, mahopdong);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
 
     protected List<ThemPhuPhi> selectBySQL(String sql, Object... args) {
         List<ThemPhuPhi> list = new ArrayList<>();
@@ -59,7 +75,7 @@ public class ThemPhuPhiDAO {
             while (rs.next()) {
                 ThemPhuPhi npp = new ThemPhuPhi();
                 npp.setMahopdong(rs.getString("mahopdong"));
-                npp.setMaphuphi(rs.getString("MaNopPhuPhi"));
+                npp.setMaphuphi(rs.getString("MaPhuPhi"));
                 list.add(npp);
             }
             rs.getStatement().getConnection().close();

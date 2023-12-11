@@ -49,10 +49,16 @@ public class HopDongDAO {
             + "tinhtranghopdong = ?"
             + "WHERE MaHopDong =?";
     String UPDATE_TRANGTHAI = "UPDATE HOPDONG SET tinhtranghopdong = ? WHERE MAHOPDONG= ?";
-    
+    String UPDATE_NGAYTRAXE = "UPDATE HOPDONG SET ngaytraxe = ? WHERE MAHOPDONG= ?";
     public void update_trangthai(HopDong entity){
         JDBCHelper.executeUpdate(UPDATE_TRANGTHAI,
                 entity.getTinhtranghopdong(),
+                entity.getMahopdong()
+        );
+    }
+    public void update_NGAYTRAXE(HopDong entity){
+        JDBCHelper.executeUpdate(UPDATE_NGAYTRAXE,
+                entity.getNgaytraxe(),
                 entity.getMahopdong()
         );
     }
