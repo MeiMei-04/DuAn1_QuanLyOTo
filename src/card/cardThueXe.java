@@ -110,7 +110,6 @@ public class cardThueXe extends javax.swing.JPanel {
         diaChi = thanhpho + huyen + xa + diachichitiet;
     }
 
-
     public int tinhSoNgayThue(int songaythue) {
         int max = -1;
         for (int i = 0; i <= songaythue; i++) {
@@ -272,7 +271,9 @@ public class cardThueXe extends javax.swing.JPanel {
             model.removeAllElements();
             List<DichVu> list = dvd.selectAll();
             for (DichVu dv : list) {
-                model.addElement(dv.getTendichvu());
+                if (!dv.isTrangthai()) {
+                    model.addElement(dv.getTendichvu());
+                }
             }
             cbb_hangxe.setSelectedIndex(0);
         } catch (Exception e) {
