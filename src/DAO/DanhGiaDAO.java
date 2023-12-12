@@ -24,11 +24,11 @@ public class DanhGiaDAO {
             + "sosaodanhgia)"
             + "VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE danhgia SET"
-            + "MAHOPDONG=?,"
             + "noidung = ?,"
             + "ngaydanhgia = ?,"
             + "sosaodanhgia = ?"
             + "WHERE userid =?";
+    String UPDATE_TRANGTHAI = "UPDATE DANHGIA SET TRANGTHAI =1 where userid = ?";
     String DELETE = "DELETE FROM danhgia WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM danhgia";
     String SELECT_BY_ID_MAXE = "SELECT*FROM DANHGIA WHERE userid = ?";
@@ -43,10 +43,11 @@ public class DanhGiaDAO {
                 entity.getSosaodanhgia()
         );
     }
-
+    public void update_trangthai(int userid){
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, userid);
+    }
     public void update(DanhGia entity) {
         JDBCHelper.executeUpdate(UPDATE,
-                entity.getMahopdong(),
                 entity.getNoidung(),
                 entity.getNgaydanhgia(),
                 entity.getSosaodanhgia(),
@@ -100,6 +101,7 @@ public class DanhGiaDAO {
                 dg.setNoidung(rs.getString("NoiDung"));
                 dg.setNgaydanhgia(rs.getDate("NgayDanhGia"));
                 dg.setSosaodanhgia(rs.getInt("SoSaoDanhGia"));
+                dg.setTrangthai(rs.getBoolean("Trangthai"));
                 list.add(dg);
             }
             rs.getStatement().getConnection().close();

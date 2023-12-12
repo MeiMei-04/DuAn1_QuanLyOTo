@@ -97,7 +97,7 @@
                                   <Component id="pnl_hopdong" alignment="2" max="32767" attributes="0"/>
                                   <Component id="pnl_dichvu" alignment="2" max="32767" attributes="0"/>
                                   <Component id="pnl_thongke" alignment="2" max="32767" attributes="0"/>
-                                  <Component id="pnl_baoduong" alignment="2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="pnl_danhgia" alignment="2" min="-2" max="-2" attributes="0"/>
                                   <Component id="pnl_dangxuat" alignment="2" max="32767" attributes="0"/>
                                   <Component id="pnl_gioithieu" alignment="2" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -126,14 +126,14 @@
                       <Component id="pnl_taikhoan" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_thuexe" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="pnl_hopdong" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="pnl_baoduong" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pnl_danhgia" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_thongke" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="pnl_dichvu" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="pnl_hopdong" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="pnl_dangxuat" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -552,16 +552,16 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="pnl_baoduong">
+            <Container class="javax.swing.JPanel" name="pnl_danhgia">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="0" green="66" red="ff" type="rgb"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_baoduongMouseClicked"/>
-                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_baoduongMouseEntered"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_baoduongMouseExited"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_danhgiaMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_danhgiaMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="pnl_danhgiaMouseExited"/>
               </Events>
 
               <Layout>
@@ -570,7 +570,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jPanel14" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="lbl_BaoDuong" min="-2" pref="123" max="-2" attributes="0"/>
+                          <Component id="lbl_ĐanhGia" min="-2" pref="123" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -580,7 +580,7 @@
                       <Component id="jPanel14" alignment="0" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lbl_BaoDuong" max="32767" attributes="0"/>
+                          <Component id="lbl_ĐanhGia" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -607,7 +607,7 @@
                     </DimensionLayout>
                   </Layout>
                 </Container>
-                <Component class="javax.swing.JLabel" name="lbl_BaoDuong">
+                <Component class="javax.swing.JLabel" name="lbl_&#x110;anhGia">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="1"/>
@@ -615,7 +615,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="B&#x1ea2;O D&#x1af;&#x1ee0;NG"/>
+                    <Property name="text" type="java.lang.String" value="&#x110;&#xc1;NH GI&#xc1;"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -778,7 +778,7 @@
                           <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="lbl_chucnang" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="39" max="32767" attributes="0"/>
+                          <EmptySpace pref="40" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>

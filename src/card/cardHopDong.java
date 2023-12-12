@@ -1001,19 +1001,21 @@ public class cardHopDong extends javax.swing.JPanel {
             if (saveFile != null) {
                 saveFile = new File(saveFile.toString() + ".xlsx");
                 Workbook wb = new XSSFWorkbook();
-                Sheet sheet = wb.createSheet("Doanh thu");
-
-                Row rowCol = sheet.createRow(4);
+                Sheet sheet = wb.createSheet("Hợp Đồng");
+                Row titleRow = sheet.createRow(0);
+                Cell titleCell = titleRow.createCell(0);
+                titleCell.setCellValue("Danh sách hợp đồng");
+                Row rowCol = sheet.createRow(1);// dòng thứ nhất
                 for (int i = 0; i < tblHopDong.getColumnCount(); i++) {
 
-                    Cell cell = rowCol.createCell(4 + i);// lui sang phải
+                    Cell cell = rowCol.createCell(i);// lui sang phải
                     cell.setCellValue(tblHopDong.getColumnName(i));
                 }
 
                 for (int j = 0; j < tblHopDong.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 5);// sang phải
+                    Row row = sheet.createRow(j+2 );//thông tin sau i
                     for (int k = 0; k < tblHopDong.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k + 4);// lùi xuống
+                        Cell cell = row.createCell(k );// sang phải
                         if (tblHopDong.getValueAt(j, k) != null) {
                             cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
                         }

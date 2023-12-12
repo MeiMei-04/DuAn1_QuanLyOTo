@@ -11,23 +11,26 @@ import java.util.Date;
  * @author hieud
  */
 public class DanhGia {
+
     private int id;
     private int userid;
     private String mahopdong;
     private String noidung;
     private Date ngaydanhgia;
     private int sosaodanhgia;
+    private boolean trangthai;
 
     public DanhGia() {
     }
 
-    public DanhGia(int id, int userid, String mahopdong, String noidung, Date ngaydanhgia, int sosaodanhgia) {
+    public DanhGia(int id, int userid, String mahopdong, String noidung, Date ngaydanhgia, int sosaodanhgia, boolean trangthai) {
         this.id = id;
         this.userid = userid;
         this.mahopdong = mahopdong;
         this.noidung = noidung;
         this.ngaydanhgia = ngaydanhgia;
         this.sosaodanhgia = sosaodanhgia;
+        this.trangthai = trangthai;
     }
 
     public int getId() {
@@ -78,5 +81,16 @@ public class DanhGia {
         this.sosaodanhgia = sosaodanhgia;
     }
 
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
+    }
     
+    
+
+    
+
 }

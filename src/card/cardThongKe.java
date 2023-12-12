@@ -96,8 +96,12 @@ public class cardThongKe extends javax.swing.JPanel {
                 saveFile = new File(saveFile.toString() + ".xlsx");
                 Workbook wb = new XSSFWorkbook();
                 Sheet sheet = wb.createSheet("Doanh thu");
+                 // Tạo một dòng mới ở vị trí đầu tiên
+                Row titleRow = sheet.createRow(0);
+                Cell titleCell = titleRow.createCell(0);
+                titleCell.setCellValue("Doanh thu tháng");
 
-                Row rowCol = sheet.createRow(4);
+                Row rowCol = sheet.createRow(1);
                 for (int i = 0; i < tblDoanhThu.getColumnCount(); i++) {
 
                     Cell cell = rowCol.createCell(i);// lui sang phải
@@ -105,7 +109,7 @@ public class cardThongKe extends javax.swing.JPanel {
                 }
 
                 for (int j = 0; j < tblDoanhThu.getRowCount(); j++) {
-                    Row row = sheet.createRow(j + 5);// lui xuong
+                    Row row = sheet.createRow(j + 2);// lui xuong
                     for (int k = 0; k < tblDoanhThu.getColumnCount(); k++) {
                         Cell cell = row.createCell(k);// sang phải
                         if (tblDoanhThu.getValueAt(j, k) != null) {
