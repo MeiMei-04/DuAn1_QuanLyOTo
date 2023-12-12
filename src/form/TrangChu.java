@@ -37,15 +37,17 @@ public class TrangChu extends javax.swing.JFrame {
         showFrom(new cardTrangChu());
         updateStatus_off();
     }
-    public void openGioiThieu(){
+
+    public void openGioiThieu() {
         String filePath = "src\\POLYCAR-main\\contact.html";
         try {
             Hepler.openweb.openWebPage(filePath);
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
+
     public void updateStatus_off() {
         pnl_baoduong.setVisible(false);
         pnl_thongke.setVisible(false);
@@ -85,6 +87,7 @@ public class TrangChu extends javax.swing.JFrame {
             System.out.println(e.getMessage());
         }
     }
+
     // bó tay
     public void openBaoDuong() {
         try {
@@ -196,7 +199,9 @@ public class TrangChu extends javax.swing.JFrame {
     public void openHopDong() {
         try {
             if (AuthHelper.authenticated()) {
-                showFrom(new cardHopDong());
+                if (AuthHelper.isManager()) {
+                    showFrom(new cardHopDong());
+                }
             } else {
                 openDangNhap();
             }

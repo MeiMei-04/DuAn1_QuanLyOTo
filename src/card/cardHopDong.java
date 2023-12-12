@@ -4,9 +4,13 @@
  */
 package card;
 
+import DAO.ChiTietTaiKhoanDAO;
+import DAO.ChiTietXeDAO;
 import DAO.HopDongDAO;
 import DAO.HopDongDAO;
 import Hepler.DialogHelper;
+import entyti.ChiTietTaiKhoan;
+import entyti.ChiTietXe;
 import entyti.HopDong;
 import entyti.TaiKhoan;
 import java.awt.Desktop;
@@ -14,6 +18,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
@@ -29,24 +34,85 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  */
 public class cardHopDong extends javax.swing.JPanel {
 
-    HopDong thdd = new HopDong();
-    HopDongDAO dao = new HopDongDAO();
+    HopDong hd = new HopDong();
+    HopDongDAO hdd = new HopDongDAO();
+    ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
+    ChiTietXeDAO ctxd = new ChiTietXeDAO();
 
     /**
      * Creates new form HopDong
      */
     public cardHopDong() {
         initComponents();
-//        filltableHopDong();
-        if (!Hepler.AuthHelper.isManager()) {
-            tabs.remove(1);
-        } else {
-            tabs.remove(0);
+        fill_Table_Hopdong(getListHopDongAll());
+    }
+    public List<HopDong> find_text(){
+        String text = txt_timkiem.getText();
+        List<HopDong> list = new ArrayList<>();
+        try {
+            List<ChiTietTaiKhoan> list_cttk = cttkd.selectByID_FIND(text);
+            for(ChiTietTaiKhoan cttk : list_cttk){
+                
+            }
+        } catch (Exception e) {
         }
+        
+        
+        
+        return list;
     }
 
-    
-    
+    public List<HopDong> getListHopDongAll() {
+        List<HopDong> list = new ArrayList<>();
+        try {
+            list = hdd.selectAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public List<HopDong> find_cbb() {
+        List<HopDong> list = new ArrayList<>();
+        int index = cbb_trangthai.getSelectedIndex() + 1;
+        try {
+            list = hdd.selectByID_TRANGTHAI(index);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    public void fill_Table_Hopdong(List<HopDong> list) {
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
+        model.setRowCount(0);
+        try {
+            for (HopDong hd : list) {
+                ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
+                ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(hd.getUserid()));
+                String tenxe = ctx.getTenxe();
+                String hoten = cttk.getHoten();
+                String sdt = cttk.getSdt();
+                String cancuoc = cttk.getCccd();
+                Object[] row = {
+                    hd.getMahopdong(),
+                    tenxe,
+                    hoten,
+                    sdt,
+                    cancuoc,
+                    hd.getNgaythue(),
+                    hd.getNgayhethan(),
+                    hd.getThanhtien(),
+                    hd.tenTrangThai(hd.getTinhtranghopdong())
+                };
+                model.addRow(row);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -118,13 +184,14 @@ public class cardHopDong extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHopDong = new javax.swing.JTable();
-        jButton7 = new javax.swing.JButton();
-        jTextField2 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        btn_xuatdanhsach = new javax.swing.JButton();
+        txt_timkiem = new javax.swing.JTextField();
+        btn_timkiem = new javax.swing.JButton();
+        btn_bangiaoxe = new javax.swing.JButton();
+        btn_xacnhantraxe = new javax.swing.JButton();
+        btn_sendmail = new javax.swing.JButton();
+        btn_in = new javax.swing.JButton();
+        cbb_trangthai = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 102, 51));
         setPreferredSize(new java.awt.Dimension(1026, 660));
@@ -537,76 +604,83 @@ public class cardHopDong extends javax.swing.JPanel {
         tblHopDong.setSelectionForeground(new java.awt.Color(255, 102, 51));
         jScrollPane3.setViewportView(tblHopDong);
 
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 102, 51));
-        jButton7.setText("Xuất danh sách");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btn_xuatdanhsach.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xuatdanhsach.setForeground(new java.awt.Color(255, 102, 51));
+        btn_xuatdanhsach.setText("Xuất danh sách");
+        btn_xuatdanhsach.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btn_xuatdanhsachActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 102, 51));
-        jButton2.setText("Tìm kiếm");
-
-        jButton8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton8.setForeground(new java.awt.Color(255, 102, 51));
-        jButton8.setText("Bàn Giao Xe");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
+        btn_timkiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_timkiem.setForeground(new java.awt.Color(255, 102, 51));
+        btn_timkiem.setText("Tìm kiếm");
+        btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
+                btn_timkiemActionPerformed(evt);
             }
         });
 
-        jButton9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton9.setForeground(new java.awt.Color(255, 102, 51));
-        jButton9.setText("Xác Nhận Trả Xe");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
+        btn_bangiaoxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_bangiaoxe.setForeground(new java.awt.Color(255, 102, 51));
+        btn_bangiaoxe.setText("Bàn Giao Xe");
+        btn_bangiaoxe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
+                btn_bangiaoxeActionPerformed(evt);
             }
         });
 
-        jButton10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton10.setForeground(new java.awt.Color(255, 102, 51));
-        jButton10.setText("Gửi Email Đến Hạn Trả Xe");
-
-        jButton11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton11.setForeground(new java.awt.Color(255, 102, 51));
-        jButton11.setText("In");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
+        btn_xacnhantraxe.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xacnhantraxe.setForeground(new java.awt.Color(255, 102, 51));
+        btn_xacnhantraxe.setText("Xác Nhận Trả Xe");
+        btn_xacnhantraxe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                btn_xacnhantraxeActionPerformed(evt);
             }
         });
+
+        btn_sendmail.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_sendmail.setForeground(new java.awt.Color(255, 102, 51));
+        btn_sendmail.setText("Gửi Email Đến Hạn Trả Xe");
+
+        btn_in.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_in.setForeground(new java.awt.Color(255, 102, 51));
+        btn_in.setText("In");
+        btn_in.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_inActionPerformed(evt);
+            }
+        });
+
+        cbb_trangthai.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Đã Thanh Toán", "Đã Hủy", "Đang Thuê", "Hết Hạn", "Hoàn Thành" }));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cbb_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_timkiem)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(509, 509, 509)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton2))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(187, 187, 187)
-                                .addComponent(jButton10)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton9)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton8)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton11)))
-                        .addGap(0, 17, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(187, 187, 187)
+                        .addComponent(btn_sendmail)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_xacnhantraxe)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_bangiaoxe)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_xuatdanhsach)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                        .addComponent(btn_in)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -614,17 +688,18 @@ public class cardHopDong extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(txt_timkiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_timkiem)
+                    .addComponent(cbb_trangthai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton8)
-                    .addComponent(jButton9)
-                    .addComponent(jButton10)
-                    .addComponent(jButton11))
+                    .addComponent(btn_xuatdanhsach)
+                    .addComponent(btn_bangiaoxe)
+                    .addComponent(btn_xacnhantraxe)
+                    .addComponent(btn_sendmail)
+                    .addComponent(btn_in))
                 .addContainerGap(137, Short.MAX_VALUE))
         );
 
@@ -648,32 +723,38 @@ public class cardHopDong extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField11ActionPerformed
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void btn_xuatdanhsachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xuatdanhsachActionPerformed
         xuatEXCL();
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btn_xuatdanhsachActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void btn_bangiaoxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bangiaoxeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_btn_bangiaoxeActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void btn_xacnhantraxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacnhantraxeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_btn_xacnhantraxeActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void btn_inActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_inActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_btn_inActionPerformed
+
+    private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
+        // TODO add your handling code here:
+        fill_Table_Hopdong(find_cbb());
+    }//GEN-LAST:event_btn_timkiemActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel anh;
     private javax.swing.JPanel background;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton btn_bangiaoxe;
+    private javax.swing.JButton btn_in;
+    private javax.swing.JButton btn_sendmail;
+    private javax.swing.JButton btn_timkiem;
+    private javax.swing.JButton btn_xacnhantraxe;
+    private javax.swing.JButton btn_xuatdanhsach;
+    private javax.swing.JComboBox<String> cbb_trangthai;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -715,7 +796,6 @@ public class cardHopDong extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField16;
     private javax.swing.JTextField jTextField17;
     private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
@@ -733,6 +813,7 @@ public class cardHopDong extends javax.swing.JPanel {
     private javax.swing.JTable tblHopDong;
     private javax.swing.JPanel ttxe;
     private javax.swing.JTextField txt_songaythue;
+    private javax.swing.JTextField txt_timkiem;
     private javax.swing.JTextField txt_voucher;
     // End of variables declaration//GEN-END:variables
     void xuatEXCL() {
