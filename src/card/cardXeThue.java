@@ -220,6 +220,7 @@ public class cardXeThue extends javax.swing.JPanel {
         btn_chonanh = new javax.swing.JButton();
         btnTim = new javax.swing.JButton();
         txtTim = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tbl_danhsachxe = new javax.swing.JTable();
@@ -337,6 +338,8 @@ public class cardXeThue extends javax.swing.JPanel {
             }
         });
 
+        jLabel3.setText("Tìm Kiếm Theo Tên Xe");
+
         javax.swing.GroupLayout ttxeLayout = new javax.swing.GroupLayout(ttxe);
         ttxe.setLayout(ttxeLayout);
         ttxeLayout.setHorizontalGroup(
@@ -351,10 +354,6 @@ public class cardXeThue extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(btn_chonanh, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
-                            .addComponent(btnTim)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtTim))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ttxeLayout.createSequentialGroup()
                             .addComponent(jButton4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -376,13 +375,16 @@ public class cardXeThue extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel8)
                                 .addComponent(jLabel9)
-                                .addComponent(jLabel6))
+                                .addComponent(jLabel6)
+                                .addComponent(btnTim))
                             .addGap(36, 36, 36)
-                            .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txt_maxe, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_tenxe, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_giathue, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtTim)
+                                .addComponent(txt_maxe)
+                                .addComponent(txt_tenxe)
+                                .addComponent(txt_giathue)
+                                .addComponent(jScrollPane1))))
+                    .addComponent(jLabel3))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         ttxeLayout.setVerticalGroup(
@@ -406,11 +408,13 @@ public class cardXeThue extends javax.swing.JPanel {
                     .addGroup(ttxeLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(32, 32, 32)))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTim)
                     .addComponent(txtTim, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(ttxeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_maxe, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
@@ -657,6 +661,7 @@ public class cardXeThue extends javax.swing.JPanel {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;

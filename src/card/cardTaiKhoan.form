@@ -31,7 +31,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="tabs" alignment="0" pref="660" max="32767" attributes="0"/>
+          <Component id="tabs" alignment="0" pref="634" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -179,7 +179,7 @@
                           </Group>
                           <Component id="pnl_anhdaidien" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="66" max="32767" attributes="0"/>
+                      <EmptySpace pref="40" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
