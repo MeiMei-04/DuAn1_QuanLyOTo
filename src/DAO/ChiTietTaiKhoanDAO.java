@@ -52,7 +52,6 @@ public class ChiTietTaiKhoanDAO {
 //            + "ON ChiTietTaiKhoan.UserID = TaiKhoan.UserID "
 //            + "ORDER BY CASE WHEN TrangThai = 0 THEN 0 ELSE 1 END";
     //thêm
-    String SELECT_BY_ID_FIND = "select * from ChiTietTaiKhoan where HOTEN like ? Or SDT like ? or cccd like ? ";
     String SELECT_BY_ID_HOTENTim = "select * from ChiTietTaiKhoan where HOTEN like ?";
 
     public void insert(ChiTietTaiKhoan entity) {
@@ -134,18 +133,8 @@ public class ChiTietTaiKhoanDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list;
     }
-    public List<ChiTietTaiKhoan> selectByID_FIND(String TEXT) {
-        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
-        List<ChiTietTaiKhoan> list = selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC, TEXT);
-        // Kiểm tra xem danh sách có trống không
-        if (list.isEmpty()) {
-            // Nếu danh sách trống, trả về null
-            return null;
-        }
 
-        // Nếu không, trả về phần tử đầu tiên trong danh sách
-        return list;
-    }
+
     public List<ChiTietTaiKhoan> selectByID_DANHSACH1() {
         return selectBySQL(SELECT_BY_ID_YEUCAUXACTHUC1);
     }
