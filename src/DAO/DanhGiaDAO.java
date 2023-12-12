@@ -18,13 +18,13 @@ public class DanhGiaDAO {
 
     String INSERT = "INSERT INTO danhgia ("
             + "userid, "
-            + "maxe, "
+            + "MAHOPDONG, "
             + "noidung, "
             + "ngaydanhgia, "
             + "sosaodanhgia)"
             + "VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE danhgia SET"
-            + "maxe=?,"
+            + "MAHOPDONG=?,"
             + "noidung = ?,"
             + "ngaydanhgia = ?,"
             + "sosaodanhgia = ?"
@@ -37,7 +37,7 @@ public class DanhGiaDAO {
     public void insert(DanhGia entity) {
         JDBCHelper.executeUpdate(INSERT,
                 entity.getUserid(),
-                entity.getMaxe(),
+                entity.getMahopdong(),
                 entity.getNoidung(),
                 entity.getNgaydanhgia(),
                 entity.getSosaodanhgia()
@@ -46,7 +46,7 @@ public class DanhGiaDAO {
 
     public void update(DanhGia entity) {
         JDBCHelper.executeUpdate(UPDATE,
-                entity.getMaxe(),
+                entity.getMahopdong(),
                 entity.getNoidung(),
                 entity.getNgaydanhgia(),
                 entity.getSosaodanhgia(),
@@ -96,7 +96,7 @@ public class DanhGiaDAO {
             while (rs.next()) {
                 DanhGia dg = new DanhGia();
                 dg.setUserid(rs.getInt("UserID"));
-                dg.setMaxe(rs.getString("MaXe"));
+                dg.setMahopdong(rs.getString("mahopdong"));
                 dg.setNoidung(rs.getString("NoiDung"));
                 dg.setNgaydanhgia(rs.getDate("NgayDanhGia"));
                 dg.setSosaodanhgia(rs.getInt("SoSaoDanhGia"));

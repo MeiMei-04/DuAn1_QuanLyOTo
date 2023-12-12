@@ -13,12 +13,21 @@ import java.util.Date;
 public class DanhGia {
     private int id;
     private int userid;
-    private String maxe;
+    private String mahopdong;
     private String noidung;
     private Date ngaydanhgia;
     private int sosaodanhgia;
 
     public DanhGia() {
+    }
+
+    public DanhGia(int id, int userid, String mahopdong, String noidung, Date ngaydanhgia, int sosaodanhgia) {
+        this.id = id;
+        this.userid = userid;
+        this.mahopdong = mahopdong;
+        this.noidung = noidung;
+        this.ngaydanhgia = ngaydanhgia;
+        this.sosaodanhgia = sosaodanhgia;
     }
 
     public int getId() {
@@ -37,12 +46,12 @@ public class DanhGia {
         this.userid = userid;
     }
 
-    public String getMaxe() {
-        return maxe;
+    public String getMahopdong() {
+        return mahopdong;
     }
 
-    public void setMaxe(String maxe) {
-        this.maxe = maxe;
+    public void setMahopdong(String mahopdong) {
+        this.mahopdong = mahopdong;
     }
 
     public String getNoidung() {
@@ -66,15 +75,6 @@ public class DanhGia {
     }
 
     public void setSosaodanhgia(int sosaodanhgia) {
-        this.sosaodanhgia = sosaodanhgia;
-    }
-
-    public DanhGia(int id, int userid, String maxe, String noidung, Date ngaydanhgia, int sosaodanhgia) {
-        this.id = id;
-        this.userid = userid;
-        this.maxe = maxe;
-        this.noidung = noidung;
-        this.ngaydanhgia = ngaydanhgia;
         this.sosaodanhgia = sosaodanhgia;
     }
 
