@@ -110,7 +110,7 @@ public class cardHopDong extends javax.swing.JPanel {
             hdnew.setTinhtranghopdong(3);
             hdd.update_trangthai(hdnew);
             DialogHelper.alert(this, "Bàn Giao Xe Thành CÔng");
-            fill_Table_Hopdong(loctheongayhientai(find_cbb()));
+            fill_Table_Hopdong(getListHopDongAll());
         }
     }
 
@@ -118,7 +118,7 @@ public class cardHopDong extends javax.swing.JPanel {
         if (this.mahopdong == null) {
             DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
         }
-        if (hd.getTinhtranghopdong() == 2) {
+        if (hd.getTinhtranghopdong() == 2 || hd.getTinhtranghopdong() == 1 ) {
             DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
         } else {
             HopDong hd = new HopDong();
@@ -126,7 +126,7 @@ public class cardHopDong extends javax.swing.JPanel {
             hd.setTinhtranghopdong(5);
             hdd.update_trangthai(hd);
             DialogHelper.alert(this, "Hoàn Thành");
-            fill_Table_Hopdong(loctheongayhientai(find_cbb()));
+            fill_Table_Hopdong(getListHopDongAll());
         }
     }
 
