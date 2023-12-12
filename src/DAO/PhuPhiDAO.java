@@ -29,12 +29,16 @@ public class PhuPhiDAO {
     String SELECT_ALL = "SELECT * FROM PhuPhi";
     String SELECT_BY_ID_MAPHUPHI = "select * from PhuPhi where MaPhuPhi =?";
     String SELECT_BY_ID_tenphuphi = "select * from PhuPhi where TenPhuPhi like ? ";
+    String UPDATE_TRANGTHAI ="UPDATE PHUPHI SET TRANGTHAI = 1 WHERE MAPHUPHI = ?";
     public void insert(PhuPhi entity) {
         JDBCHelper.executeUpdate(INSERT,
                 entity.getMaphuphi(),
                 entity.getTenphuphi(),
                 entity.getGiatri()
         );
+    }
+    public void update_trangthai(String key){
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, key);
     }
     //sửa
     public void update(PhuPhi entity) {
@@ -89,6 +93,7 @@ public class PhuPhiDAO {
                 pp.setMaphuphi(rs.getString("MaPhuPhi"));
                 pp.setTenphuphi(rs.getString("TenPhuPhi"));
                 pp.setGiatri(rs.getInt("GiaTri"));
+                pp.setTrangthai(rs.getBoolean("Trangthai"));
                 list.add(pp);
             }
             rs.getStatement().getConnection().close();

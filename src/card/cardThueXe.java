@@ -120,7 +120,7 @@ public class cardThueXe extends javax.swing.JPanel {
 
     public int tinhSoNgayThue(int songaythue) {
         int max = -1;
-        for (int i = 1; i <= songaythue; i++) {
+        for (int i = 0; i <= songaythue; i++) {
             if (kiemtraxe(i)) {
                 break;
             } else {

@@ -498,9 +498,9 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
                 .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
-                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_guiemail)
-                            .addComponent(btn_xacthuc))
+                        .addGroup(pnl_taikhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_xacthuc)
+                            .addComponent(btn_guiemail))
                         .addGap(31, 31, 31))
                     .addGroup(pnl_taikhoanLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -804,7 +804,6 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
             } catch (Exception e) {
                 e.getStackTrace();
             }
-            filltableTaiKhoan(locdanhsach(index_cbb));
         }
 
 

@@ -34,96 +34,96 @@ public class DanhGiaDialog extends java.awt.Dialog {
     public DanhGiaDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        filltable_danhgia(getListDanhGia());
-        setLocationRelativeTo(null);
-        setTitle("Đánh Giá");
-        fillcbb_sanpham();
-        TaiKhoan tk = Hepler.AuthHelper.user;
-        String userid = String.valueOf(tk.getUserid());
-        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(userid);
-        txt_hoten.setText(cttk.getHoten());
+//        filltable_danhgia(getListDanhGia());
+//        setLocationRelativeTo(null);
+//        setTitle("Đánh Giá");
+//        fillcbb_sanpham();
+//        TaiKhoan tk = Hepler.AuthHelper.user;
+//        String userid = String.valueOf(tk.getUserid());
+//        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(userid);
+//        txt_hoten.setText(cttk.getHoten());
     }
 
-    public DanhGia getForm() {
-        int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
-        String tenxe = cbb_sanPham.getSelectedItem().toString();
-        ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
-        TaiKhoan tk = Hepler.AuthHelper.user;
-        DanhGia dg = new DanhGia();
-        dg.setUserid(tk.getUserid());
-        dg.setMaxe(ctx.getMaxe());
-        dg.setNoidung(txt_noidung.getText());
-        dg.setNgaydanhgia(Hepler.DateHelper.now());
-        dg.setSosaodanhgia(sosao_danhgia);
-        return dg;
-    }
-
-    public void themDanhGia() {
-        DanhGia dg = getForm();
-        try {
-            dgd.insert(dg);
-            DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
-            filltable_danhgia(getListDanhGia());
-        } catch (Exception e) {
-            DialogHelper.alert(this, "Thêm Đánh Giá Thất Bại");
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public List<DanhGia> getListDanhGia() {
-        try {
-            all_danhgia = dgd.selectAll();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        return all_danhgia;
-    }
-
-    public void timkiem() {
-        try {
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            List<DanhGia> list_find_danhgia = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
-            filltable_danhgia(list_find_danhgia);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    public void fillcbb_sanpham() {
-        try {
-            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanPham.getModel();
-            model.removeAllElements();
-            List<ChiTietXe> list = ctxd.selectAll();
-            for (ChiTietXe ctx : list) {
-                model.addElement(ctx.getTenxe());
-            }
-            cbb_sanPham.setSelectedIndex(0);
-        } catch (Exception e) {
-            Hepler.DialogHelper.alert(this, "Hiện Tại Bạn Chưa Có Đánh Giá Nào");
-            System.out.println(e.getMessage());
-        }
-    }
-
-    public void filltable_danhgia(List<DanhGia> list) {
-        DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
-        model.setRowCount(0);
-        try {
-            for (DanhGia dg : list) {
-                ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(dg.getUserid()));
-                ChiTietXe ctx = ctxd.selectByID_MAXE(dg.getMaxe());
-                Object[] row = {
-                    cttk.getHoten(),
-                    ctx.getTenxe(),
-                    dg.getNoidung(),
-                    dg.getNgaydanhgia(),
-                    dg.getSosaodanhgia()
-                };
-                model.addRow(row);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+//    public DanhGia getForm() {
+//        int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
+//        String tenxe = cbb_sanPham.getSelectedItem().toString();
+//        ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
+//        TaiKhoan tk = Hepler.AuthHelper.user;
+//        DanhGia dg = new DanhGia();
+//        dg.setUserid(tk.getUserid());
+//        dg.setMaxe(ctx.getMaxe());
+//        dg.setNoidung(txt_noidung.getText());
+//        dg.setNgaydanhgia(Hepler.DateHelper.now());
+//        dg.setSosaodanhgia(sosao_danhgia);
+//        return dg;
+//    }
+//
+//    public void themDanhGia() {
+//        DanhGia dg = getForm();
+//        try {
+//            dgd.insert(dg);
+//            DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
+//            filltable_danhgia(getListDanhGia());
+//        } catch (Exception e) {
+//            DialogHelper.alert(this, "Thêm Đánh Giá Thất Bại");
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    public List<DanhGia> getListDanhGia() {
+//        try {
+//            all_danhgia = dgd.selectAll();
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        return all_danhgia;
+//    }
+//
+//    public void timkiem() {
+//        try {
+//            TaiKhoan tk = Hepler.AuthHelper.user;
+//            List<DanhGia> list_find_danhgia = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
+//            filltable_danhgia(list_find_danhgia);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//    public void fillcbb_sanpham() {
+//        try {
+//            DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanPham.getModel();
+//            model.removeAllElements();
+//            List<ChiTietXe> list = ctxd.selectAll();
+//            for (ChiTietXe ctx : list) {
+//                model.addElement(ctx.getTenxe());
+//            }
+//            cbb_sanPham.setSelectedIndex(0);
+//        } catch (Exception e) {
+//            Hepler.DialogHelper.alert(this, "Hiện Tại Bạn Chưa Có Đánh Giá Nào");
+//            System.out.println(e.getMessage());
+//        }
+//    }
+//
+//    public void filltable_danhgia(List<DanhGia> list) {
+//        DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
+//        model.setRowCount(0);
+//        try {
+//            for (DanhGia dg : list) {
+//                ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(dg.getUserid()));
+//                ChiTietXe ctx = ctxd.selectByID_MAXE(dg.getMaxe());
+//                Object[] row = {
+//                    cttk.getHoten(),
+//                    ctx.getTenxe(),
+//                    dg.getNoidung(),
+//                    dg.getNgaydanhgia(),
+//                    dg.getSosaodanhgia()
+//                };
+//                model.addRow(row);
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -280,12 +280,12 @@ public class DanhGiaDialog extends java.awt.Dialog {
 
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
         // TODO add your handling code here:
-        timkiem();
+//        timkiem();
     }//GEN-LAST:event_btn_timkiemActionPerformed
 
     private void btn_themActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_themActionPerformed
         // TODO add your handling code here:
-        themDanhGia();
+//        themDanhGia();
     }//GEN-LAST:event_btn_themActionPerformed
 
     private void tbl_danhgiaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_danhgiaMouseClicked

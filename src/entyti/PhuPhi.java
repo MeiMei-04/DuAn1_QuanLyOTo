@@ -12,14 +12,9 @@ public class PhuPhi {
     private String maphuphi;
     private String tenphuphi;
     private int giatri;
+    private boolean trangthai;
 
     public PhuPhi() {
-    }
-
-    public PhuPhi(String maphuphi, String tenphuphi, int giatri) {
-        this.maphuphi = maphuphi;
-        this.tenphuphi = tenphuphi;
-        this.giatri = giatri;
     }
 
     public String getMaphuphi() {
@@ -45,6 +40,20 @@ public class PhuPhi {
     public void setGiatri(int giatri) {
         this.giatri = giatri;
     }
-    
+
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
+    }
+
+    public PhuPhi(String maphuphi, String tenphuphi, int giatri, boolean trangthai) {
+        this.maphuphi = maphuphi;
+        this.tenphuphi = tenphuphi;
+        this.giatri = giatri;
+        this.trangthai = trangthai;
+    }
     
 }

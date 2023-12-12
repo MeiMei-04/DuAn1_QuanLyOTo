@@ -31,6 +31,7 @@ public class DichVuDAO {
     String SELECT_ALL = "SELECT * FROM DichVu";
     String SELECT_BY_ID_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
     String SELECT_BY_ID_TENDICHVU = "SELECT*FROM DichVu WHERE  tendichvu like ?";
+    String UPDATE_TRANGTHAI = "UPDATE DICHVU SET TRANTHAI = 1 WHERE MADICHVU = ?";
 
     public void insert(DichVu entity) {
         JDBCHelper.executeUpdate(INSERT,
@@ -49,7 +50,9 @@ public class DichVuDAO {
                 entity.getMadichvu()
         );
     }
-
+    public void update_trangthai(String key){
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, key);
+    }
     public void delete(String key) {
         JDBCHelper.executeUpdate(DELETE, key);
     }
@@ -94,6 +97,7 @@ public class DichVuDAO {
                 dv.setTendichvu(rs.getString("TenDichVu"));
                 dv.setGhichu(rs.getString("GhiChu"));
                 dv.setDongia(rs.getInt("DonGia"));
+                dv.setTrangthai(rs.getBoolean("trangthai"));
                 list.add(dv);
             }
             rs.getStatement().getConnection().close();

@@ -56,12 +56,14 @@ public class cardDichVu extends javax.swing.JPanel {
         try {
             List<DichVu> list = dao.selectAll();
             for (DichVu dv : list) {
-                Object[] row = {dv.getMadichvu(),
-                    dv.getTendichvu(),
-                    dv.getDongia(),
-                    dv.getGhichu()
-                };
-                model.addRow(row);
+                if (!dv.isTrangthai()) {
+                    Object[] row = {dv.getMadichvu(),
+                        dv.getTendichvu(),
+                        dv.getDongia(),
+                        dv.getGhichu()
+                    };
+                    model.addRow(row);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -177,11 +179,14 @@ public class cardDichVu extends javax.swing.JPanel {
         try {
             List<Voucher> list = vdao.selectAll();
             for (Voucher vh : list) {
-                Object[] row = {vh.getMavoucher(),
-                    vh.getNoidung(),
-                    vh.getGiatri(), //                    vh.isTrangthai()
-            };
-                model.addRow(row);
+                if (!vh.isTrangthai()) {
+                    Object[] row = {
+                        vh.getMavoucher(),
+                        vh.getNoidung(),
+                        vh.getGiatri()
+                    };
+                    model.addRow(row);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -192,12 +197,6 @@ public class cardDichVu extends javax.swing.JPanel {
         txtMavoucher.setText(vh.getMavoucher());
         txtNoiDung.setText(vh.getNoidung());
         txtGiaTri.setText(String.valueOf(vh.getGiatri()));
-//        if (!vh.isTrangthai()) {
-//            rdoChuaDung.setSelected(true);
-//        } else {
-//            rdoDaDung.setSelected(true);
-//        }
-
     }
 
     void clearFromvoucher() {
@@ -212,7 +211,6 @@ public class cardDichVu extends javax.swing.JPanel {
         vh.setMavoucher(txtMavoucher.getText());
         vh.setNoidung(txtNoiDung.getText());
         vh.setGiatri(Integer.parseInt(txtGiaTri.getText()));
-//        vh.setTrangthai(rdoChuaDung.isSelected());
         return vh;
     }
 
@@ -302,12 +300,14 @@ public class cardDichVu extends javax.swing.JPanel {
         try {
             List<PhuPhi> list = pdao.selectAll();
             for (PhuPhi ph : list) {
-                Object[] row = {ph.getMaphuphi(),
-                    ph.getTenphuphi(),
-                    ph.getGiatri()
+                if (!ph.isTrangthai()) {
+                    Object[] row = {ph.getMaphuphi(),
+                        ph.getTenphuphi(),
+                        ph.getGiatri()
 
-                };
-                model.addRow(row);
+                    };
+                    model.addRow(row);
+                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());

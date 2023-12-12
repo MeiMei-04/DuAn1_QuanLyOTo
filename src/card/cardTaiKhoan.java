@@ -85,7 +85,8 @@ public class cardTaiKhoan extends javax.swing.JPanel {
                 hdd.update_trangthai(hdnew);
                 hdd.update_NGAYTRAXE(hdnew);
                 cttkd.update_sodu(cttknew);
-            }else{
+                DialogHelper.alert(this, "Huỷ Hợp Đồng Thành CÔng");
+            } else {
                 DialogHelper.alert(this, "Hợp Đồng Không Trong Diện Hỗ Trợ");
             }
         } else {
@@ -97,14 +98,15 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         try {
             if (mahopdong != null) {
                 HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
-                if(hd.getTinhtranghopdong() == 4){
+                if (hd.getTinhtranghopdong() == 4) {
                     ThongTinTraXe tttx = new ThongTinTraXe(null, true, mahopdong);
-                tttx.setVisible(true);
-                if (!tttx.isVisible()) {
-                    setForm();
-                    setForm_XeCuatoi(mahopdong);
-                }
-                }else{
+                    tttx.setVisible(true);
+                    if (!tttx.isVisible()) {
+                        setForm();
+                        setForm_XeCuatoi(mahopdong);
+                        fill_table_hopdong();
+                    }
+                } else {
                     DialogHelper.alert(this, "Hợp Đồng Không Trong Diện Hỗ Trợ");
                 }
             } else {
@@ -1012,6 +1014,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private void btn_huyhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyhopdongActionPerformed
         // TODO add your handling code here:
         huyHopDong();
+        fill_table_hopdong();
     }//GEN-LAST:event_btn_huyhopdongActionPerformed
 
 

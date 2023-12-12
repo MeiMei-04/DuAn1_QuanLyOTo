@@ -57,6 +57,7 @@ public class cardHopDong extends javax.swing.JPanel {
     PhuPhiDAO ppd = new PhuPhiDAO();
     String mahopdong = null;
     String path = "src/imghopdong/";
+
     /**
      * Creates new form HopDong
      */
@@ -64,8 +65,12 @@ public class cardHopDong extends javax.swing.JPanel {
         initComponents();
         fill_Table_Hopdong(getListHopDongAll());
     }
-    public void sendMail(){
+
+    public void sendMail() {
         try {
+            if (hd.getTinhtranghopdong() != 4) {
+                DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
+            }
             TaiKhoan tk = Hepler.AuthHelper.user;
             ImagesHelper.capturePanel(jPanel1, mahopdong);
             Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng Quá Hạn", "Vui Lòng Bàn Giao Lại Xe Cho Cơ Sở Thuê", path, mahopdong + ".png");
@@ -74,12 +79,16 @@ public class cardHopDong extends javax.swing.JPanel {
             return;
         }
     }
-    public List<HopDong> loctheongayhientai(List<HopDong> list_all){
+
+    public List<HopDong> loctheongayhientai(List<HopDong> list_all) {
         List<HopDong> list = new ArrayList<>();
-        Date datenow = Hepler.DateHelper.now();
+        Date datenow = Hepler.DateHelper.resetTime(Hepler.DateHelper.now());
         try {
-            for(HopDong hd : list_all){
-                if(datenow.equals(hd.getNgaythue())||datenow.equals(hd.getNgayhethan())){
+            for (HopDong hd : list_all) {
+                Date ngayThue = Hepler.DateHelper.resetTime(hd.getNgaythue());
+                Date ngayTra = Hepler.DateHelper.resetTime(hd.getNgayhethan());
+                if (datenow.equals(ngayThue) || datenow.equals(ngayTra)) {
+                    System.out.println("a");
                     list.add(hd);
                 }
             }
@@ -87,32 +96,44 @@ public class cardHopDong extends javax.swing.JPanel {
         }
         return list;
     }
-    public void banGiaoXe(String mahopdong){
-        if(this.mahopdong == null){
+
+    public void banGiaoXe(String mahopdong) {
+        if (this.mahopdong == null) {
             DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
         }
         HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
-        if(hd.getTinhtranghopdong() == 5){
+        if (hd.getTinhtranghopdong() == 5 || hd.getTinhtranghopdong() == 2) {
             DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
-        }else{
+        } else {
             HopDong hdnew = new HopDong();
             hdnew.setMahopdong(mahopdong);
             hdnew.setTinhtranghopdong(3);
             hdd.update_trangthai(hdnew);
+            DialogHelper.alert(this, "Bàn Giao Xe Thành CÔng");
+            fill_Table_Hopdong(loctheongayhientai(find_cbb()));
         }
     }
-    public void xacNhanTraXe(String mahopdong){
-        if(this.mahopdong == null){
+
+    public void xacNhanTraXe(String mahopdong) {
+        if (this.mahopdong == null) {
             DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
         }
-        HopDong hd = new HopDong();
-        hd.setMahopdong(mahopdong);
-        hd.setTinhtranghopdong(5);
-        hdd.update_trangthai(hd);
+        if (hd.getTinhtranghopdong() == 2) {
+            DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
+        } else {
+            HopDong hd = new HopDong();
+            hd.setMahopdong(mahopdong);
+            hd.setTinhtranghopdong(5);
+            hdd.update_trangthai(hd);
+            DialogHelper.alert(this, "Hoàn Thành");
+            fill_Table_Hopdong(loctheongayhientai(find_cbb()));
+        }
     }
+
     public void setimg(String anhxe) {
         Hepler.ImagesHelper.setIconlabel(lbl_anhxe, "src\\imgxe\\" + anhxe);
     }
+
     public void fill_phuphi(String mahopdong) {
         DefaultTableModel model = (DefaultTableModel) tbl_phuphi.getModel();
         model.setRowCount(0);
@@ -159,7 +180,8 @@ public class cardHopDong extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    public void setForm(String mahopdong){
+
+    public void setForm(String mahopdong) {
         try {
             HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
             ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
@@ -189,8 +211,9 @@ public class cardHopDong extends javax.swing.JPanel {
         } catch (Exception e) {
         }
     }
+
     public List<HopDong> find_text(String text) {
-        String text_find = "%"+text + "%";
+        String text_find = "%" + text + "%";
         List<HopDong> list = new ArrayList<>();
         try {
             List<ChiTietTaiKhoan> list_cttk = cttkd.selectByID_Tim(text_find);
@@ -893,7 +916,6 @@ public class cardHopDong extends javax.swing.JPanel {
         String text = txt_timkiem.getText();
         if (text.equals("")) {
             fill_Table_Hopdong(loctheongayhientai(find_cbb()));
-            System.out.println("1");
         } else {
             fill_Table_Hopdong(loctheongayhientai(find_text(text)));
         }

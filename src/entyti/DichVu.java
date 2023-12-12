@@ -13,15 +13,17 @@ public class DichVu {
     private String tendichvu;
     private String ghichu;
     private int dongia;
+    private boolean trangthai;
 
     public DichVu() {
     }
 
-    public DichVu(String madichvu, String tendichvu, String ghichu, int dongia) {
+    public DichVu(String madichvu, String tendichvu, String ghichu, int dongia, boolean trangthai) {
         this.madichvu = madichvu;
         this.tendichvu = tendichvu;
         this.ghichu = ghichu;
         this.dongia = dongia;
+        this.trangthai = trangthai;
     }
 
     public String getMadichvu() {
@@ -55,5 +57,13 @@ public class DichVu {
     public void setDongia(int dongia) {
         this.dongia = dongia;
     }
-    
+
+    public boolean isTrangthai() {
+        return trangthai;
+    }
+
+    public void setTrangthai(boolean trangthai) {
+        this.trangthai = trangthai;
+    }
+
 }
