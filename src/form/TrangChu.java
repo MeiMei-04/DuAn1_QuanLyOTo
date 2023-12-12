@@ -95,9 +95,7 @@ public class TrangChu extends javax.swing.JFrame {
             if (!AuthHelper.authenticated()) {
                 new DangNhapDialog(this, false).setVisible(true);
             } else {
-                if (!AuthHelper.isManager()) {
                     showFrom(new cardDanhGIa());
-                }
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -987,7 +985,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_gioithieu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-//        openBaoDuong();
+        openDanhGia();
     }//GEN-LAST:event_pnl_danhgiaMouseClicked
 
     private void pnl_gioithieuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_gioithieuMouseClicked
@@ -1002,7 +1000,7 @@ public class TrangChu extends javax.swing.JFrame {
         onLeaveClick(pnl_TrangChu);
         onLeaveClick(pnl_dangxuat);
         onLeaveClick(pnl_chucnang);
-//        openGioiThieu();
+        openGioiThieu();
     }//GEN-LAST:event_pnl_gioithieuMouseClicked
 
     private void pnl_dangxuatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnl_dangxuatMouseClicked

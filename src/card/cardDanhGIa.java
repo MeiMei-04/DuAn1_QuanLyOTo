@@ -175,6 +175,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         btn_timkiem = new javax.swing.JButton();
 
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(300, 335));
 
         tbl_danhgia.setModel(new javax.swing.table.DefaultTableModel(
@@ -243,7 +244,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 954, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -291,7 +292,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbb_saodanhgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -304,6 +305,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
             DanhGia dg = dgd.selectByID_userid_doituong(String.valueOf(cttk.getUserid()));
             txt_noidung.setText(dg.getNoidung());
+            cbb_saodanhgia.setSelectedIndex(dg.getSosaodanhgia()-1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
