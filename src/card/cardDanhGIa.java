@@ -37,8 +37,13 @@ public class cardDanhGIa extends javax.swing.JPanel {
     public cardDanhGIa() {
         initComponents();
         filltable_danhgia(getListDanhGia());
+        setForm();
     }
-
+    public void setForm(){
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
+        txt_hoten.setText(cttk.getHoten());
+    }
     public void xoadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -61,6 +66,11 @@ public class cardDanhGIa extends javax.swing.JPanel {
         if (hd != null) {
             DanhGia dg = getForm();
             try {
+                DanhGia dg_check = dgd.selectByID_userid_doituong(String.valueOf(tk.getUserid()));
+                if(dg_check != null){
+                    DialogHelper.alert(this, "Bạn Đã Đánh Giá Sản Phẩm Này Rồi");
+                    return;
+                }
                 dgd.insert(dg);
                 DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
                 filltable_danhgia(getListDanhGia());
@@ -176,7 +186,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
         btn_timkiem = new javax.swing.JButton();
 
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(300, 335));
+        setPreferredSize(new java.awt.Dimension(960, 600));
 
         tbl_danhgia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -244,7 +254,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 965, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 951, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -23,16 +23,16 @@ public class DanhGiaDAO {
             + "ngaydanhgia, "
             + "sosaodanhgia)"
             + "VALUES (?,?,?,?,?)";
-    String UPDATE = "UPDATE danhgia SET"
+    String UPDATE = "UPDATE danhgia SET "
             + "noidung = ?,"
             + "ngaydanhgia = ?,"
-            + "sosaodanhgia = ?"
+            + "sosaodanhgia = ? "
             + "WHERE userid =?";
     String UPDATE_TRANGTHAI = "UPDATE DANHGIA SET TRANGTHAI =1 where userid = ?";
     String DELETE = "DELETE FROM danhgia WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM danhgia";
     String SELECT_BY_ID_MAXE = "SELECT*FROM DANHGIA WHERE userid = ?";
-    String SELECT_BY_ID_USERID = "SELECT*FROM DANHGIA WHERE USERID = ?";
+    String SELECT_BY_ID_USERID = "SELECT*FROM DANHGIA WHERE USERID = ? AND TRANGTHAI = 0";
 
     public void insert(DanhGia entity) {
         JDBCHelper.executeUpdate(INSERT,
