@@ -134,6 +134,7 @@ public class cardThueXe extends javax.swing.JPanel {
             if (hd != null) {
                 return true;  // Hợp đồng đã đặt cho ngày đó
             }
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

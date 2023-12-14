@@ -4,6 +4,7 @@
  */
 package form;
 
+import DAO.HopDongDAO;
 import card.cardTaiKhoan;
 import java.awt.Color;
 import java.awt.Component;
@@ -19,12 +20,18 @@ import card.cardTaiKhoan_QuanLy;
 import card.cardThueXe;
 import card.cardTrangChu;
 import card.cardXeThue;
+import entyti.HopDong;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
  * @author truon
  */
 public class TrangChu extends javax.swing.JFrame {
+
+    HopDongDAO hdd = new HopDongDAO();
 
     /**
      * Creates new form MainJFrame
@@ -37,6 +44,36 @@ public class TrangChu extends javax.swing.JFrame {
         openDangNhap();
         showFrom(new cardTrangChu());
         updateStatus_off();
+        checkNgayHetHanHopDong();
+    }
+
+    public void checkNgayHetHanHopDong() {
+        Date daynow = Hepler.DateHelper.resetTime(Hepler.DateHelper.now());
+        try {
+            List<HopDong> list = hdd.selectAll();
+            for (HopDong hd : list) {
+                Date ngayHetHan = Hepler.DateHelper.resetTime(hd.getNgayhethan());
+                if (daynow.equals(ngayHetHan)) {
+                    HopDong hdnew = new HopDong();
+                    hdnew.setTinhtranghopdong(4);
+                    hdnew.setMahopdong(hd.getMahopdong());
+                    hd.setSongayquahan(0);
+                    hdd.update_trangthai(hdnew);
+                    hdd.update_songayquahan(hdnew);
+                } else if (daynow.before(ngayHetHan)) {
+                    // Ngày hiện tại nhỏ hơn ngày hết hạn, xử lý theo yêu cầu của bạn ở đây
+                    // Ví dụ, tính số ngày quá hạn và cập nhật thông tin hopdong
+                    long soNgayQuaHan = TimeUnit.DAYS.convert(ngayHetHan.getTime() - daynow.getTime(), TimeUnit.MILLISECONDS);
+                    HopDong hdnew = new HopDong();
+                    hdnew.setTinhtranghopdong(4); // Tùy thuộc vào yêu cầu của bạn
+                    hdnew.setMahopdong(hd.getMahopdong());
+                    hdnew.setSongayquahan((int) soNgayQuaHan); // Chuyển đổi số ngày thành kiểu int nếu cần
+                    hdd.update_trangthai(hdnew);
+                    hdd.update_songayquahan(hdnew);
+                }
+            }
+        } catch (Exception e) {
+        }
     }
 
     public void openGioiThieu() {
@@ -95,7 +132,7 @@ public class TrangChu extends javax.swing.JFrame {
             if (!AuthHelper.authenticated()) {
                 new DangNhapDialog(this, false).setVisible(true);
             } else {
-                    showFrom(new cardDanhGIa());
+                showFrom(new cardDanhGIa());
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
