@@ -25,7 +25,7 @@ public class VoucherDAO{
     String UPDATE_TRANGTHAI = "UPDATE Voucher set TrangThai=1 where MaVoucher=?";
     String DELETE="  DELETE FROM Voucher WHERE MaVoucher=?";
     String SELECT_ALL="SELECT * FROM Voucher";
-    String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=?";
+    String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=? and trangthai = 0";
     String SELECT_BY_ID_NoiDung=" SELECT * FROM Voucher WHERE NoiDung like ?";
     public void insert(Voucher entity) {
        JDBCHelper.executeUpdate(INSERT, 
