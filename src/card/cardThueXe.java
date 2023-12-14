@@ -133,8 +133,15 @@ public class cardThueXe extends javax.swing.JPanel {
             HopDong hd = hdd.selectByID_MAXE_NULL(maxe, ngayTra);
             if (hd != null) {
                 return true;  // Hợp đồng đã đặt cho ngày đó
+            } else {
+                List<HopDong> list = hdd.selectByID_MAXE_TRANGTHAIDANGTHUE(maxe);
+                for(HopDong hopdong : list){
+                    Date NgayTao = Hepler.DateHelper.resetTime(hd.getNgaythue());
+                    if(ngayTra.after(NgayTao)||ngayTra.equals(NgayTao)){
+                        return true;
+                    }
+                }
             }
-            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

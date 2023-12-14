@@ -52,6 +52,7 @@ public class HopDongDAO {
     String UPDATE_TRANGTHAI = "UPDATE HOPDONG SET tinhtranghopdong = ? WHERE MAHOPDONG= ?";
     String UPDATE_NGAYTRAXE = "UPDATE HOPDONG SET ngaytraxe = ? WHERE MAHOPDONG= ?";
     String UPDATE_SONGAYQUAHAN = "UPDATE HOPDONG SET SONGAYQUAHAN = ? WHERE MAHOPDONG = ?";
+    String SELECT_BY_ID_MAXE_TRANGTHAIDANGTHUE = "SELECT*FROM HopDong WHERE MAXE = ? AND TINHTRANGHOPDONG = 3";
     public void update_songayquahan(HopDong entity){
         JDBCHelper.executeUpdate(UPDATE_SONGAYQUAHAN,
                 entity.getSongayquahan(),
@@ -155,6 +156,18 @@ public class HopDongDAO {
 
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
+    }
+    public List<HopDong> selectByID_MAXE_TRANGTHAIDANGTHUE(String MAXE) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_MAXE_TRANGTHAIDANGTHUE, MAXE);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
     }
     public HopDong selectByID_MAXE_NULL(String MAXE,Date NGAYTHUE) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
