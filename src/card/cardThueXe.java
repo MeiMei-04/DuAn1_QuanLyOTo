@@ -135,16 +135,18 @@ public class cardThueXe extends javax.swing.JPanel {
                 return true;  // Hợp đồng đã đặt cho ngày đó
             } else {
                 List<HopDong> list = hdd.selectByID_MAXE_TRANGTHAIDANGTHUE(maxe);
-                for (HopDong hopdong : list) {
-                    Date NgayTao = Hepler.DateHelper.resetTime(hopdong.getNgaythue());
-                    Date ngayHetHan = Hepler.DateHelper.resetTime(hopdong.getNgayhethan());
-                    long soNgayQuaHan = TimeUnit.DAYS.convert(ngayHetHan.getTime() - NgayTao.getTime(), TimeUnit.MILLISECONDS);
-                    for (int i = 0; i <= (int) soNgayQuaHan; i++) {
-                        Date ngayTaoHopDongTam = (Date) NgayTao.clone();
-                        Date ngayHienTai = Hepler.DateHelper.resetTime(Hepler.DateHelper.addDays(ngayTaoHopDongTam, i));
-                        if (ngayThue.compareTo(ngayHienTai) == 0) {
-                            DialogHelper.alert(this, "Bạn Chỉ Có Thể Thuê Sau Ngày:" + Hepler.DateHelper.toString(ngayHetHan, "dd/MM/yyyy"));
-                            return true;
+                if (list != null) {
+                    for (HopDong hopdong : list) {
+                        Date NgayTao = Hepler.DateHelper.resetTime(hopdong.getNgaythue());
+                        Date ngayHetHan = Hepler.DateHelper.resetTime(hopdong.getNgayhethan());
+                        long soNgayQuaHan = TimeUnit.DAYS.convert(ngayHetHan.getTime() - NgayTao.getTime(), TimeUnit.MILLISECONDS);
+                        for (int i = 0; i <= (int) soNgayQuaHan; i++) {
+                            Date ngayTaoHopDongTam = (Date) NgayTao.clone();
+                            Date ngayHienTai = Hepler.DateHelper.resetTime(Hepler.DateHelper.addDays(ngayTaoHopDongTam, i));
+                            if (ngayThue.compareTo(ngayHienTai) == 0) {
+                                DialogHelper.alert(this, "Bạn Chỉ Có Thể Thuê Sau Ngày:" + Hepler.DateHelper.toString(ngayHetHan, "dd/MM/yyyy"));
+                                return true;
+                            }
                         }
                     }
                 }
