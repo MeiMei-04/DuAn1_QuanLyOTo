@@ -52,7 +52,7 @@ public class HopDongDAO {
     String UPDATE_TRANGTHAI = "UPDATE HOPDONG SET tinhtranghopdong = ? WHERE MAHOPDONG= ?";
     String UPDATE_NGAYTRAXE = "UPDATE HOPDONG SET ngaytraxe = ? WHERE MAHOPDONG= ?";
     String UPDATE_SONGAYQUAHAN = "UPDATE HOPDONG SET SONGAYQUAHAN = ? WHERE MAHOPDONG = ?";
-    String SELECT_BY_ID_MAXE_TRANGTHAIDANGTHUE = "SELECT*FROM HopDong WHERE MAXE = ? AND TINHTRANGHOPDONG = 3";
+    String SELECT_BY_ID_MAXE_TRANGTHAIDANGTHUE = "SELECT*FROM HopDong WHERE MAXE = ? AND  NGAYTRAXE IS NULL";
     public void update_songayquahan(HopDong entity){
         JDBCHelper.executeUpdate(UPDATE_SONGAYQUAHAN,
                 entity.getSongayquahan(),

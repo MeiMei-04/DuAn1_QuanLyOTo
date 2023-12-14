@@ -60,9 +60,12 @@ public class TrangChu extends javax.swing.JFrame {
                     hd.setSongayquahan(0);
                     hdd.update_trangthai(hdnew);
                     hdd.update_songayquahan(hdnew);
-                } else if (daynow.before(ngayHetHan)) {
+                } else if (daynow.after(ngayHetHan)) {
                     // Ngày hiện tại nhỏ hơn ngày hết hạn, xử lý theo yêu cầu của bạn ở đây
                     // Ví dụ, tính số ngày quá hạn và cập nhật thông tin hopdong
+                    if(hd.getTinhtranghopdong()==2 || hd.getTinhtranghopdong()==5){
+                        return;
+                    }
                     long soNgayQuaHan = TimeUnit.DAYS.convert(ngayHetHan.getTime() - daynow.getTime(), TimeUnit.MILLISECONDS);
                     HopDong hdnew = new HopDong();
                     hdnew.setTinhtranghopdong(4); // Tùy thuộc vào yêu cầu của bạn
