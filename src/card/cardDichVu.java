@@ -141,7 +141,7 @@ public class cardDichVu extends javax.swing.JPanel {
         String madv = txtMaDichVu.getText();
         if (DialogHelper.confirm(this, "Bạn muốn xóa dịch vụ này!")) {
             try {
-                dao.delete(madv);
+                dao.update_trangthai(madv);
                 this.filltable();
                 this.clearFrom();
                 DialogHelper.alert(this, "bạn xóa thành công");
@@ -261,7 +261,7 @@ public class cardDichVu extends javax.swing.JPanel {
         String mavh = txtMavoucher.getText();
         if (DialogHelper.confirm(this, "Bạn muốn xóa Voucher này!")) {
             try {
-                vdao.delete(mavh);
+                vdao.update_Trangthai(mavh);
                 this.filltable();
                 this.clearFrom();
                 DialogHelper.alert(this, "bạn xóa thành công");
@@ -382,7 +382,7 @@ public class cardDichVu extends javax.swing.JPanel {
         String maph = txtMaPhuPhi.getText();
         if (DialogHelper.confirm(this, "Bạn muốn xóa Phụ phí này!")) {
             try {
-                pdao.delete(maph);
+                pdao.update_trangthai(maph);
                 this.filltablePhuPhi();
                 this.clearFromPhuPhi();
                 DialogHelper.alert(this, "bạn xóa thành công");
