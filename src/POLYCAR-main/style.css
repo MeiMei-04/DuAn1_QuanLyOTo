@@ -42,23 +42,6 @@ header{
     background: rgb(255, 79, 0);
     color: white;
 }
-/*POP-UP*/
-.popup {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  background-color: #003329;
-  border: 1px solid #ccc;
-  z-index: 1000;
-  color: white;
-  border-radius: 15px;
-}
-.popup button {
-  float: right;
-}
 /*PARALLAX*/
 .parallax{
     position: relative;
@@ -141,7 +124,7 @@ header{
 }
 .card_contact figcaption {
   position: absolute;
-  padding: 15px 20px 40px;
+  padding: 40px;
   bottom: 0;
   z-index: 1;
 }
@@ -152,8 +135,8 @@ header{
   bottom: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(30deg, rgb(255, 79, 0), #fff);
-  opacity: 0.8;
+  background: #003329;
+  opacity: 0.7;
   z-index: -1;
 }
 .card_contact h3 {
@@ -162,6 +145,7 @@ header{
   margin-bottom: 5px;
 }
 .card_contact p {
+  padding-bottom: 5px;
   font-size: 0.8em;
   line-height: 1.6em;
 }

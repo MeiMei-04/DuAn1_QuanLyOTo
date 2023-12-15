@@ -14,19 +14,6 @@ window.addEventListener('scroll', () => {
     hill4.style.left = value * -1.5 + 'px';
     hill1.style.top = value * -1.5 + 'px';
 });
-
-/*POP-UP*/
-// Hàm mở pop-up
-function openPopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'block';
-}
-
-// Hàm đóng pop-up
-function closePopup() {
-    var popup = document.getElementById('popup');
-    popup.style.display = 'none';
-}
 /*CHUYỂN TRANG*/
 function redirectToDichVu() {
     window.location.href = 'loadingdichvu.html';
@@ -37,3 +24,16 @@ function redirectToTrangChu() {
 function redirectToContact() {
     window.location.href = 'loadingcontact.html';
 }
+function redirectToThongtin() {
+    window.location.href = 'loadingthongtin.html';
+}
+/*SLIDE SHOW*/
+document.getElementById('next').onclick = function(){
+    let lists = document.querySelectorAll('.item');
+    document.getElementById('slide').appendChild(lists[0]);
+}
+document.getElementById('prev').onclick = function(){
+    let lists = document.querySelectorAll('.item');
+    document.getElementById('slide').prepend(lists[lists.length - 1]);
+}
+
