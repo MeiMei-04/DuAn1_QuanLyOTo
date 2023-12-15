@@ -39,11 +39,13 @@ public class cardDanhGIa extends javax.swing.JPanel {
         filltable_danhgia(getListDanhGia());
         setForm();
     }
-    public void setForm(){
+
+    public void setForm() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
     }
+
     public void xoadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -67,7 +69,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             DanhGia dg = getForm();
             try {
                 DanhGia dg_check = dgd.selectByID_userid_doituong(String.valueOf(tk.getUserid()));
-                if(dg_check != null){
+                if (dg_check != null) {
                     DialogHelper.alert(this, "Bạn Đã Đánh Giá Sản Phẩm Này Rồi");
                     return;
                 }
@@ -315,7 +317,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
             DanhGia dg = dgd.selectByID_userid_doituong(String.valueOf(cttk.getUserid()));
             txt_noidung.setText(dg.getNoidung());
-            cbb_saodanhgia.setSelectedIndex(dg.getSosaodanhgia()-1);
+            cbb_saodanhgia.setSelectedIndex(dg.getSosaodanhgia() - 1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -338,8 +340,11 @@ public class cardDanhGIa extends javax.swing.JPanel {
         String hoten = (String) tbl_danhgia.getValueAt(row, 0);
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
-            suadanhgia(cttk.getUserid());
+            if (DialogHelper.confirm(this, "Bạn Có Muốn Sửa Không")) {
+                suadanhgia(cttk.getUserid());
+            }
         } catch (Exception e) {
+            DialogHelper.alert(this, "Vui Lòng Chọn Đánh Giá");
             System.out.println(e.getMessage());
         }
 
@@ -352,8 +357,12 @@ public class cardDanhGIa extends javax.swing.JPanel {
         String hoten = (String) tbl_danhgia.getValueAt(row, 0);
         try {
             ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
-            xoadanhgia(cttk.getUserid());
+            if (DialogHelper.confirm(this, "Bạn Có Muốn Sửa Không")) {
+                xoadanhgia(cttk.getUserid());
+            }
+
         } catch (Exception e) {
+            DialogHelper.alert(this, "Vui Lòng Chọn Đánh Giá");
             System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btn_xoaActionPerformed

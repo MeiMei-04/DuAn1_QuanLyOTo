@@ -118,7 +118,7 @@ public class cardHopDong extends javax.swing.JPanel {
         if (this.mahopdong == null) {
             DialogHelper.alert(this, "Vui Lòng Chọn Hợp Đồng");
         }
-        if (hd.getTinhtranghopdong() == 2 || hd.getTinhtranghopdong() == 1 ) {
+        if (hd.getTinhtranghopdong() == 2 || hd.getTinhtranghopdong() == 1) {
             DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
         } else {
             HopDong hd = new HopDong();
@@ -884,12 +884,16 @@ public class cardHopDong extends javax.swing.JPanel {
 
     private void btn_bangiaoxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bangiaoxeActionPerformed
         // TODO add your handling code here:
-        banGiaoXe(mahopdong);
+        if (DialogHelper.confirm(this, "Bạn Có Chắc Không")) {
+            banGiaoXe(mahopdong);
+        }
     }//GEN-LAST:event_btn_bangiaoxeActionPerformed
 
     private void btn_xacnhantraxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_xacnhantraxeActionPerformed
         // TODO add your handling code here:
-        xacNhanTraXe(mahopdong);
+        if (DialogHelper.confirm(this, "Bạn Có Chắc Không")) {
+            xacNhanTraXe(mahopdong);
+        }
     }//GEN-LAST:event_btn_xacnhantraxeActionPerformed
 
     private void btn_timkiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_timkiemActionPerformed
@@ -923,7 +927,10 @@ public class cardHopDong extends javax.swing.JPanel {
 
     private void btn_sendmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_sendmailActionPerformed
         // TODO add your handling code here:
-        sendMail();
+        if (DialogHelper.confirm(this, "Bạn Có Chắc Không")) {
+            sendMail();
+        }
+
     }//GEN-LAST:event_btn_sendmailActionPerformed
 
 
@@ -1013,9 +1020,9 @@ public class cardHopDong extends javax.swing.JPanel {
                 }
 
                 for (int j = 0; j < tblHopDong.getRowCount(); j++) {
-                    Row row = sheet.createRow(j+2 );//thông tin sau i
+                    Row row = sheet.createRow(j + 2);//thông tin sau i
                     for (int k = 0; k < tblHopDong.getColumnCount(); k++) {
-                        Cell cell = row.createCell(k );// sang phải
+                        Cell cell = row.createCell(k);// sang phải
                         if (tblHopDong.getValueAt(j, k) != null) {
                             cell.setCellValue(tblHopDong.getValueAt(j, k).toString());
                         }

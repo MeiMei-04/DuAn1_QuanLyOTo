@@ -1008,13 +1008,17 @@ public class cardTaiKhoan extends javax.swing.JPanel {
 
     private void btn_traxeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_traxeActionPerformed
         // TODO add your handling code here:
-        openTraXe();
+        if (DialogHelper.confirm(this, "Bạn Có Chắc Không")) {
+            openTraXe();
+        }
     }//GEN-LAST:event_btn_traxeActionPerformed
 
     private void btn_huyhopdongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_huyhopdongActionPerformed
         // TODO add your handling code here:
-        huyHopDong();
-        fill_table_hopdong();
+        if (DialogHelper.confirm(this, "Bạn Có Chắc Không")) {
+            huyHopDong();
+            fill_table_hopdong();
+        }
     }//GEN-LAST:event_btn_huyhopdongActionPerformed
 
 
