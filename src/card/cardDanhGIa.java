@@ -72,7 +72,8 @@ public class cardDanhGIa extends javax.swing.JPanel {
         TaiKhoan tk = Hepler.AuthHelper.user;
         if (userid == tk.getUserid()) {
             try {
-                dgd.update_trangthai(tk.getUserid());
+                DanhGia dg = getForm();
+                dgd.update_trangthai(dg.getMahopdong());
                 DialogHelper.alert(this, "Xoá Thành Công");
                 filltable_danhgia(getListDanhGia());
             } catch (Exception e) {
@@ -88,10 +89,12 @@ public class cardDanhGIa extends javax.swing.JPanel {
         DanhGia dg = getForm();
         try {
             List<DanhGia> list = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
-            for (DanhGia danhgia : list) {
-                if (danhgia.getMahopdong().equals(dg.getMahopdong())) {
-                    DialogHelper.alert(this, "Sản Phẩm Này Bạn Đánh Giá Rồi");
-                    return;
+            if (list != null) {
+                for (DanhGia danhgia : list) {
+                    if (danhgia.getMahopdong().equals(dg.getMahopdong())) {
+                        DialogHelper.alert(this, "Sản Phẩm Này Bạn Đánh Giá Rồi");
+                        return;
+                    }
                 }
             }
             dgd.insert(dg);

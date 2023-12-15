@@ -27,7 +27,7 @@ public class DanhGiaDAO {
             + "noidung = ?,"
             + "sosaodanhgia = ? "
             + "WHERE mahopdong =?";
-    String UPDATE_TRANGTHAI = "UPDATE DANHGIA SET TRANGTHAI =1 where userid = ?";
+    String UPDATE_TRANGTHAI = "UPDATE DANHGIA SET TRANGTHAI =1 where mahopdong = ?";
     String DELETE = "DELETE FROM danhgia WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM danhgia";
     String SELECT_BY_ID_MAXE = "SELECT*FROM DANHGIA WHERE userid = ?";
@@ -42,8 +42,8 @@ public class DanhGiaDAO {
                 entity.getSosaodanhgia()
         );
     }
-    public void update_trangthai(int userid){
-        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, userid);
+    public void update_trangthai(String mahopdong){
+        JDBCHelper.executeUpdate(UPDATE_TRANGTHAI, mahopdong);
     }
     public void update(DanhGia entity) {
         JDBCHelper.executeUpdate(UPDATE,
