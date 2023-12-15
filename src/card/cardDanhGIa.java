@@ -24,13 +24,12 @@ import javax.swing.table.DefaultTableModel;
  * @author hieud
  */
 public class cardDanhGIa extends javax.swing.JPanel {
-    
+
     DanhGiaDAO dgd = new DanhGiaDAO();
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
     List<DanhGia> all_danhgia = new ArrayList<>();
     HopDongDAO hdd = new HopDongDAO();
-    boolean hopDongThueXe = true;
 
     /**
      * Creates new form cardDanhGIa
@@ -48,25 +47,26 @@ public class cardDanhGIa extends javax.swing.JPanel {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanpham.getModel();
         model.removeAllElements();
         if (list == null) {
-            hopDongThueXe = false;
-        }
-        try {
-            for (HopDong hd : list) {
-                ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
-                model.addElement(ctx.getTenxe());
+            DialogHelper.alert(this, "Vui Lòng Đánh Giá Sau Khi Thuê Xe");
+        } else {
+            try {
+                for (HopDong hd : list) {
+                    ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
+                    model.addElement(ctx.getTenxe());
+                }
+                cbb_sanpham.setSelectedIndex(0);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
-            cbb_sanpham.setSelectedIndex(0);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
         }
     }
-    
+
     public void setForm() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
     }
-    
+
     public void xoadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -82,7 +82,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             DialogHelper.alert(this, "Chi Được Sửa Đánh Giá Của Bản Thân");
         }
     }
-    
+
     public void themdanhgia() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         DanhGia dg = getForm();
@@ -101,7 +101,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void suadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -118,22 +118,26 @@ public class cardDanhGIa extends javax.swing.JPanel {
             DialogHelper.alert(this, "Chi Được Sửa Đánh Giá Của Bản Thân");
         }
     }
-    
+
     public DanhGia getForm() {
-        String tenxe = cbb_sanpham.getSelectedItem().toString();
-        int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
-        TaiKhoan tk = Hepler.AuthHelper.user;
         DanhGia dg = new DanhGia();
-        ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
-        HopDong hd = hdd.selectByID_MAXE_DOITUONG(ctx.getMaxe());
-        dg.setUserid(tk.getUserid());
-        dg.setMahopdong(hd.getMahopdong());
-        dg.setNoidung(txt_noidung.getText());
-        dg.setNgaydanhgia(Hepler.DateHelper.now());
-        dg.setSosaodanhgia(sosao_danhgia);
+        try {
+            String tenxe = cbb_sanpham.getSelectedItem().toString();
+            int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
+            TaiKhoan tk = Hepler.AuthHelper.user;
+            ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
+            HopDong hd = hdd.selectByID_MAXE_DOITUONG(ctx.getMaxe());
+            dg.setUserid(tk.getUserid());
+            dg.setMahopdong(hd.getMahopdong());
+            dg.setNoidung(txt_noidung.getText());
+            dg.setNgaydanhgia(Hepler.DateHelper.now());
+            dg.setSosaodanhgia(sosao_danhgia);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return dg;
     }
-    
+
     public List<DanhGia> getListDanhGia() {
         List<DanhGia> list = new ArrayList<>();
         try {
@@ -148,7 +152,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
         }
         return list;
     }
-    
+
     public void timkiem() {
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;
@@ -161,7 +165,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             System.out.println(e.getMessage());
         }
     }
-    
+
     public void filltable_danhgia(List<DanhGia> list) {
         DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
         model.setRowCount(0);
@@ -179,7 +183,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
                 };
                 model.addRow(row);
             }
-            
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -389,7 +393,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             if (DialogHelper.confirm(this, "Bạn Có Muốn Sửa Không")) {
                 xoadanhgia(cttk.getUserid());
             }
-            
+
         } catch (Exception e) {
             DialogHelper.alert(this, "Vui Lòng Chọn Đánh Giá");
             System.out.println(e.getMessage());
