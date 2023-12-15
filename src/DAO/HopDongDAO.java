@@ -181,6 +181,18 @@ public class HopDongDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
+    public HopDong selectByID_MAXE_DOITUONG(String MAXE) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<HopDong> list = selectBySQL(SELECT_BY_ID_MAXE, MAXE);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list.get(0);
+    }
     public List<HopDong> selectByID_MAXE(String MAXE) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<HopDong> list = selectBySQL(SELECT_BY_ID_MAXE, MAXE);

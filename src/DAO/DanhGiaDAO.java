@@ -25,9 +25,8 @@ public class DanhGiaDAO {
             + "VALUES (?,?,?,?,?)";
     String UPDATE = "UPDATE danhgia SET "
             + "noidung = ?,"
-            + "ngaydanhgia = ?,"
             + "sosaodanhgia = ? "
-            + "WHERE userid =?";
+            + "WHERE mahopdong =?";
     String UPDATE_TRANGTHAI = "UPDATE DANHGIA SET TRANGTHAI =1 where userid = ?";
     String DELETE = "DELETE FROM danhgia WHERE userid =?";
     String SELECT_ALL = "SELECT * FROM danhgia";
@@ -49,9 +48,8 @@ public class DanhGiaDAO {
     public void update(DanhGia entity) {
         JDBCHelper.executeUpdate(UPDATE,
                 entity.getNoidung(),
-                entity.getNgaydanhgia(),
                 entity.getSosaodanhgia(),
-                entity.getUserid()
+                entity.getMahopdong()
         );
     }
 
@@ -76,7 +74,18 @@ public class DanhGiaDAO {
         return list;
     }
     
-    
+    public List<DanhGia> selectByID_userid_doituong_LIST(String userid) {
+        // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
+        List<DanhGia> list = selectBySQL(SELECT_BY_ID_USERID, userid);
+        // Kiểm tra xem danh sách có trống không
+        if (list.isEmpty()) {
+            // Nếu danh sách trống, trả về null
+            return null;
+        }
+
+        // Nếu không, trả về phần tử đầu tiên trong danh sách
+        return list;
+    }
     public DanhGia selectByID_userid_doituong(String userid) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<DanhGia> list = selectBySQL(SELECT_BY_ID_USERID, userid);

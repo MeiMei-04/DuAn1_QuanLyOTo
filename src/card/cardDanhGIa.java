@@ -24,12 +24,13 @@ import javax.swing.table.DefaultTableModel;
  * @author hieud
  */
 public class cardDanhGIa extends javax.swing.JPanel {
-
+    
     DanhGiaDAO dgd = new DanhGiaDAO();
     ChiTietTaiKhoanDAO cttkd = new ChiTietTaiKhoanDAO();
     ChiTietXeDAO ctxd = new ChiTietXeDAO();
     List<DanhGia> all_danhgia = new ArrayList<>();
     HopDongDAO hdd = new HopDongDAO();
+    boolean hopDongThueXe = true;
 
     /**
      * Creates new form cardDanhGIa
@@ -38,14 +39,34 @@ public class cardDanhGIa extends javax.swing.JPanel {
         initComponents();
         filltable_danhgia(getListDanhGia());
         setForm();
+        fill_cbb_SanPham();
     }
 
+    public void fill_cbb_SanPham() {
+        TaiKhoan tk = Hepler.AuthHelper.user;
+        List<HopDong> list = hdd.selectByID_USERID(String.valueOf(tk.getUserid()));
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cbb_sanpham.getModel();
+        model.removeAllElements();
+        if (list == null) {
+            hopDongThueXe = false;
+        }
+        try {
+            for (HopDong hd : list) {
+                ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
+                model.addElement(ctx.getTenxe());
+            }
+            cbb_sanpham.setSelectedIndex(0);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    
     public void setForm() {
         TaiKhoan tk = Hepler.AuthHelper.user;
         ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(tk.getUserid()));
         txt_hoten.setText(cttk.getHoten());
     }
-
+    
     public void xoadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
@@ -61,36 +82,31 @@ public class cardDanhGIa extends javax.swing.JPanel {
             DialogHelper.alert(this, "Chi Được Sửa Đánh Giá Của Bản Thân");
         }
     }
-
+    
     public void themdanhgia() {
         TaiKhoan tk = Hepler.AuthHelper.user;
-        HopDong hd = hdd.selectByID_USERID_HD(String.valueOf(tk.getUserid()));
-        if (hd != null) {
-            DanhGia dg = getForm();
-            try {
-                DanhGia dg_check = dgd.selectByID_userid_doituong(String.valueOf(tk.getUserid()));
-                if (dg_check != null) {
-                    DialogHelper.alert(this, "Bạn Đã Đánh Giá Sản Phẩm Này Rồi");
+        DanhGia dg = getForm();
+        try {
+            List<DanhGia> list = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
+            for (DanhGia danhgia : list) {
+                if (danhgia.getMahopdong().equals(dg.getMahopdong())) {
+                    DialogHelper.alert(this, "Sản Phẩm Này Bạn Đánh Giá Rồi");
                     return;
                 }
-                dgd.insert(dg);
-                DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
-                filltable_danhgia(getListDanhGia());
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
             }
+            dgd.insert(dg);
+            DialogHelper.alert(this, "Thêm Đánh Giá Thành Công");
+            filltable_danhgia(getListDanhGia());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
-
+    
     public void suadanhgia(int userid) {
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
         if (userid == tk.getUserid()) {
-            DanhGia dg = new DanhGia();
-            dg.setUserid(tk.getUserid());
-            dg.setNoidung(txt_noidung.getText());
-            dg.setNgaydanhgia(Hepler.DateHelper.now());
-            dg.setSosaodanhgia(sosao_danhgia);
+            DanhGia dg = getForm();
             try {
                 dgd.update(dg);
                 DialogHelper.alert(this, "Sửa Thành Công");
@@ -102,12 +118,14 @@ public class cardDanhGIa extends javax.swing.JPanel {
             DialogHelper.alert(this, "Chi Được Sửa Đánh Giá Của Bản Thân");
         }
     }
-
+    
     public DanhGia getForm() {
+        String tenxe = cbb_sanpham.getSelectedItem().toString();
         int sosao_danhgia = cbb_saodanhgia.getSelectedIndex() + 1;
         TaiKhoan tk = Hepler.AuthHelper.user;
         DanhGia dg = new DanhGia();
-        HopDong hd = hdd.selectByID_USERID_HD(String.valueOf(tk.getUserid()));
+        ChiTietXe ctx = ctxd.selectByID_TENXE(tenxe);
+        HopDong hd = hdd.selectByID_MAXE_DOITUONG(ctx.getMaxe());
         dg.setUserid(tk.getUserid());
         dg.setMahopdong(hd.getMahopdong());
         dg.setNoidung(txt_noidung.getText());
@@ -115,7 +133,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
         dg.setSosaodanhgia(sosao_danhgia);
         return dg;
     }
-
+    
     public List<DanhGia> getListDanhGia() {
         List<DanhGia> list = new ArrayList<>();
         try {
@@ -130,24 +148,27 @@ public class cardDanhGIa extends javax.swing.JPanel {
         }
         return list;
     }
-
+    
     public void timkiem() {
         try {
             TaiKhoan tk = Hepler.AuthHelper.user;
             List<DanhGia> list_find_danhgia = dgd.selectByID_userid(String.valueOf(tk.getUserid()));
+            if (list_find_danhgia == null) {
+                DialogHelper.alert(this, "Bạn Hiện Tại Chưa Có Đánh Giá Nào");
+            }
             filltable_danhgia(list_find_danhgia);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
-
+    
     public void filltable_danhgia(List<DanhGia> list) {
         DefaultTableModel model = (DefaultTableModel) tbl_danhgia.getModel();
         model.setRowCount(0);
         try {
             for (DanhGia dg : list) {
                 ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG(String.valueOf(dg.getUserid()));
-                HopDong hd = hdd.selectByID_USERID_HD(String.valueOf(dg.getUserid()));
+                HopDong hd = hdd.selectByID_MAHOPDONG(dg.getMahopdong());
                 ChiTietXe ctx = ctxd.selectByID_MAXE(hd.getMaxe());
                 Object[] row = {
                     cttk.getHoten(),
@@ -158,7 +179,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
                 };
                 model.addRow(row);
             }
-
+            
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -186,6 +207,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
         cbb_saodanhgia = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btn_timkiem = new javax.swing.JButton();
+        cbb_sanpham = new javax.swing.JComboBox<>();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(960, 600));
@@ -250,6 +272,8 @@ public class cardDanhGIa extends javax.swing.JPanel {
             }
         });
 
+        cbb_sanpham.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -261,7 +285,6 @@ public class cardDanhGIa extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -271,9 +294,11 @@ public class cardDanhGIa extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(btn_xoa))
                                     .addComponent(txt_hoten, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))
                                 .addGap(17, 17, 17)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cbb_sanpham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(cbb_saodanhgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel3)
                                     .addComponent(btn_timkiem))))
@@ -292,11 +317,14 @@ public class cardDanhGIa extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txt_hoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_timkiem))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txt_hoten, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_timkiem))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2))
+                    .addComponent(cbb_sanpham, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -312,12 +340,13 @@ public class cardDanhGIa extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = -1;
         row = tbl_danhgia.getSelectedRow();
-        String hoten = (String) tbl_danhgia.getValueAt(row, 0);
+        String sanpham = (String) tbl_danhgia.getValueAt(row, 1);
+        String noidung = (String) tbl_danhgia.getValueAt(row, 2);
+        int sosaodanhgia = (int) tbl_danhgia.getValueAt(row, 4);
         try {
-            ChiTietTaiKhoan cttk = cttkd.selectByID_DOITUONG_HOTEN(hoten);
-            DanhGia dg = dgd.selectByID_userid_doituong(String.valueOf(cttk.getUserid()));
-            txt_noidung.setText(dg.getNoidung());
-            cbb_saodanhgia.setSelectedIndex(dg.getSosaodanhgia() - 1);
+            cbb_sanpham.setSelectedItem(sanpham);
+            txt_noidung.setText(noidung);
+            cbb_saodanhgia.setSelectedIndex(sosaodanhgia - 1);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -360,7 +389,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
             if (DialogHelper.confirm(this, "Bạn Có Muốn Sửa Không")) {
                 xoadanhgia(cttk.getUserid());
             }
-
+            
         } catch (Exception e) {
             DialogHelper.alert(this, "Vui Lòng Chọn Đánh Giá");
             System.out.println(e.getMessage());
@@ -373,6 +402,7 @@ public class cardDanhGIa extends javax.swing.JPanel {
     private javax.swing.JButton btn_them;
     private javax.swing.JButton btn_timkiem;
     private javax.swing.JButton btn_xoa;
+    private javax.swing.JComboBox<String> cbb_sanpham;
     private javax.swing.JComboBox<String> cbb_saodanhgia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

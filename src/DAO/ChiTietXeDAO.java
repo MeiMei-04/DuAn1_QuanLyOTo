@@ -39,6 +39,7 @@ public class ChiTietXeDAO {
     String SELECT_BY_ID_TENXE = "SELECT*FROM ChiTietXe WHERE TENXE = ?";
     String SELECT_BY_ID_TENXEtim = "SELECT*FROM ChiTietXe WHERE TENXE like ?";
     String UPDATE_CHITIETXE = "UPDATE CHITIETXE SET TRANGTHAIXE = ? WHERE MAXE = ?";
+    String SELECT_BY_ID_TENXE_USERID = "SELECT*FROM ChiTietXe WHERE TENXE = ?"; 
 
     public void insert(ChiTietXe entity) {
         JDBCHelper.executeUpdate(INSERT,
@@ -100,7 +101,6 @@ public class ChiTietXeDAO {
         // Nếu không, trả về phần tử đầu tiên trong danh sách
         return list.get(0);
     }
-
     public List<ChiTietXe> selectByID_TENXETim(String TENXE) {
         // Tạo một danh sách các đối tượng TaiKhoan từ kết quả truy vấn SQL
         List<ChiTietXe> list = selectBySQL(SELECT_BY_ID_TENXEtim, TENXE);
