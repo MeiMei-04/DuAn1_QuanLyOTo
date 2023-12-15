@@ -155,6 +155,9 @@ public class DanhGiaDialog extends java.awt.Dialog {
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 102, 0));
+
+        tbl_danhgia.setBackground(new java.awt.Color(255, 102, 0));
         tbl_danhgia.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -173,6 +176,8 @@ public class DanhGiaDialog extends java.awt.Dialog {
         });
         jScrollPane1.setViewportView(tbl_danhgia);
 
+        btn_them.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_them.setForeground(new java.awt.Color(255, 102, 0));
         btn_them.setText("Thêm");
         btn_them.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -180,26 +185,38 @@ public class DanhGiaDialog extends java.awt.Dialog {
             }
         });
 
+        btn_sua.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_sua.setForeground(new java.awt.Color(255, 102, 0));
         btn_sua.setText("Sửa");
 
+        btn_xoa.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_xoa.setForeground(new java.awt.Color(255, 102, 0));
         btn_xoa.setText("Xoá");
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("Họ Tên");
 
         txt_hoten.setEnabled(false);
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Nội Dung");
 
         txt_noidung.setColumns(20);
         txt_noidung.setRows(5);
         jScrollPane2.setViewportView(txt_noidung);
 
+        cbb_saodanhgia.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        cbb_saodanhgia.setForeground(new java.awt.Color(255, 102, 0));
         cbb_saodanhgia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Số Sao");
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Sản Phẩm");
 
+        btn_timkiem.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_timkiem.setForeground(new java.awt.Color(255, 102, 0));
         btn_timkiem.setText("Tìm Kiếm");
         btn_timkiem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,11 +277,14 @@ public class DanhGiaDialog extends java.awt.Dialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbb_saodanhgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(46, 46, 46))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(cbb_saodanhgia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26))))
         );
 
         pack();
