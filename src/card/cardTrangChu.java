@@ -18,9 +18,10 @@ public class cardTrangChu extends javax.swing.JPanel {
      */
     public cardTrangChu() {
         initComponents();
-        showLoader();
+//        showLoader();
+        lbl_gif.setEnabled(true);
     }
-
+    
     public void showLoader() {
         //URL url = getClass().getResource("/gif/dragon.gif");
         Icon icon = new ImageIcon("src\\gif\\dragon.gif");
@@ -38,7 +39,7 @@ public class cardTrangChu extends javax.swing.JPanel {
 
         lbl_gif = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(0, 0, 0));
+        setBackground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
