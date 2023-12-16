@@ -31,7 +31,7 @@ public class DichVuDAO {
     String SELECT_ALL = "SELECT * FROM DichVu";
     String SELECT_BY_ID_MADICHVU = "SELECT*FROM DichVu WHERE MaDichVu = ?";
     String SELECT_BY_ID_TENDICHVU = "SELECT*FROM DichVu WHERE  tendichvu like ?";
-    String UPDATE_TRANGTHAI = "UPDATE DICHVU SET TRANTHAI = 1 WHERE MADICHVU = ?";
+    String UPDATE_TRANGTHAI = "UPDATE DICHVU SET trangthai = 1 WHERE MADICHVU = ?";
 
     public void insert(DichVu entity) {
         JDBCHelper.executeUpdate(INSERT,

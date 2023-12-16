@@ -10,6 +10,7 @@ import DAO.DichVuDAO;
 import DAO.HopDongDAO;
 import DAO.HopDongDAO;
 import DAO.PhuPhiDAO;
+import DAO.TaiKhoanDAO;
 import DAO.ThemDichVuDAO;
 import DAO.ThemPhuPhiDAO;
 import DAO.VoucherDAO;
@@ -55,6 +56,7 @@ public class cardHopDong extends javax.swing.JPanel {
     DichVuDAO dvd = new DichVuDAO();
     ThemPhuPhiDAO tppd = new ThemPhuPhiDAO();
     PhuPhiDAO ppd = new PhuPhiDAO();
+    TaiKhoanDAO tkd = new TaiKhoanDAO();
     String mahopdong = null;
     String path = "src/imghopdong/";
 
@@ -68,12 +70,17 @@ public class cardHopDong extends javax.swing.JPanel {
 
     public void sendMail() {
         try {
+            int row = tblHopDong.getSelectedRow();
+            String mahopdong = (String) tblHopDong.getValueAt(row, 0);
+            HopDong hd = hdd.selectByID_MAHOPDONG(mahopdong);
             if (hd.getTinhtranghopdong() != 4) {
                 DialogHelper.alert(this, "Hợp Đồng Không Thuộc Diện Chỉnh Sửa");
+                return;
+            } else {
+                ImagesHelper.capturePanel(jPanel1, mahopdong);
+                TaiKhoan tk = tkd.selectByID_USERID(String.valueOf(hd.getUserid()));
+                Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng Quá Hạn", "Vui Lòng Bàn Giao Lại Xe Cho Cơ Sở Thuê", path, mahopdong + ".png");
             }
-            TaiKhoan tk = Hepler.AuthHelper.user;
-            ImagesHelper.capturePanel(jPanel1, mahopdong);
-            Hepler.Email.sendEmail(tk.getEmail(), "Hợp Đồng Quá Hạn", "Vui Lòng Bàn Giao Lại Xe Cho Cơ Sở Thuê", path, mahopdong + ".png");
         } catch (Exception e) {
             DialogHelper.alert(this, "Lỗi Truy Vấn");
             return;
@@ -197,18 +204,30 @@ public class cardHopDong extends javax.swing.JPanel {
             txt_ngaytra.setText(Hepler.DateHelper.toString(hd.getNgayhethan(), "dd/MM/yyyy"));
             txt_diachi.setText(hd.getDiadiemnhanxe());
             txt_voucher.setText(hd.getMavoucher());
-            Voucher vc = vcd.selectByID_MAVOUCHER(hd.getMavoucher());
-            if (vc == null) {
-                txt_giatri.setText("0%");
-            } else {
-                txt_giatri.setText(String.valueOf(vc.getGiatri()) + "%");
-            }
             fill_dichvu(mahopdong);
             fill_phuphi(mahopdong);
             txt_tongtien.setText(Hepler.MoneyFormatter.formatMoney(hd.getThanhtien()));
             txt_trangthaihopdong.setText(hd.tenTrangThai(hd.getTinhtranghopdong()));
             txt_ngayquahan.setText(String.valueOf(hd.getSongayquahan()));
+            Voucher vc = vcd.selectByID_MAVOUCHER1(hd.getMavoucher());
+            if (hd.getMavoucher() != null) {
+                String giaTri = null;
+                if (vc.getGiatri() == 1) {
+                    giaTri = "5";
+                }
+                if (vc.getGiatri() == 2) {
+                    giaTri = "10";
+                }
+                if (vc.getGiatri() == 3) {
+                    giaTri = "15";
+                }
+                txt_giatri.setText(giaTri + "%");
+
+            } else {
+                txt_giatri.setText("0%");
+            }
         } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 

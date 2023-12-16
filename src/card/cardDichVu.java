@@ -138,15 +138,16 @@ public class cardDichVu extends javax.swing.JPanel {
     }
 
     void delete() {
-        String madv = txtMaDichVu.getText();
+        DichVu dv =getFrom();
         if (DialogHelper.confirm(this, "Bạn muốn xóa dịch vụ này!")) {
             try {
-                dao.update_trangthai(madv);
+                dao.update_trangthai(dv.getMadichvu());
                 this.filltable();
                 this.clearFrom();
                 DialogHelper.alert(this, "bạn xóa thành công");
             } catch (Exception e) {
                 DialogHelper.alert(this, "Xóa thất bại");
+                e.printStackTrace();
             }
         }
     }
@@ -258,10 +259,10 @@ public class cardDichVu extends javax.swing.JPanel {
     }
 
     void deleteVoucher() {
-        String mavh = txtMavoucher.getText();
+        Voucher vh = getFromVoucher();
         if (DialogHelper.confirm(this, "Bạn muốn xóa Voucher này!")) {
             try {
-                vdao.update_Trangthai(mavh);
+                vdao.update_Trangthai(vh.getMavoucher());
                 this.filltable();
                 this.clearFrom();
                 DialogHelper.alert(this, "bạn xóa thành công");
@@ -379,10 +380,10 @@ public class cardDichVu extends javax.swing.JPanel {
     }
 
     void deletePhuPhi() {
-        String maph = txtMaPhuPhi.getText();
+        PhuPhi maph = getFromPhuPhi();
         if (DialogHelper.confirm(this, "Bạn muốn xóa Phụ phí này!")) {
             try {
-                pdao.update_trangthai(maph);
+                pdao.update_trangthai(maph.getMaphuphi());
                 this.filltablePhuPhi();
                 this.clearFromPhuPhi();
                 DialogHelper.alert(this, "bạn xóa thành công");

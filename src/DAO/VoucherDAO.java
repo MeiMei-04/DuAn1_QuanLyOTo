@@ -27,6 +27,7 @@ public class VoucherDAO{
     String SELECT_ALL="SELECT * FROM Voucher";
     String SELECT_BY_ID_MAVOUCHER=" SELECT * FROM Voucher WHERE MaVoucher=? and trangthai = 0";
     String SELECT_BY_ID_NoiDung=" SELECT * FROM Voucher WHERE NoiDung like ?";
+    String SELECT_BY_ID_MAVOUCHER1=" SELECT * FROM Voucher WHERE MaVoucher=? ";
     public void insert(Voucher entity) {
        JDBCHelper.executeUpdate(INSERT, 
                entity.getMavoucher(),
@@ -52,6 +53,13 @@ public class VoucherDAO{
 
     public Voucher selectByID_MAVOUCHER(String MAVOUCHER) {
         List<Voucher> list = selectBySQL(SELECT_BY_ID_MAVOUCHER, MAVOUCHER);
+        if(list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
+    }
+      public Voucher selectByID_MAVOUCHER1(String MAVOUCHER) {
+        List<Voucher> list = selectBySQL(SELECT_BY_ID_MAVOUCHER1, MAVOUCHER);
         if(list.isEmpty()){
             return null;
         }

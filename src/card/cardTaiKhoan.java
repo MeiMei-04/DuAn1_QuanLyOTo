@@ -388,6 +388,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private void initComponents() {
 
         btngr_gioitinh = new javax.swing.ButtonGroup();
+        buttonGroup1 = new javax.swing.ButtonGroup();
         tabs = new javax.swing.JTabbedPane();
         pnl_taikhoan = new javax.swing.JPanel();
         lbl_trangthaithaikhoan = new javax.swing.JLabel();
@@ -565,10 +566,12 @@ public class cardTaiKhoan extends javax.swing.JPanel {
         pnl_gioitinh.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GIỚI TÍNH", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 255, 255))); // NOI18N
         pnl_gioitinh.setForeground(new java.awt.Color(255, 255, 255));
 
+        btngr_gioitinh.add(rdo_nu);
         rdo_nu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdo_nu.setForeground(new java.awt.Color(255, 255, 255));
         rdo_nu.setText("NỮ");
 
+        btngr_gioitinh.add(rdo_nam);
         rdo_nam.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         rdo_nam.setForeground(new java.awt.Color(255, 255, 255));
         rdo_nam.setText("NAM");
@@ -1029,6 +1032,7 @@ public class cardTaiKhoan extends javax.swing.JPanel {
     private javax.swing.JButton btn_napsodu;
     private javax.swing.JButton btn_traxe;
     private javax.swing.ButtonGroup btngr_gioitinh;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

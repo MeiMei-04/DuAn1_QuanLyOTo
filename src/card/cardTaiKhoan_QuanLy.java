@@ -224,7 +224,7 @@ public class cardTaiKhoan_QuanLy extends javax.swing.JPanel {
 
     void deleteNapCard() {
         String manc = txtMaNap.getText();
-        if (DialogHelper.confirm(this, "Bạn muốn xóa Voucher này!")) {
+        if (DialogHelper.confirm(this, "Bạn muốn xóa Mã nạp này!")) {
             try {
                 ndao.delete(manc);
                 this.filltableNapCard();

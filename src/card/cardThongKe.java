@@ -38,14 +38,7 @@ public class cardThongKe extends javax.swing.JPanel {
     }
     ThongKeDAO tkdao = new ThongKeDAO();
 
-//    void filltableHopDong() {
-//        DefaultTableModel model = (DefaultTableModel) tblHopDong.getModel();
-//        model.setRowCount(0);
-//        List<Object[]> list = tkdao.getSoHopDong();
-//        for (Object[] row : list) {
-//            model.addRow(row);
-//        }
-//    }
+
     void fillComboboxthang() {
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboThang.getModel();
         model.removeAllElements();
